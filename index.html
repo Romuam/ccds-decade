@@ -1,0 +1,2369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CCDS · The First Decade — Center for Critical Democracy Studies, AUP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ── Local font fallbacks ─────────────────────────────────── */
+@font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/inter-latin-400-normal.woff2') format('woff2')}
+@font-face{font-family:'Inter';font-style:normal;font-weight:500;font-display:swap;src:url('fonts/inter-latin-500-normal.woff2') format('woff2')}
+@font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url('fonts/inter-latin-600-normal.woff2') format('woff2')}
+@font-face{font-family:'Inter';font-style:normal;font-weight:700;font-display:swap;src:url('fonts/inter-latin-700-normal.woff2') format('woff2')}
+@font-face{font-family:'Inter';font-style:normal;font-weight:800;font-display:swap;src:url('fonts/inter-latin-800-normal.woff2') format('woff2')}
+@font-face{font-family:'EB Garamond';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/eb-garamond-latin-400-normal.woff2') format('woff2')}
+@font-face{font-family:'EB Garamond';font-style:normal;font-weight:500;font-display:swap;src:url('fonts/eb-garamond-latin-500-normal.woff2') format('woff2')}
+@font-face{font-family:'EB Garamond';font-style:italic;font-weight:400;font-display:swap;src:url('fonts/eb-garamond-latin-400-italic.woff2') format('woff2')}
+@font-face{font-family:'EB Garamond';font-style:italic;font-weight:500;font-display:swap;src:url('fonts/eb-garamond-latin-500-italic.woff2') format('woff2')}
+
+/* ── Variables ───────────────────────────────────────────── */
+:root {
+  --red:    #E4002B;
+  --blue:   #002F6C;
+  --navy:   #001F4D;
+  --gold:   #C9A24B;
+  --ink:    #111111;
+  --muted:  #5E5E5E;
+  --rule:   #D7D4CC;
+  --paper:  #FAFAF7;
+  --soft:   #F4F1E8;
+  --serif:  "EB Garamond", Georgia, serif;
+  --sans:   "Inter", "Helvetica Neue", Arial, sans-serif;
+  --nav-h:  60px;
+  --max:    1100px;
+}
+
+/* ── Reset & base ────────────────────────────────────────── */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--serif);color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3,h4{font-family:var(--sans);line-height:1.15;letter-spacing:-0.01em}
+p{margin-bottom:0.8em}
+p:last-child{margin-bottom:0}
+ul,ol{padding-left:1.4em;margin-bottom:0.8em}
+li{margin-bottom:0.2em}
+
+/* ── Tricolor ────────────────────────────────────────────── */
+.tricolor{height:5px;background:linear-gradient(to right,var(--blue) 0 33.33%,var(--red) 33.33% 66.66%,#111 66.66% 100%)}
+.tricolor.thin{height:3px}
+
+/* ── Utilities ───────────────────────────────────────────── */
+.container{max-width:var(--max);margin:0 auto;padding:0 32px}
+.kicker{font-family:var(--sans);font-size:0.72rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--red);margin-bottom:10px;display:block}
+.section-label{font-family:var(--sans);font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;display:block}
+.fade-in{opacity:0;transform:translateY(18px);transition:opacity 0.55s ease,transform 0.55s ease}
+.fade-in.visible{opacity:1;transform:none}
+
+/* ── Navigation ──────────────────────────────────────────── */
+#site-nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  height:var(--nav-h);background:rgba(0,15,50,0.97);
+  backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,0.08);
+  display:flex;align-items:center;
+}
+#site-nav .nav-inner{
+  max-width:var(--max);margin:0 auto;padding:0 32px;
+  width:100%;display:flex;align-items:center;gap:0;
+}
+#site-nav .nav-logo{
+  display:flex;align-items:center;gap:14px;margin-right:auto;flex-shrink:0;text-decoration:none;
+}
+#site-nav .nav-logo img{height:36px;width:auto;mix-blend-mode:screen;flex-shrink:0}
+footer .footer-bottom img.logo-img{height:28px;width:auto;mix-blend-mode:screen;opacity:0.75}
+#site-nav .nav-logo:hover{text-decoration:none}
+#site-nav .nav-logo span{
+  font-family:var(--sans);font-size:0.75rem;font-weight:600;
+  letter-spacing:0.12em;text-transform:uppercase;color:#C8C2B0;white-space:nowrap;
+}
+#site-nav nav{display:flex;gap:2px;flex-wrap:nowrap}
+#site-nav nav a{
+  font-family:var(--sans);font-size:0.72rem;font-weight:500;
+  letter-spacing:0.06em;text-transform:uppercase;color:#B0AEAD;
+  padding:6px 10px;border-radius:3px;white-space:nowrap;transition:color 0.2s,background 0.2s;
+}
+#site-nav nav a:hover,#site-nav nav a.active{color:#fff;background:rgba(255,255,255,0.08);text-decoration:none}
+#burger{display:none;background:none;border:none;cursor:pointer;padding:8px;color:#fff;margin-left:12px}
+#burger span{display:block;width:20px;height:2px;background:currentColor;margin:4px 0}
+#mobile-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;background:var(--navy);z-index:999;padding:16px 24px 24px;border-bottom:2px solid var(--red)}
+#mobile-menu.open{display:block}
+#mobile-menu a{display:block;font-family:var(--sans);font-size:0.85rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:#C8C2B0;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.07)}
+
+/* ── Hero ────────────────────────────────────────────────── */
+#hero{
+  min-height:100vh;background:#000;color:#fff;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding-top:var(--nav-h);position:relative;overflow:hidden;
+}
+#hero .hero-bg{
+  position:absolute;inset:0;
+  background-image:url('charts_large/00_photo_collage.png');
+  background-size:cover;background-position:center 30%;
+  opacity:0.22;
+}
+#hero .hero-body{
+  position:relative;z-index:1;
+  padding:0 32px 0;max-width:var(--max);margin:0 auto;width:100%;
+  display:flex;flex-direction:column;justify-content:center;flex:1;
+  padding-top:80px;
+}
+#hero .hero-year{
+  font-family:var(--sans);font-size:0.72rem;font-weight:600;
+  letter-spacing:0.3em;text-transform:uppercase;color:var(--red);margin-bottom:18px;
+}
+#hero h1{
+  font-family:var(--sans);font-size:clamp(2.6rem,6vw,5rem);
+  font-weight:800;letter-spacing:-0.03em;line-height:1.0;
+  color:#fff;margin-bottom:22px;
+}
+#hero h1 em{font-style:normal;color:var(--red)}
+#hero .hero-sub{
+  font-family:var(--serif);font-size:clamp(1rem,2vw,1.3rem);
+  font-style:italic;color:#C8C2B0;max-width:620px;line-height:1.5;margin-bottom:40px;
+}
+#hero .hero-cta{
+  display:flex;gap:14px;flex-wrap:wrap;margin-bottom:60px;
+}
+#hero .btn{
+  font-family:var(--sans);font-size:0.8rem;font-weight:600;
+  letter-spacing:0.1em;text-transform:uppercase;
+  padding:12px 26px;border:1.5px solid rgba(255,255,255,0.35);color:#fff;
+  border-radius:3px;transition:background 0.2s,border-color 0.2s;
+}
+#hero .btn:hover{background:rgba(255,255,255,0.12);border-color:#fff;text-decoration:none}
+#hero .btn.primary{background:var(--red);border-color:var(--red)}
+#hero .btn.primary:hover{background:#c50025;border-color:#c50025}
+#hero .hero-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:0;border-top:1px solid rgba(255,255,255,0.12);
+  padding:28px 0;margin-bottom:0;
+}
+#hero .hero-stat{padding:0 24px 0 0;border-right:1px solid rgba(255,255,255,0.1)}
+#hero .hero-stat:last-child{border-right:none}
+#hero .hero-stat .num{
+  font-family:var(--serif);font-size:2.8rem;font-weight:400;line-height:1;
+  color:#fff;letter-spacing:-0.01em;
+}
+#hero .hero-stat .lbl{
+  font-family:var(--sans);font-size:0.68rem;font-weight:500;
+  letter-spacing:0.1em;text-transform:uppercase;color:#8A8580;margin-top:4px;
+}
+#hero .tricolor{margin-top:0}
+
+/* ── Section layout ──────────────────────────────────────── */
+.section{padding:88px 0}
+.section.alt{background:var(--soft)}
+.section-header{margin-bottom:48px}
+.section-header h2{
+  font-family:var(--sans);font-size:clamp(1.6rem,3.5vw,2.4rem);
+  font-weight:700;letter-spacing:-0.02em;color:var(--navy);
+  padding-bottom:12px;border-bottom:2.5px solid var(--red);display:inline-block;
+}
+.section-header .intro{
+  font-family:var(--serif);font-size:1.12rem;color:#3B3B3B;
+  max-width:700px;margin-top:16px;line-height:1.65;
+}
+
+/* ── Overview / Mission ──────────────────────────────────── */
+#overview .two-col{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+#overview .mission-block{
+  background:var(--navy);color:#fff;padding:40px;border-radius:2px;
+}
+#overview .mission-block .kicker{color:rgba(228,0,43,0.9)}
+#overview .mission-block p{
+  font-family:var(--serif);font-size:1.18rem;font-style:italic;
+  color:#E9E3D3;line-height:1.65;
+}
+#overview .mission-block .contacts{
+  margin-top:28px;font-family:var(--sans);font-size:0.78rem;color:#9FA8B8;line-height:1.9;
+}
+#overview .mission-block .contacts strong{color:#C8C2B0}
+#overview .facts-block{display:flex;flex-direction:column;gap:20px}
+#overview .fact-row{
+  display:flex;gap:16px;align-items:flex-start;
+  padding-bottom:20px;border-bottom:1px solid var(--rule);
+}
+#overview .fact-row:last-child{border-bottom:none;padding-bottom:0}
+#overview .fact-num{
+  font-family:var(--serif);font-size:2.4rem;font-weight:400;
+  line-height:1;color:var(--red);min-width:70px;text-align:right;flex-shrink:0;
+}
+#overview .fact-text strong{
+  font-family:var(--sans);font-size:0.82rem;font-weight:700;
+  letter-spacing:0.04em;color:var(--navy);display:block;margin-bottom:3px;
+}
+#overview .fact-text span{font-size:0.9rem;color:var(--muted)}
+
+/* ── Stats strip ─────────────────────────────────────────── */
+#stats{background:var(--navy);padding:60px 0}
+#stats .stats-grid{
+  display:grid;grid-template-columns:repeat(6,1fr);gap:0;
+  text-align:center;
+}
+#stats .stat-item{
+  padding:0 12px;border-right:1px solid rgba(255,255,255,0.1);
+}
+#stats .stat-item:last-child{border-right:none}
+#stats .stat-item .n{
+  font-family:var(--serif);font-size:3rem;font-weight:400;
+  color:#fff;line-height:1;letter-spacing:-0.01em;
+}
+#stats .stat-item .n .unit{font-size:1.6rem}
+#stats .stat-item .l{
+  font-family:var(--sans);font-size:0.68rem;font-weight:500;
+  letter-spacing:0.1em;text-transform:uppercase;color:#8A8590;margin-top:8px;
+}
+
+/* ── Charts ──────────────────────────────────────────────── */
+.chart-figure{margin:28px 0}
+.chart-figure img{width:100%;border-radius:2px}
+.chart-figure figcaption{
+  font-family:var(--sans);font-size:0.78rem;color:var(--muted);
+  text-align:center;margin-top:10px;line-height:1.5;
+}
+.charts-two{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.chart-full{margin:32px 0}
+
+/* ── Community ───────────────────────────────────────────── */
+#community .members-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:24px;margin-bottom:52px;
+}
+.member-card{text-align:center}
+.member-card img{
+  width:100%;aspect-ratio:1;object-fit:cover;border-radius:2px;
+  filter:grayscale(20%);transition:filter 0.3s;margin-bottom:10px;
+}
+.member-card:hover img{filter:none}
+.member-card .m-name{
+  font-family:var(--sans);font-size:0.82rem;font-weight:600;color:var(--navy);
+  margin-bottom:2px;
+}
+.member-card .m-role{
+  font-family:var(--sans);font-size:0.7rem;font-weight:500;
+  letter-spacing:0.06em;text-transform:uppercase;color:var(--red);margin-bottom:2px;
+}
+.member-card .m-field{font-family:var(--serif);font-size:0.85rem;color:var(--muted);font-style:italic}
+.member-card .m-affil{font-family:var(--sans);font-size:0.68rem;color:var(--muted);margin-top:1px}
+#community .group-photo{margin:0 0 48px;position:relative}
+#community .group-photo img{width:100%;max-height:380px;object-fit:cover;object-position:center 30%;border-radius:2px}
+#community .group-photo figcaption{font-family:var(--sans);font-size:0.75rem;color:var(--muted);text-align:center;margin-top:8px}
+#community .fellows-bio{margin-top:56px}
+.fellow-bio-block{
+  display:grid;grid-template-columns:110px 1fr;gap:28px;
+  padding:32px 0;border-top:1px solid var(--rule);align-items:start;
+}
+.fellow-bio-block img{
+  width:110px;height:132px;object-fit:cover;object-position:center top;
+  border-radius:2px;flex-shrink:0;
+}
+.fellow-bio-block .bio-meta .name{
+  font-family:var(--sans);font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:2px;
+}
+.fellow-bio-block .bio-meta .role{
+  font-family:var(--sans);font-size:0.72rem;font-weight:600;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--red);margin-bottom:10px;
+}
+.fellow-bio-block .bio-text{font-size:0.95rem;line-height:1.7;color:#2B2B2B}
+.past-members-section{margin-top:56px}
+.past-members-section h3{
+  font-family:var(--sans);font-size:1.1rem;font-weight:600;color:var(--navy);
+  margin-bottom:20px;padding-bottom:8px;border-bottom:1px solid var(--rule);
+}
+.past-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:24px;margin-bottom:24px}
+.past-card{text-align:center;display:block;text-decoration:none;color:inherit}
+.past-card img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:2px;margin-bottom:8px;filter:grayscale(30%);transition:filter 0.25s,transform 0.2s}
+.past-card:hover img{filter:grayscale(0%);transform:translateY(-2px)}
+.past-card .p-name{font-family:var(--sans);font-size:0.82rem;font-weight:600;color:var(--navy)}
+.past-card .p-role{font-family:var(--sans);font-size:0.65rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted)}
+.past-card .p-period{font-family:var(--sans);font-size:0.68rem;color:var(--muted)}
+.intern-list{
+  font-family:var(--sans);font-size:0.85rem;color:var(--muted);
+  line-height:1.9;padding:16px;background:var(--soft);border-radius:2px;
+  border-left:3px solid var(--rule);
+}
+
+/* ── Publications ────────────────────────────────────────── */
+#publications .pub-charts{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-bottom:48px}
+#publications .pub-big-num{
+  text-align:center;padding:40px 0;border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);margin:32px 0;
+}
+#publications .pub-big-num .n{
+  font-family:var(--serif);font-size:6rem;line-height:1;color:var(--red);font-weight:400;
+}
+#publications .pub-big-num .l{
+  font-family:var(--sans);font-size:0.85rem;color:var(--muted);margin-top:6px;
+}
+.pub-year-group{margin-bottom:4px}
+.pub-year-toggle{
+  width:100%;background:none;border:none;border-bottom:1.5px solid var(--rule);
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 0;cursor:pointer;text-align:left;
+}
+.pub-year-toggle:hover{background:rgba(0,0,0,0.02)}
+.pub-year-toggle .yr{
+  font-family:var(--sans);font-size:1.1rem;font-weight:700;color:var(--navy);
+}
+.pub-year-toggle .count{
+  font-family:var(--sans);font-size:0.75rem;font-weight:500;color:var(--muted);
+  display:flex;align-items:center;gap:8px;
+}
+.pub-year-toggle .arrow{font-size:1rem;color:var(--muted);transition:transform 0.25s}
+.pub-year-toggle.open .arrow{transform:rotate(180deg)}
+.pub-year-body{display:none;padding:16px 0 8px}
+.pub-year-body.open{display:block}
+.pub-entry{
+  display:grid;grid-template-columns:44px 1fr;gap:12px;
+  padding:10px 0;border-bottom:1px solid var(--rule-soft,#EDEAE0);
+  align-items:start;
+}
+.pub-entry:last-child{border-bottom:none}
+.pub-entry img{width:44px;height:58px;object-fit:cover;border:1px solid #E0DDD5;border-radius:1px}
+.pub-entry .pub-text{font-size:0.9rem;line-height:1.55;color:#2B2B2B}
+.pub-entry .pub-text em{color:var(--muted)}
+.pub-entry .pub-abstract{
+  font-family:var(--sans);font-size:0.75rem;color:var(--muted);
+  margin-top:5px;line-height:1.5;
+}
+.pub-entry .pub-kw{
+  font-family:var(--sans);font-size:0.7rem;color:var(--blue);margin-top:4px;
+}
+.pub-cat-head{
+  font-family:var(--sans);font-size:0.7rem;font-weight:700;
+  letter-spacing:0.15em;text-transform:uppercase;color:var(--blue);
+  margin:16px 0 6px;padding-bottom:3px;border-bottom:1px solid var(--rule);
+}
+
+/* ── Hosted Journals ─────────────────────────────────────── */
+#journals .journals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.journal-card{background:#fff;border:1px solid var(--rule);border-radius:3px;overflow:hidden}
+.journal-card img{width:100%;height:220px;object-fit:cover;object-position:center top}
+.journal-card .jc-body{padding:24px}
+.journal-card .jc-title{
+  font-family:var(--sans);font-size:1rem;font-weight:700;color:var(--navy);
+  margin-bottom:4px;line-height:1.25;
+}
+.journal-card .jc-sub{font-family:var(--serif);font-style:italic;font-size:0.92rem;color:var(--muted);margin-bottom:12px}
+.journal-card .jc-meta{font-family:var(--sans);font-size:0.78rem;color:var(--muted);line-height:1.7}
+.journal-card .jc-meta strong{color:var(--ink)}
+.journal-card .jc-url{
+  display:inline-block;margin-top:12px;font-family:var(--sans);font-size:0.75rem;
+  font-weight:600;color:var(--blue);letter-spacing:0.04em;
+}
+
+/* ── Research Projects ───────────────────────────────────── */
+#research .rp-overview{margin-bottom:48px}
+.rp-cards{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:48px}
+.rp-card{
+  background:#fff;border:1px solid var(--rule);border-radius:3px;padding:28px;
+  display:flex;flex-direction:column;gap:10px;
+}
+.rp-card .rp-logo{height:40px;width:auto;object-fit:contain;object-position:left center;margin-bottom:4px}
+.rp-card .rp-name{font-family:var(--sans);font-size:0.9rem;font-weight:700;color:var(--navy)}
+.rp-card .rp-sub{font-family:var(--serif);font-style:italic;font-size:0.92rem;color:var(--muted)}
+.rp-card .rp-period{
+  font-family:var(--sans);font-size:0.7rem;font-weight:600;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--red);margin-bottom:2px;
+}
+.rp-card .rp-desc{font-size:0.9rem;color:#2B2B2B;line-height:1.6}
+.rp-card .rp-stats{
+  display:flex;flex-wrap:wrap;gap:16px;margin-top:6px;
+  padding-top:14px;border-top:1px solid var(--rule);
+}
+.rp-card .rp-stat .rn{
+  font-family:var(--sans);font-size:1.4rem;font-weight:700;
+  color:var(--navy);line-height:1;
+}
+.rp-card .rp-stat .rl{
+  font-family:var(--sans);font-size:0.66rem;font-weight:500;color:var(--muted);
+  letter-spacing:0.04em;line-height:1.3;
+}
+.rp-detail{
+  margin-top:12px;padding-top:32px;border-top:1px solid var(--rule);
+}
+.rp-detail h3{
+  font-family:var(--sans);font-size:1.2rem;font-weight:700;color:var(--navy);
+  margin-bottom:6px;
+}
+.rp-detail .rp-detail-period{
+  font-family:var(--sans);font-size:0.72rem;font-weight:600;
+  letter-spacing:0.1em;text-transform:uppercase;color:var(--red);margin-bottom:16px;
+}
+.rp-detail p{font-size:0.95rem;line-height:1.7;color:#2B2B2B;margin-bottom:0.7em}
+.rp-detail .rp-hero{margin:20px 0;border-radius:2px;overflow:hidden}
+.rp-detail .rp-hero img{width:100%;max-height:280px;object-fit:cover}
+.funding-big{
+  text-align:center;background:var(--navy);color:#fff;
+  padding:48px 32px;border-radius:3px;margin:40px 0;
+}
+.funding-big .fn{
+  font-family:var(--serif);font-size:5rem;color:var(--red);font-weight:400;line-height:1;
+}
+.funding-big .fl{font-family:var(--sans);font-size:0.85rem;color:#8A9AAF;margin-top:8px}
+
+/* ── Partnerships ────────────────────────────────────────── */
+#partnerships .partners-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+.partner-card{
+  display:grid;grid-template-columns:80px 1fr;gap:20px;
+  background:#fff;border:1px solid var(--rule);padding:24px;border-radius:3px;
+  align-items:start;
+}
+.partner-card img{width:80px;height:80px;object-fit:contain;object-position:center}
+.partner-card .pc-name{
+  font-family:var(--sans);font-size:0.88rem;font-weight:700;color:var(--navy);
+  margin-bottom:3px;line-height:1.25;
+}
+.partner-card .pc-url{font-family:var(--sans);font-size:0.72rem;color:var(--blue);margin-bottom:8px}
+.partner-card p{font-size:0.88rem;color:var(--muted);line-height:1.55}
+
+/* ── Education ───────────────────────────────────────────── */
+#education .edu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.edu-card{background:#fff;border:1px solid var(--rule);border-radius:3px;overflow:hidden}
+.edu-card img{width:100%;height:160px;object-fit:cover}
+.edu-card img.logo{object-fit:contain;background:var(--soft);padding:24px}
+.edu-card .ec-body{padding:20px}
+.edu-card .ec-title{font-family:var(--sans);font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:8px}
+.edu-card .ec-desc{font-size:0.88rem;color:#2B2B2B;line-height:1.6;margin-bottom:12px}
+.edu-card .ec-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px}
+.edu-card .ec-tags span{
+  font-family:var(--sans);font-size:0.66rem;font-weight:600;
+  letter-spacing:0.05em;text-transform:uppercase;
+  background:var(--soft);color:var(--blue);padding:3px 8px;border-radius:2px;
+}
+.edu-card .ec-stat{
+  font-family:var(--sans);font-size:0.78rem;color:var(--muted);
+  border-top:1px solid var(--rule);padding-top:10px;
+}
+.edu-card .ec-stat strong{color:var(--red);font-size:1.1em}
+
+/* ── Events ──────────────────────────────────────────────── */
+#events .events-summary{
+  display:flex;justify-content:center;flex-wrap:wrap;gap:48px;
+  padding:40px 0;margin:0 0 48px;border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+}
+#events .ev-sum-item{text-align:center}
+#events .ev-sum-item .n{
+  font-family:var(--serif);font-size:3.5rem;font-weight:400;line-height:1;
+  color:var(--navy);
+}
+#events .ev-sum-item .l{
+  font-family:var(--sans);font-size:0.72rem;font-weight:500;
+  letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-top:4px;
+}
+#events .ev-big{text-align:center;margin:32px 0}
+#events .ev-big .n{font-family:var(--serif);font-size:7rem;color:var(--red);font-weight:400;line-height:1}
+#events .ev-big .l{font-family:var(--sans);font-size:0.9rem;color:var(--muted);margin-top:4px}
+.events-gallery{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:36px 0;
+}
+.ev-item{position:relative;border-radius:2px;overflow:hidden;aspect-ratio:3/4;cursor:default}
+.ev-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.35s}
+.ev-item:hover img{transform:scale(1.04)}
+.ev-item .ev-overlay{
+  position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(to top,rgba(0,0,0,0.85) 0,rgba(0,0,0,0) 100%);
+  padding:16px 12px 14px;
+}
+.ev-item .ev-count{font-family:var(--sans);font-size:1.2rem;font-weight:700;color:var(--red);line-height:1}
+.ev-item .ev-count-lbl{font-family:var(--sans);font-size:0.62rem;color:#aaa;letter-spacing:0.08em;text-transform:uppercase}
+.ev-item .ev-title{font-family:var(--sans);font-size:0.72rem;font-weight:600;color:#fff;margin-top:4px;line-height:1.3}
+.ev-item .ev-date{font-family:var(--sans);font-size:0.62rem;color:#aaa;margin-top:2px}
+
+/* ── Invited Guests ──────────────────────────────────────── */
+#guests .guests-nums{
+  display:flex;gap:48px;justify-content:center;flex-wrap:wrap;
+  padding:32px 0;margin-bottom:32px;
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+}
+#guests .guests-nums .gn .n{
+  font-family:var(--serif);font-size:4.5rem;font-weight:400;color:var(--red);line-height:1;text-align:center;
+}
+#guests .guests-nums .gn .l{
+  font-family:var(--sans);font-size:0.72rem;font-weight:500;
+  letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-top:4px;text-align:center;
+}
+#guests .maps-pair{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:28px 0}
+.notable-guests{margin-top:48px}
+.notable-guests h3{
+  font-family:var(--sans);font-size:1rem;font-weight:700;color:var(--navy);
+  margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--rule);
+}
+.guest-names{
+  font-family:var(--serif);font-size:1.05rem;color:#2B2B2B;
+  line-height:1.9;
+}
+.guest-names span{color:var(--muted);font-style:italic}
+
+/* ── Footer ──────────────────────────────────────────────── */
+footer{background:var(--navy);color:#B0AEAD;padding:52px 0 32px}
+footer .footer-inner{
+  max-width:var(--max);margin:0 auto;padding:0 32px;
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;margin-bottom:40px;
+}
+footer h4{font-family:var(--sans);font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#C8C2B0;margin-bottom:14px}
+footer p,footer address{font-size:0.82rem;line-height:1.8;font-style:normal}
+footer a{color:#8A9AAF}
+footer a:hover{color:#fff}
+footer .footer-bottom{
+  max-width:var(--max);margin:0 auto;padding:20px 32px 0;
+  border-top:1px solid rgba(255,255,255,0.08);
+  display:flex;justify-content:space-between;align-items:center;
+  font-family:var(--sans);font-size:0.73rem;color:#6A6870;
+}
+footer .footer-bottom img{height:22px;opacity:0.5}
+
+/* ── Visiting Scholars Program ───────────────────────────── */
+.visiting-box{
+  background:var(--soft);border-left:4px solid var(--blue);
+  padding:28px 28px 24px;border-radius:0 3px 3px 0;margin-top:40px;
+}
+.visiting-box h3{font-family:var(--sans);font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:10px}
+.visiting-box p,.visiting-box ul{font-size:0.9rem;color:#2B2B2B;line-height:1.7}
+.visiting-box .apply{
+  display:inline-block;margin-top:16px;font-family:var(--sans);font-size:0.78rem;
+  font-weight:600;letter-spacing:0.08em;text-transform:uppercase;
+  color:#fff;background:var(--blue);padding:10px 20px;border-radius:2px;
+}
+.visiting-box .apply:hover{background:var(--navy);text-decoration:none}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media(max-width:900px){
+  #site-nav nav{display:none}
+  #burger{display:block}
+  #hero .hero-stats{grid-template-columns:repeat(2,1fr);gap:16px}
+  #overview .two-col{grid-template-columns:1fr}
+  #stats .stats-grid{grid-template-columns:repeat(3,1fr);gap:24px}
+  #stats .stat-item{border-right:none;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:20px}
+  #stats .stat-item:last-child{border-bottom:none}
+  #community .members-grid{grid-template-columns:repeat(3,1fr)}
+  .rp-cards{grid-template-columns:1fr}
+  #journals .journals-grid{grid-template-columns:1fr}
+  #education .edu-grid{grid-template-columns:repeat(2,1fr)}
+  .events-gallery{grid-template-columns:repeat(2,1fr)}
+  #guests .maps-pair{grid-template-columns:1fr}
+  .charts-two{grid-template-columns:1fr}
+  .pub-charts{grid-template-columns:1fr!important}
+  #publications .pub-charts{grid-template-columns:1fr}
+  #partnerships .partners-grid{grid-template-columns:1fr}
+  footer .footer-inner{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .container{padding:0 18px}
+  .section{padding:56px 0}
+  #community .members-grid{grid-template-columns:repeat(2,1fr)}
+  #education .edu-grid{grid-template-columns:1fr}
+  .fellow-bio-block{grid-template-columns:80px 1fr;gap:16px}
+  .fellow-bio-block img{width:80px;height:96px}
+  footer .footer-bottom{flex-direction:column;gap:10px;text-align:center}
+}
+
+/* ── Clickable / interactive hints ───────────────────────── */
+.clickable{cursor:pointer;position:relative}
+.clickable::after{
+  content:'';position:absolute;inset:0;border-radius:inherit;
+  background:transparent;transition:background 0.18s;pointer-events:none;
+}
+.clickable:hover::after{background:rgba(0,47,108,0.05)}
+.click-hint{
+  display:inline-flex;align-items:center;gap:4px;
+  font-family:var(--sans);font-size:0.65rem;font-weight:600;
+  letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);
+  opacity:0;transition:opacity 0.2s;margin-top:4px;
+}
+.clickable:hover .click-hint{opacity:1}
+/* chart zoom cursor */
+.chart-figure img{cursor:zoom-in}
+/* stat num click ring */
+[data-modal] .num,[data-modal] .n{text-decoration:underline;text-decoration-style:dotted;text-underline-offset:4px;text-decoration-color:rgba(228,0,43,0.4)}
+.member-card.clickable{transition:transform 0.18s,box-shadow 0.18s}
+.member-card.clickable:hover{transform:translateY(-3px);box-shadow:0 6px 18px rgba(0,0,0,0.12)}
+.rp-card.clickable{transition:box-shadow 0.18s,border-color 0.18s}
+.rp-card.clickable:hover{box-shadow:0 4px 20px rgba(0,47,108,0.12);border-color:var(--blue)}
+.ev-item.clickable{cursor:pointer}
+
+/* ── Modal overlay ────────────────────────────────────────── */
+#modal-overlay{
+  position:fixed;inset:0;z-index:2000;
+  display:flex;align-items:flex-end;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity 0.25s;
+}
+#modal-overlay.open{opacity:1;pointer-events:all}
+#modal-backdrop{position:absolute;inset:0;background:rgba(0,15,50,0.55);backdrop-filter:blur(3px)}
+#modal-panel{
+  position:relative;z-index:1;
+  background:#fff;width:100%;max-width:760px;
+  max-height:90vh;overflow-y:auto;
+  border-radius:6px 6px 0 0;
+  transform:translateY(32px);transition:transform 0.3s cubic-bezier(0.22,1,0.36,1);
+  padding:0 0 40px;
+}
+#modal-overlay.open #modal-panel{transform:translateY(0)}
+#modal-bar{
+  position:sticky;top:0;z-index:2;
+  background:#fff;border-bottom:1px solid var(--rule);
+  padding:14px 28px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+#modal-bar .modal-eyebrow{
+  font-family:var(--sans);font-size:0.68rem;font-weight:700;
+  letter-spacing:0.18em;text-transform:uppercase;color:var(--red);
+}
+#modal-close{
+  background:none;border:none;cursor:pointer;
+  font-size:1.2rem;color:var(--muted);line-height:1;padding:4px 6px;
+  transition:color 0.15s;
+}
+#modal-close:hover{color:var(--ink)}
+#modal-body{padding:28px 28px 0}
+
+/* modal content types */
+.modal-headline{
+  font-family:var(--serif);font-size:4rem;font-weight:400;
+  color:var(--red);line-height:1;margin-bottom:4px;
+}
+.modal-subtitle{
+  font-family:var(--sans);font-size:0.82rem;color:var(--muted);
+  margin-bottom:16px;letter-spacing:0.04em;
+}
+.modal-intro{
+  font-family:var(--serif);font-size:1.05rem;color:#2B2B2B;
+  line-height:1.65;margin-bottom:24px;border-left:3px solid var(--red);
+  padding-left:16px;font-style:italic;
+}
+.modal-bars{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+.modal-bar-row{display:flex;align-items:center;gap:12px}
+.modal-bar-label{font-family:var(--sans);font-size:0.8rem;color:var(--ink);width:200px;flex-shrink:0}
+.modal-bar-track{flex:1;height:10px;background:#EDEAE0;border-radius:3px;overflow:hidden}
+.modal-bar-fill{height:100%;border-radius:3px;transition:width 0.6s cubic-bezier(0.22,1,0.36,1)}
+.modal-bar-val{font-family:var(--sans);font-size:0.8rem;font-weight:700;color:var(--ink);min-width:36px;text-align:right}
+.modal-table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:0.85rem;margin-bottom:20px}
+.modal-table th{text-align:left;font-weight:700;color:var(--navy);padding:8px 10px;border-bottom:2px solid var(--navy);font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase}
+.modal-table td{padding:10px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+.modal-table tr:last-child td{border-bottom:none}
+.modal-note{font-family:var(--sans);font-size:0.78rem;color:var(--muted);line-height:1.6;padding:12px 16px;background:var(--soft);border-radius:3px;margin-bottom:16px}
+.modal-member-head{display:grid;grid-template-columns:120px 1fr;gap:24px;margin-bottom:20px;align-items:start}
+.modal-member-head img{width:120px;height:144px;object-fit:cover;object-position:center top;border-radius:2px}
+.modal-member-name{font-family:var(--sans);font-size:1.3rem;font-weight:700;color:var(--navy);margin-bottom:4px}
+.modal-member-role{font-family:var(--sans);font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--red);margin-bottom:8px}
+.modal-member-affil{font-family:var(--sans);font-size:0.8rem;color:var(--muted)}
+.modal-profile-btn{display:inline-block;font-family:var(--sans);font-size:0.75rem;font-weight:700;letter-spacing:0.05em;color:#fff;background:var(--blue);padding:5px 14px;border-radius:3px;text-decoration:none;transition:background 0.18s}
+.modal-profile-btn:hover{background:var(--red);text-decoration:none}
+.modal-profile-btn-bottom{margin-top:4px}
+.modal-bio{font-family:var(--serif);font-size:1rem;line-height:1.7;color:#2B2B2B}
+.modal-bio p{margin-bottom:0.8em}
+.modal-bio p:last-child{margin-bottom:0}
+.modal-project-head{display:flex;align-items:center;gap:16px;margin-bottom:16px}
+.modal-project-head img{height:36px;width:auto;object-fit:contain}
+.modal-project-badge{font-family:var(--sans);font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#fff;background:var(--red);padding:3px 10px;border-radius:2px}
+.modal-stat-row{display:flex;gap:24px;flex-wrap:wrap;margin:16px 0;padding:16px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.modal-stat-box{text-align:center}
+.modal-stat-box .n{font-family:var(--sans);font-size:1.6rem;font-weight:700;color:var(--navy);line-height:1}
+.modal-stat-box .l{font-family:var(--sans);font-size:0.65rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+.modal-event-img{width:100%;max-height:200px;object-fit:cover;border-radius:3px;margin-bottom:16px}
+.modal-event-meta{font-family:var(--sans);font-size:0.78rem;color:var(--muted);margin-bottom:14px;display:flex;gap:20px;flex-wrap:wrap}
+.modal-event-meta span strong{color:var(--ink)}
+
+/* ── Lightbox ─────────────────────────────────────────────── */
+#lightbox{
+  position:fixed;inset:0;z-index:3000;
+  background:rgba(0,0,0,0.92);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity 0.2s;padding:20px;
+}
+#lightbox.open{opacity:1;pointer-events:all}
+#lightbox img{max-width:100%;max-height:85vh;object-fit:contain;border-radius:2px}
+#lightbox figcaption{font-family:var(--sans);font-size:0.75rem;color:#aaa;text-align:center;margin-top:10px;max-width:700px}
+#lightbox-close{
+  position:absolute;top:16px;right:20px;background:none;border:none;
+  color:#fff;font-size:1.8rem;cursor:pointer;line-height:1;opacity:0.7;
+}
+#lightbox-close:hover{opacity:1}
+</style>
+</head>
+<body>
+
+<!-- ── Navigation ───────────────────────────────────────── -->
+<header id="site-nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#hero">
+      <img src="assets/logo_ccds_blackBG.png" alt="AUP · Center for Critical Democracy Studies">
+    </a>
+    <nav>
+      <a href="#overview">Overview</a>
+      <a href="#community">Community</a>
+      <a href="#publications">Publications</a>
+      <a href="#journals">Journals</a>
+      <a href="#research">Research</a>
+      <a href="#education">Education</a>
+      <a href="#events">Events</a>
+      <a href="#guests">Guests</a>
+    </nav>
+    <button id="burger" aria-label="Menu" onclick="document.getElementById('mobile-menu').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<div id="mobile-menu">
+  <a href="#overview" onclick="this.closest('#mobile-menu').classList.remove('open')">Overview</a>
+  <a href="#community" onclick="this.closest('#mobile-menu').classList.remove('open')">Community</a>
+  <a href="#publications" onclick="this.closest('#mobile-menu').classList.remove('open')">Publications</a>
+  <a href="#journals" onclick="this.closest('#mobile-menu').classList.remove('open')">Journals &amp; Blog</a>
+  <a href="#research" onclick="this.closest('#mobile-menu').classList.remove('open')">Research Projects</a>
+  <a href="#education" onclick="this.closest('#mobile-menu').classList.remove('open')">Education</a>
+  <a href="#events" onclick="this.closest('#mobile-menu').classList.remove('open')">Events</a>
+  <a href="#guests" onclick="this.closest('#mobile-menu').classList.remove('open')">Invited Guests</a>
+</div>
+
+<!-- ── Hero ─────────────────────────────────────────────── -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-body">
+    <span class="hero-year">Activity Report · 2016 – 2026</span>
+    <h1>CCDS · <em>The&nbsp;First Decade</em></h1>
+    <p class="hero-sub">An institutional record of research, publishing, curriculum, partnerships, and public programming at the intersection of political theory, law, history, and the social sciences.</p>
+    <div class="hero-cta">
+      <a href="#overview" class="btn primary">Explore the Report</a>
+      <a href="https://doi.org/10.5281/zenodo.19880201" class="btn" target="_blank">DOI · Full PDF</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat clickable" data-modal="stat-publications" title="Click for breakdown">
+        <div class="num" data-target="186">0</div>
+        <div class="lbl">Publications</div>
+      </div>
+      <div class="hero-stat clickable" data-modal="stat-events" title="Click for breakdown">
+        <div class="num" data-target="178">0</div>
+        <div class="lbl">Academic Events</div>
+      </div>
+      <div class="hero-stat clickable" data-modal="stat-speakers" title="Click for breakdown">
+        <div class="num" data-target="545">0</div>
+        <div class="lbl">Invited Speakers</div>
+      </div>
+      <div class="hero-stat clickable" data-modal="stat-speakers" title="Click for breakdown">
+        <div class="num" data-target="43" data-suffix=" countries">0</div>
+        <div class="lbl">Countries Represented</div>
+      </div>
+    </div>
+  </div>
+  <div class="tricolor"></div>
+</section>
+
+<!-- ── Overview ─────────────────────────────────────────── -->
+<section class="section" id="overview">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="kicker">The Center at a Glance</span>
+      <h2>Overview &amp; Mission</h2>
+      <p class="intro">Founded in 2016 at The American University of Paris, the Center for Critical Democracy Studies advances interdisciplinary inquiry into democracy as a social state, political regime, and form of collective agency.</p>
+    </div>
+    <div class="two-col fade-in">
+      <div class="mission-block">
+        <span class="kicker">Mission</span>
+        <p>The Center for Critical Democracy Studies pursues inquiry into the emancipatory possibilities of democracy in the widest sense. We encourage work that understands democracy as a way of organizing social relations based on equality and as a means of self-governing toward individual and collective liberty.</p>
+        <div class="contacts">
+          <strong>Director</strong> · Stephen W. Sawyer, Ballantine-Leavitt Professor of History<br>
+          <strong>Associate Director (2026–)</strong> · Roman Zinigrad, Assistant Professor of Law<br>
+          <strong>Founded</strong> · 2016<br>
+          <strong>Address</strong> · 6 rue du Colonel Combes, 75007 Paris<br>
+          <strong>Contact</strong> · <a href="mailto:ccds@aup.edu" style="color:#7A9ABF">ccds@aup.edu</a>
+        </div>
+      </div>
+      <div class="facts-block">
+        <div class="fact-row clickable" data-modal="stat-community" title="Click for community details">
+          <div class="fact-num">17</div>
+          <div class="fact-text">
+            <strong>Current Members</strong>
+            <span>Faculty fellows, affiliate members, postdoctoral research fellows, visiting scholars, and student researchers.</span>
+          </div>
+        </div>
+        <div class="fact-row clickable" data-modal="stat-publications" title="Click for publication breakdown">
+          <div class="fact-num">186</div>
+          <div class="fact-text">
+            <strong>Scholarly Publications</strong>
+            <span>16 books · 3 special issues · 127 articles &amp; chapters · 15 reports · 17 reviews · 8 blogs</span>
+          </div>
+        </div>
+        <div class="fact-row clickable" data-modal="stat-events" title="Click for events breakdown">
+          <div class="fact-num">178</div>
+          <div class="fact-text">
+            <strong>Academic Events</strong>
+            <span>52 seminar sessions · 33 book launches · 22 conferences &amp; symposia · 71 thematic lectures &amp; workshops</span>
+          </div>
+        </div>
+        <div class="fact-row clickable" data-modal="stat-funding" title="Click for grant breakdown">
+          <div class="fact-num" style="font-size:1.7rem;padding-top:4px;">€797k</div>
+          <div class="fact-text">
+            <strong>EU Research Funding (CCDS share)</strong>
+            <span>Three Horizon Europe grants totalling €8.19M across consortia. D.Rad · OppAttune · CO3.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Stats strip ───────────────────────────────────────── -->
+<div id="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item fade-in clickable" data-modal="stat-publications" title="Click for publication breakdown">
+        <div class="n" data-target="186">0</div>
+        <div class="l">Publications</div>
+      </div>
+      <div class="stat-item fade-in clickable" data-modal="stat-citations" title="Click for citation details">
+        <div class="n" data-target="1225">0</div>
+        <div class="l">Scholarly Citations</div>
+      </div>
+      <div class="stat-item fade-in clickable" data-modal="stat-events" title="Click for events breakdown">
+        <div class="n" data-target="178">0</div>
+        <div class="l">Events</div>
+      </div>
+      <div class="stat-item fade-in clickable" data-modal="stat-speakers" title="Click for speaker details">
+        <div class="n" data-target="545">0</div>
+        <div class="l">Invited Speakers</div>
+      </div>
+      <div class="stat-item fade-in clickable" data-modal="stat-speakers" title="Click for geographic breakdown">
+        <div class="n" data-target="43">0</div>
+        <div class="l">Countries</div>
+      </div>
+      <div class="stat-item fade-in clickable" data-modal="stat-funding" title="Click for grant breakdown">
+        <div class="n"><span class="unit">€</span>797k</div>
+        <div class="l">EU Funding (CCDS)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Community ────────────────────────────────────────── -->
+<section class="section alt" id="community">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="kicker">Part II</span>
+      <h2>Community</h2>
+      <p class="intro">Faculty fellows, affiliate members, visiting scholars, and the students who sustain the Center's intellectual life.</p>
+    </div>
+
+    <figure class="group-photo fade-in">
+      <img src="images/community/image1.jpeg" alt="CCDS community, Fall 2025">
+      <figcaption>Members of the Center for Critical Democracy Studies community, Fall 2025 (not all members pictured)</figcaption>
+    </figure>
+
+    <span class="section-label">Current Fellows &amp; Members</span>
+    <div class="members-grid fade-in">
+      <div class="member-card clickable" data-modal="member-sawyer">
+        <img src="images/community/image2.png" alt="Stephen W. Sawyer">
+        <div class="m-name">Stephen W. Sawyer</div>
+        <div class="m-role">Director</div>
+        <div class="m-field">History, state &amp; administration</div>
+      </div>
+      <div class="member-card clickable" data-modal="member-zinigrad">
+        <img src="images/community/image15.jpeg" alt="Roman Zinigrad">
+        <div class="m-name">Roman Zinigrad</div>
+        <div class="m-role">Associate Director</div>
+        <div class="m-field">Comp. constitutional law &amp; theory</div>
+      </div>
+      <div class="member-card clickable" data-modal="member-culp">
+        <img src="images/community/image5.jpeg" alt="Julian Culp">
+        <div class="m-name">Julian Culp</div>
+        <div class="m-role">Faculty Fellow</div>
+        <div class="m-field">Global justice, education</div>
+      </div>
+      <div class="member-card clickable" data-modal="member-dageforde">
+        <img src="images/community/image6.png" alt="Mirjam Dageförde">
+        <div class="m-name">Mirjam Dageförde</div>
+        <div class="m-role">Faculty Fellow</div>
+        <div class="m-field">Political economy, EU politics</div>
+      </div>
+      <div class="member-card clickable" data-modal="member-spieler">
+        <img src="images/community/image11.jpeg" alt="Miranda Spieler">
+        <div class="m-name">Miranda Spieler</div>
+        <div class="m-role">Faculty Fellow</div>
+        <div class="m-field">Legal history, colonialism</div>
+      </div>
+      <div class="member-card clickable" data-modal="member-colinjaeger">
+        <img src="images/community/colinjaeger_portrait.jpeg" alt="Nathanaël Colin-Jaeger">
+        <div class="m-name">Nathanaël Colin-Jaeger</div>
+        <div class="m-role">Affiliate Member</div>
+        <div class="m-field">Political philosophy</div>
+        <div class="m-affil">ESPOL</div>
+      </div>
+      <div class="member-card clickable" data-modal="member-lever">
+        <img src="images/community/image7.jpeg" alt="Annabelle Lever">
+        <div class="m-name">Annabelle Lever</div>
+        <div class="m-role">Affiliate Member</div>
+        <div class="m-field">Democratic theory</div>
+        <div class="m-affil">Sciences Po</div>
+      </div>
+      <div class="member-card clickable" data-modal="member-zaric">
+        <img src="images/community/image14.png" alt="Zona Zarić">
+        <div class="m-name">Zona Zarić</div>
+        <div class="m-role">Affiliate Member</div>
+        <div class="m-field">Feminist philosophy</div>
+      </div>
+      <div class="member-card clickable" data-modal="member-oberoi">
+        <img src="images/community/oberoi_portrait.jpeg" alt="Naintara Oberoi">
+        <div class="m-name">Naintara Oberoi</div>
+        <div class="m-role">Postdoc Fellow</div>
+        <div class="m-field">Political phil., domination</div>
+      </div>
+      <div class="member-card clickable" data-modal="member-taieb">
+        <img src="images/community/image12.jpeg" alt="Hannah Davis Taieb">
+        <div class="m-name">Hannah Davis Taieb</div>
+        <div class="m-role">Clinical Fellow</div>
+        <div class="m-field">Prison education, justice</div>
+      </div>
+      <div class="member-card clickable" data-modal="member-crary">
+        <img src="images/community/image4.jpeg" alt="Alice Crary">
+        <div class="m-name">Alice Crary</div>
+        <div class="m-role">Visiting Scholar 2025–26</div>
+        <div class="m-field">Moral &amp; social philosophy</div>
+        <div class="m-affil">New School</div>
+      </div>
+      <div class="member-card clickable" data-modal="member-williams">
+        <img src="images/community/image13.jpeg" alt="Juliet A. Williams">
+        <div class="m-name">Juliet A. Williams</div>
+        <div class="m-role">Visiting Scholar 2025–26</div>
+        <div class="m-field">Gender, law &amp; politics</div>
+        <div class="m-affil">UCLA</div>
+      </div>
+      <div class="member-card clickable" data-modal="member-ritchie">
+        <img src="images/community/ritchie.png" alt="Jennifer Ritchie">
+        <div class="m-name">Jennifer Ritchie</div>
+        <div class="m-role">Visiting Clinical Scholar</div>
+        <div class="m-field">Comparative justice systems</div>
+      </div>
+      <div class="member-card clickable" data-modal="member-mclorrain">
+        <img src="images/community/image8.jpeg" alt="Shane McLorrain">
+        <div class="m-name">Shane McLorrain</div>
+        <div class="m-role">Tocqueville 21 Editor</div>
+        <div class="m-field">Geopolitics, intl. political economy</div>
+      </div>
+    </div>
+
+    <!-- Biographical profiles (collapsible) -->
+    <div class="fellows-bio fade-in">
+      <span class="section-label" style="margin-bottom:20px;">Selected Profiles</span>
+
+      <div class="fellow-bio-block">
+        <img src="images/community/image2.png" alt="Stephen W. Sawyer">
+        <div>
+          <div class="bio-meta">
+            <div class="name">Stephen W. Sawyer</div>
+            <div class="role">Director · Ballantine-Leavitt Professor of History</div>
+          </div>
+          <div class="bio-text">Sawyer's work articulates a history and theory of democracy as a mode of popular magistrature, administration and public regulation. His first volume, <em>Demos Assembled: Democracy and the International Origins of the Modern State, 1840–1880</em> (University of Chicago Press, 2018) was followed in 2025 by <em>Demos Rising</em> (UChicago Press). He directs <em>The Tocqueville Review / La Revue Tocqueville</em> and founded the online platform Tocqueville21 in 2017. He has held fellowships at the EHESS, Fulbright, Sciences Po, Stanford CASBS, and Harvard CES.</div>
+        </div>
+      </div>
+
+      <div class="fellow-bio-block">
+        <img src="images/community/image15.jpeg" alt="Roman Zinigrad">
+        <div>
+          <div class="bio-meta">
+            <div class="name">Roman Zinigrad</div>
+            <div class="role">Associate Director (2026–) · Assistant Professor of Law</div>
+          </div>
+          <div class="bio-text">Zinigrad coordinates the AUP History, Law &amp; Society undergraduate program and specializes in constitutional law and theory, comparative constitutional law, and law and education. His research addresses law and religion, international human rights law, children's rights, parental rights, and legal aspects of radical violence. He is co-curator of this report.</div>
+        </div>
+      </div>
+
+      <div class="fellow-bio-block">
+        <img src="images/community/image5.jpeg" alt="Julian Culp">
+        <div>
+          <div class="bio-meta">
+            <div class="name">Julian Culp</div>
+            <div class="role">Faculty Fellow · Associate Professor of Philosophy</div>
+          </div>
+          <div class="bio-text">Author of <em>Global Justice and Development</em> (Palgrave, 2014) and <em>Democratic Education in a Globalized World</em> (Routledge, 2019). Co-editor of <em>The Cambridge Handbook of Democratic Education</em> (CUP, 2023) and the journal <em>Analyse &amp; Kritik</em> (De Gruyter). Previously held postdoctoral fellowships from the University of Toronto and the Catholic University of Louvain.</div>
+        </div>
+      </div>
+
+      <div class="fellow-bio-block">
+        <img src="images/community/image14.png" alt="Zona Zarić">
+        <div>
+          <div class="bio-meta">
+            <div class="name">Zona Zarić</div>
+            <div class="role">Affiliate Member · Research Fellow, IFDT Belgrade</div>
+          </div>
+          <div class="bio-text">Philosopher and feminist, Zarić organizes the Center's "Care &amp; Democracy" seminar series and previously held a CCDS postdoctoral fellowship during which she contributed to the OppAttune project. She holds a PhD in Political Philosophy from the ENS-Ulm, a J.D. from the University of Belgrade, and an MA from AUP. Her current book project, dedicated to Nancy Fraser's oeuvre, is under contract at Edinburgh University Press.</div>
+        </div>
+      </div>
+
+      <div class="fellow-bio-block">
+        <img src="images/community/image4.jpeg" alt="Alice Crary">
+        <div>
+          <div class="bio-meta">
+            <div class="name">Alice Crary</div>
+            <div class="role">Visiting Scholar 2025–26 · Walter A. Eberstadt Distinguished University Professor, New School</div>
+          </div>
+          <div class="bio-text">Expert in twentieth-century British and American moral philosophy, ordinary language philosophy, feminist philosophy, and animal ethics. Her publications include <em>Beyond Moral Judgment</em>, <em>Inside Ethics</em>, and (with Lori Gruen) <em>Animal Crisis</em>. At CCDS, she is working on a project on "philosophy in the time of technofascism" and participating in the Care and Democracy series.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Past members -->
+    <div class="past-members-section fade-in">
+      <h3>Former Visiting Scholars</h3>
+      <div class="past-grid">
+        <a class="past-card" href="https://www.leuphana.de/en/institutes/iswb/team/harald-hantke.html" target="_blank" rel="noopener">
+          <img src="images/past_members/hantke.jpg" alt="Harald Hantke">
+          <div class="p-name">Harald Hantke</div>
+          <div class="p-role">Visiting Scholar</div>
+          <div class="p-period">2025 · Leuphana U.</div>
+        </a>
+        <a class="past-card" href="https://www.aup.edu/profile/nlefkopoulou" target="_blank" rel="noopener">
+          <img src="images/past_members/lefkopoulou.jpg" alt="Nefeli Lefkopoulou">
+          <div class="p-name">Nefeli Lefkopoulou</div>
+          <div class="p-role">Visiting Scholar</div>
+          <div class="p-period">2025 · Sciences Po</div>
+        </a>
+        <a class="past-card" href="https://www.runi.ac.il/en/faculty/ashinar" target="_blank" rel="noopener">
+          <img src="images/past_members/shinar.png" alt="Adam Shinar">
+          <div class="p-name">Adam Shinar</div>
+          <div class="p-role">Visiting Scholar</div>
+          <div class="p-period">2024 · Reichman U.</div>
+        </a>
+        <a class="past-card" href="https://www.qmul.ac.uk/history/people/academic-staff/profiles/maggornoam.html" target="_blank" rel="noopener">
+          <img src="images/past_members/maggor.png" alt="Noam Maggor">
+          <div class="p-name">Noam Maggor</div>
+          <div class="p-role">Visiting Scholar</div>
+          <div class="p-period">2023–24 · Queen Mary</div>
+        </a>
+        <a class="past-card" href="https://www.aup.edu/profile/svaleonti" target="_blank" rel="noopener">
+          <img src="images/past_members/valeonti.jpg" alt="Sofia Valeonti">
+          <div class="p-name">Sofia Valeonti</div>
+          <div class="p-role">Visiting Scholar</div>
+          <div class="p-period">2022–23 · AUP</div>
+        </a>
+        <a class="past-card" href="https://law.unimelb.edu.au/about/staff/scott-stephenson" target="_blank" rel="noopener">
+          <img src="images/past_members/stephenson.png" alt="Scott Stephenson">
+          <div class="p-name">Scott Stephenson</div>
+          <div class="p-role">Visiting Scholar</div>
+          <div class="p-period">2023 · Melbourne Law</div>
+        </a>
+        <a class="past-card" href="https://www.kings.cam.ac.uk/research/fellows/michael-sonenscher" target="_blank" rel="noopener">
+          <img src="images/past_members/sonenscher.jpg" alt="Michael Sonenscher">
+          <div class="p-name">Michael Sonenscher</div>
+          <div class="p-role">Visiting Scholar</div>
+          <div class="p-period">2023 · King's Cambridge</div>
+        </a>
+        <a class="past-card" href="https://research.uniupo.it/en/persons/carlo-burelli" target="_blank" rel="noopener">
+          <img src="images/past_members/burelli.jpg" alt="Carlo Burelli">
+          <div class="p-name">Carlo Burelli</div>
+          <div class="p-role">Visiting Scholar</div>
+          <div class="p-period">2021–22 · U. East Piedmont</div>
+        </a>
+      </div>
+      <div class="intern-list">
+        <strong style="font-family:var(--sans);font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);">Former Student Researchers &amp; Interns</strong><br>
+        Anna Sophia Abundis · Emily Barlett · Sarah Beck · Madison Coakley · Zachary Egan · Clare Flaherty · Halley Hoellwarth · Alessia Lavorato · Yelena Menard · Constanze Melz · Reem Rajab · Alexandra Shao · Jennifer Shoemaker · Anastasiya Sindyukova · Dominic Spada
+      </div>
+    </div>
+
+    <!-- Visiting Scholars Program info -->
+    <div class="visiting-box fade-in">
+      <h3>Visiting Scholars Program</h3>
+      <p>Senior and junior researchers interested in applying are welcome to submit at any time. Scholars have access to CCDS resources, library privileges, and participation in CCDS seminars. Visiting scholars are encouraged to present their research, organize events, and collaborate with CCDS members and the AUP community.</p>
+      <p><strong>Required documents:</strong> CV · selected publications list · proposed stay dates (minimum 3 months notice) · brief research description · potential collaborations · financing information. For PhD candidates: a recommendation letter.</p>
+      <a href="mailto:ccds@aup.edu" class="apply">Apply · ccds@aup.edu</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Publications ──────────────────────────────────────── -->
+<section class="section" id="publications">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="kicker">Part III</span>
+      <h2>Publications by CCDS Fellows</h2>
+      <p class="intro">186 scholarly works since 2016, spanning books, peer-reviewed articles, policy reports, and journal reviews across six disciplines and ten languages.</p>
+    </div>
+
+    <div class="pub-big-num fade-in">
+      <div class="n" data-target="186">0</div>
+      <div class="l">total publications by current Fellows and Affiliate Members · 2016–2026</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px" class="fade-in">
+      <figure class="chart-figure">
+        <img src="charts_large/04_publications_stacked.png" alt="Publications by type, 2016–2026">
+        <figcaption>Books, edited volumes, articles, and other works published by CCDS Fellows and Affiliate Members from 2016, or from the year in which they joined the Center.</figcaption>
+      </figure>
+      <figure class="chart-figure">
+        <img src="charts_large/13_citation_impact.png" alt="Citation impact 2016–2026">
+        <figcaption>Scholarly citations across all publications by current CCDS Fellows and Affiliate Members.</figcaption>
+      </figure>
+    </div>
+
+    <figure class="chart-figure fade-in" style="margin-top:36px">
+      <img src="charts_large/12_keyword_index.png" alt="Publication keywords">
+      <figcaption>Thematic keywords across all CCDS fellow publications, 2016–2026.</figcaption>
+    </figure>
+
+    <!-- Year-by-year accordion -->
+    <div style="margin-top:52px">
+      <span class="section-label" style="margin-bottom:16px">Full Publication Record · by Year</span>
+
+      <!-- 2026 -->
+      <div class="pub-year-group">
+        <button class="pub-year-toggle" onclick="toggleYear(this)">
+          <span class="yr">2026</span>
+          <span class="count">Selected works <span class="arrow">▾</span></span>
+        </button>
+        <div class="pub-year-body">
+          <div class="pub-cat-head">Articles &amp; Book Chapters</div>
+          <div class="pub-entry">
+            <img src="images/journal_covers/rmm.jpg" alt="Journal cover" onerror="this.style.display='none'">
+            <div class="pub-text"><strong>Zarić, Z.</strong> 2026. Article on care ethics. <em>Revue de Métaphysique et de Morale</em>.</div>
+          </div>
+          <div class="pub-cat-head">Special Issues</div>
+          <div class="pub-entry">
+            <img src="images/fcri20.jpg" alt="Journal cover" onerror="this.style.display='none'">
+            <div class="pub-text"><strong>Colin-Jaeger, N.</strong> (Guest Ed.) 2026. Special Issue. <em>French Cultural &amp; Religious Identity</em>.</div>
+          </div>
+          <div class="pub-cat-head">Reviews</div>
+          <div class="pub-entry">
+            <img src="images/journal_covers/ethics.png" alt="Journal cover">
+            <div class="pub-text">Book review. <em>Ethics</em>.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2025 -->
+      <div class="pub-year-group">
+        <button class="pub-year-toggle" onclick="toggleYear(this)">
+          <span class="yr">2025</span>
+          <span class="count">Selected works <span class="arrow">▾</span></span>
+        </button>
+        <div class="pub-year-body">
+          <div class="pub-cat-head">Books</div>
+          <div class="pub-entry">
+            <img src="images/book_covers/bk_mig.jpg" alt="Book cover" onerror="this.style.display='none'">
+            <div class="pub-text"><strong>Sawyer, S.W.</strong> 2025. <em>Demos Rising: Democracy and the Popular Construction of Public Power in France, 1800–1850</em>. University of Chicago Press.</div>
+          </div>
+          <div class="pub-cat-head">Articles &amp; Book Chapters</div>
+          <div class="pub-entry">
+            <img src="images/journal_covers/nyu.jpg" alt="Journal cover" onerror="this.style.display='none'">
+            <div class="pub-text">Zinigrad, R. 2025. Article on constitutional law and education. <em>NYU Review of Law &amp; Social Change</em>.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2024 -->
+      <div class="pub-year-group">
+        <button class="pub-year-toggle" onclick="toggleYear(this)">
+          <span class="yr">2024</span>
+          <span class="count">Selected works <span class="arrow">▾</span></span>
+        </button>
+        <div class="pub-year-body">
+          <div class="pub-cat-head">Books</div>
+          <div class="pub-entry">
+            <img src="images/book_covers/nancy_fraser_and_politics.jpg" alt="Nancy Fraser and Politics">
+            <div class="pub-text"><strong>Zarić, Z.</strong> (Ed.) 2024. <em>Nancy Fraser and Politics</em>.</div>
+          </div>
+          <div class="pub-cat-head">Articles &amp; Book Chapters</div>
+          <div class="pub-entry">
+            <img src="images/journal_covers/impl.png" alt="Journal cover" onerror="this.style.display='none'">
+            <div class="pub-text">Article on democratic theory. <em>Imprints</em>.</div>
+          </div>
+          <div class="pub-entry">
+            <img src="images/journal_covers/wp_alt.jpg" alt="Journal cover" onerror="this.style.display='none'">
+            <div class="pub-text">Article. <em>West European Politics</em>.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2023 -->
+      <div class="pub-year-group">
+        <button class="pub-year-toggle" onclick="toggleYear(this)">
+          <span class="yr">2023</span>
+          <span class="count">Selected works <span class="arrow">▾</span></span>
+        </button>
+        <div class="pub-year-body">
+          <div class="pub-cat-head">Books</div>
+          <div class="pub-entry">
+            <img src="images/book_covers/cambridge_handbook.jpg" alt="Cambridge Handbook of Democratic Education">
+            <div class="pub-text"><strong>Culp, J.</strong> (Co-Ed.) 2023. <em>The Cambridge Handbook of Democratic Education</em>. Cambridge University Press.</div>
+          </div>
+          <div class="pub-entry">
+            <img src="images/book_covers/soin_et_compassion.jpg" alt="Soin et compassion">
+            <div class="pub-text"><strong>Zarić, Z.</strong> (Co-Author) 2023. <em>Soin et compassion: Un nouveau paradigme pour la philosophie politique?</em>. Hermann.</div>
+          </div>
+          <div class="pub-cat-head">Articles &amp; Book Chapters</div>
+          <div class="pub-entry">
+            <img src="images/journal_covers/rai.jpg" alt="Journal cover" onerror="this.style.display='none'">
+            <div class="pub-text">Article. <em>Revue Africaine et Malgache de Recherche</em>.</div>
+          </div>
+          <div class="pub-entry">
+            <img src="images/book_covers/rawls_handbuch.jpeg" alt="Rawls-Handbuch">
+            <div class="pub-text">Chapter in <em>Rawls-Handbuch</em>. Metzler.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2022 -->
+      <div class="pub-year-group">
+        <button class="pub-year-toggle" onclick="toggleYear(this)">
+          <span class="yr">2022</span>
+          <span class="count">Selected works <span class="arrow">▾</span></span>
+        </button>
+        <div class="pub-year-body">
+          <div class="pub-cat-head">Articles &amp; Book Chapters</div>
+          <div class="pub-entry">
+            <img src="images/journal_covers/rejh20.jpg" alt="Journal cover" onerror="this.style.display='none'">
+            <div class="pub-text">Article. <em>Revue Européenne de Journalisme et d'Histoire</em>.</div>
+          </div>
+          <div class="pub-entry">
+            <img src="images/journal_covers/cr_current.jpg" alt="Journal cover" onerror="this.style.display='none'">
+            <div class="pub-text">Article. <em>Critical Review</em>.</div>
+          </div>
+          <div class="pub-cat-head">Blogs</div>
+          <div class="pub-entry">
+            <img src="images/journal_covers/blog-verf.png" alt="Blog" onerror="this.style.display='none'">
+            <div class="pub-text">Blog post. <em>Verfassungsblog</em>.</div>
+          </div>
+          <div class="pub-entry">
+            <img src="images/journal_covers/journal_global_ethics.webp" alt="Journal of Global Ethics" onerror="this.style.display='none'">
+            <div class="pub-text">Article. <em>Journal of Global Ethics</em>.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2021 -->
+      <div class="pub-year-group">
+        <button class="pub-year-toggle" onclick="toggleYear(this)">
+          <span class="yr">2021</span>
+          <span class="count">Selected works <span class="arrow">▾</span></span>
+        </button>
+        <div class="pub-year-body">
+          <div class="pub-cat-head">Books</div>
+          <div class="pub-entry">
+            <img src="images/book_covers/bk_abidjan.jpg" alt="Book cover" onerror="this.style.display='none'">
+            <div class="pub-text">Monograph. AUP Press.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2019 -->
+      <div class="pub-year-group">
+        <button class="pub-year-toggle" onclick="toggleYear(this)">
+          <span class="yr">2019</span>
+          <span class="count">Selected works <span class="arrow">▾</span></span>
+        </button>
+        <div class="pub-year-body">
+          <div class="pub-cat-head">Books</div>
+          <div class="pub-entry">
+            <img src="images/book_covers/bk_dem_ed_globalized.jpg" alt="Democratic Education in a Globalized World">
+            <div class="pub-text"><strong>Culp, J.</strong> 2019. <em>Democratic Education in a Globalized World</em>. Routledge.</div>
+          </div>
+          <div class="pub-cat-head">Articles</div>
+          <div class="pub-entry">
+            <img src="images/journal_covers/philosophy_public_issues.jpg" alt="Philosophy and Public Issues" onerror="this.style.display='none'">
+            <div class="pub-text">Article. <em>Philosophy &amp; Public Issues</em>.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2018 -->
+      <div class="pub-year-group">
+        <button class="pub-year-toggle" onclick="toggleYear(this)">
+          <span class="yr">2018</span>
+          <span class="count">Selected works <span class="arrow">▾</span></span>
+        </button>
+        <div class="pub-year-body">
+          <div class="pub-cat-head">Books</div>
+          <div class="pub-entry">
+            <img src="images/book_covers/bk_thiers.jpg" alt="Adolphe Thiers" onerror="this.style.display='none'">
+            <div class="pub-text"><strong>Sawyer, S.W.</strong> 2018. <em>Demos Assembled: Democracy and the International Origins of the Modern State, 1840–1880</em>. University of Chicago Press.</div>
+          </div>
+          <div class="pub-entry">
+            <img src="images/book_covers/bk_manuel.jpg" alt="Book cover" onerror="this.style.display='none'">
+            <div class="pub-text">Monograph. Armand Colin.</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end year groups -->
+
+    <p style="font-family:var(--sans);font-size:0.82rem;color:var(--muted);margin-top:20px;text-align:center;">
+      Full publication record with abstracts and keywords available in the <a href="https://doi.org/10.5281/zenodo.19880201">PDF report</a> (pp. 51–84).
+    </p>
+  </div>
+</section>
+
+<!-- ── Hosted Journals ───────────────────────────────────── -->
+<section class="section alt" id="journals">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="kicker">Part IV</span>
+      <h2>Hosting Publications · Journals &amp; Blog</h2>
+      <p class="intro">CCDS directs two transatlantic peer-reviewed journals and maintains an online publishing platform bringing scholarly debate to broader audiences.</p>
+    </div>
+    <div class="journals-grid fade-in">
+      <div class="journal-card">
+        <img src="images/ccds_publishing/tocqueville_review_cover.jpg" alt="The Tocqueville Review">
+        <div class="jc-body">
+          <div class="jc-title">The Tocqueville Review</div>
+          <div class="jc-sub">La Revue Tocqueville</div>
+          <div class="jc-meta">
+            <strong>Director:</strong> Stephen W. Sawyer<br>
+            <strong>Publisher:</strong> University of Toronto Press<br>
+            <strong>Founded:</strong> 1979 · <strong>Frequency:</strong> 2 issues/year<br>
+            <strong>ISSN:</strong> 0730-479X · eISSN: 1918-6649
+          </div>
+          <a href="https://utppublishing.com/journal/ttr" class="jc-url" target="_blank">utppublishing.com/journal/ttr</a>
+        </div>
+      </div>
+      <div class="journal-card">
+        <img src="images/ccds_publishing/analyse_kritik_cover.png" alt="Analyse &amp; Kritik">
+        <div class="jc-body">
+          <div class="jc-title">Analyse &amp; Kritik</div>
+          <div class="jc-sub">Journal of Philosophy and Social Theory</div>
+          <div class="jc-meta">
+            <strong>Co-Editor:</strong> Julian Culp<br>
+            <strong>Publisher:</strong> De Gruyter<br>
+            <strong>Frequency:</strong> 2 issues/year
+          </div>
+          <a href="https://www.degruyter.com/journal/key/auk/html" class="jc-url" target="_blank">degruyter.com · Analyse &amp; Kritik</a>
+        </div>
+      </div>
+      <div class="journal-card">
+        <img src="images/journal_covers/blog-tocq.svg" alt="Tocqueville 21" style="background:var(--navy);padding:32px;height:220px;object-fit:contain" onerror="this.style.background='var(--navy)'">
+        <div class="jc-body">
+          <div class="jc-title">Tocqueville 21</div>
+          <div class="jc-sub">Online scholarly blog</div>
+          <div class="jc-meta">
+            <strong>Editor:</strong> Shane McLorrain<br>
+            <strong>Founded:</strong> 2017<br>
+            Online companion to <em>The Tocqueville Review</em>. Brings commentary, interviews, and political analysis to wider audiences. Hosts the Tocqueville 21 Podcast.
+          </div>
+          <a href="https://tocqueville21.com" class="jc-url" target="_blank">tocqueville21.com</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Research Projects ─────────────────────────────────── -->
+<section class="section" id="research">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="kicker">Part V</span>
+      <h2>Research Projects</h2>
+      <p class="intro">Four projects spanning 2020–2027, including three successive EU Horizon grants totalling €8.19M in consortium funding.</p>
+    </div>
+
+    <figure class="chart-figure fade-in">
+      <img src="charts_large/03_funding_infographic.png" alt="Research projects timeline &amp; funding">
+      <figcaption>Four research projects spanning 2020–2027, including three successive EU Horizon grants totalling €8.19M.</figcaption>
+    </figure>
+
+    <div class="funding-big fade-in">
+      <div class="fn">€797k</div>
+      <div class="fl">total CCDS share across three EU Horizon research grants — <strong style="color:#fff;">€8.19M</strong> total consortium funding</div>
+    </div>
+
+    <div class="rp-cards fade-in">
+      <div class="rp-card clickable" data-modal="project-lsd">
+        <img src="LSD_logo_clean.png" alt="LSD" class="rp-logo" onerror="this.style.display='none'">
+        <div class="rp-period">Ongoing · since December 2025</div>
+        <div class="rp-name">Law, State, Democracy (LSD)</div>
+        <div class="rp-sub">Promoting an interdisciplinary approach to questions of law, state and democracy</div>
+        <div class="rp-desc">LSD seeks to shed new light on the interdependence and fundamental co-construction of law and democracy in promoting just and effective modes of government. Launched December 2025 with an inaugural international symposium of 19 speakers from 2 partner institutions.</div>
+        <div class="rp-stats">
+          <div class="rp-stat"><div class="rn">1</div><div class="rl">International<br>Symposium</div></div>
+          <div class="rp-stat"><div class="rn">19</div><div class="rl">Symposium<br>Speakers</div></div>
+          <div class="rp-stat"><div class="rn">2</div><div class="rl">Partner<br>Institutions</div></div>
+        </div>
+      </div>
+
+      <div class="rp-card clickable" data-modal="project-co3">
+        <img src="images/co3/co3_logo_clean.png" alt="CO3" class="rp-logo">
+        <div class="rp-period">Ongoing · since March 2024 · Horizon Europe</div>
+        <div class="rp-name">CO3 — Resilient Social Contracts</div>
+        <div class="rp-sub">COntinuous COnstruction of resilient social COntracts through societal transformations</div>
+        <div class="rp-desc">CO3 studies more open, inclusive, and democratic models of social contracts. The project creates resilient societies capable of addressing societal challenges and anti-democratic tendencies. CCDS share: €273k of €3.0M consortium.</div>
+        <div class="rp-stats">
+          <div class="rp-stat"><div class="rn">4</div><div class="rl">Working<br>Papers</div></div>
+          <div class="rp-stat"><div class="rn">1</div><div class="rl">CCDS<br>Conference</div></div>
+          <div class="rp-stat"><div class="rn">11</div><div class="rl">Consortium<br>Partners</div></div>
+        </div>
+      </div>
+
+      <div class="rp-card clickable" data-modal="project-oppattune">
+        <img src="images/lsd__oppattune_drad/oppattune_logo_clean.png" alt="OppAttune" class="rp-logo">
+        <div class="rp-period">April 2023 – April 2026 · Horizon Europe</div>
+        <div class="rp-name">OppAttune</div>
+        <div class="rp-sub">Countering Oppositional Political Extremism through Attuned Dialogue</div>
+        <div class="rp-desc">OppAttune developed an innovative Attunement Model to track and limit extreme political narratives in "everyday extremism" — polarising issues in common-sense discussions. Examined 6 national case studies. CCDS share: €269k of €2.09M consortium.</div>
+        <div class="rp-stats">
+          <div class="rp-stat"><div class="rn">6</div><div class="rl">Case<br>Studies</div></div>
+          <div class="rp-stat"><div class="rn">1</div><div class="rl">Flagship<br>Conference</div></div>
+          <div class="rp-stat"><div class="rn">2</div><div class="rl">Training<br>Academies</div></div>
+          <div class="rp-stat"><div class="rn">17</div><div class="rl">Consortium<br>Partners</div></div>
+        </div>
+      </div>
+
+      <div class="rp-card clickable" data-modal="project-drad">
+        <img src="images/drad/drad_logo_clean.png" alt="D.Rad" class="rp-logo">
+        <div class="rp-period">December 2020 – April 2024 · Horizon 2020</div>
+        <div class="rp-name">D.Rad — De-Radicalization in Europe and Beyond</div>
+        <div class="rp-sub">Detect, Resolve, Re-integrate</div>
+        <div class="rp-desc">D.Rad identified factors leading to radicalization and developed recommendations to counter extremism, reintegrate radicalised individuals, and improve social inclusion. Drew on machine learning, discourse analysis, and social psychology. CCDS share: €255k of €3.1M consortium. Produced 8 policy reports including 6 on radicalization in France, and a landmark art exhibition.</div>
+        <div class="rp-stats">
+          <div class="rp-stat"><div class="rn">8</div><div class="rl">Policy<br>Reports</div></div>
+          <div class="rp-stat"><div class="rn">1</div><div class="rl">Art<br>Exhibition</div></div>
+          <div class="rp-stat"><div class="rn">4</div><div class="rl">Events &amp;<br>Symposia</div></div>
+          <div class="rp-stat"><div class="rn">17</div><div class="rl">Consortium<br>Partners</div></div>
+        </div>
+      </div>
+    </div>
+
+    <figure class="chart-figure fade-in">
+      <img src="charts_large/15_project_keywords.png" alt="Research project keywords">
+      <figcaption>Thematic keywords across the Center's research projects.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ── Partnerships ──────────────────────────────────────── -->
+<section class="section alt" id="partnerships">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="kicker">Institutional Networks</span>
+      <h2>Partnerships</h2>
+      <p class="intro">The Center maintains institutional partnerships with leading research centers on both sides of the Atlantic and in Europe.</p>
+    </div>
+    <div class="partners-grid fade-in">
+      <div class="partner-card">
+        <img src="images/partnerships/cts.webp" alt="Center for Transcultural Studies">
+        <div>
+          <div class="pc-name">Center for Transcultural Studies</div>
+          <div class="pc-url">thects.org · Chicago</div>
+          <p>Research institution creating new forms of cultural understanding for an internationalizing world.</p>
+        </div>
+      </div>
+      <div class="partner-card">
+        <img src="images/partnerships/cgcc.png" alt="CGCC Northwestern">
+        <div>
+          <div class="pc-name">Center for Global Culture and Communication · Northwestern University</div>
+          <div class="pc-url">cgcc.soc.northwestern.edu</div>
+          <p>Interdepartmental forum in Northwestern's School of Communication addressing globalization in communication studies.</p>
+        </div>
+      </div>
+      <div class="partner-card">
+        <img src="images/partnerships/ifdt.png" alt="IFDT Belgrade">
+        <div>
+          <div class="pc-name">Institute for Philosophy and Social Theory (IFDT) · Belgrade</div>
+          <div class="pc-url">ifdt.bg.ac.rs</div>
+          <p>Interdisciplinary research on social movements, academic freedom, and critical approaches to engaged action.</p>
+        </div>
+      </div>
+      <div class="partner-card">
+        <img src="images/partnerships/isjps.png" alt="ISJPS Sorbonne">
+        <div>
+          <div class="pc-name">Institut des sciences juridique et philosophique de la Sorbonne (ISJPS)</div>
+          <div class="pc-url">isjps.pantheonsorbonne.fr · Paris 1 &amp; CNRS</div>
+          <p>Research on democracy, environment, gender, corporate social responsibility, data and AI.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Education ─────────────────────────────────────────── -->
+<section class="section" id="education">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="kicker">Part VI</span>
+      <h2>Education · Engaging Students</h2>
+      <p class="intro">The Center integrates democratic inquiry into AUP's liberal arts curriculum through experimental courses, student competitions, and international delegations.</p>
+    </div>
+    <div class="edu-grid fade-in">
+      <div class="edu-card clickable" data-modal="edu-dlab">
+        <img src="images/curriculum/image5.jpeg" alt="Democracy Lab">
+        <div class="ec-body">
+          <div class="ec-title">Democracy Lab</div>
+          <div class="ec-desc">Semester-long design-thinking courses where students identify a democratic challenge and devise a prototype solution. Inspired by John Dewey's pragmatist pedagogy.</div>
+          <div class="ec-tags"><span>Education Justice</span><span>Radical Violence</span><span>Global Citizenship</span><span>Prison Education</span></div>
+          <div class="ec-stat"><strong>4</strong> thematic editions since 2020</div>
+        </div>
+      </div>
+      <div class="edu-card">
+        <img src="images/curriculum/image6.jpeg" alt="Prison Education Workshop">
+        <div class="ec-body" data-modal="edu-prison" style="cursor:pointer">
+          <div class="ec-title">Prison Education Workshop</div>
+          <div class="ec-desc">AUP students share readings, discussions, and creative activities with detainees at La Santé prison in Paris, using circle pedagogy and egalitarian approaches. Led by Dr. Hannah Taieb; non-profit partner: Dialogue &amp; Transformation.</div>
+          <div class="ec-stat"><strong>7</strong> iterations · Fall 2019 – Summer 2024</div>
+        </div>
+      </div>
+      <div class="edu-card">
+        <img src="images/curriculum_logos/tocqueville_foundation.png" alt="Tocqueville Challenge" class="logo">
+        <div class="ec-body">
+          <div class="ec-title">Tocqueville Challenge</div>
+          <div class="ec-desc">Student competition organized by the Tocqueville Foundation. CCDS-supervised teams develop public interest projects; winners receive funding to implement their solutions.</div>
+          <div class="ec-stat"><strong>3</strong> projects supervised · 2022–2023</div>
+        </div>
+      </div>
+      <div class="edu-card">
+        <img src="images/curriculum_logos/tocqueville_foundation.png" alt="Tocqueville Conversations" class="logo">
+        <div class="ec-body">
+          <div class="ec-title">Tocqueville Conversations</div>
+          <div class="ec-desc">Annual international conference at the Château de Tocqueville (Normandy). CCDS selects outstanding AUP students to attend alongside ~200 politicians, intellectuals, and civil society actors.</div>
+          <div class="ec-stat"><strong>4</strong> editions 2022–2025 · <strong>8</strong> AUP student delegates</div>
+        </div>
+      </div>
+      <div class="edu-card">
+        <img src="images/curriculum_logos/athens_democracy_forum.png" alt="Athens Democracy Forum" class="logo">
+        <div class="ec-body">
+          <div class="ec-title">Athens Democracy Forum</div>
+          <div class="ec-desc">Since 2016, AUP nominates two students each year as Ambassadors to the Athens Democracy Forum, organized by the Democracy &amp; Culture Foundation. Ambassadors join the Global Liberal Arts Alliance delegation.</div>
+          <div class="ec-stat">up to <strong>2</strong> ambassadors per year · since 2016</div>
+        </div>
+      </div>
+      <div class="edu-card">
+        <img src="images/curriculum_logos/aupmun.png" alt="AUPMUN" class="logo">
+        <div class="ec-body">
+          <div class="ec-title">Model United Nations (AUPMUN)</div>
+          <div class="ec-desc">Student-led organization founded in 1985. Weekly sessions simulating UN structures; delegations to international MUN conferences across Europe.</div>
+          <div class="ec-stat">Highest-awarded delegation · Barcelona 2025</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Events ─────────────────────────────────────────────── -->
+<section class="section alt" id="events">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="kicker">Part VII</span>
+      <h2>Events · 2016 – 2026</h2>
+      <p class="intro">178 academic events organized since the Center's founding, spanning seminar series, book launches, international conferences, and thematic lectures.</p>
+    </div>
+
+    <div class="events-summary fade-in">
+      <div class="ev-sum-item"><div class="n">71</div><div class="l">Thematic Lectures<br>&amp; Seminars</div></div>
+      <div class="ev-sum-item"><div class="n">52</div><div class="l">Sessions in<br>Seminar Series</div></div>
+      <div class="ev-sum-item"><div class="n">33</div><div class="l">Book Launches<br>&amp; Talks</div></div>
+      <div class="ev-sum-item"><div class="n">22</div><div class="l">Conferences<br>&amp; Symposia</div></div>
+    </div>
+
+    <div class="ev-big fade-in">
+      <div class="n">178</div>
+      <div class="l">total academic events · 2016–2026</div>
+    </div>
+
+    <figure class="chart-figure fade-in">
+      <img src="charts_large/01_events_per_year.png" alt="Events per year 2016–2026">
+    </figure>
+    <figure class="chart-figure fade-in">
+      <img src="charts_large/02_events_by_type_treemap.png" alt="Events by type">
+      <figcaption>Events by type, 2016–2026.</figcaption>
+    </figure>
+
+    <div style="margin-top:48px">
+      <span class="section-label" style="margin-bottom:16px">Selected Highlights</span>
+      <div class="events-gallery fade-in">
+        <div class="ev-item clickable" data-modal="event-0">
+          <img src="images/highlights/franco_american_poster.jpg" alt="Franco-American Relations" onerror="this.src='images/ccds_booklet/image13.jpeg'">
+          <div class="ev-overlay">
+            <div class="ev-count">27</div>
+            <div class="ev-count-lbl">speakers</div>
+            <div class="ev-title">A Quarter-Millennium of Franco-American Relations</div>
+            <div class="ev-date">May 2026 · Upcoming</div>
+          </div>
+        </div>
+        <div class="ev-item clickable" data-modal="event-1">
+          <img src="images/ccds_booklet/image13.jpeg" alt="Rousseau Journée">
+          <div class="ev-overlay">
+            <div class="ev-count">5</div>
+            <div class="ev-count-lbl">speakers</div>
+            <div class="ev-title">Journée d'Étude: Rousseau · Nouvelles Perspectives</div>
+            <div class="ev-date">March 2026</div>
+          </div>
+        </div>
+        <div class="ev-item clickable" data-modal="event-2">
+          <img src="images/ccds_booklet/image47.jpeg" alt="Democracy CoLab">
+          <div class="ev-overlay">
+            <div class="ev-count">14</div>
+            <div class="ev-count-lbl">speakers</div>
+            <div class="ev-title">Democracy CoLab: Care Democracy &amp; Everyday Extremism</div>
+            <div class="ev-date">February 2026</div>
+          </div>
+        </div>
+        <div class="ev-item clickable" data-modal="event-3">
+          <img src="images/ccds_booklet/image114.jpeg" alt="LSD Symposium">
+          <div class="ev-overlay">
+            <div class="ev-count">19</div>
+            <div class="ev-count-lbl">speakers</div>
+            <div class="ev-title">Law, State, and Democracy · International Symposium</div>
+            <div class="ev-date">December 2025</div>
+          </div>
+        </div>
+        <div class="ev-item clickable" data-modal="event-4">
+          <img src="images/ccds_booklet/image169.jpeg" alt="Autonomy and the Law">
+          <div class="ev-overlay">
+            <div class="ev-count">8</div>
+            <div class="ev-count-lbl">speakers</div>
+            <div class="ev-title">Autonomy and the Law</div>
+            <div class="ev-date">May 2025</div>
+          </div>
+        </div>
+        <div class="ev-item clickable" data-modal="event-5">
+          <img src="images/ccds_booklet/image225.jpeg" alt="Renewing the Social Contract">
+          <div class="ev-overlay">
+            <div class="ev-count">50</div>
+            <div class="ev-count-lbl">speakers</div>
+            <div class="ev-title">Renewing the Social Contract</div>
+            <div class="ev-date">December 2024</div>
+          </div>
+        </div>
+        <div class="ev-item clickable" data-modal="event-6">
+          <img src="images/ccds_booklet/image235.jpeg" alt="">
+          <div class="ev-overlay">
+            <div class="ev-count">1</div>
+            <div class="ev-count-lbl">speaker</div>
+            <div class="ev-title">The Law of International Society: A Road Not Taken</div>
+            <div class="ev-date">October 2024</div>
+          </div>
+        </div>
+        <div class="ev-item clickable" data-modal="event-7">
+          <img src="images/ccds_booklet/image244.jpeg" alt="Academic Freedom">
+          <div class="ev-overlay">
+            <div class="ev-count">6</div>
+            <div class="ev-count-lbl">speakers</div>
+            <div class="ev-title">Perspectives on Academic Freedom: USA &amp; Europe</div>
+            <div class="ev-date">May 2024</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Seminar series -->
+    <div style="margin-top:52px" class="fade-in">
+      <span class="section-label" style="margin-bottom:16px">Recurring Seminar Series</span>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+        <div style="background:#fff;border:1px solid var(--rule);padding:20px;border-radius:3px">
+          <div style="font-family:var(--sans);font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:4px">Demos 21</div>
+          <div style="font-family:var(--sans);font-size:1.5rem;font-weight:700;color:var(--red)">23</div>
+          <div style="font-family:var(--sans);font-size:0.72rem;color:var(--muted)">sessions</div>
+        </div>
+        <div style="background:#fff;border:1px solid var(--rule);padding:20px;border-radius:3px">
+          <div style="font-family:var(--sans);font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:4px">Care &amp; Democracy</div>
+          <div style="font-family:var(--sans);font-size:1.5rem;font-weight:700;color:var(--red)">14</div>
+          <div style="font-family:var(--sans);font-size:0.72rem;color:var(--muted)">sessions</div>
+        </div>
+        <div style="background:#fff;border:1px solid var(--rule);padding:20px;border-radius:3px">
+          <div style="font-family:var(--sans);font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:4px">UPEL</div>
+          <div style="font-family:var(--sans);font-size:1.5rem;font-weight:700;color:var(--red)">7</div>
+          <div style="font-family:var(--sans);font-size:0.72rem;color:var(--muted)">sessions</div>
+        </div>
+        <div style="background:#fff;border:1px solid var(--rule);padding:20px;border-radius:3px">
+          <div style="font-family:var(--sans);font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:4px">Soulèvements ou Révolutions</div>
+          <div style="font-family:var(--sans);font-size:1.5rem;font-weight:700;color:var(--red)">5</div>
+          <div style="font-family:var(--sans);font-size:0.72rem;color:var(--muted)">sessions</div>
+        </div>
+        <div style="background:#fff;border:1px solid var(--rule);padding:20px;border-radius:3px">
+          <div style="font-family:var(--sans);font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:4px">Critical Theory 101</div>
+          <div style="font-family:var(--sans);font-size:1.5rem;font-weight:700;color:var(--red)">3</div>
+          <div style="font-family:var(--sans);font-size:0.72rem;color:var(--muted)">sessions</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Invited Guests ────────────────────────────────────── -->
+<section class="section" id="guests">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="kicker">Invited Guests</span>
+      <h2>Invited Speakers &amp; Contributors</h2>
+      <p class="intro">From 2016 to 2026 the Center hosted speakers and contributors from across the globe, concentrated in Europe, the eastern seaboard of North America, and the eastern Mediterranean.</p>
+    </div>
+
+    <div class="guests-nums fade-in">
+      <div class="gn"><div class="n">545</div><div class="l">Invited Speakers</div></div>
+      <div class="gn"><div class="n">43</div><div class="l">Countries</div></div>
+      <div class="gn"><div class="n">176</div><div class="l">Cities</div></div>
+    </div>
+
+    <figure class="chart-figure fade-in">
+      <img src="charts_large/07_guest_origins_map_left.png" alt="Guest origins world map">
+      <figcaption>Invited speakers and contributors hosted by the Center, 2016–2026. Marker size reflects the number of speakers per city.</figcaption>
+    </figure>
+
+    <div class="maps-pair fade-in">
+      <figure class="chart-figure" style="margin:0">
+        <img src="charts_large/07_europe_inset.png" alt="Western Europe detail">
+        <figcaption>Western Europe (detail)</figcaption>
+      </figure>
+      <figure class="chart-figure" style="margin:0">
+        <img src="charts_large/08_guests_per_country.png" alt="Guests per country">
+        <figcaption>France, the United States, and the United Kingdom together account for roughly three-quarters of all invited participants.</figcaption>
+      </figure>
+    </div>
+
+    <div class="notable-guests fade-in">
+      <h3>Selected Keynote Speakers</h3>
+      <p class="guest-names">
+        Axel Honneth · Nancy Fraser · Rahel Jaeggi · Craig Calhoun · Charles Taylor · Carol Gilligan · Étienne Balibar · Margaret MacMillan · Adam Tooze · Thomas Piketty · Justice Stephen Breyer
+        <span> — among 545 speakers from 43 countries</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <h4>Center for Critical Democracy Studies</h4>
+      <address>
+        The American University of Paris<br>
+        6 rue du Colonel Combes<br>
+        75007 Paris · France<br>
+        <a href="mailto:ccds@aup.edu">ccds@aup.edu</a>
+      </address>
+    </div>
+    <div>
+      <h4>Report</h4>
+      <p>
+        <strong style="color:#C8C2B0">CCDS · The First Decade</strong><br>
+        Activity Report 2016–2026<br>
+        1st Edition · May 2026<br>
+        DOI: <a href="https://doi.org/10.5281/zenodo.19880201">10.5281/zenodo.19880201</a><br>
+        Curation: Roman Zinigrad
+      </p>
+    </div>
+    <div>
+      <h4>Links</h4>
+      <p>
+        <a href="https://www.aup.edu/academics/research-centers/center-critical-democracy-studies">CCDS at AUP</a><br>
+        <a href="https://tocqueville21.com">Tocqueville 21</a><br>
+        <a href="https://utppublishing.com/journal/ttr">The Tocqueville Review</a><br>
+        <a href="https://www.degruyter.com/journal/key/auk/html">Analyse &amp; Kritik</a>
+      </p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Center for Critical Democracy Studies · The American University of Paris</span>
+      <img class="logo-img" src="assets/logo_ccds_blackBG.png" alt="AUP · Center for Critical Democracy Studies">
+  </div>
+  <div class="tricolor"></div>
+</footer>
+
+
+<!-- ── Modal overlay ─────────────────────────────────────── -->
+<div id="modal-overlay" role="dialog" aria-modal="true" aria-hidden="true">
+  <div id="modal-backdrop"></div>
+  <div id="modal-panel">
+    <div id="modal-bar">
+      <span id="modal-eyebrow" class="modal-eyebrow"></span>
+      <button id="modal-close" aria-label="Close">✕</button>
+    </div>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<!-- ── Lightbox ───────────────────────────────────────────── -->
+<div id="lightbox" role="dialog" aria-modal="true">
+  <button id="lightbox-close" aria-label="Close">✕</button>
+  <img id="lightbox-img" src="" alt="">
+  <figcaption id="lightbox-cap"></figcaption>
+</div>
+
+<script>
+/* ════════════════════════════════════════════════════════════
+   MODAL DATA STORE
+   ════════════════════════════════════════════════════════════ */
+const MODAL = {
+
+  /* ── Statistics ─────────────────────────────────────────── */
+  'stat-publications': {
+    type:'stat', eyebrow:'Publications',
+    headline:'186', subtitle:'Total publications by CCDS Fellows & Affiliates · 2016–2026',
+    intro:'Since its founding in 2016, the Center has produced 186 scholarly works across every genre of academic output — from authored monographs and edited volumes to peer-reviewed articles, EU policy reports, and scholarly reviews.',
+    bars:[
+      {label:'Articles & Book Chapters', val:127, max:186, color:'#E4002B'},
+      {label:'Book Reviews',             val:17,  max:186, color:'#002F6C'},
+      {label:'Books (authored/edited)',  val:16,  max:186, color:'#C9A24B'},
+      {label:'Policy Reports',           val:15,  max:186, color:'#5E5E5E'},
+      {label:'Blog Essays',              val:8,   max:186, color:'#8A9AAF'},
+      {label:'Special Issues (guest-ed)',val:3,   max:186, color:'#001F4D'},
+    ],
+    note:'Counts include all publications from 2016, or from the year each scholar joined the Center, whichever is later. Total citations across all works: 1,225.'
+  },
+
+  'stat-events': {
+    type:'stat', eyebrow:'Academic Events',
+    headline:'178', subtitle:'Academic events organised by CCDS · 2016–2026',
+    intro:'The Center has organised 178 academic events over a decade, spanning five recurring seminar series, major international conferences, intimate book talks, and thematic workshops.',
+    bars:[
+      {label:'Thematic Lectures & Seminars', val:71, max:178, color:'#001F4D'},
+      {label:'Seminar Series Sessions',       val:52, max:178, color:'#2E6B62'},
+      {label:'Book Launches & Talks',         val:33, max:178, color:'#C9A24B'},
+      {label:'Conferences & Symposia',        val:22, max:178, color:'#002F6C'},
+    ],
+    note:'Recurring seminar series: Demos 21 (23 sessions) · Care & Democracy (14) · UPEL (7) · Soulèvements ou Révolutions (5) · Critical Theory 101 (3)'
+  },
+
+  'stat-speakers': {
+    type:'stat', eyebrow:'Invited Guests',
+    headline:'545', subtitle:'Invited speakers & contributors from 43 countries, 176 cities',
+    intro:'The Center has hosted 545 distinct invited speakers and contributors from across the globe. France, the United States, and the United Kingdom together account for roughly three-quarters of all participants.',
+    bars:[
+      {label:'France',                val:185, max:545, color:'#E4002B'},
+      {label:'United States',         val:148, max:545, color:'#002F6C'},
+      {label:'United Kingdom',        val:72,  max:545, color:'#C9A24B'},
+      {label:'Germany',               val:35,  max:545, color:'#5E5E5E'},
+      {label:'Other (39 countries)',  val:105, max:545, color:'#8A9AAF'},
+    ],
+    note:'Notable keynote speakers include Axel Honneth, Nancy Fraser, Rahel Jaeggi, Craig Calhoun, Charles Taylor, Carol Gilligan, Étienne Balibar, Margaret MacMillan, Adam Tooze, Thomas Piketty, and Justice Stephen Breyer.'
+  },
+
+  'stat-funding': {
+    type:'funding', eyebrow:'EU Research Funding',
+    headline:'€797k', subtitle:'CCDS share across three Horizon grants · €8.19M total consortia funding',
+    intro:'The Center participates in three successive European Commission research programmes, bringing together partner institutions across Europe and beyond to study radicalization, extremism, social contracts, and democratic resilience.',
+    grants:[
+      {name:'CO3',       full:'Resilient Social Contracts for Democratic Societies',        period:'Mar 2024 – ongoing',    horizon:'Horizon Europe', total:'€3.0M',  ccds:'€273k', partners:11},
+      {name:'OppAttune', full:'Countering Oppositional Political Extremism',                period:'Apr 2023 – Apr 2026',   horizon:'Horizon Europe', total:'€2.09M', ccds:'€269k', partners:17},
+      {name:'D.Rad',     full:'De-Radicalization in Europe and Beyond',                    period:'Dec 2020 – Apr 2024',   horizon:'Horizon 2020',   total:'€3.1M',  ccds:'€255k', partners:17},
+    ]
+  },
+
+  'stat-citations': {
+    type:'stat', eyebrow:'Scholarly Impact',
+    headline:'1,225', subtitle:'Total scholarly citations · CCDS Fellows & Affiliates · 2016–2026',
+    intro:'Across all 186 publications, CCDS Fellows and Affiliate Members have accumulated 1,225 scholarly citations — a measure of the Center\'s intellectual reach within the global academic community.',
+    note:'Counts citations from 2016, or from the year each scholar joined the Center, whichever is later. Citation data drawn from Google Scholar and Scopus.'
+  },
+
+  'stat-community': {
+    type:'stat', eyebrow:'Community',
+    headline:'17', subtitle:'Current members · as of May 2026',
+    intro:'The CCDS community comprises faculty fellows, affiliate members, postdoctoral research fellows, visiting scholars, a clinical fellow, and student researchers and interns.',
+    bars:[
+      {label:'Faculty Fellows',          val:5, max:17, color:'#E4002B'},
+      {label:'Affiliate Members',        val:3, max:17, color:'#002F6C'},
+      {label:'Visiting Scholars',        val:3, max:17, color:'#C9A24B'},
+      {label:'Postdoc / Clinical',       val:2, max:17, color:'#5E5E5E'},
+      {label:'Editor / Analyst',         val:1, max:17, color:'#8A9AAF'},
+      {label:'Student Interns',          val:3, max:17, color:'#AAAAAA'},
+    ],
+    note:'26 past members — including 8 former visiting scholars and 15 former student researchers — have contributed to the Center\'s work since its founding in 2016.'
+  },
+
+  /* ── Community members ────────────────────────────────── */
+  'member-sawyer': {
+    type:'member', eyebrow:'Director · Faculty Fellow',
+    name:'Stephen W. Sawyer',
+    role:'Director · Ballantine-Leavitt Professor of History',
+    url:'https://www.aup.edu/profile/ssawyer',
+    photo:'images/community/image2.png',
+    bio:`<p>Stephen W. Sawyer is the Ballantine-Leavitt Professor of History and Director of the Center for Critical Democracy Studies. He came to AUP from the University of Chicago center in Paris and the École Normale Supérieure–rue d'Ulm. After receiving fellowships from the EHESS, Fulbright, and Sciences Po, Sawyer served as part-time assistant to Pierre Rosanvallon at the Collège de France.</p>
+<p>His core project articulates a history and theory of democracy as a mode of popular magistrature, administration, and public regulation. The first volume, <em>Demos Assembled: Democracy and the International Origins of the Modern State, 1840–1880</em> (University of Chicago Press, 2018), was followed in 2025 by <em>Demos Rising: Democracy and the Popular Construction of Public Power in France, 1800–1850</em> (UChicago Press). He also published <em>La contingence et le pouvoir</em> (Armand Colin, 2018).</p>
+<p>He has edited nine volumes including <em>In Search of the Liberal Moment</em> (Palgrave, 2016), <em>Pierre Rosanvallon's Political Thought</em> (Bielefeld, 2018), and <em>Michel Foucault, Neoliberalism and Beyond</em> (Rowman and Littlefield, 2019). He directs <em>The Tocqueville Review / La Revue Tocqueville</em> and founded the online platform Tocqueville21 in 2017. He was Kratter Visiting Professor at Stanford (Spring 2020) and Visiting Scholar at Harvard's Center for European Studies (2024–25).</p>`
+  },
+
+  'member-zinigrad': {
+    type:'member', eyebrow:'Associate Director · Faculty Fellow',
+    name:'Roman Zinigrad',
+    role:'Associate Director (2026–) · Assistant Professor of Law',
+    url:'https://www.aup.edu/profile/rzinigrad',
+    photo:'images/community/image15.jpeg',
+    bio:`<p>Roman Zinigrad is Assistant Professor of Law and, from 2026, Associate Director of the Center for Critical Democracy Studies. He coordinates the AUP History, Law & Society undergraduate program.</p>
+<p>He specializes in constitutional law and theory, comparative constitutional law, and law and education. His research addresses law and religion, international human rights law, children's rights, parental rights, and legal aspects of the French approach to radical violence. He is co-curator of this activity report.</p>`
+  },
+
+  'member-culp': {
+    type:'member', eyebrow:'Faculty Fellow',
+    name:'Julian Culp',
+    role:'Faculty Fellow · Associate Professor of Philosophy',
+    url:'https://www.aup.edu/profile/jculp',
+    photo:'images/community/image5.jpeg',
+    bio:`<p>Julian Culp is Associate Professor of Philosophy, Program Coordinator for Philosophy, and Fellow of the Center for Critical Democracy Studies. Previously, he was a lecturer at the Goethe University of Frankfurt am Main, where he received his Habilitation and PhD. He held postdoctoral fellowships from the University of Toronto and the Catholic University of Louvain, and research stays at Duke and Princeton.</p>
+<p>Culp is the author of <em>Global Justice and Development</em> (Palgrave, 2014) and <em>Democratic Education in a Globalized World</em> (Routledge, 2019). He co-edited <em>The Cambridge Handbook of Democratic Education</em> (CUP, 2023) and co-edits the journal <em>Analyse & Kritik – Journal of Philosophy and Social Theory</em> (De Gruyter) and the book series <em>Philosophy of Education – Debates and Constellations</em> (Brill/Mentis).</p>`
+  },
+
+  'member-dageforde': {
+    type:'member', eyebrow:'Faculty Fellow',
+    name:'Mirjam Dageförde',
+    role:'Faculty Fellow · Assistant Professor of Comparative Politics',
+    url:'https://www.aup.edu/profile/mdagefoerde',
+    photo:'images/community/image6.png',
+    bio:`<p>Mirjam Dageförde researches failing representation, citizen-politics relations, party politics, and inequality with a focus on Europe — France and Germany in particular. She is currently Assistant Professor of Comparative Politics at AUP and an Associate Researcher at Sciences Po Paris and the WZB (Wissenschaftszentrum Berlin).</p>
+<p>Previously, she was Lecturer at Freie Universität Berlin. She holds a PhD from Sciences Po Paris, and was awarded a Max Weber Fellowship at the European University Institute (EUI) in Florence, an OxPo Fellowship at Oxford (Nuffield College), and was chercheuse invitée at the Paris School of Economics (invited by Jean-François Laslier and Thomas Piketty).</p>`
+  },
+
+  'member-spieler': {
+    type:'member', eyebrow:'Faculty Fellow',
+    name:'Miranda Spieler',
+    role:'Faculty Fellow · Professor of History',
+    url:'https://www.aup.edu/profile/mspieler',
+    photo:'images/community/image11.jpeg',
+    bio:`<p>Professor Miranda Spieler joined the faculty of AUP in 2012. She holds an AB from Harvard College and a PhD from Columbia University, where she also served as assistant to writer Susan Sontag. Before joining AUP she was in the history department at the University of Arizona, where she received tenure in 2011.</p>
+<p>She is an historian of France and the overseas empire, writing about law and imperial violence. Her research uses archives to recover traces of marginal people — slaves, former slaves, immigrants, prisoners, and vagabonds — in France and former colonies. Her book <em>Empire and Underworld</em> drew on archival research in France and French Guiana (six months on site). Her new project focuses on people of color living in Paris and French port cities during the eighteenth century.</p>`
+  },
+
+  'member-colinjaeger': {
+    type:'member', eyebrow:'Affiliate Member',
+    name:'Nathanaël Colin-Jaeger',
+    role:'Affiliate Member · Maître de Conférences, ESPOL',
+    url:'https://espol.school/en/team/nathanael-colin-jaeger/',
+    photo:'images/community/colinjaeger_portrait.jpeg',
+    bio:`<p>Nathanaël Colin-Jaeger is Maître de Conférences (Associate Professor) of Politics, Philosophy & Economics at ESPOL (European School of Political and Social Sciences, Catholic University of Lille). He is Affiliate Member at the CCDS and was Postdoctoral Research Fellow at the Center from January 2024 to June 2025.</p>
+<p>He holds a PhD in Political Philosophy from the ENS Lyon. His work focuses on neoliberal political theory, theories of social justice in market and competitive situations, deliberative democracy under pluralism, and federalism and polycentricity. He is interested in reconciling liberal theories (Rawls, Hayek) and exploring non-statist alternatives to social justice.</p>`
+  },
+
+  'member-lever': {
+    type:'member', eyebrow:'Affiliate Member',
+    name:'Annabelle Lever',
+    role:'Affiliate Member · Professor of Political Philosophy, Sciences Po',
+    url:'https://www.sciencespo.fr/cevipof/en/researcher/annabelle-lever.html',
+    photo:'images/community/image7.jpeg',
+    bio:`<p>Annabelle Lever is an Affiliate Member of the CCDS since September 2025 and Professor of Political Philosophy at Sciences Po, Paris. She writes mainly on democratic theory, ethics, and public policy.</p>
+<p>She is the author of <em>On Privacy</em> (2011) and <em>A Democratic Conception of Privacy</em> (2014); editor of <em>New Frontiers in the Philosophy of Intellectual Property</em> (2012); and co-editor of <em>The Routledge Handbook of Ethics and Public Policy</em> (2018), <em>Ideas that Matter: Democracy, Justice, Rights</em> (2019), and <em>Reconstructing Democracy in Times of Crisis</em> (2023). Since 2017 she has co-edited the <em>Critical Review of International Social and Political Philosophy</em>.</p>`
+  },
+
+  'member-zaric': {
+    type:'member', eyebrow:'Affiliate Member',
+    name:'Zona Zarić',
+    role:'Affiliate Member · Research Fellow, IFDT Belgrade',
+    url:'https://www.aup.edu/profile/zzaric',
+    photo:'images/community/image14.png',
+    bio:`<p>Zona Zarić, philosopher and feminist, organises the Center's "Care & Democracy" seminar series and previously held a CCDS postdoctoral fellowship during which she contributed to the OppAttune project. She holds a PhD in Political Philosophy from the ENS-Ulm, a J.D. in law from the University of Belgrade, and an MA from AUP.</p>
+<p>Her scholarly contributions include co-authoring <em>Soin et compassion: Un nouveau paradigme pour la philosophie politique?</em> (Hermann, 2023) and co-editing <em>Pierre Bourdieu: Radical Thought and Praxis</em> (IFDT, 2023) and <em>Refusing to Be Silent: Engaged Conversations with Leading Intellectuals</em> (Mimesis, 2023). She is currently working on the first monograph dedicated to Nancy Fraser's oeuvre, forthcoming from Edinburgh University Press. She has taught at the ENS-Ulm, the University of Belgrade, Sciences Po, CNAM, the Catholic Institute of Paris, Paris 8, and AUP.</p>`
+  },
+
+  'member-oberoi': {
+    type:'member', eyebrow:'Postdoctoral Research Fellow',
+    name:'Naintara Maya Oberoi',
+    role:'Postdoctoral Research Fellow · since October 2025',
+    photo:'images/community/oberoi_portrait.jpeg',
+    bio:`<p>Naintara Maya Oberoi is a Postdoctoral Research Fellow at the CCDS since October 2025. She completed her doctoral research in political philosophy at the École Normale Supérieure, Paris, specialising in questions of subalternity and citizenship.</p>
+<p>Her dissertation, <em>La citoyenneté subalterne</em>, examines the aporias structuring democratic citizenship in postcolonial states, drawing on the Constitutional Assembly Debates of India. She is a member of the Institut Convergences Migrations' PhiloMigr project. Her research interests include border studies, postcolonial studies, constitutionalism, critical citizenship studies, democratic theory, and legal history.</p>`
+  },
+
+  'member-taieb': {
+    type:'member', eyebrow:'Clinical Fellow',
+    name:'Hannah Davis Taieb',
+    role:'Clinical Fellow · PhD in Anthropology',
+    url:'https://dialoguetransformation.com',
+    photo:'images/community/image12.jpeg',
+    bio:`<p>Dr. Hannah Davis Taieb is a Clinical Fellow at the Center for Critical Democracy Studies. She holds a PhD in anthropology and is the founder and leader of AUP's innovative prison education workshops, where students learn from and with people who are currently incarcerated.</p>
+<p>Taieb first established a collaboration with La Santé prison in Paris in 2019. In 2020 she co-founded the non-profit Dialogue & Transformation (dialoguetransformation.com) which develops workshops led and co-led by people who have experienced incarceration. She is primarily interested in egalitarian pedagogies that create connection and generative exchange across difference, and is currently training as a gestalt practitioner.</p>`
+  },
+
+  'member-crary': {
+    type:'member', eyebrow:'Visiting Scholar 2025–26',
+    name:'Alice Crary',
+    role:'Visiting Scholar · Walter A. Eberstadt Distinguished University Professor, New School',
+    url:'https://www.newschool.edu/nssr/faculty/alice-crary/',
+    photo:'images/community/image4.jpeg',
+    bio:`<p>Alice Crary is a moral and social philosopher, currently Walter A. Eberstadt Distinguished University Professor at the New School for Social Research and Visiting Fellow in Philosophy and Christian Ethics at Regent's Park College, Oxford. She is also a Researcher-in-Residence at Maison Suger (FMSH) and Visiting Researcher at ISJPS (Sorbonne/Paris 1).</p>
+<p>An expert in twentieth-century British and American moral philosophy, ordinary language philosophy, feminist philosophy, and animal ethics, her publications include <em>Beyond Moral Judgment</em>, <em>Inside Ethics: On the Difficulty of Moral Thought</em>, <em>Animal Crisis</em> (with Lori Gruen), and the forthcoming <em>The Political Wittgenstein</em> (with Joel de Lara). At CCDS, she is working on "philosophy in the time of technofascism" and a book on animals and justice.</p>`
+  },
+
+  'member-williams': {
+    type:'member', eyebrow:'Visiting Scholar 2025–26',
+    name:'Juliet A. Williams',
+    role:'Visiting Scholar · Professor of Gender Studies, UCLA',
+    url:'https://genderstudies.ucla.edu/person/juliet-a-williams/',
+    photo:'images/community/image13.jpeg',
+    bio:`<p>Juliet A. Williams is Professor of Gender Studies and Faculty Director of the UCLA Quarter in Washington Program. She holds a B.A. in Government from Harvard and a Ph.D. in Government from Cornell. She is a socio-legal scholar specialising in feminist theory and politics, masculinities studies, gender discrimination law, and Title IX.</p>
+<p>She is the author of <em>The Separation Solution?: Single-Sex Education and the New Politics of Gender Equality</em> (UC Press, 2016). At CCDS, she is working on a book examining the development of the concept of patriarchy in feminist theory and activism from the 1970s to the present. Her recent research includes a multi-year NSF-supported study of gender neutrality in U.S. law, media, and activism (with Dr. Abigail Saguy).</p>`
+  },
+
+  'member-ritchie': {
+    type:'member', eyebrow:'Visiting Clinical Scholar · Summer 2026',
+    name:'Jennifer Ritchie',
+    role:'Visiting Clinical Scholar · Senior Deputy Prosecuting Attorney, King County, Seattle',
+    photo:'images/community/ritchie.png',
+    bio:`<p>Jennifer Ritchie is a Senior Deputy Prosecutor with the King County Prosecuting Attorney's Office in Seattle, where she has spent over thirty years working at the intersection of trauma, victimization, and institutional response. She served nearly a decade as Commissioner on the Washington State Supreme Court Commission on Gender and Justice.</p>
+<p>She has taught trial advocacy at the University of Washington School of Law for 10 years and served as adjunct faculty teaching Prosecutorial Ethics, Discretion, and Reform at Seattle University School of Law. She has presented at national and international conferences (Copenhagen, Porto, Frankfurt, Trondheim). At CCDS, her research focuses on comparative justice systems as they relate to survivors of sexual assault and interpersonal violence.</p>`
+  },
+
+  'member-mclorrain': {
+    type:'member', eyebrow:'Tocqueville 21 Editor',
+    name:'Shane McLorrain',
+    role:'Tocqueville 21 Editor / Visiting Research Analyst',
+    photo:'images/community/image8.jpeg',
+    bio:`<p>Shane McLorrain is a Visiting Research Analyst with the Center for Critical Democracy Studies and an Editor for Tocqueville 21. His contributions focus on geopolitics, international political economy, and French politics. He is also the creator, host, and producer of the Tocqueville 21 Podcast.</p>
+<p>Prior to joining the CCDS, Shane was an analyst and consultant with PR firm Fabriq, working with industry leaders in cybersecurity and machine learning. In 2019 he founded Zeitgeist Zeitung (now the Concorde International Review). He holds an MSc in History of International Relations from LSE and a B.A. in History from AUP.</p>`
+  },
+
+  /* ── Research projects ────────────────────────────────── */
+  'project-lsd': {
+    type:'project', eyebrow:'Research Project',
+    name:'Law, State, Democracy (LSD)',
+    logo:'LSD_logo_clean.png',
+    badge:'Ongoing · since Dec 2025',
+    image:'images/lsd__oppattune_drad/lsd_poster.jpg',
+    desc:`<p>Law, State, Democracy (LSD) is a research project seeking to promote an interdisciplinary approach to questions of law, state and democracy. Its aim is to shed new light on the interdependence, and indeed fundamental co-construction of law and democracy in promoting just and effective modes of government.</p>
+<p>The project launched in December 2025 with an inaugural international symposium of 19 speakers from 2 partner institutions — a gathering that brought together legal theorists, historians, and political philosophers to address foundational questions about democratic legality and constitutional self-government.</p>`,
+    stats:[
+      {n:'1', l:'International Symposium'},
+      {n:'19', l:'Symposium Speakers'},
+      {n:'2', l:'Partner Institutions'},
+    ]
+  },
+
+  'project-co3': {
+    type:'project', eyebrow:'Horizon Europe · Research Project',
+    name:'CO3 — Resilient Social Contracts',
+    logo:'images/co3/co3_logo_clean.png',
+    badge:'Mar 2024 – ongoing · €273k CCDS share',
+    image:'images/co3/co3_banner.png',
+    desc:`<p>CO3 (COntinuous COnstruction of resilient social COntracts through societal transformations) studies more open, inclusive, and democratic models of social contracts. Its mission is to create resilient societies capable of addressing societal challenges and anti-democratic tendencies.</p>
+<p>The project brings together 11 consortium partners across Europe and examines how social contracts can be continuously renegotiated to respond to crises — pandemic, climate, democratic backsliding — while preserving legitimacy and inclusion. CCDS contributes expertise on democratic theory, constitutional frameworks, and the history of popular sovereignty.</p>`,
+    stats:[
+      {n:'4', l:'Working Papers'},
+      {n:'1', l:'CCDS Conference'},
+      {n:'11', l:'Consortium Partners'},
+      {n:'€3.0M', l:'Total Consortium'},
+    ]
+  },
+
+  'project-oppattune': {
+    type:'project', eyebrow:'Horizon Europe · Research Project',
+    name:'OppAttune',
+    logo:'images/lsd__oppattune_drad/oppattune_logo_clean.png',
+    badge:'Apr 2023 – Apr 2026 · €269k CCDS share',
+    image:'images/lsd__oppattune_drad/oppattune_banner.png',
+    desc:`<p>OppAttune (Countering Oppositional Political Extremism through Attuned Dialogue) developed an innovative Attunement Model which tracks, attunes, and limits the spread of extreme political narratives. The focus of the project is not on discourse that incites violence or engages in hate speech — rather, it looked at the spread of extreme narratives through seemingly 'common sense' discussions about polarising issues which create an 'everyday extremism'.</p>
+<p>The project examined 6 national case studies, organised 1 flagship conference and 2 training academies, and involved 17 consortium partners across Europe. CCDS contributed research on political philosophy, democratic theory, and the French case study on extremism and social polarisation.</p>`,
+    stats:[
+      {n:'6', l:'Case Studies'},
+      {n:'1', l:'Flagship Conference'},
+      {n:'2', l:'Training Academies'},
+      {n:'17', l:'Consortium Partners'},
+      {n:'€2.09M', l:'Total Consortium'},
+    ]
+  },
+
+  'project-drad': {
+    type:'project', eyebrow:'Horizon 2020 · Research Project',
+    name:'D.Rad — De-Radicalization in Europe and Beyond',
+    logo:'images/drad/drad_logo_clean.png',
+    badge:'Dec 2020 – Apr 2024 · €255k CCDS share · Completed',
+    image:'images/drad/drad_banner.png',
+    desc:`<p>The D.Rad project identified the factors that lead to radicalization and developed recommendations to counter extremism, explore how radicalised individuals can be reintegrated into society, and help shape policies to improve social inclusion. The project drew upon machine learning, discourse analysis, and social psychology approaches.</p>
+<p>CCDS contributed 8 policy reports including 6 specifically on radicalization in France — the most comprehensive comparative study of its kind. The project also produced a landmark art exhibition drawing on testimonies and creative interventions by former radicalised individuals. D.Rad involved 17 consortium partners across 12 countries and concluded with 4 symposia and conferences.</p>`,
+    stats:[
+      {n:'8', l:'Policy Reports'},
+      {n:'6', l:'France Reports'},
+      {n:'1', l:'Art Exhibition'},
+      {n:'4', l:'Events & Symposia'},
+      {n:'17', l:'Consortium Partners'},
+      {n:'€3.1M', l:'Total Consortium'},
+    ]
+  },
+
+  /* ── Events ─────────────────────────────────────────────── */
+  'event-0': {
+    type:'event', eyebrow:'Upcoming Event · May 2026',
+    title:'A Quarter-Millennium of Franco-American Relations',
+    date:'May 2026 · Upcoming', speakers:27,
+    img:'images/highlights/franco_american_poster.jpg',
+    desc:'An international conference marking 250 years of Franco-American diplomatic, cultural, and intellectual relations. The event brings together historians, political scientists, legal scholars, and diplomats to assess the legacy and future of this foundational transatlantic partnership. 27 speakers confirmed.'
+  },
+  'event-1': {
+    type:'event', eyebrow:'Conference · March 2026',
+    title:'Journée d\'Étude: Rousseau · Nouvelles Perspectives',
+    date:'March 2026', speakers:5,
+    img:'images/ccds_booklet/image13.jpeg',
+    desc:'A study day bringing together philosophers and historians to revisit Rousseau\'s political thought through contemporary lenses. Five specialists presented new interpretations of the Social Contract, the General Will, and Rousseau\'s legacy for twenty-first-century democracy.'
+  },
+  'event-2': {
+    type:'event', eyebrow:'Conference · February 2026',
+    title:'Democracy CoLab: Care Democracy & Everyday Extremism',
+    date:'February 2026', speakers:14,
+    img:'images/ccds_booklet/image47.jpeg',
+    desc:'A collaborative laboratory event bridging the Center\'s two major research streams — care ethics and the study of political extremism. 14 speakers from philosophy, sociology, and political science explored the intersection of care-based democracy and the dynamics of everyday radicalization addressed by the OppAttune project.'
+  },
+  'event-3': {
+    type:'event', eyebrow:'International Symposium · December 2025',
+    title:'Law, State, and Democracy · International Symposium',
+    date:'December 2025', speakers:19,
+    img:'images/ccds_booklet/image114.jpeg',
+    desc:'The inaugural event of the Law, State, Democracy (LSD) research project. 19 leading scholars in constitutional law, legal philosophy, and democratic theory gathered to address foundational questions about the co-construction of law and democracy. The symposium established the intellectual agenda for the LSD project and produced a rich programme of collaborative research.'
+  },
+  'event-4': {
+    type:'event', eyebrow:'Workshop · May 2025',
+    title:'Autonomy and the Law',
+    date:'May 2025', speakers:8,
+    img:'images/ccds_booklet/image169.jpeg',
+    desc:'An interdisciplinary workshop examining the concept of individual and collective autonomy across legal, philosophical, and political registers. Eight speakers from law schools and philosophy departments in France, the UK, and the United States addressed themes including reproductive autonomy, constitutional self-determination, and the limits of legal paternalism.'
+  },
+  'event-5': {
+    type:'event', eyebrow:'International Conference · December 2024',
+    title:'Renewing the Social Contract',
+    date:'December 2024', speakers:50,
+    img:'images/ccds_booklet/image225.jpeg',
+    desc:'One of the Center\'s largest events, bringing together 50 speakers for a major international conference on the renewal of social contracts in an era of democratic crisis. A flagship event of the CO3 Horizon Europe project, the conference examined inclusive and resilient models of democratic legitimacy across Europe, North America, and beyond.'
+  },
+  'event-6': {
+    type:'event', eyebrow:'Book Talk · October 2024',
+    title:'The Law of International Society: A Road Not Taken',
+    date:'October 2024', speakers:1,
+    img:'images/ccds_booklet/image235.jpeg',
+    desc:'A CCDS book talk and public lecture presenting and discussing a new monograph on the history of international law and the concept of international society. The speaker traced the "road not taken" by international law in the twentieth century — an alternative tradition emphasising solidarity, community, and democratic governance at the global level.'
+  },
+  'event-7': {
+    type:'event', eyebrow:'Panel · May 2024',
+    title:'Perspectives on Academic Freedom: USA & Europe',
+    date:'May 2024', speakers:6,
+    img:'images/ccds_booklet/image244.jpeg',
+    desc:'A comparative panel discussion examining academic freedom on both sides of the Atlantic. Six speakers from universities in the United States and Europe debated the legal frameworks, institutional cultures, and political pressures shaping scholarly inquiry — from Title IX enforcement and DEI policies in the US to the challenges facing academic institutions in Hungary and Poland.'
+  },
+
+  /* ── Education programs ──────────────────────────────── */
+  'edu-dlab': {
+    type:'event', eyebrow:'Education Programme',
+    title:'Democracy Lab (D.Lab)',
+    date:'4 thematic editions · 2020–present', speakers:null,
+    img:'images/curriculum/image5.jpeg',
+    desc:'The Democracy Lab is a semester-long design-thinking course where students identify a real democratic challenge and devise a prototype solution — drawing on John Dewey\'s pragmatist pedagogy and applied democratic theory. Thematic editions have addressed: Education Justice, Radical Violence, Global Citizenship, and Prison Education. Students collaborate with CCDS fellows and external partners to develop, test, and present their proposals to real stakeholders.'
+  },
+  'edu-prison': {
+    type:'event', eyebrow:'Education Programme',
+    title:'Prison Education Workshop · La Santé',
+    date:'7 iterations · Fall 2019 – Summer 2024', speakers:null,
+    img:'images/curriculum/image6.jpeg',
+    desc:'AUP students share readings, discussions, and creative activities with detainees at La Santé prison in Paris. Led by Dr. Hannah Davis Taieb and co-taught with Michelle Kuo, Albert Wu, Roman Zinigrad, and Friederike Windel, the workshop uses circle pedagogy and egalitarian approaches that treat all participants as equal contributors. The programme grew out of Taieb\'s 2019 training with Walls to Bridges (Canada) and is supported by the non-profit Dialogue & Transformation.'
+  },
+};
+
+/* ════════════════════════════════════════════════════════════
+   RENDER FUNCTIONS
+   ════════════════════════════════════════════════════════════ */
+function renderModal(data) {
+  if (!data) return '<p>No details available.</p>';
+  if (data.type === 'stat')    return renderStat(data);
+  if (data.type === 'funding') return renderFunding(data);
+  if (data.type === 'member')  return renderMember(data);
+  if (data.type === 'project') return renderProject(data);
+  if (data.type === 'event')   return renderEvent(data);
+  return '<p>No details available.</p>';
+}
+
+function renderStat(d) {
+  const maxVal = d.bars ? Math.max(...d.bars.map(b => b.max || b.val)) : 1;
+  let barsHTML = '';
+  if (d.bars) {
+    barsHTML = `<div class="modal-bars">` +
+      d.bars.map(b => {
+        const pct = Math.round((b.val / (b.max || maxVal)) * 100);
+        return `<div class="modal-bar-row">
+          <div class="modal-bar-label">${b.label}</div>
+          <div class="modal-bar-track"><div class="modal-bar-fill" style="width:0%;background:${b.color}" data-pct="${pct}"></div></div>
+          <div class="modal-bar-val">${b.val}</div>
+        </div>`;
+      }).join('') + `</div>`;
+  }
+  const noteHTML = d.note ? `<div class="modal-note">${d.note}</div>` : '';
+  return `<div class="modal-headline">${d.headline}</div>
+<div class="modal-subtitle">${d.subtitle}</div>
+<div class="modal-intro">${d.intro}</div>
+${barsHTML}${noteHTML}`;
+}
+
+function renderFunding(d) {
+  const rows = d.grants.map(g => `<tr>
+    <td><strong>${g.name}</strong><br><span style="font-size:0.78rem;color:#5E5E5E">${g.full}</span></td>
+    <td>${g.period}</td>
+    <td style="color:#002F6C;font-weight:700">${g.ccds}</td>
+    <td style="color:#5E5E5E">${g.total} · ${g.partners} partners</td>
+  </tr>`).join('');
+  return `<div class="modal-headline">${d.headline}</div>
+<div class="modal-subtitle">${d.subtitle}</div>
+<div class="modal-intro">${d.intro}</div>
+<table class="modal-table">
+  <thead><tr><th>Project</th><th>Period</th><th>CCDS Share</th><th>Consortium</th></tr></thead>
+  <tbody>${rows}</tbody>
+</table>`;
+}
+
+function renderMember(d) {
+  const profileBtn = d.url ? `<a href="${d.url}" target="_blank" rel="noopener" class="modal-profile-btn">View full profile →</a>` : '';
+  return `<div class="modal-member-head">
+  <img src="${d.photo}" alt="${d.name}" onerror="this.style.display='none'">
+  <div>
+    <div class="modal-member-name">${d.name}</div>
+    <div class="modal-member-role">${d.role}</div>
+    ${profileBtn}
+  </div>
+</div>
+<div class="modal-bio">${d.bio}</div>`;
+}
+
+function renderProject(d) {
+  const logoHTML = d.logo ? `<img src="${d.logo}" alt="${d.name}" onerror="this.style.display='none'" style="height:32px;width:auto;object-fit:contain">` : '';
+  const imgHTML  = d.image ? `<div class="rp-detail rp-hero" style="margin:16px 0 0"><img src="${d.image}" alt="${d.name}" style="width:100%;max-height:220px;object-fit:cover;border-radius:3px" onerror="this.style.display='none'"></div>` : '';
+  const statsHTML = d.stats ? `<div class="modal-stat-row">${d.stats.map(s => `<div class="modal-stat-box"><div class="n">${s.n}</div><div class="l">${s.l}</div></div>`).join('')}</div>` : '';
+  return `<div class="modal-project-head">
+  ${logoHTML}
+  <span class="modal-project-badge">${d.badge}</span>
+</div>
+<div style="font-family:var(--sans);font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:12px">${d.name}</div>
+${statsHTML}
+${imgHTML}
+<div class="modal-bio" style="margin-top:16px">${d.desc}</div>`;
+}
+
+function renderEvent(d) {
+  const imgHTML = d.img ? `<img class="modal-event-img" src="${d.img}" alt="${d.title}" onerror="this.style.display='none'">` : '';
+  const spkHTML = d.speakers ? `<span><strong>${d.speakers}</strong> speaker${d.speakers===1?'':'s'}</span>` : '';
+  return `${imgHTML}
+<div style="font-family:var(--sans);font-size:1.15rem;font-weight:700;color:var(--navy);margin-bottom:8px;line-height:1.25">${d.title}</div>
+<div class="modal-event-meta">
+  <span><strong>Date:</strong> ${d.date}</span>
+  ${spkHTML}
+</div>
+<div class="modal-bio"><p>${d.desc}</p></div>`;
+}
+
+/* ════════════════════════════════════════════════════════════
+   MODAL ENGINE
+   ════════════════════════════════════════════════════════════ */
+const overlay  = document.getElementById('modal-overlay');
+const panel    = document.getElementById('modal-panel');
+const body     = document.getElementById('modal-body');
+const eyebrow  = document.getElementById('modal-eyebrow');
+const closeBtn = document.getElementById('modal-close');
+
+function openModal(key) {
+  const data = MODAL[key];
+  if (!data) return;
+  eyebrow.textContent = data.eyebrow || '';
+  body.innerHTML = renderModal(data);
+  panel.scrollTop = 0;
+  overlay.classList.add('open');
+  overlay.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  // animate bars after paint
+  requestAnimationFrame(() => {
+    body.querySelectorAll('.modal-bar-fill[data-pct]').forEach(el => {
+      el.style.transition = 'width 0.7s cubic-bezier(0.22,1,0.36,1)';
+      el.style.width = el.dataset.pct + '%';
+    });
+  });
+}
+
+function closeModal() {
+  overlay.classList.remove('open');
+  overlay.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+closeBtn.addEventListener('click', closeModal);
+document.getElementById('modal-backdrop').addEventListener('click', closeModal);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeLightbox(); } });
+
+// Wire up all [data-modal] elements
+document.querySelectorAll('[data-modal]').forEach(el => {
+  el.style.cursor = 'pointer';
+  el.addEventListener('click', () => openModal(el.dataset.modal));
+});
+
+/* ════════════════════════════════════════════════════════════
+   LIGHTBOX (for chart images)
+   ════════════════════════════════════════════════════════════ */
+const lb      = document.getElementById('lightbox');
+const lbImg   = document.getElementById('lightbox-img');
+const lbCap   = document.getElementById('lightbox-cap');
+
+function openLightbox(src, alt, cap) {
+  lbImg.src = src; lbImg.alt = alt || '';
+  lbCap.textContent = cap || alt || '';
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  lb.classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+
+// Make all chart images open in lightbox
+document.querySelectorAll('.chart-figure img').forEach(img => {
+  img.style.cursor = 'zoom-in';
+  img.setAttribute('title', 'Click to enlarge');
+  img.addEventListener('click', () => {
+    const cap = img.closest('figure')?.querySelector('figcaption')?.textContent || '';
+    openLightbox(img.src, img.alt, cap);
+  });
+});
+
+/* ════════════════════════════════════════════════════════════
+   EXISTING: counters + scroll spy + accordion + mobile menu
+   ════════════════════════════════════════════════════════════ */
+function animateCount(el) {
+  const target = parseInt(el.getAttribute('data-target'));
+  if (isNaN(target)) return;
+  const suffix = el.getAttribute('data-suffix') || '';
+  const duration = 1200;
+  const start = performance.now();
+  function step(now) {
+    const p = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(ease * target).toLocaleString() + suffix;
+    if (p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    entry.target.classList.add('visible');
+    entry.target.querySelectorAll('[data-target]').forEach(animateCount);
+    io.unobserve(entry.target);
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+
+const counterIo = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) { animateCount(entry.target); counterIo.unobserve(entry.target); }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-target]').forEach(el => {
+  if (!el.closest('.fade-in')) counterIo.observe(el);
+});
+
+const sections = document.querySelectorAll('section[id], div[id="stats"]');
+const navLinks = document.querySelectorAll('#site-nav nav a');
+const scrollSpy = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id));
+    }
+  });
+}, { rootMargin: '-40% 0px -55% 0px' });
+sections.forEach(s => scrollSpy.observe(s));
+
+function toggleYear(btn) {
+  const isOpen = btn.nextElementSibling.classList.contains('open');
+  btn.classList.toggle('open', !isOpen);
+  btn.nextElementSibling.classList.toggle('open', !isOpen);
+}
+
+document.addEventListener('click', e => {
+  const menu = document.getElementById('mobile-menu');
+  const burger = document.getElementById('burger');
+  if (menu.classList.contains('open') && !menu.contains(e.target) && !burger.contains(e.target)) {
+    menu.classList.remove('open');
+  }
+});
+</script>
+</body>
+</html>
