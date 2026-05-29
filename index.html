@@ -2452,7 +2452,7 @@ footer .footer-bottom img{height:22px;opacity:0.5}
           <button class="event-modal-close" onclick="closeEventModal()">&times;</button>
         </div>
         <div class="event-modal-body">
-          <img id="eventPoster" src="" alt="Event poster" style="width:100%;height:auto;border-radius:4px;margin-bottom:24px;display:none;max-height:300px;object-fit:cover">
+          <img id="eventPoster" src="" alt="Event poster" style="width:100%;height:auto;border-radius:4px;margin-bottom:24px;display:none;object-fit:contain">
           <div class="event-meta">
             <div class="event-meta-item">
               <span class="event-meta-label">Date & Duration</span>
@@ -3013,7 +3013,7 @@ function generatePastEventsHTML() {
       const posterSrc = EVENT_POSTERS[event.id] || 'images/ccds_booklet/image292.jpeg';
       html += `
             <div class="past-ev-item" onclick="openEventModal('${event.id}')">
-              <img src="${posterSrc}" alt="${event.title}" style="width:100%;height:180px;object-fit:cover;border-radius:4px 4px 0 0">
+              <img src="${posterSrc}" alt="${event.title}" style="width:100%;height:auto;object-fit:contain;border-radius:4px 4px 0 0;max-height:200px">
               <div class="past-ev-info">
                 <div class="past-ev-title">${event.title}</div>
                 <div class="past-ev-date">${event.date}${event.speakers ? ' · ' + event.speakers + ' speaker' + (event.speakers > 1 ? 's' : '') : ''}</div>
@@ -3060,7 +3060,7 @@ function generateHighlights() {
       const img = highlightImages[eventId] || 'images/ccds_booklet/image292.jpeg';
       html += `
         <div class="past-ev-item" onclick="openEventModal('${eventId}')" style="cursor:pointer;transition:transform 0.2s">
-          <img src="${img}" alt="${event.title}" style="width:100%;height:180px;object-fit:cover;border-radius:4px">
+          <img src="${img}" alt="${event.title}" style="width:100%;height:auto;object-fit:contain;border-radius:4px;max-height:200px">
           <div class="past-ev-info">
             <div class="past-ev-title">${event.title}</div>
             <div class="past-ev-date">${event.date}</div>
@@ -3093,7 +3093,7 @@ function generatePhotoGallery() {
   photos.forEach(photo => {
     html += `
       <div style="overflow:hidden;border-radius:4px;background:#f0f0f0">
-        <img src="${photo.src}" alt="${photo.alt}" style="width:100%;height:200px;object-fit:cover;transition:transform 0.3s;cursor:pointer" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        <img src="${photo.src}" alt="${photo.alt}" style="width:100%;height:auto;object-fit:contain;transition:transform 0.3s;cursor:pointer;max-height:250px" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
         <div style="padding:12px;font-size:0.9rem;color:#666">${photo.alt}</div>
       </div>
     `;
