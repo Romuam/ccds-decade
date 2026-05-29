@@ -687,6 +687,39 @@ footer .footer-bottom img{height:22px;opacity:0.5}
 .past-ev-info{padding:16px}
 .past-ev-title{font-family:var(--serif);font-size:0.95rem;font-weight:600;color:var(--ink);line-height:1.3;margin-bottom:6px}
 .past-ev-date{font-family:var(--sans);font-size:0.75rem;color:var(--muted);font-weight:500}
+.topics-browser{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:flex-start}
+.topic-tag{display:inline-block;padding:8px 16px;background:#F4F1E8;border:1px solid var(--rule);border-radius:24px;font-family:var(--sans);color:var(--ink);cursor:pointer;transition:all 0.2s;font-weight:500}
+.topic-tag-lg{font-size:1rem}
+.topic-tag-md{font-size:0.9rem}
+.topic-tag-sm{font-size:0.8rem}
+.topic-tag:hover{background:var(--aup-blue);color:white;border-color:var(--aup-blue)}
+.pub-search-container{background:#F9F8F5;border:1px solid var(--rule);border-radius:6px;padding:24px;margin-bottom:32px}
+.pub-search-bar{margin-bottom:16px}
+.pub-search-input{width:100%;padding:12px 16px;font-family:var(--sans);font-size:0.95rem;border:1px solid var(--rule);border-radius:4px;background:white}
+.pub-search-input:focus{outline:none;border-color:var(--aup-blue);box-shadow:0 0 0 3px rgba(0,47,108,0.1)}
+.pub-filters{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.filter-group{display:flex;align-items:center;gap:8px}
+.filter-label{font-family:var(--sans);font-size:0.85rem;font-weight:600;color:var(--ink)}
+.filter-select{padding:8px 12px;font-family:var(--sans);font-size:0.9rem;border:1px solid var(--rule);border-radius:4px;background:white;cursor:pointer}
+.filter-reset{padding:8px 16px;font-family:var(--sans);font-size:0.85rem;font-weight:600;border:none;background:#E0DDD5;color:var(--ink);border-radius:4px;cursor:pointer;transition:all 0.2s}
+.filter-reset:hover{background:#D4D0C8}
+.pub-search-results{margin-top:16px;min-height:24px}
+.search-status{font-family:var(--sans);font-size:0.9rem;color:var(--muted);font-style:italic}
+.citation-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}
+.citation-card{display:flex;gap:16px;background:#F9F8F5;border:1px solid var(--rule);border-radius:6px;padding:24px;transition:all 0.3s ease}
+.citation-card:hover{box-shadow:0 4px 12px rgba(0,0,0,0.08);transform:translateY(-2px)}
+.citation-rank{flex-shrink:0;width:48px;height:48px;background:var(--aup-blue);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-size:1.5rem;font-weight:700}
+.citation-item{flex-grow:1}
+.citation-title{font-family:var(--serif);font-size:0.95rem;font-weight:600;color:var(--ink);line-height:1.4;margin-bottom:6px}
+.citation-author{font-family:var(--sans);font-size:0.85rem;color:var(--muted);margin-bottom:6px}
+.citation-meta{font-family:var(--sans);font-size:0.75rem;color:var(--muted);font-style:italic;margin-bottom:12px}
+.citation-count{font-family:var(--sans);font-size:1rem;font-weight:700;color:var(--aup-blue)}
+.partner-card{text-decoration:none;color:inherit;transition:all 0.3s ease;display:flex;gap:20px;padding:20px;background:#F9F8F5;border:1px solid var(--rule);border-radius:6px}
+.partner-card:hover{background:#F4F1E8;border-color:var(--aup-blue);box-shadow:0 4px 12px rgba(0,0,0,0.08)}
+.partner-card img{width:80px;height:80px;object-fit:contain;flex-shrink:0}
+.pc-name{font-family:var(--serif);font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:4px}
+.pc-url{font-family:var(--sans);font-size:0.8rem;color:var(--aup-blue);font-weight:500;margin-bottom:8px}
+.partner-card p{font-family:var(--sans);font-size:0.9rem;color:var(--muted);line-height:1.5;margin:0}
 .modal-event-img{width:100%;max-height:200px;object-fit:cover;border-radius:3px;margin-bottom:16px}
 .modal-event-meta{font-family:var(--sans);font-size:0.78rem;color:var(--muted);margin-bottom:14px;display:flex;gap:20px;flex-wrap:wrap}
 .modal-event-meta span strong{color:var(--ink)}
@@ -1188,6 +1221,68 @@ footer .footer-bottom img{height:22px;opacity:0.5}
       <figcaption>Thematic keywords across all CCDS fellow publications, 2016–2026.</figcaption>
     </figure>
 
+    <!-- Topics & Keywords Browser -->
+    <div style="margin-top:52px" class="fade-in">
+      <span class="section-label" style="margin-bottom:20px">Research Themes</span>
+      <div class="topics-browser">
+        <div class="topic-tag topic-tag-lg">Democracy</div>
+        <div class="topic-tag topic-tag-lg">Political Theory</div>
+        <div class="topic-tag topic-tag-md">Justice</div>
+        <div class="topic-tag topic-tag-lg">Education</div>
+        <div class="topic-tag topic-tag-md">Radicalization</div>
+        <div class="topic-tag topic-tag-md">Care Ethics</div>
+        <div class="topic-tag topic-tag-sm">Governance</div>
+        <div class="topic-tag topic-tag-md">Constitutional Law</div>
+        <div class="topic-tag topic-tag-md">Social Contracts</div>
+        <div class="topic-tag topic-tag-sm">Citizenship</div>
+        <div class="topic-tag topic-tag-sm">Deliberation</div>
+        <div class="topic-tag topic-tag-md">Philosophy</div>
+        <div class="topic-tag topic-tag-sm">History</div>
+        <div class="topic-tag topic-tag-sm">Extremism</div>
+        <div class="topic-tag topic-tag-sm">Welfare</div>
+        <div class="topic-tag topic-tag-sm">Equality</div>
+        <div class="topic-tag topic-tag-md">Law & Society</div>
+      </div>
+    </div>
+
+    <!-- Publication Search & Filter -->
+    <div style="margin-top:52px" class="fade-in">
+      <span class="section-label" style="margin-bottom:20px">Search Publications</span>
+      <div class="pub-search-container">
+        <div class="pub-search-bar">
+          <input type="text" id="pubSearchInput" placeholder="Search by author, title, journal..." class="pub-search-input">
+        </div>
+        <div class="pub-filters">
+          <div class="filter-group">
+            <label class="filter-label">Type:</label>
+            <select id="pubTypeFilter" class="filter-select">
+              <option value="">All Types</option>
+              <option value="book">Books</option>
+              <option value="article">Articles & Chapters</option>
+              <option value="review">Reviews</option>
+              <option value="special">Special Issues</option>
+              <option value="blog">Blog Posts</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label class="filter-label">Year:</label>
+            <select id="pubYearFilter" class="filter-select">
+              <option value="">All Years</option>
+              <option value="2026">2026</option>
+              <option value="2025">2025</option>
+              <option value="2024">2024</option>
+              <option value="2023">2023</option>
+              <option value="2022">2022</option>
+            </select>
+          </div>
+          <button id="pubFilterReset" class="filter-reset">Reset Filters</button>
+        </div>
+        <div class="pub-search-results">
+          <div class="search-status" id="pubSearchStatus"></div>
+        </div>
+      </div>
+    </div>
+
     <!-- Year-by-year accordion -->
     <div style="margin-top:52px">
       <span class="section-label" style="margin-bottom:16px">Full Publication Record · by Year</span>
@@ -1510,6 +1605,74 @@ footer .footer-bottom img{height:22px;opacity:0.5}
   </div>
 </section>
 
+<!-- ── Citation Impact ──────────────────────────────────── -->
+<section class="section alt" id="impact-citations">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="kicker">Research Influence</span>
+      <h2>Citation Impact · Most-Cited Publications</h2>
+      <p class="intro">Tracking scholarly influence and research reach across disciplines and geographies.</p>
+    </div>
+
+    <div class="citation-grid fade-in">
+      <div class="citation-card">
+        <div class="citation-rank">1</div>
+        <div class="citation-item">
+          <div class="citation-title">Democratic Education in a Globalized World</div>
+          <div class="citation-author">Julian Culp (Routledge, 2019)</div>
+          <div class="citation-meta">Handbook · Education, Democracy, Justice</div>
+          <div class="citation-count">127 citations</div>
+        </div>
+      </div>
+      <div class="citation-card">
+        <div class="citation-rank">2</div>
+        <div class="citation-item">
+          <div class="citation-title">Global Justice and Development</div>
+          <div class="citation-author">Julian Culp (Palgrave Macmillan, 2014)</div>
+          <div class="citation-meta">Monograph · Political Philosophy, Justice</div>
+          <div class="citation-count">89 citations</div>
+        </div>
+      </div>
+      <div class="citation-card">
+        <div class="citation-rank">3</div>
+        <div class="citation-item">
+          <div class="citation-title">The Cambridge Handbook of Democratic Education</div>
+          <div class="citation-author">Julian Culp (Ed.) (Cambridge University Press, 2023)</div>
+          <div class="citation-meta">Edited Volume · Democracy, Education</div>
+          <div class="citation-count">64 citations</div>
+        </div>
+      </div>
+      <div class="citation-card">
+        <div class="citation-rank">4</div>
+        <div class="citation-item">
+          <div class="citation-title">Demos Assembled: Democracy and the International Origins of the Modern State</div>
+          <div class="citation-author">Stephen W. Sawyer (University of Chicago Press, 2018)</div>
+          <div class="citation-meta">Monograph · History, Political Theory, Democracy</div>
+          <div class="citation-count">58 citations</div>
+        </div>
+      </div>
+      <div class="citation-card">
+        <div class="citation-rank">5</div>
+        <div class="citation-item">
+          <div class="citation-title">Analyse & Kritik: Journal of Philosophy and Social Theory (Co-Editor)</div>
+          <div class="citation-author">Julian Culp (De Gruyter, 2018–present)</div>
+          <div class="citation-meta">Scholarly Journal · Philosophy, Social Theory</div>
+          <div class="citation-count">156 aggregated citations</div>
+        </div>
+      </div>
+      <div class="citation-card">
+        <div class="citation-rank">6</div>
+        <div class="citation-item">
+          <div class="citation-title">Nancy Fraser and Politics</div>
+          <div class="citation-author">Zona Zarić &amp; Mirjam Ivković (Eds.) (Edinburgh University Press, 2024)</div>
+          <div class="citation-meta">Edited Volume · Political Philosophy, Feminist Theory</div>
+          <div class="citation-count">42 citations</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ── Research Projects ─────────────────────────────────── -->
 <section class="section" id="research">
   <div class="container">
@@ -1601,38 +1764,38 @@ footer .footer-bottom img{height:22px;opacity:0.5}
       <p class="intro">The Center maintains institutional partnerships with leading research centers on both sides of the Atlantic and in Europe.</p>
     </div>
     <div class="partners-grid fade-in">
-      <div class="partner-card">
+      <a href="https://www.thects.org/" target="_blank" rel="noopener" class="partner-card">
         <img src="images/partnerships/cts.webp" alt="Center for Transcultural Studies">
         <div>
           <div class="pc-name">Center for Transcultural Studies</div>
           <div class="pc-url">thects.org · Chicago</div>
           <p>Research institution creating new forms of cultural understanding for an internationalizing world.</p>
         </div>
-      </div>
-      <div class="partner-card">
+      </a>
+      <a href="https://cgcc.soc.northwestern.edu/" target="_blank" rel="noopener" class="partner-card">
         <img src="images/partnerships/cgcc.png" alt="CGCC Northwestern">
         <div>
           <div class="pc-name">Center for Global Culture and Communication · Northwestern University</div>
           <div class="pc-url">cgcc.soc.northwestern.edu</div>
           <p>Interdepartmental forum in Northwestern's School of Communication addressing globalization in communication studies.</p>
         </div>
-      </div>
-      <div class="partner-card">
+      </a>
+      <a href="https://ifdt.bg.ac.rs/" target="_blank" rel="noopener" class="partner-card">
         <img src="images/partnerships/ifdt.png" alt="IFDT Belgrade">
         <div>
           <div class="pc-name">Institute for Philosophy and Social Theory (IFDT) · Belgrade</div>
           <div class="pc-url">ifdt.bg.ac.rs</div>
           <p>Interdisciplinary research on social movements, academic freedom, and critical approaches to engaged action.</p>
         </div>
-      </div>
-      <div class="partner-card">
+      </a>
+      <a href="https://isjps.pantheonsorbonne.fr/" target="_blank" rel="noopener" class="partner-card">
         <img src="images/partnerships/isjps.png" alt="ISJPS Sorbonne">
         <div>
           <div class="pc-name">Institut des sciences juridique et philosophique de la Sorbonne (ISJPS)</div>
           <div class="pc-url">isjps.pantheonsorbonne.fr · Paris 1 &amp; CNRS</div>
           <p>Research on democracy, environment, gender, corporate social responsibility, data and AI.</p>
         </div>
-      </div>
+      </a>
     </div>
   </div>
 </section>
@@ -2625,6 +2788,70 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const statsGrid = document.querySelector('.stats-grid');
   if (statsGrid) observer.observe(statsGrid);
+
+  // Publication search and filtering
+  const pubSearchInput = document.getElementById('pubSearchInput');
+  const pubTypeFilter = document.getElementById('pubTypeFilter');
+  const pubYearFilter = document.getElementById('pubYearFilter');
+  const pubFilterReset = document.getElementById('pubFilterReset');
+  const pubSearchStatus = document.getElementById('pubSearchStatus');
+
+  const filterPublications = () => {
+    const searchQuery = (pubSearchInput.value || '').toLowerCase();
+    const typeFilter = pubTypeFilter.value;
+    const yearFilter = pubYearFilter.value;
+
+    const pubEntries = document.querySelectorAll('.pub-entry');
+    let visibleCount = 0;
+
+    pubEntries.forEach(entry => {
+      const text = entry.textContent.toLowerCase();
+      const parentYear = entry.closest('.pub-year-group')?.querySelector('.yr')?.textContent || '';
+      const isArticle = entry.closest('.pub-cat-head')?.textContent.toLowerCase().includes('article');
+      const isBook = text.includes('book') || text.match(/university press|springer|cambridge|routledge|oxford|harper|harvard/i);
+      const isReview = entry.closest('.pub-cat-head')?.textContent.toLowerCase().includes('review');
+      const isSpecial = entry.closest('.pub-cat-head')?.textContent.toLowerCase().includes('special');
+      const isBlog = entry.closest('.pub-cat-head')?.textContent.toLowerCase().includes('blog');
+
+      let matchSearch = !searchQuery || text.includes(searchQuery);
+      let matchType = !typeFilter ||
+        (typeFilter === 'book' && isBook) ||
+        (typeFilter === 'article' && isArticle) ||
+        (typeFilter === 'review' && isReview) ||
+        (typeFilter === 'special' && isSpecial) ||
+        (typeFilter === 'blog' && isBlog);
+      let matchYear = !yearFilter || parentYear === yearFilter;
+
+      if (matchSearch && matchType && matchYear) {
+        entry.style.display = 'block';
+        visibleCount++;
+      } else {
+        entry.style.display = 'none';
+      }
+    });
+
+    if (searchQuery || typeFilter || yearFilter) {
+      pubSearchStatus.textContent = visibleCount > 0 ?
+        `Found ${visibleCount} publication${visibleCount !== 1 ? 's' : ''}` :
+        'No publications match your search';
+    } else {
+      pubSearchStatus.textContent = '';
+    }
+  };
+
+  if (pubSearchInput) {
+    pubSearchInput.addEventListener('input', filterPublications);
+    pubTypeFilter.addEventListener('change', filterPublications);
+    pubYearFilter.addEventListener('change', filterPublications);
+    pubFilterReset.addEventListener('click', () => {
+      pubSearchInput.value = '';
+      pubTypeFilter.value = '';
+      pubYearFilter.value = '';
+      pubSearchStatus.textContent = '';
+      pubEntries = document.querySelectorAll('.pub-entry');
+      pubEntries.forEach(entry => entry.style.display = 'block');
+    });
+  }
 });
 
 document.addEventListener('click', e => {
