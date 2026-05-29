@@ -88,6 +88,26 @@ footer .footer-bottom img.logo-img{height:28px;width:auto;mix-blend-mode:screen;
   padding:6px 10px;border-radius:3px;white-space:nowrap;transition:color 0.2s,background 0.2s;
 }
 #site-nav nav a:hover,#site-nav nav a.active{color:#fff;background:rgba(255,255,255,0.08);text-decoration:none}
+#search-btn{background:none;border:none;cursor:pointer;color:#B0AEAD;font-size:1.2rem;padding:8px 12px;transition:color 0.2s;margin-left:8px}
+#search-btn:hover{color:#fff}
+#search-modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);z-index:1500;align-items:flex-start;justify-content:center;padding:80px 20px 20px}
+#search-modal.active{display:flex}
+#search-modal-content{background:white;border-radius:6px;width:100%;max-width:600px;max-height:80vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+#search-modal-header{padding:24px;border-bottom:1px solid #D7D4CC;display:flex;align-items:center;justify-content:space-between;gap:16px}
+#search-modal-input{flex:1;font-family:var(--serif);font-size:1.2rem;border:none;outline:none;padding:8px 0;color:var(--ink)}
+#search-modal-input::placeholder{color:#999}
+#search-modal-close{background:none;border:none;font-size:28px;color:#999;cursor:pointer;padding:0;width:40px;height:40px;display:flex;align-items:center;justify-content:center}
+#search-modal-close:hover{color:#111}
+#search-modal-tabs{display:flex;border-bottom:1px solid #D7D4CC;margin-bottom:0}
+.search-tab{flex:1;padding:12px;text-align:center;cursor:pointer;border:none;background:none;font-family:var(--sans);font-size:0.9rem;color:#999;border-bottom:2px solid transparent;transition:all 0.2s}
+.search-tab.active{color:var(--ink);border-bottom-color:var(--blue)}
+#search-results{padding:16px}
+.search-result-item{padding:16px;border-bottom:1px solid #EEE;cursor:pointer;transition:background 0.2s}
+.search-result-item:hover{background:#F9F8F5}
+.search-result-title{font-family:var(--serif);font-weight:600;color:var(--ink);margin-bottom:4px}
+.search-result-meta{font-family:var(--sans);font-size:0.8rem;color:#999;margin-bottom:6px}
+.search-result-desc{font-family:var(--serif);font-size:0.9rem;color:#666;line-height:1.4}
+.search-no-results{padding:40px 20px;text-align:center;color:#999}
 #burger{display:none;background:none;border:none;cursor:pointer;padding:8px;color:#fff;margin-left:12px}
 #burger span{display:block;width:20px;height:2px;background:currentColor;margin:4px 0}
 #mobile-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;background:var(--navy);z-index:999;padding:16px 24px 24px;border-bottom:2px solid var(--red)}
@@ -769,6 +789,7 @@ footer .footer-bottom img{height:22px;opacity:0.5}
       <a href="#events">Events</a>
       <a href="#guests">Guests</a>
     </nav>
+    <button id="search-btn" aria-label="Search" onclick="openSearchModal()" title="Search events and publications">🔍</button>
     <button id="burger" aria-label="Menu" onclick="document.getElementById('mobile-menu').classList.toggle('open')">
       <span></span><span></span><span></span>
     </button>
@@ -783,6 +804,22 @@ footer .footer-bottom img{height:22px;opacity:0.5}
   <a href="#education" onclick="this.closest('#mobile-menu').classList.remove('open')">Education</a>
   <a href="#events" onclick="this.closest('#mobile-menu').classList.remove('open')">Events</a>
   <a href="#guests" onclick="this.closest('#mobile-menu').classList.remove('open')">Invited Guests</a>
+</div>
+
+<!-- ── Global Search Modal ──────────────────────────────────– -->
+<div id="search-modal" onclick="if(event.target.id === 'search-modal') closeSearchModal()">
+  <div id="search-modal-content">
+    <div id="search-modal-header">
+      <input id="search-modal-input" type="text" placeholder="Search events, publications..." autofocus>
+      <button id="search-modal-close" onclick="closeSearchModal()">✕</button>
+    </div>
+    <div id="search-modal-tabs">
+      <button class="search-tab active" onclick="switchSearchTab('all')">All</button>
+      <button class="search-tab" onclick="switchSearchTab('events')">Events</button>
+      <button class="search-tab" onclick="switchSearchTab('publications')">Publications</button>
+    </div>
+    <div id="search-results"></div>
+  </div>
 </div>
 
 <!-- ── Hero ─────────────────────────────────────────────── -->
@@ -3166,6 +3203,105 @@ document.addEventListener('click', e => {
   const burger = document.getElementById('burger');
   if (menu.classList.contains('open') && !menu.contains(e.target) && !burger.contains(e.target)) {
     menu.classList.remove('open');
+  }
+});
+
+/* ════════════════════════════════════════════════════════════
+   GLOBAL SEARCH MODAL
+   ════════════════════════════════════════════════════════════ */
+let currentSearchTab = 'all';
+
+function openSearchModal() {
+  document.getElementById('search-modal').classList.add('active');
+  document.getElementById('search-modal-input').focus();
+  document.body.style.overflow = 'hidden';
+}
+
+function closeSearchModal() {
+  document.getElementById('search-modal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function switchSearchTab(tab) {
+  currentSearchTab = tab;
+  document.querySelectorAll('.search-tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  performSearch();
+}
+
+function performSearch() {
+  const query = document.getElementById('search-modal-input').value.toLowerCase().trim();
+  const resultsContainer = document.getElementById('search-results');
+
+  if (!query) {
+    resultsContainer.innerHTML = '<div class="search-no-results">Enter a search term</div>';
+    return;
+  }
+
+  let results = [];
+
+  // Search events
+  if (currentSearchTab === 'all' || currentSearchTab === 'events') {
+    Object.entries(EVENTS).forEach(([key, event]) => {
+      const eventText = (event.title + ' ' + event.keywords + ' ' + event.desc).toLowerCase();
+      if (eventText.includes(query)) {
+        results.push({
+          type: 'event',
+          title: event.title,
+          meta: `${event.date} · ${event.speakers ? event.speakers + ' speakers' : 'Event'}`,
+          desc: event.desc,
+          keywords: event.keywords
+        });
+      }
+    });
+  }
+
+  // Search publications
+  if (currentSearchTab === 'all' || currentSearchTab === 'publications') {
+    Object.entries(PUBLICATIONS).forEach(([key, pub]) => {
+      const pubText = (pub.title + ' ' + pub.author + ' ' + pub.journal).toLowerCase();
+      if (pubText.includes(query)) {
+        results.push({
+          type: 'publication',
+          title: pub.title,
+          meta: `${pub.author} · ${pub.year}`,
+          desc: pub.journal,
+          keywords: pub.type
+        });
+      }
+    });
+  }
+
+  if (results.length === 0) {
+    resultsContainer.innerHTML = '<div class="search-no-results">No results found</div>';
+    return;
+  }
+
+  resultsContainer.innerHTML = results.map(result => `
+    <div class="search-result-item">
+      <div class="search-result-title">${result.title}</div>
+      <div class="search-result-meta">${result.meta}</div>
+      <div class="search-result-desc">${result.desc}</div>
+    </div>
+  `).join('');
+}
+
+// Open search with keyboard shortcut (Cmd+K or Ctrl+K)
+document.addEventListener('keydown', (e) => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+    e.preventDefault();
+    openSearchModal();
+  }
+  if (e.key === 'Escape') {
+    closeSearchModal();
+  }
+});
+
+// Search input handler
+document.addEventListener('DOMContentLoaded', () => {
+  const searchInput = document.getElementById('search-modal-input');
+  if (searchInput) {
+    searchInput.addEventListener('input', performSearch);
   }
 });
 
