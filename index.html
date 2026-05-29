@@ -674,6 +674,19 @@ footer .footer-bottom img{height:22px;opacity:0.5}
 .modal-stat-box{text-align:center}
 .modal-stat-box .n{font-family:var(--sans);font-size:1.6rem;font-weight:700;color:var(--navy);line-height:1}
 .modal-stat-box .l{font-family:var(--sans);font-size:0.65rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;margin:48px 0}
+.stat-card{background:#F9F8F5;border:1px solid var(--rule);border-left:4px solid var(--aup-blue);border-radius:4px;padding:32px 24px;text-align:center;transition:all 0.3s ease}
+.stat-card:hover{background:#F4F1E8;transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.08)}
+.stat-num{font-family:var(--sans);font-size:3.2rem;font-weight:800;color:var(--aup-blue);line-height:1;margin-bottom:8px}
+.stat-label{font-family:var(--sans);font-size:1.1rem;font-weight:600;color:var(--ink);margin-bottom:4px}
+.stat-detail{font-family:var(--sans);font-size:0.85rem;color:var(--muted);line-height:1.4}
+.past-events-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.past-ev-item{background:#F9F8F5;border-radius:4px;overflow:hidden;transition:all 0.3s ease;cursor:pointer}
+.past-ev-item:hover{box-shadow:0 4px 12px rgba(0,0,0,0.1);transform:translateY(-2px)}
+.past-ev-item img{width:100%;height:160px;object-fit:cover;display:block;background:#E0DDD5}
+.past-ev-info{padding:16px}
+.past-ev-title{font-family:var(--serif);font-size:0.95rem;font-weight:600;color:var(--ink);line-height:1.3;margin-bottom:6px}
+.past-ev-date{font-family:var(--sans);font-size:0.75rem;color:var(--muted);font-weight:500}
 .modal-event-img{width:100%;max-height:200px;object-fit:cover;border-radius:3px;margin-bottom:16px}
 .modal-event-meta{font-family:var(--sans);font-size:0.78rem;color:var(--muted);margin-bottom:14px;display:flex;gap:20px;flex-wrap:wrap}
 .modal-event-meta span strong{color:var(--ink)}
@@ -1097,6 +1110,50 @@ footer .footer-bottom img{height:22px;opacity:0.5}
       <p>Senior and junior researchers interested in applying are welcome to submit at any time. Scholars have access to CCDS resources, library privileges, and participation in CCDS seminars. Visiting scholars are encouraged to present their research, organize events, and collaborate with CCDS members and the AUP community.</p>
       <p><strong>Required documents:</strong> CV · selected publications list · proposed stay dates (minimum 3 months notice) · brief research description · potential collaborations · financing information. For PhD candidates: a recommendation letter.</p>
       <a href="mailto:ccds@aup.edu" class="apply">Apply · ccds@aup.edu</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Statistics Dashboard ─────────────────────────────── -->
+<section class="section alt" id="impact">
+  <div class="container">
+    <div class="section-header fade-in">
+      <span class="kicker">By the Numbers</span>
+      <h2>CCDS at a Glance · 2016 – 2026</h2>
+      <p class="intro">A decade of impact across research, education, and public engagement.</p>
+    </div>
+
+    <div class="stats-grid fade-in">
+      <div class="stat-card">
+        <div class="stat-num" data-target="186">0</div>
+        <div class="stat-label">Publications</div>
+        <div class="stat-detail">Books, articles, reports, reviews</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" data-target="178">0</div>
+        <div class="stat-label">Academic Events</div>
+        <div class="stat-detail">Conferences, seminars, lectures</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" data-target="50">0</div>
+        <div class="stat-label">Fellows & Affiliates</div>
+        <div class="stat-detail">Current and past members</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" data-target="4">0</div>
+        <div class="stat-label">Horizon Europe Projects</div>
+        <div class="stat-detail">€8.19M in research funding</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" data-target="10">0</div>
+        <div class="stat-label">Languages</div>
+        <div class="stat-detail">Spanning publications & research</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" data-target="4">0</div>
+        <div class="stat-label">Partner Institutions</div>
+        <div class="stat-detail">International collaborations</div>
+      </div>
     </div>
   </div>
 </section>
@@ -1744,6 +1801,69 @@ footer .footer-bottom img{height:22px;opacity:0.5}
             <div class="ev-count-lbl">speakers</div>
             <div class="ev-title">Perspectives on Academic Freedom: USA &amp; Europe</div>
             <div class="ev-date">May 2024</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Past events archive -->
+    <div style="margin-top:64px">
+      <span class="section-label" style="margin-bottom:24px">Archive · Past Events</span>
+      <div class="past-events-grid fade-in">
+        <div class="past-ev-item">
+          <img src="images/ccds_booklet/image292.jpeg" alt="Foucault">
+          <div class="past-ev-info">
+            <div class="past-ev-title">Journée d'Études: Michel Foucault</div>
+            <div class="past-ev-date">December 2023 · 6 speakers</div>
+          </div>
+        </div>
+        <div class="past-ev-item">
+          <img src="images/ccds_booklet/image306.jpg" alt="Violent Turns">
+          <div class="past-ev-info">
+            <div class="past-ev-title">Violent Turns: Sources, Interpretations, Responses</div>
+            <div class="past-ev-date">June 2023 · 75 speakers</div>
+          </div>
+        </div>
+        <div class="past-ev-item">
+          <img src="images/ccds_booklet/image309.jpg" alt="Tocqueville 2023">
+          <div class="past-ev-info">
+            <div class="past-ev-title">Tocqueville Colloque 2023: Autocratie vs. Démocratie?</div>
+            <div class="past-ev-date">June 2023 · 18 speakers</div>
+          </div>
+        </div>
+        <div class="past-ev-item">
+          <img src="images/ccds_booklet/american_developmental_state.jpg" alt="American Developmental State">
+          <div class="past-ev-info">
+            <div class="past-ev-title">The American Developmental State</div>
+            <div class="past-ev-date">May 2023 · 36 speakers</div>
+          </div>
+        </div>
+        <div class="past-ev-item">
+          <img src="images/ccds_booklet/image307.jpg" alt="Liberal Democracy">
+          <div class="past-ev-info">
+            <div class="past-ev-title">Liberal Democracy and Its Challenges</div>
+            <div class="past-ev-date">June 2023 · 8 speakers</div>
+          </div>
+        </div>
+        <div class="past-ev-item">
+          <img src="images/ccds_booklet/image392.jpeg" alt="D.Rad Symposium">
+          <div class="past-ev-info">
+            <div class="past-ev-title">D.Rad Symposium: Trends of Radicalization</div>
+            <div class="past-ev-date">December 2021 · 15 speakers</div>
+          </div>
+        </div>
+        <div class="past-ev-item">
+          <img src="images/ccds_booklet/hl_demos21_balibar.jpeg" alt="Demos21 Balibar">
+          <div class="past-ev-info">
+            <div class="past-ev-title">Demos21 · Balibar to "What Demos for the 21st Century?"</div>
+            <div class="past-ev-date">Dec 2020 – Apr 2022 · 23 sessions</div>
+          </div>
+        </div>
+        <div class="past-ev-item">
+          <img src="images/ccds_booklet/hl_paris_centennial.jpeg" alt="Paris Centennial">
+          <div class="past-ev-info">
+            <div class="past-ev-title">Paris Centennial Conference</div>
+            <div class="past-ev-date">May 2019 · AUP Centennial</div>
           </div>
         </div>
       </div>
@@ -2462,6 +2582,25 @@ function toggleYear(btn) {
   btn.nextElementSibling.classList.toggle('open', !isOpen);
 }
 
+// Animate statistics counters
+const animateCounters = () => {
+  const statNums = document.querySelectorAll('.stat-num');
+  statNums.forEach(el => {
+    const target = parseInt(el.dataset.target);
+    let current = 0;
+    const increment = Math.ceil(target / 40);
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= target) {
+        el.textContent = target;
+        clearInterval(timer);
+      } else {
+        el.textContent = current;
+      }
+    }, 30);
+  });
+};
+
 // Open 2026 and 2025 by default
 document.addEventListener('DOMContentLoaded', () => {
   const yearButtons = document.querySelectorAll('.pub-year-toggle');
@@ -2472,6 +2611,20 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.nextElementSibling.classList.add('open');
     }
   });
+
+  // Trigger counter animation when stats section comes into view
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+        entry.target.classList.add('animated');
+        animateCounters();
+        observer.unobserve(entry.target);
+      }
+    });
+  });
+
+  const statsGrid = document.querySelector('.stats-grid');
+  if (statsGrid) observer.observe(statsGrid);
 });
 
 document.addEventListener('click', e => {
