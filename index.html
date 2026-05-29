@@ -299,33 +299,41 @@ footer .footer-bottom img.logo-img{height:28px;width:auto;mix-blend-mode:screen;
 #publications .pub-big-num .l{
   font-family:var(--sans);font-size:0.85rem;color:var(--muted);margin-top:6px;
 }
-.pub-year-group{margin-bottom:4px}
+.pub-year-group{margin-bottom:20px;padding:0}
+.pub-year-group:last-child{margin-bottom:0}
 .pub-year-toggle{
   width:100%;background:none;border:none;border-bottom:1.5px solid var(--rule);
   display:flex;justify-content:space-between;align-items:center;
   padding:14px 0;cursor:pointer;text-align:left;
 }
-.pub-year-toggle:hover{background:rgba(0,0,0,0.02)}
+.pub-year-toggle:hover{background:rgba(0,47,108,0.03);border-bottom-color:var(--aup-blue)}
 .pub-year-toggle .yr{
-  font-family:var(--sans);font-size:1.1rem;font-weight:700;color:var(--navy);
+  font-family:var(--sans);font-size:1.15rem;font-weight:700;color:var(--navy);
 }
 .pub-year-toggle .count{
-  font-family:var(--sans);font-size:0.75rem;font-weight:500;color:var(--muted);
-  display:flex;align-items:center;gap:8px;
+  font-family:var(--sans);font-size:0.8rem;font-weight:500;color:var(--muted);
+  display:flex;align-items:center;gap:12px;
 }
-.pub-year-toggle .arrow{font-size:1rem;color:var(--muted);transition:transform 0.25s}
-.pub-year-toggle.open .arrow{transform:rotate(180deg)}
-.pub-year-body{display:none;padding:16px 0 8px}
+.pub-year-toggle .arrow{font-size:1rem;color:var(--muted);transition:transform 0.25s,color 0.25s}
+.pub-year-toggle.open .arrow{transform:rotate(180deg);color:var(--aup-blue)}
+.pub-year-body{display:none;padding:20px 0 16px;margin-bottom:32px}
 .pub-year-body.open{display:block}
 .pub-entry{
-  display:grid;grid-template-columns:44px 1fr;gap:12px;
-  padding:10px 0;border-bottom:1px solid var(--rule-soft,#EDEAE0);
+  display:grid;grid-template-columns:60px 1fr;gap:16px;
+  padding:14px 16px;margin-bottom:8px;
+  background:#F9F8F5;border-radius:4px;
+  border-left:3px solid var(--rule);
   align-items:start;
+  transition:all 0.2s ease;
 }
-.pub-entry:last-child{border-bottom:none}
-.pub-entry img{width:44px;height:58px;object-fit:cover;border:1px solid #E0DDD5;border-radius:1px}
-.pub-entry .pub-text{font-size:0.9rem;line-height:1.55;color:#2B2B2B}
-.pub-entry .pub-text em{color:var(--muted)}
+.pub-entry:hover{
+  background:#F4F1E8;border-left-color:var(--aup-blue);
+}
+.pub-entry img{width:60px;height:80px;object-fit:cover;border:1px solid #D4D0C8;border-radius:2px;display:block}
+.pub-entry img[style*="display: none"]{width:0;height:0}
+.pub-entry .pub-text{font-size:0.9rem;line-height:1.6;color:#2B2B2B}
+.pub-entry .pub-text strong{color:var(--ink);font-weight:600}
+.pub-entry .pub-text em{color:var(--muted);font-style:italic}
 .pub-entry .pub-abstract{
   font-family:var(--sans);font-size:0.75rem;color:var(--muted);
   margin-top:5px;line-height:1.5;
@@ -334,9 +342,10 @@ footer .footer-bottom img.logo-img{height:28px;width:auto;mix-blend-mode:screen;
   font-family:var(--sans);font-size:0.7rem;color:var(--blue);margin-top:4px;
 }
 .pub-cat-head{
-  font-family:var(--sans);font-size:0.7rem;font-weight:700;
-  letter-spacing:0.15em;text-transform:uppercase;color:var(--blue);
-  margin:16px 0 6px;padding-bottom:3px;border-bottom:1px solid var(--rule);
+  font-family:var(--sans);font-size:0.75rem;font-weight:600;
+  letter-spacing:0.08em;text-transform:uppercase;color:var(--aup-blue);
+  margin:24px 0 12px;padding-bottom:8px;border-bottom:2px solid var(--rule);
+  padding-left:0;
 }
 
 /* ── Hosted Journals ─────────────────────────────────────── */
@@ -1139,15 +1148,15 @@ footer .footer-bottom img{height:22px;opacity:0.5}
             <div class="pub-text"><strong>Colin-Jaeger, N.</strong> 2026. "Alexandre Viala, <em>Faut-il abandonner le pouvoir aux savants?</em>" <em>Revue de Métaphysique et de Morale</em>, 135–138.</div>
           </div>
           <div class="pub-entry">
-            <img src="images/journal_covers/philosophy_public_issues.jpg" alt="Book cover" onerror="this.style.display='none'">
+            <img src="images/book_covers/bk_edu_handbook.jpg" alt="Book cover" onerror="this.style.display='none'">
             <div class="pub-text"><strong>Culp, J.</strong> 2026. "Non-ideal theorizing of democratic education." <em>Handbook on Education History, Philosophy and Theory</em>, p. 112.</div>
           </div>
           <div class="pub-entry">
-            <img src="images/journal_covers/rejh20.jpg" alt="Journal cover" onerror="this.style.display='none'">
+            <img src="images/journal_covers/eps.jpg" alt="Journal cover" onerror="this.style.display='none'">
             <div class="pub-text">Stockemer, D., Abou-El-Kheir, E., &amp; <strong>Sawyer, S.W.</strong> 2026. "Closing the gender gap in political science publishing." <em>European Political Science</em>, 1–11.</div>
           </div>
           <div class="pub-entry">
-            <img src="images/journal_covers/rai.jpg" alt="Book cover" onerror="this.style.display='none'">
+            <img src="images/book_covers/bk_ipsa_companion.jpg" alt="Book cover" onerror="this.style.display='none'">
             <div class="pub-text">Stockemer, D., <strong>Sawyer, S.W.</strong>, &amp; Gagnon, A. 2026. "Introduction." <em>IPSA Companion to Political Science</em>.</div>
           </div>
           <div class="pub-cat-head">Reviews</div>
@@ -1171,11 +1180,11 @@ footer .footer-bottom img{height:22px;opacity:0.5}
         <div class="pub-year-body">
           <div class="pub-cat-head">Books</div>
           <div class="pub-entry">
-            <img src="images/book_covers/bk_thiers.jpg" alt="Demos Rising" onerror="this.style.display='none'">
+            <img src="images/book_covers/demos_rising.jpg" alt="Demos Rising" onerror="this.style.display='none'">
             <div class="pub-text"><strong>Sawyer, S.W.</strong> 2025. <em>Demos Rising: Democracy and the Popular Construction of Public Power in France, 1800–1850</em>. University of Chicago Press.</div>
           </div>
           <div class="pub-entry">
-            <img src="images/book_covers/bk_abidjan.jpg" alt="Slaves in Paris" onerror="this.style.display='none'">
+            <img src="images/book_covers/slaves_in_paris.jpg" alt="Slaves in Paris" onerror="this.style.display='none'">
             <div class="pub-text"><strong>Spieler, M.</strong> 2025. <em>Slaves in Paris: Hidden Lives and Fugitive Histories</em>. Harvard University Press.</div>
           </div>
           <div class="pub-cat-head">Special Issues</div>
@@ -1185,15 +1194,15 @@ footer .footer-bottom img{height:22px;opacity:0.5}
           </div>
           <div class="pub-cat-head">Articles &amp; Book Chapters</div>
           <div class="pub-entry">
-            <img src="images/journal_covers/philosophy_public_issues.jpg" alt="Journal cover" onerror="this.style.display='none'">
+            <img src="images/journal_covers/hssc.jpeg" alt="Journal cover" onerror="this.style.display='none'">
             <div class="pub-text"><strong>Colin-Jaeger, N.</strong> &amp; Dold, M. 2025. "Individual autonomy and public deliberation." <em>Humanities and Social Sciences Communications</em>, 12(1), 1–10.</div>
           </div>
           <div class="pub-entry">
-            <img src="images/journal_covers/rai.jpg" alt="Journal cover" onerror="this.style.display='none'">
+            <img src="images/journal_covers/oeconomia.jpg" alt="Journal cover" onerror="this.style.display='none'">
             <div class="pub-text"><strong>Colin-Jaeger, N.</strong>, Hédoin, C., &amp; Espinel, C.O. 2025. "Markets and Democracy: Introduction." <em>Oeconomia</em>.</div>
           </div>
           <div class="pub-entry">
-            <img src="images/journal_covers/zphf.png" alt="Journal cover" onerror="this.style.display='none'">
+            <img src="images/journal_covers/zphf_2026.png" alt="Journal cover" onerror="this.style.display='none'">
             <div class="pub-text"><strong>Culp, J.</strong> 2025. "Das Verhältnis Rawls' idealer und nicht-idealer Gerechtigkeitstheorie." <em>Zeitschrift für philosophische Forschung</em>, 79(4), 439–464.</div>
           </div>
           <div class="pub-entry">
@@ -1207,10 +1216,6 @@ footer .footer-bottom img{height:22px;opacity:0.5}
           <div class="pub-entry">
             <img src="images/journal_covers/jope.jpg" alt="Journal cover" onerror="this.style.display='none'">
             <div class="pub-text"><strong>Culp, J.</strong> 2025. "Multicultural Education for Transnational Democratic Citizenship." <em>Journal of Philosophy of Education</em>, 59(3–4), 413–433.</div>
-          </div>
-          <div class="pub-entry">
-            <img src="images/journal_covers/zphf.png" alt="Journal cover" onerror="this.style.display='none'">
-            <div class="pub-text"><strong>Culp, J.</strong> 2025. "The Relationship between Rawls' Ideal and Non-Ideal Theories of Justice." <em>Zeitschrift für philosophische Forschung</em>, 79(4), 439–464.</div>
           </div>
           <div class="pub-entry">
             <img src="images/journal_covers/rop.jpg" alt="Journal cover" onerror="this.style.display='none'">
@@ -1242,7 +1247,7 @@ footer .footer-bottom img{height:22px;opacity:0.5}
           </div>
           <div class="pub-cat-head">Blogs</div>
           <div class="pub-entry">
-            <img src="images/journal_covers/rmm.jpg" alt="Journal cover" onerror="this.style.display='none'">
+            <img src="images/journal_covers/conversation_france.png" alt="Blog cover" onerror="this.style.display='none'">
             <div class="pub-text"><strong>Dageförde, M.</strong>, Lang, J., &amp; Laslier, J.-F. 2025. "Élections: pourquoi la proportionnelle à l'allemande devrait inspirer la France." <em>The Conversation France</em>.</div>
           </div>
           <div class="pub-entry">
@@ -2456,6 +2461,18 @@ function toggleYear(btn) {
   btn.classList.toggle('open', !isOpen);
   btn.nextElementSibling.classList.toggle('open', !isOpen);
 }
+
+// Open 2026 and 2025 by default
+document.addEventListener('DOMContentLoaded', () => {
+  const yearButtons = document.querySelectorAll('.pub-year-toggle');
+  yearButtons.forEach(btn => {
+    const yearText = btn.querySelector('.yr').textContent;
+    if (yearText === '2026' || yearText === '2025') {
+      btn.classList.add('open');
+      btn.nextElementSibling.classList.add('open');
+    }
+  });
+});
 
 document.addEventListener('click', e => {
   const menu = document.getElementById('mobile-menu');
