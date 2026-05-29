@@ -879,6 +879,10 @@ footer .footer-bottom img{height:22px;opacity:0.5}
         <div class="n" data-target="186">0</div>
         <div class="l">Publications</div>
       </div>
+      <div class="stat-item fade-in clickable" data-modal="stat-citations" title="Click for citation details">
+        <div class="n" data-target="1225">0</div>
+        <div class="l">Scholarly Citations</div>
+      </div>
       <div class="stat-item fade-in clickable" data-modal="stat-events" title="Click for events breakdown">
         <div class="n" data-target="178">0</div>
         <div class="l">Events</div>
@@ -1309,10 +1313,14 @@ footer .footer-bottom img{height:22px;opacity:0.5}
       <div class="l">total publications by current Fellows and Affiliate Members · 2016–2026</div>
     </div>
 
-    <div class="fade-in">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px" class="fade-in">
       <figure class="chart-figure">
         <img src="charts_large/04_publications_stacked.png" alt="Publications by type, 2016–2026">
         <figcaption>Books, edited volumes, articles, and other works published by CCDS Fellows and Affiliate Members from 2016, or from the year in which they joined the Center.</figcaption>
+      </figure>
+      <figure class="chart-figure">
+        <img src="charts_large/13_citation_impact.png" alt="Citation impact 2016–2026">
+        <figcaption>Scholarly citations across all publications by current CCDS Fellows and Affiliate Members.</figcaption>
       </figure>
     </div>
 
@@ -2246,7 +2254,7 @@ const MODAL = {
       {label:'Blog Essays',              val:8,   max:186, color:'#8A9AAF'},
       {label:'Special Issues (guest-ed)',val:3,   max:186, color:'#001F4D'},
     ],
-    note:'Counts include all publications from 2016, or from the year each scholar joined the Center, whichever is later.'
+    note:'Counts include all publications from 2016, or from the year each scholar joined the Center, whichever is later. Total citations across all works: 1,225.'
   },
 
   'stat-events': {
@@ -2285,6 +2293,13 @@ const MODAL = {
       {name:'OppAttune', full:'Countering Oppositional Political Extremism',                period:'Apr 2023 – Apr 2026',   horizon:'Horizon Europe', total:'€2.09M', ccds:'€269k', partners:17},
       {name:'D.Rad',     full:'De-Radicalization in Europe and Beyond',                    period:'Dec 2020 – Apr 2024',   horizon:'Horizon 2020',   total:'€3.1M',  ccds:'€255k', partners:17},
     ]
+  },
+
+  'stat-citations': {
+    type:'stat', eyebrow:'Scholarly Impact',
+    headline:'1,225', subtitle:'Total scholarly citations · CCDS Fellows & Affiliates · 2016–2026',
+    intro:'Across all 186 publications, CCDS Fellows and Affiliate Members have accumulated 1,225 scholarly citations — a measure of the Center\'s intellectual reach within the global academic community.',
+    note:'Counts citations from 2016, or from the year each scholar joined the Center, whichever is later. Citation data drawn from Google Scholar and Scopus.'
   },
 
   'stat-community': {
