@@ -723,15 +723,6 @@ footer .footer-bottom img{height:22px;opacity:0.5}
 .filter-reset:hover{background:#D4D0C8}
 .pub-search-results{margin-top:16px;min-height:24px}
 .search-status{font-family:var(--sans);font-size:0.9rem;color:var(--muted);font-style:italic}
-.citation-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}
-.citation-card{display:flex;gap:16px;background:#F9F8F5;border:1px solid var(--rule);border-radius:6px;padding:24px;transition:all 0.3s ease}
-.citation-card:hover{box-shadow:0 4px 12px rgba(0,0,0,0.08);transform:translateY(-2px)}
-.citation-rank{flex-shrink:0;width:48px;height:48px;background:var(--aup-blue);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-size:1.5rem;font-weight:700}
-.citation-item{flex-grow:1}
-.citation-title{font-family:var(--serif);font-size:0.95rem;font-weight:600;color:var(--ink);line-height:1.4;margin-bottom:6px}
-.citation-author{font-family:var(--sans);font-size:0.85rem;color:var(--muted);margin-bottom:6px}
-.citation-meta{font-family:var(--sans);font-size:0.75rem;color:var(--muted);font-style:italic;margin-bottom:12px}
-.citation-count{font-family:var(--sans);font-size:1rem;font-weight:700;color:var(--aup-blue)}
 .partner-card{text-decoration:none;color:inherit;transition:all 0.3s ease;display:flex;gap:20px;padding:20px;background:#F9F8F5;border:1px solid var(--rule);border-radius:6px}
 .partner-card:hover{background:#F4F1E8;border-color:var(--aup-blue);box-shadow:0 4px 12px rgba(0,0,0,0.08)}
 .partner-card img{width:80px;height:80px;object-fit:contain;flex-shrink:0}
@@ -887,10 +878,6 @@ footer .footer-bottom img{height:22px;opacity:0.5}
       <div class="stat-item fade-in clickable" data-modal="stat-publications" title="Click for publication breakdown">
         <div class="n" data-target="186">0</div>
         <div class="l">Publications</div>
-      </div>
-      <div class="stat-item fade-in clickable" data-modal="stat-citations" title="Click for citation details">
-        <div class="n" data-target="1225">0</div>
-        <div class="l">Scholarly Citations</div>
       </div>
       <div class="stat-item fade-in clickable" data-modal="stat-events" title="Click for events breakdown">
         <div class="n" data-target="178">0</div>
@@ -1322,14 +1309,10 @@ footer .footer-bottom img{height:22px;opacity:0.5}
       <div class="l">total publications by current Fellows and Affiliate Members · 2016–2026</div>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px" class="fade-in">
+    <div class="fade-in">
       <figure class="chart-figure">
         <img src="charts_large/04_publications_stacked.png" alt="Publications by type, 2016–2026">
         <figcaption>Books, edited volumes, articles, and other works published by CCDS Fellows and Affiliate Members from 2016, or from the year in which they joined the Center.</figcaption>
-      </figure>
-      <figure class="chart-figure">
-        <img src="charts_large/13_citation_impact.png" alt="Citation impact 2016–2026">
-        <figcaption>Scholarly citations across all publications by current CCDS Fellows and Affiliate Members.</figcaption>
       </figure>
     </div>
 
@@ -1716,74 +1699,6 @@ footer .footer-bottom img{height:22px;opacity:0.5}
             Online companion to <em>The Tocqueville Review</em>. Brings commentary, interviews, and political analysis to wider audiences. Hosts the Tocqueville 21 Podcast.
           </div>
           <a href="https://tocqueville21.com" class="jc-url" target="_blank">tocqueville21.com</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── Citation Impact ──────────────────────────────────── -->
-<section class="section alt" id="impact-citations">
-  <div class="container">
-    <div class="section-header fade-in">
-      <span class="kicker">Research Influence</span>
-      <h2>Citation Impact · Most-Cited Publications</h2>
-      <p class="intro">Tracking scholarly influence and research reach across disciplines and geographies.</p>
-    </div>
-
-    <div class="citation-grid fade-in">
-      <div class="citation-card">
-        <div class="citation-rank">1</div>
-        <div class="citation-item">
-          <div class="citation-title">Democratic Education in a Globalized World</div>
-          <div class="citation-author">Julian Culp (Routledge, 2019)</div>
-          <div class="citation-meta">Handbook · Education, Democracy, Justice</div>
-          <div class="citation-count">127 citations</div>
-        </div>
-      </div>
-      <div class="citation-card">
-        <div class="citation-rank">2</div>
-        <div class="citation-item">
-          <div class="citation-title">Global Justice and Development</div>
-          <div class="citation-author">Julian Culp (Palgrave Macmillan, 2014)</div>
-          <div class="citation-meta">Monograph · Political Philosophy, Justice</div>
-          <div class="citation-count">89 citations</div>
-        </div>
-      </div>
-      <div class="citation-card">
-        <div class="citation-rank">3</div>
-        <div class="citation-item">
-          <div class="citation-title">The Cambridge Handbook of Democratic Education</div>
-          <div class="citation-author">Julian Culp (Ed.) (Cambridge University Press, 2023)</div>
-          <div class="citation-meta">Edited Volume · Democracy, Education</div>
-          <div class="citation-count">64 citations</div>
-        </div>
-      </div>
-      <div class="citation-card">
-        <div class="citation-rank">4</div>
-        <div class="citation-item">
-          <div class="citation-title">Demos Assembled: Democracy and the International Origins of the Modern State</div>
-          <div class="citation-author">Stephen W. Sawyer (University of Chicago Press, 2018)</div>
-          <div class="citation-meta">Monograph · History, Political Theory, Democracy</div>
-          <div class="citation-count">58 citations</div>
-        </div>
-      </div>
-      <div class="citation-card">
-        <div class="citation-rank">5</div>
-        <div class="citation-item">
-          <div class="citation-title">Analyse & Kritik: Journal of Philosophy and Social Theory (Co-Editor)</div>
-          <div class="citation-author">Julian Culp (De Gruyter, 2018–present)</div>
-          <div class="citation-meta">Scholarly Journal · Philosophy, Social Theory</div>
-          <div class="citation-count">156 aggregated citations</div>
-        </div>
-      </div>
-      <div class="citation-card">
-        <div class="citation-rank">6</div>
-        <div class="citation-item">
-          <div class="citation-title">Nancy Fraser and Politics</div>
-          <div class="citation-author">Zona Zarić &amp; Mirjam Ivković (Eds.) (Edinburgh University Press, 2024)</div>
-          <div class="citation-meta">Edited Volume · Political Philosophy, Feminist Theory</div>
-          <div class="citation-count">42 citations</div>
         </div>
       </div>
     </div>
@@ -2331,7 +2246,7 @@ const MODAL = {
       {label:'Blog Essays',              val:8,   max:186, color:'#8A9AAF'},
       {label:'Special Issues (guest-ed)',val:3,   max:186, color:'#001F4D'},
     ],
-    note:'Counts include all publications from 2016, or from the year each scholar joined the Center, whichever is later. Total citations across all works: 1,225.'
+    note:'Counts include all publications from 2016, or from the year each scholar joined the Center, whichever is later.'
   },
 
   'stat-events': {
@@ -2370,13 +2285,6 @@ const MODAL = {
       {name:'OppAttune', full:'Countering Oppositional Political Extremism',                period:'Apr 2023 – Apr 2026',   horizon:'Horizon Europe', total:'€2.09M', ccds:'€269k', partners:17},
       {name:'D.Rad',     full:'De-Radicalization in Europe and Beyond',                    period:'Dec 2020 – Apr 2024',   horizon:'Horizon 2020',   total:'€3.1M',  ccds:'€255k', partners:17},
     ]
-  },
-
-  'stat-citations': {
-    type:'stat', eyebrow:'Scholarly Impact',
-    headline:'1,225', subtitle:'Total scholarly citations · CCDS Fellows & Affiliates · 2016–2026',
-    intro:'Across all 186 publications, CCDS Fellows and Affiliate Members have accumulated 1,225 scholarly citations — a measure of the Center\'s intellectual reach within the global academic community.',
-    note:'Counts citations from 2016, or from the year each scholar joined the Center, whichever is later. Citation data drawn from Google Scholar and Scopus.'
   },
 
   'stat-community': {
