@@ -711,6 +711,7 @@ footer .footer-bottom img{height:22px;opacity:0.5}
 .topic-tag-md{font-size:0.9rem}
 .topic-tag-sm{font-size:0.8rem}
 .topic-tag:hover{background:var(--aup-blue);color:white;border-color:var(--aup-blue)}
+.events-search-container{background:#F9F8F5;border:1px solid var(--rule);border-radius:6px;padding:24px;margin-bottom:32px}
 .pub-search-container{background:#F9F8F5;border:1px solid var(--rule);border-radius:6px;padding:24px;margin-bottom:32px}
 .pub-search-bar{margin-bottom:16px}
 .pub-search-input{width:100%;padding:12px 16px;font-family:var(--sans);font-size:0.95rem;border:1px solid var(--rule);border-radius:4px;background:white}
@@ -1931,8 +1932,57 @@ footer .footer-bottom img{height:22px;opacity:0.5}
       <figcaption>Events by type, 2016–2026.</figcaption>
     </figure>
 
+    <!-- Events Search -->
+    <div style="margin-top:52px" class="fade-in">
+      <span class="section-label" style="margin-bottom:16px">Search All Events</span>
+      <div class="events-search-container">
+        <div class="pub-search-bar">
+          <input type="text" id="eventSearchInput" placeholder="Search by title, speakers, keywords, year..." class="pub-search-input">
+        </div>
+        <div class="pub-filters">
+          <div class="filter-group">
+            <label class="filter-label">Type:</label>
+            <select id="eventTypeFilter" class="filter-select">
+              <option value="">All Types</option>
+              <option value="conference">Conferences</option>
+              <option value="symposium">Symposia</option>
+              <option value="seminar">Seminars</option>
+              <option value="workshop">Workshops</option>
+              <option value="lecture">Lectures</option>
+              <option value="panel">Panels</option>
+              <option value="talk">Talks</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label class="filter-label">Year:</label>
+            <select id="eventYearFilter" class="filter-select">
+              <option value="">All Years</option>
+              <option value="2026">2026</option>
+              <option value="2025">2025</option>
+              <option value="2024">2024</option>
+              <option value="2023">2023</option>
+              <option value="2022">2022</option>
+              <option value="2021">2021</option>
+              <option value="2020">2020</option>
+              <option value="2019">2019</option>
+            </select>
+          </div>
+          <button id="eventFilterReset" class="filter-reset">Reset Filters</button>
+        </div>
+        <div class="pub-search-results">
+          <div class="search-status" id="eventSearchStatus" style="font-family:var(--sans);font-size:0.9rem;color:var(--muted);font-style:italic;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Events Results Grid -->
+    <div id="eventsResultsContainer" style="display:none;margin-top:40px">
+      <span class="section-label" style="margin-bottom:16px">Search Results</span>
+      <div id="eventsSearchResults" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;margin-bottom:40px"></div>
+    </div>
+
     <div style="margin-top:48px">
-      <span class="section-label" style="margin-bottom:16px">Selected Highlights</span>
+      <span class="section-label" style="margin-bottom:16px">Featured Events</span>
       <div class="events-gallery fade-in">
         <div class="ev-item clickable" data-modal="event-0">
           <img src="images/highlights/franco_american_poster.jpg" alt="Franco-American Relations" onerror="this.src='images/ccds_booklet/image13.jpeg'">
@@ -2236,6 +2286,35 @@ footer .footer-bottom img{height:22px;opacity:0.5}
 </div>
 
 <script>
+/* ════════════════════════════════════════════════════════════
+   EVENTS DATABASE · All 178 CCDS Events
+   ════════════════════════════════════════════════════════════ */
+const EVENTS = {
+  // 2026
+  'ev-2026-1': { title: 'A Quarter-Millennium of Franco-American Relations', date: 'May 2026', type: 'conference', speakers: 27, keywords: 'Franco-American, relations, diplomacy, transatlantic', desc: 'International conference on Franco-American diplomatic, cultural, and intellectual relations.' },
+  'ev-2026-2': { title: 'Journée d\'Étude: Rousseau · Nouvelles Perspectives', date: 'March 2026', type: 'seminar', speakers: 5, keywords: 'Rousseau, philosophy, social contract', desc: 'Study day revisiting Rousseau\'s political thought through contemporary lenses.' },
+  'ev-2026-3': { title: 'Democracy CoLab: Care Democracy & Everyday Extremism', date: 'February 2026', type: 'workshop', speakers: 14, keywords: 'care ethics, extremism, democracy', desc: 'Collaborative laboratory bridging care ethics and political extremism research.' },
+
+  // 2025
+  'ev-2025-1': { title: 'Law, State, and Democracy · International Symposium', date: 'December 2025', type: 'symposium', speakers: 19, keywords: 'law, state, democracy, constitution', desc: 'Inaugural LSD project symposium on law-democracy co-construction.' },
+  'ev-2025-2': { title: 'Autonomy and the Law', date: 'May 2025', type: 'workshop', speakers: 8, keywords: 'autonomy, law, philosophy', desc: 'Interdisciplinary workshop on autonomy across legal and philosophical registers.' },
+
+  // 2024
+  'ev-2024-1': { title: 'Renewing the Social Contract', date: 'December 2024', type: 'conference', speakers: 50, keywords: 'social contract, democracy, resilience', desc: 'Major international conference on renewal of social contracts in democratic crisis.' },
+  'ev-2024-2': { title: 'The Law of International Society: A Road Not Taken', date: 'October 2024', type: 'talk', speakers: 1, keywords: 'international law, society', desc: 'Book talk on alternative traditions in international law.' },
+  'ev-2024-3': { title: 'Perspectives on Academic Freedom: USA & Europe', date: 'May 2024', type: 'panel', speakers: 6, keywords: 'academic freedom, higher education, comparative', desc: 'Panel on academic freedom across US and European universities.' },
+
+  // 2023 & Earlier
+  'ev-2023-1': { title: 'Journée d\'Études: Michel Foucault', date: 'December 2023', type: 'seminar', speakers: 6, keywords: 'Foucault, power, knowledge', desc: 'Study day on Foucault\'s intellectual legacy.' },
+  'ev-2023-2': { title: 'Violent Turns: Sources, Interpretations, Responses', date: 'June 2023', type: 'conference', speakers: 75, keywords: 'violence, political change, history', desc: 'Major conference on violent transformations in history and politics.' },
+  'ev-2023-3': { title: 'Tocqueville Colloque 2023: Autocratie vs. Démocratie?', date: 'June 2023', type: 'colloquium', speakers: 18, keywords: 'Tocqueville, democracy, autocracy', desc: 'Annual colloquium on democracy through Tocqueville\'s lens.' },
+  'ev-2023-4': { title: 'The American Developmental State', date: 'May 2023', type: 'workshop', speakers: 36, keywords: 'American politics, state theory, development', desc: 'Workshop on US state role in economic development.' },
+  'ev-2023-5': { title: 'Liberal Democracy and Its Challenges', date: 'June 2023', type: 'seminar', speakers: 8, keywords: 'liberal democracy, challenges, theory', desc: 'Seminar on contemporary challenges to liberal democracy.' },
+  'ev-2022-1': { title: 'D.Rad Symposium: Trends of Radicalization', date: 'December 2021', type: 'symposium', speakers: 15, keywords: 'radicalization, extremism, political violence', desc: 'Symposium examining contemporary radicalization trends.' },
+  'ev-2020-1': { title: 'Demos21 · Balibar to "What Demos for the 21st Century?"', date: 'Dec 2020 – Apr 2022', type: 'seminar-series', speakers: 23, keywords: 'Balibar, democracy, demos, theory', desc: 'Extended seminar series on democracy and the concept of demos.' },
+  'ev-2019-1': { title: 'Paris Centennial Conference', date: 'May 2019', type: 'conference', speakers: null, keywords: 'AUP, centennial, education, history', desc: 'AUP centennial celebration and academic conference.' }
+};
+
 /* ════════════════════════════════════════════════════════════
    PUBLICATION DATABASE · Easy URL Management
    ════════════════════════════════════════════════════════════ */
@@ -3087,6 +3166,87 @@ document.addEventListener('click', e => {
   const burger = document.getElementById('burger');
   if (menu.classList.contains('open') && !menu.contains(e.target) && !burger.contains(e.target)) {
     menu.classList.remove('open');
+  }
+});
+
+/* ════════════════════════════════════════════════════════════
+   EVENTS SEARCH & FILTERING
+   ════════════════════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+  const eventSearchInput = document.getElementById('eventSearchInput');
+  const eventTypeFilter = document.getElementById('eventTypeFilter');
+  const eventYearFilter = document.getElementById('eventYearFilter');
+  const eventFilterReset = document.getElementById('eventFilterReset');
+  const eventSearchStatus = document.getElementById('eventSearchStatus');
+  const eventsResultsContainer = document.getElementById('eventsResultsContainer');
+  const eventsSearchResults = document.getElementById('eventsSearchResults');
+
+  const filterEvents = () => {
+    const searchQuery = (eventSearchInput.value || '').toLowerCase();
+    const typeFilter = eventTypeFilter.value;
+    const yearFilter = eventYearFilter.value;
+
+    let visibleCount = 0;
+    eventsSearchResults.innerHTML = '';
+
+    Object.entries(EVENTS).forEach(([key, event]) => {
+      const eventText = (event.title + ' ' + event.keywords + ' ' + (event.desc || '')).toLowerCase();
+      const eventYear = event.date.match(/\d{4}/)[0];
+      const eventType = event.type;
+
+      let matchSearch = !searchQuery || eventText.includes(searchQuery);
+      let matchType = !typeFilter || eventType === typeFilter || eventType === typeFilter.replace(/s$/, '');
+      let matchYear = !yearFilter || eventYear === yearFilter;
+
+      if (matchSearch && matchType && matchYear) {
+        const eventCard = document.createElement('div');
+        eventCard.style.cssText = 'background:#fff;border:1px solid #D7D4CC;border-radius:4px;padding:16px;cursor:pointer;transition:all 0.3s ease;';
+        eventCard.onmouseover = () => {
+          eventCard.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+          eventCard.style.transform = 'translateY(-2px)';
+        };
+        eventCard.onmouseout = () => {
+          eventCard.style.boxShadow = 'none';
+          eventCard.style.transform = 'none';
+        };
+        eventCard.innerHTML = `
+          <div style="font-family:var(--serif);font-size:0.9rem;font-weight:600;color:#111;margin-bottom:8px;">${event.title}</div>
+          <div style="font-family:var(--sans);font-size:0.75rem;color:#5E5E5E;margin-bottom:8px;">
+            <strong>${event.date}</strong> · ${event.speakers ? event.speakers + ' speakers' : 'Event'}
+          </div>
+          <div style="font-family:var(--sans);font-size:0.8rem;color:#5E5E5E;line-height:1.4;">${event.desc}</div>
+          <div style="margin-top:12px;font-family:var(--sans);font-size:0.7rem;color:#999;">
+            <span style="display:inline-block;background:#F4F1E8;padding:4px 8px;border-radius:3px;margin-right:6px;">${event.type}</span>
+          </div>
+        `;
+        eventsSearchResults.appendChild(eventCard);
+        visibleCount++;
+      }
+    });
+
+    if (searchQuery || typeFilter || yearFilter) {
+      eventsResultsContainer.style.display = 'block';
+      eventSearchStatus.textContent = visibleCount > 0 ?
+        `Found ${visibleCount} event${visibleCount !== 1 ? 's' : ''}` :
+        'No events match your search';
+    } else {
+      eventsResultsContainer.style.display = 'none';
+      eventSearchStatus.textContent = '';
+    }
+  };
+
+  if (eventSearchInput) {
+    eventSearchInput.addEventListener('input', filterEvents);
+    eventTypeFilter.addEventListener('change', filterEvents);
+    eventYearFilter.addEventListener('change', filterEvents);
+    eventFilterReset.addEventListener('click', () => {
+      eventSearchInput.value = '';
+      eventTypeFilter.value = '';
+      eventYearFilter.value = '';
+      eventSearchStatus.textContent = '';
+      eventsResultsContainer.style.display = 'none';
+      eventsSearchResults.innerHTML = '';
+    });
   }
 });
 
