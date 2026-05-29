@@ -2110,61 +2110,107 @@ footer .footer-bottom img{height:22px;opacity:0.5}
     <!-- Past events archive -->
     <div style="margin-top:64px">
       <span class="section-label" style="margin-bottom:24px">Archive · Past Events</span>
-      <div class="past-events-grid fade-in">
-        <div class="past-ev-item" data-event-id="1" onclick="openEventModal(1)">
-          <img src="images/ccds_booklet/image292.jpeg" alt="Foucault">
-          <div class="past-ev-info">
-            <div class="past-ev-title">Journée d'Études: Michel Foucault</div>
-            <div class="past-ev-date">December 2023 · 6 speakers</div>
+
+      <!-- 2023 Events -->
+      <div class="pub-year-group">
+        <button class="pub-year-toggle open" onclick="toggleYear(this)">
+          <span class="yr">2023</span>
+          <span class="count">5 events <span class="arrow">▾</span></span>
+        </button>
+        <div class="pub-year-body open">
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px">
+            <div class="past-ev-item" data-event-id="1" onclick="openEventModal(1)">
+              <img src="images/ccds_booklet/image292.jpeg" alt="Foucault">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Journée d'Études: Michel Foucault</div>
+                <div class="past-ev-date">December 2023 · 6 speakers</div>
+              </div>
+            </div>
+            <div class="past-ev-item" data-event-id="2" onclick="openEventModal(2)">
+              <img src="images/ccds_booklet/image306.jpg" alt="Violent Turns">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Violent Turns: Sources, Interpretations, Responses</div>
+                <div class="past-ev-date">June 2023 · 75 speakers</div>
+              </div>
+            </div>
+            <div class="past-ev-item" data-event-id="3" onclick="openEventModal(3)">
+              <img src="images/ccds_booklet/image309.jpg" alt="Tocqueville 2023">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Tocqueville Colloque 2023: Autocratie vs. Démocratie?</div>
+                <div class="past-ev-date">June 2023 · 18 speakers</div>
+              </div>
+            </div>
+            <div class="past-ev-item" data-event-id="4" onclick="openEventModal(4)">
+              <img src="images/ccds_booklet/american_developmental_state.jpg" alt="American Developmental State">
+              <div class="past-ev-info">
+                <div class="past-ev-title">The American Developmental State</div>
+                <div class="past-ev-date">May 2023 · 36 speakers</div>
+              </div>
+            </div>
+            <div class="past-ev-item" data-event-id="5" onclick="openEventModal(5)">
+              <img src="images/ccds_booklet/image307.jpg" alt="Liberal Democracy">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Liberal Democracy and Its Challenges</div>
+                <div class="past-ev-date">June 2023 · 8 speakers</div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="past-ev-item" data-event-id="2" onclick="openEventModal(2)">
-          <img src="images/ccds_booklet/image306.jpg" alt="Violent Turns">
-          <div class="past-ev-info">
-            <div class="past-ev-title">Violent Turns: Sources, Interpretations, Responses</div>
-            <div class="past-ev-date">June 2023 · 75 speakers</div>
+      </div>
+
+      <!-- 2021 Events -->
+      <div class="pub-year-group" style="margin-top:24px">
+        <button class="pub-year-toggle open" onclick="toggleYear(this)">
+          <span class="yr">2021</span>
+          <span class="count">1 event <span class="arrow">▾</span></span>
+        </button>
+        <div class="pub-year-body open">
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px">
+            <div class="past-ev-item" data-event-id="6" onclick="openEventModal(6)">
+              <img src="images/ccds_booklet/image392.jpeg" alt="D.Rad Symposium">
+              <div class="past-ev-info">
+                <div class="past-ev-title">D.Rad Symposium: Trends of Radicalization</div>
+                <div class="past-ev-date">December 2021 · 15 speakers</div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="past-ev-item" data-event-id="3" onclick="openEventModal(3)">
-          <img src="images/ccds_booklet/image309.jpg" alt="Tocqueville 2023">
-          <div class="past-ev-info">
-            <div class="past-ev-title">Tocqueville Colloque 2023: Autocratie vs. Démocratie?</div>
-            <div class="past-ev-date">June 2023 · 18 speakers</div>
+      </div>
+
+      <!-- 2020 Events -->
+      <div class="pub-year-group" style="margin-top:24px">
+        <button class="pub-year-toggle open" onclick="toggleYear(this)">
+          <span class="yr">2020</span>
+          <span class="count">1 event <span class="arrow">▾</span></span>
+        </button>
+        <div class="pub-year-body open">
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px">
+            <div class="past-ev-item" data-event-id="7" onclick="openEventModal(7)">
+              <img src="images/ccds_booklet/hl_demos21_balibar.jpeg" alt="Demos21 Balibar">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Demos21 · Balibar to "What Demos for the 21st Century?"</div>
+                <div class="past-ev-date">Dec 2020 – Apr 2022 · 23 sessions</div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="past-ev-item" data-event-id="4" onclick="openEventModal(4)">
-          <img src="images/ccds_booklet/american_developmental_state.jpg" alt="American Developmental State">
-          <div class="past-ev-info">
-            <div class="past-ev-title">The American Developmental State</div>
-            <div class="past-ev-date">May 2023 · 36 speakers</div>
-          </div>
-        </div>
-        <div class="past-ev-item" data-event-id="5" onclick="openEventModal(5)">
-          <img src="images/ccds_booklet/image307.jpg" alt="Liberal Democracy">
-          <div class="past-ev-info">
-            <div class="past-ev-title">Liberal Democracy and Its Challenges</div>
-            <div class="past-ev-date">June 2023 · 8 speakers</div>
-          </div>
-        </div>
-        <div class="past-ev-item" data-event-id="6" onclick="openEventModal(6)">
-          <img src="images/ccds_booklet/image392.jpeg" alt="D.Rad Symposium">
-          <div class="past-ev-info">
-            <div class="past-ev-title">D.Rad Symposium: Trends of Radicalization</div>
-            <div class="past-ev-date">December 2021 · 15 speakers</div>
-          </div>
-        </div>
-        <div class="past-ev-item" data-event-id="7" onclick="openEventModal(7)">
-          <img src="images/ccds_booklet/hl_demos21_balibar.jpeg" alt="Demos21 Balibar">
-          <div class="past-ev-info">
-            <div class="past-ev-title">Demos21 · Balibar to "What Demos for the 21st Century?"</div>
-            <div class="past-ev-date">Dec 2020 – Apr 2022 · 23 sessions</div>
-          </div>
-        </div>
-        <div class="past-ev-item" data-event-id="8" onclick="openEventModal(8)">
-          <img src="images/ccds_booklet/hl_paris_centennial.jpeg" alt="Paris Centennial">
-          <div class="past-ev-info">
-            <div class="past-ev-title">Paris Centennial Conference</div>
-            <div class="past-ev-date">May 2019 · AUP Centennial</div>
+      </div>
+
+      <!-- 2019 Events -->
+      <div class="pub-year-group" style="margin-top:24px">
+        <button class="pub-year-toggle open" onclick="toggleYear(this)">
+          <span class="yr">2019</span>
+          <span class="count">1 event <span class="arrow">▾</span></span>
+        </button>
+        <div class="pub-year-body open">
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px">
+            <div class="past-ev-item" data-event-id="8" onclick="openEventModal(8)">
+              <img src="images/ccds_booklet/hl_paris_centennial.jpeg" alt="Paris Centennial">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Paris Centennial Conference</div>
+                <div class="past-ev-date">May 2019 · AUP Centennial</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
