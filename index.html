@@ -2468,6 +2468,10 @@ footer .footer-bottom img{height:22px;opacity:0.5}
             <div class="event-themes-title">Key Themes</div>
             <div class="event-theme-list" id="eventThemes"></div>
           </div>
+          <div id="eventPhotosSection" style="display:none;margin-top:32px">
+            <div class="event-themes-title">Event Photos</div>
+            <div id="eventPhotos" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:12px"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -2969,6 +2973,181 @@ const EVENT_POSTERS = {
   'ev-2026-7': 'images/ccds_booklet/image1.jpeg',
   'ev-2026-8': 'images/ccds_booklet/image13.jpeg',
 };;
+
+const EVENT_PHOTOS = {
+  'ev-2016-1': [],
+  'ev-2016-2': [],
+  'ev-2016-3': [],
+  'ev-2016-4': [],
+  'ev-2016-5': [],
+  'ev-2016-6': [],
+  'ev-2016-7': [],
+  'ev-2016-8': [],
+  'ev-2016-9': [],
+  'ev-2017-1': [],
+  'ev-2017-2': [],
+  'ev-2017-3': [],
+  'ev-2017-4': [],
+  'ev-2017-5': [],
+  'ev-2018-1': [],
+  'ev-2018-2': [],
+  'ev-2018-3': [],
+  'ev-2018-4': [],
+  'ev-2018-5': [],
+  'ev-2019-1': [],
+  'ev-2019-2': [],
+  'ev-2019-3': ['images/old_events/image25.jpeg'],
+  'ev-2020-1': [],
+  'ev-2020-2': [],
+  'ev-2020-3': [],
+  'ev-2020-4': [],
+  'ev-2020-5': [],
+  'ev-2020-6': [],
+  'ev-2020-7': [],
+  'ev-2021-1': [],
+  'ev-2021-10': [],
+  'ev-2021-11': [],
+  'ev-2021-12': [],
+  'ev-2021-13': [],
+  'ev-2021-14': [],
+  'ev-2021-15': [],
+  'ev-2021-16': [],
+  'ev-2021-17': [],
+  'ev-2021-18': [],
+  'ev-2021-19': [],
+  'ev-2021-2': [],
+  'ev-2021-20': [],
+  'ev-2021-21': [],
+  'ev-2021-22': [],
+  'ev-2021-23': [],
+  'ev-2021-3': [],
+  'ev-2021-4': [],
+  'ev-2021-5': [],
+  'ev-2021-6': [],
+  'ev-2021-7': [],
+  'ev-2021-8': [],
+  'ev-2021-9': [],
+  'ev-2022-1': [],
+  'ev-2022-10': [],
+  'ev-2022-11': [],
+  'ev-2022-12': [],
+  'ev-2022-13': [],
+  'ev-2022-14': [],
+  'ev-2022-15': [],
+  'ev-2022-16': [],
+  'ev-2022-17': [],
+  'ev-2022-18': [],
+  'ev-2022-2': [],
+  'ev-2022-3': [],
+  'ev-2022-4': [],
+  'ev-2022-5': [],
+  'ev-2022-6': [],
+  'ev-2022-7': [],
+  'ev-2022-8': [],
+  'ev-2022-9': [],
+  'ev-2023-1': [],
+  'ev-2023-10': ['images/ccds_booklet/image318.jpeg', 'images/ccds_booklet/exhibition_vernissage.jpeg', 'images/ccds_booklet/exhibition_artwork.jpeg'],
+  'ev-2023-11': [],
+  'ev-2023-12': [],
+  'ev-2023-13': [],
+  'ev-2023-14': [],
+  'ev-2023-15': [],
+  'ev-2023-16': [],
+  'ev-2023-17': [],
+  'ev-2023-18': [],
+  'ev-2023-19': [],
+  'ev-2023-2': [],
+  'ev-2023-20': [],
+  'ev-2023-21': [],
+  'ev-2023-22': ['images/old_events/reich_1.jpg', 'images/old_events/reich_2.jpg', 'images/old_events/reich_3.jpg'],
+  'ev-2023-23': [],
+  'ev-2023-24': [],
+  'ev-2023-25': [],
+  'ev-2023-26': [],
+  'ev-2023-27': [],
+  'ev-2023-28': [],
+  'ev-2023-29': [],
+  'ev-2023-30': [],
+  'ev-2023-4': ['images/ccds_booklet/vt1.png', 'images/ccds_booklet/vt2.png'],
+  'ev-2023-5': [],
+  'ev-2023-6': [],
+  'ev-2023-7': [],
+  'ev-2023-8': [],
+  'ev-2024-1': ['images/ccds_booklet/image229.jpeg'],
+  'ev-2024-10': [],
+  'ev-2024-11': [],
+  'ev-2024-12': [],
+  'ev-2024-13': [],
+  'ev-2024-14': [],
+  'ev-2024-15': [],
+  'ev-2024-16': [],
+  'ev-2024-17': [],
+  'ev-2024-18': ['images/ccds_booklet/silent_audience.png', 'images/ccds_booklet/silent_group.png'],
+  'ev-2024-19': [],
+  'ev-2024-2': [],
+  'ev-2024-20': [],
+  'ev-2024-21': [],
+  'ev-2024-22': [],
+  'ev-2024-23': [],
+  'ev-2024-24': [],
+  'ev-2024-25': [],
+  'ev-2024-26': [],
+  'ev-2024-27': [],
+  'ev-2024-28': [],
+  'ev-2024-29': [],
+  'ev-2024-3': [],
+  'ev-2024-30': [],
+  'ev-2024-31': [],
+  'ev-2024-32': [],
+  'ev-2024-4': [],
+  'ev-2024-5': ['images/ccds_booklet/image232.jpeg', 'images/ccds_booklet/image233.jpeg'],
+  'ev-2024-6': [],
+  'ev-2024-7': ['images/ccds_booklet/image250.jpeg', 'images/ccds_booklet/image260.jpeg', 'images/ccds_booklet/image247.jpeg'],
+  'ev-2024-8': [],
+  'ev-2024-9': [],
+  'ev-2025-1': ['images/lsd__oppattune_drad/image36.jpeg', 'images/lsd__oppattune_drad/image10.jpeg', 'images/lsd__oppattune_drad/image16.jpeg'],
+  'ev-2025-10': [],
+  'ev-2025-11': ['images/ccds_booklet/image173.jpeg', 'images/ccds_booklet/image184.jpeg', 'images/ccds_booklet/image172.jpeg'],
+  'ev-2025-12': [],
+  'ev-2025-14': [],
+  'ev-2025-15': [],
+  'ev-2025-16': ['images/ccds_booklet/image203.jpeg', 'images/ccds_booklet/image204.jpeg'],
+  'ev-2025-17': [],
+  'ev-2025-18': [],
+  'ev-2025-19': [],
+  'ev-2025-2': [],
+  'ev-2025-20': [],
+  'ev-2025-21': [],
+  'ev-2025-22': [],
+  'ev-2025-23': [],
+  'ev-2025-24': [],
+  'ev-2025-25': [],
+  'ev-2025-26': [],
+  'ev-2025-27': [],
+  'ev-2025-3': ['images/ccds_booklet/image119.jpeg', 'images/ccds_booklet/image121.jpeg'],
+  'ev-2025-4': [],
+  'ev-2025-5': ['images/ccds_booklet/gilligan_2.jpeg', 'images/ccds_booklet/gilligan_3.jpeg'],
+  'ev-2025-6': [],
+  'ev-2025-7': ['images/ccds_booklet/image136.jpeg', 'images/ccds_booklet/image141.jpeg'],
+  'ev-2025-8': ['images/ccds_booklet/image145.jpeg', 'images/ccds_booklet/image148.jpeg'],
+  'ev-2025-9': ['images/ccds_booklet/image160.jpeg', 'images/ccds_booklet/image161.jpeg'],
+  'ev-2026-1': [],
+  'ev-2026-10': ['images/ccds_booklet/image49.jpeg', 'images/ccds_booklet/image52.jpeg'],
+  'ev-2026-11': [],
+  'ev-2026-12': [],
+  'ev-2026-13': [],
+  'ev-2026-14': [],
+  'ev-2026-15': ['images/ccds_booklet/image109.jpeg', 'images/ccds_booklet/image107.jpeg'],
+  'ev-2026-16': [],
+  'ev-2026-2': [],
+  'ev-2026-3': [],
+  'ev-2026-4': [],
+  'ev-2026-5': [],
+  'ev-2026-6': [],
+  'ev-2026-7': [],
+  'ev-2026-8': ['images/ccds_booklet/image15.jpeg', 'images/ccds_booklet/image17.jpeg'],
+};
+
 
 /* ════════════════════════════════════════════════════════════
    DYNAMIC EVENT DISPLAY · Generate Past Events from Database
@@ -3851,6 +4030,23 @@ function openEventModal(eventId) {
       tag.textContent = keyword;
       themesList.appendChild(tag);
     });
+  }
+
+  // Display event photos if available
+  const photosSection = document.getElementById('eventPhotosSection');
+  const photosContainer = document.getElementById('eventPhotos');
+  if (EVENT_PHOTOS[eventId] && EVENT_PHOTOS[eventId].length > 0) {
+    photosContainer.innerHTML = '';
+    EVENT_PHOTOS[eventId].forEach(photoSrc => {
+      const photoDiv = document.createElement('div');
+      photoDiv.style.overflow = 'hidden';
+      photoDiv.style.borderRadius = '4px';
+      photoDiv.innerHTML = `<img src="${photoSrc}" alt="Event photo" style="width:100%;height:150px;object-fit:cover;cursor:pointer" onclick="window.open(this.src, '_blank')">`;
+      photosContainer.appendChild(photoDiv);
+    });
+    photosSection.style.display = 'block';
+  } else {
+    photosSection.style.display = 'none';
   }
 
   document.getElementById('eventModal').classList.add('active');
