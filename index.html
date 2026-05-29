@@ -108,6 +108,17 @@ footer .footer-bottom img.logo-img{height:28px;width:auto;mix-blend-mode:screen;
 .search-result-meta{font-family:var(--sans);font-size:0.8rem;color:#999;margin-bottom:6px}
 .search-result-desc{font-family:var(--serif);font-size:0.9rem;color:#666;line-height:1.4}
 .search-no-results{padding:40px 20px;text-align:center;color:#999}
+.seminar-card:hover{background:#F9F8F5;transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.08)}
+.seminar-modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:2000;align-items:center;justify-content:center;padding:20px}
+.seminar-modal.active{display:flex}
+.seminar-modal-content{background:white;border-radius:8px;max-width:650px;width:100%;max-height:85vh;overflow-y:auto;padding:40px;box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+.seminar-modal-title{font-family:var(--serif);font-size:1.8rem;font-weight:600;color:var(--ink);margin-bottom:8px;line-height:1.3}
+.seminar-modal-meta{font-family:var(--sans);font-size:0.9rem;color:var(--muted);margin-bottom:24px}
+.seminar-modal-section{margin-bottom:24px}
+.seminar-modal-label{font-family:var(--sans);font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--muted);margin-bottom:8px}
+.seminar-modal-text{font-family:var(--serif);font-size:1rem;line-height:1.8;color:var(--ink)}
+.seminar-modal-close{position:absolute;top:20px;right:20px;background:none;border:none;font-size:28px;color:var(--muted);cursor:pointer;padding:0;width:40px;height:40px;display:flex;align-items:center;justify-content:center}
+.seminar-modal-close:hover{color:var(--ink)}
 #burger{display:none;background:none;border:none;cursor:pointer;padding:8px;color:#fff;margin-left:12px}
 #burger span{display:block;width:20px;height:2px;background:currentColor;margin:4px 0}
 #mobile-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;background:var(--navy);z-index:999;padding:16px 24px 24px;border-bottom:2px solid var(--red)}
@@ -2192,27 +2203,27 @@ footer .footer-bottom img{height:22px;opacity:0.5}
     <div style="margin-top:52px" class="fade-in">
       <span class="section-label" style="margin-bottom:16px">Recurring Seminar Series</span>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
-        <div style="background:#fff;border:1px solid var(--rule);padding:20px;border-radius:3px">
+        <div class="seminar-card" onclick="openSeminarModal('demos21')" style="background:#fff;border:1px solid var(--rule);padding:20px;border-radius:3px;cursor:pointer;transition:all 0.3s ease">
           <div style="font-family:var(--sans);font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:4px">Demos 21</div>
           <div style="font-family:var(--sans);font-size:1.5rem;font-weight:700;color:var(--red)">23</div>
           <div style="font-family:var(--sans);font-size:0.72rem;color:var(--muted)">sessions</div>
         </div>
-        <div style="background:#fff;border:1px solid var(--rule);padding:20px;border-radius:3px">
+        <div class="seminar-card" onclick="openSeminarModal('care')" style="background:#fff;border:1px solid var(--rule);padding:20px;border-radius:3px;cursor:pointer;transition:all 0.3s ease">
           <div style="font-family:var(--sans);font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:4px">Care &amp; Democracy</div>
           <div style="font-family:var(--sans);font-size:1.5rem;font-weight:700;color:var(--red)">14</div>
           <div style="font-family:var(--sans);font-size:0.72rem;color:var(--muted)">sessions</div>
         </div>
-        <div style="background:#fff;border:1px solid var(--rule);padding:20px;border-radius:3px">
+        <div class="seminar-card" onclick="openSeminarModal('upel')" style="background:#fff;border:1px solid var(--rule);padding:20px;border-radius:3px;cursor:pointer;transition:all 0.3s ease">
           <div style="font-family:var(--sans);font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:4px">UPEL</div>
           <div style="font-family:var(--sans);font-size:1.5rem;font-weight:700;color:var(--red)">7</div>
           <div style="font-family:var(--sans);font-size:0.72rem;color:var(--muted)">sessions</div>
         </div>
-        <div style="background:#fff;border:1px solid var(--rule);padding:20px;border-radius:3px">
+        <div class="seminar-card" onclick="openSeminarModal('soulevements')" style="background:#fff;border:1px solid var(--rule);padding:20px;border-radius:3px;cursor:pointer;transition:all 0.3s ease">
           <div style="font-family:var(--sans);font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:4px">Soulèvements ou Révolutions</div>
           <div style="font-family:var(--sans);font-size:1.5rem;font-weight:700;color:var(--red)">5</div>
           <div style="font-family:var(--sans);font-size:0.72rem;color:var(--muted)">sessions</div>
         </div>
-        <div style="background:#fff;border:1px solid var(--rule);padding:20px;border-radius:3px">
+        <div class="seminar-card" onclick="openSeminarModal('theory101')" style="background:#fff;border:1px solid var(--rule);padding:20px;border-radius:3px;cursor:pointer;transition:all 0.3s ease">
           <div style="font-family:var(--sans);font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:4px">Critical Theory 101</div>
           <div style="font-family:var(--sans);font-size:1.5rem;font-weight:700;color:var(--red)">3</div>
           <div style="font-family:var(--sans);font-size:0.72rem;color:var(--muted)">sessions</div>
@@ -2320,6 +2331,14 @@ footer .footer-bottom img{height:22px;opacity:0.5}
   <button id="lightbox-close" aria-label="Close">✕</button>
   <img id="lightbox-img" src="" alt="">
   <figcaption id="lightbox-cap"></figcaption>
+</div>
+
+<!-- ── Seminar Series Modal ──────────────────────────────── -->
+<div class="seminar-modal" id="seminarModal" onclick="if(event.target.id === 'seminarModal') closeSeminarModal()">
+  <div class="seminar-modal-content" onclick="event.stopPropagation()">
+    <button class="seminar-modal-close" onclick="closeSeminarModal()">✕</button>
+    <div id="seminarModalBody"></div>
+  </div>
 </div>
 
 <script>
@@ -3302,6 +3321,107 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchInput = document.getElementById('search-modal-input');
   if (searchInput) {
     searchInput.addEventListener('input', performSearch);
+  }
+});
+
+/* ════════════════════════════════════════════════════════════
+   SEMINAR SERIES MODALS
+   ════════════════════════════════════════════════════════════ */
+const SEMINARS = {
+  'demos21': {
+    title: 'Demos 21',
+    sessions: 23,
+    period: 'December 2020 – April 2022',
+    organizer: 'Stephen W. Sawyer',
+    desc: 'An extended seminar series exploring the question "What Demos for the 21st Century?" in dialogue with philosopher Étienne Balibar\'s work. The series examined contemporary understandings of democracy and the people through readings in political theory, history, and social analysis. Key themes included the relationship between demos and kratos, forms of democratic participation, and how democracies respond to modern challenges.',
+    themes: ['Democracy Theory', 'Political Philosophy', 'Demos & Kratos', 'Contemporary Politics', 'Balibar'],
+    keyTopics: 'Examined foundational concepts of democracy, the composition of the demos, and transformations of democratic practice in the 21st century.'
+  },
+  'care': {
+    title: 'Care & Democracy',
+    sessions: 14,
+    period: 'Ongoing since 2021',
+    organizer: 'Zona Zarić',
+    desc: 'A seminar series exploring the philosophical, political, and ethical dimensions of care as a concept central to democracy. The series brings together scholars working on care ethics, feminist theory, and democratic theory to examine how care relates to citizenship, justice, and collective decision-making. Sessions have addressed care in healthcare systems, education, social policy, and democratic institutions.',
+    themes: ['Care Ethics', 'Feminist Theory', 'Democracy', 'Social Policy', 'Justice'],
+    keyTopics: 'Investigates care as both a practice and a political concept essential to democratic life and social justice.'
+  },
+  'upel': {
+    title: 'UPEL',
+    sessions: 7,
+    period: '2019 – 2024',
+    organizer: 'CCDS Faculty',
+    desc: 'A specialized seminar series in political theory, ethics, and law (UPEL). This series hosts advanced seminars on critical topics at the intersection of political philosophy, legal theory, and social analysis. Topics have ranged from constitutional theory to global justice to contemporary political movements.',
+    themes: ['Political Theory', 'Legal Philosophy', 'Ethics', 'Constitutional Law', 'Global Justice'],
+    keyTopics: 'Addresses cutting-edge questions in political theory, legal philosophy, and their bearing on contemporary democratic challenges.'
+  },
+  'soulevements': {
+    title: 'Soulèvements ou Révolutions',
+    sessions: 5,
+    period: '2019 – 2023',
+    organizer: 'CCDS Faculty',
+    desc: 'A French-language seminar series examining historical and contemporary uprisings, revolts, and revolutions. The series explores the conditions, ideologies, and consequences of collective movements for political change. Sessions have examined case studies from the French Revolution to modern protest movements, with attention to how societies understand and narrate moments of rupture.',
+    themes: ['Revolution', 'Social Movements', 'Political Change', 'History', 'Collective Action'],
+    keyTopics: 'Analyzes the dynamics of collective uprisings and their transformative potential in democratic societies.'
+  },
+  'theory101': {
+    title: 'Critical Theory 101',
+    sessions: 3,
+    period: '2020 – 2022',
+    organizer: 'CCDS Faculty',
+    desc: 'An introductory seminar series offering engaged readings of foundational texts in critical theory. These sessions provided accessible entry points into major theorists and concepts shaping contemporary political thought, including discussions of power, knowledge, identity, and social critique.',
+    themes: ['Critical Theory', 'Political Thought', 'Foundational Texts', 'Social Critique', 'Theory'],
+    keyTopics: 'Introduces key concepts and theorists in critical theory essential for understanding contemporary political analysis.'
+  }
+};
+
+function openSeminarModal(seminarId) {
+  const seminar = SEMINARS[seminarId];
+  if (!seminar) return;
+
+  const modalBody = document.getElementById('seminarModalBody');
+  modalBody.innerHTML = `
+    <h2 class="seminar-modal-title">${seminar.title}</h2>
+    <div class="seminar-modal-meta">${seminar.sessions} sessions · ${seminar.period}</div>
+
+    <div class="seminar-modal-section">
+      <div class="seminar-modal-label">Organizer / Facilitator</div>
+      <div class="seminar-modal-text">${seminar.organizer}</div>
+    </div>
+
+    <div class="seminar-modal-section">
+      <div class="seminar-modal-label">About This Series</div>
+      <div class="seminar-modal-text">${seminar.desc}</div>
+    </div>
+
+    <div class="seminar-modal-section">
+      <div class="seminar-modal-label">Key Topics</div>
+      <div class="seminar-modal-text">${seminar.keyTopics}</div>
+    </div>
+
+    <div class="seminar-modal-section">
+      <div class="seminar-modal-label">Themes Covered</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        ${seminar.themes.map(theme => `
+          <span style="display:inline-block;background:#F4F1E8;border:1px solid #D7D4CC;padding:6px 12px;border-radius:16px;font-family:var(--sans);font-size:0.85rem;color:var(--ink);">${theme}</span>
+        `).join('')}
+      </div>
+    </div>
+  `;
+
+  document.getElementById('seminarModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeSeminarModal() {
+  document.getElementById('seminarModal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// Close on Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && document.getElementById('seminarModal').classList.contains('active')) {
+    closeSeminarModal();
   }
 });
 
