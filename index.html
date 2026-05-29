@@ -2109,7 +2109,7 @@ footer .footer-bottom img{height:22px;opacity:0.5}
 
     <!-- Past events archive -->
     <div style="margin-top:64px">
-      <span class="section-label" style="margin-bottom:24px">Archive · Past Events</span>
+      <span class="section-label" style="margin-bottom:24px">Archive · Past Events by Year</span>
 
       <!-- 2023 Events -->
       <div class="pub-year-group">
@@ -2119,35 +2119,35 @@ footer .footer-bottom img{height:22px;opacity:0.5}
         </button>
         <div class="pub-year-body open">
           <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px">
-            <div class="past-ev-item" data-event-id="1" onclick="openEventModal(1)">
+            <div class="past-ev-item" onclick="openEventModal('ev-2023-1')">
               <img src="images/ccds_booklet/image292.jpeg" alt="Foucault">
               <div class="past-ev-info">
                 <div class="past-ev-title">Journée d'Études: Michel Foucault</div>
                 <div class="past-ev-date">December 2023 · 6 speakers</div>
               </div>
             </div>
-            <div class="past-ev-item" data-event-id="2" onclick="openEventModal(2)">
+            <div class="past-ev-item" onclick="openEventModal('ev-2023-2')">
               <img src="images/ccds_booklet/image306.jpg" alt="Violent Turns">
               <div class="past-ev-info">
                 <div class="past-ev-title">Violent Turns: Sources, Interpretations, Responses</div>
                 <div class="past-ev-date">June 2023 · 75 speakers</div>
               </div>
             </div>
-            <div class="past-ev-item" data-event-id="3" onclick="openEventModal(3)">
+            <div class="past-ev-item" onclick="openEventModal('ev-2023-3')">
               <img src="images/ccds_booklet/image309.jpg" alt="Tocqueville 2023">
               <div class="past-ev-info">
                 <div class="past-ev-title">Tocqueville Colloque 2023: Autocratie vs. Démocratie?</div>
                 <div class="past-ev-date">June 2023 · 18 speakers</div>
               </div>
             </div>
-            <div class="past-ev-item" data-event-id="4" onclick="openEventModal(4)">
+            <div class="past-ev-item" onclick="openEventModal('ev-2023-4')">
               <img src="images/ccds_booklet/american_developmental_state.jpg" alt="American Developmental State">
               <div class="past-ev-info">
                 <div class="past-ev-title">The American Developmental State</div>
                 <div class="past-ev-date">May 2023 · 36 speakers</div>
               </div>
             </div>
-            <div class="past-ev-item" data-event-id="5" onclick="openEventModal(5)">
+            <div class="past-ev-item" onclick="openEventModal('ev-2023-5')">
               <img src="images/ccds_booklet/image307.jpg" alt="Liberal Democracy">
               <div class="past-ev-info">
                 <div class="past-ev-title">Liberal Democracy and Its Challenges</div>
@@ -2158,15 +2158,15 @@ footer .footer-bottom img{height:22px;opacity:0.5}
         </div>
       </div>
 
-      <!-- 2021 Events -->
+      <!-- 2022 Events -->
       <div class="pub-year-group" style="margin-top:24px">
-        <button class="pub-year-toggle open" onclick="toggleYear(this)">
-          <span class="yr">2021</span>
-          <span class="count">1 event <span class="arrow">▾</span></span>
+        <button class="pub-year-toggle" onclick="toggleYear(this)">
+          <span class="yr">2022</span>
+          <span class="count">1 event <span class="arrow">▶</span></span>
         </button>
-        <div class="pub-year-body open">
+        <div class="pub-year-body">
           <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px">
-            <div class="past-ev-item" data-event-id="6" onclick="openEventModal(6)">
+            <div class="past-ev-item" onclick="openEventModal('ev-2022-1')">
               <img src="images/ccds_booklet/image392.jpeg" alt="D.Rad Symposium">
               <div class="past-ev-info">
                 <div class="past-ev-title">D.Rad Symposium: Trends of Radicalization</div>
@@ -2177,19 +2177,61 @@ footer .footer-bottom img{height:22px;opacity:0.5}
         </div>
       </div>
 
-      <!-- 2020 Events -->
+      <!-- 2021 Events -->
       <div class="pub-year-group" style="margin-top:24px">
-        <button class="pub-year-toggle open" onclick="toggleYear(this)">
-          <span class="yr">2020</span>
-          <span class="count">1 event <span class="arrow">▾</span></span>
+        <button class="pub-year-toggle" onclick="toggleYear(this)">
+          <span class="yr">2021</span>
+          <span class="count">1 event <span class="arrow">▶</span></span>
         </button>
-        <div class="pub-year-body open">
+        <div class="pub-year-body">
           <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px">
-            <div class="past-ev-item" data-event-id="7" onclick="openEventModal(7)">
+            <div class="past-ev-item" onclick="openEventModal('ev-2021-1')">
               <img src="images/ccds_booklet/hl_demos21_balibar.jpeg" alt="Demos21 Balibar">
               <div class="past-ev-info">
-                <div class="past-ev-title">Demos21 · Balibar to "What Demos for the 21st Century?"</div>
-                <div class="past-ev-date">Dec 2020 – Apr 2022 · 23 sessions</div>
+                <div class="past-ev-title">Demos21 · Balibar: "What Demos for the 21st Century?"</div>
+                <div class="past-ev-date">December 2020 – April 2022 · 23 sessions</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2020 Events -->
+      <div class="pub-year-group" style="margin-top:24px">
+        <button class="pub-year-toggle" onclick="toggleYear(this)">
+          <span class="yr">2020</span>
+          <span class="count">5 events <span class="arrow">▶</span></span>
+        </button>
+        <div class="pub-year-body">
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px">
+            <div class="past-ev-item" onclick="openEventModal('ev-2020-1')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Gilles Marmasse: "L'homme dans l'État selon Hegel"</div>
+                <div class="past-ev-date">December 10, 2020</div>
+              </div>
+            </div>
+            <div class="past-ev-item" onclick="openEventModal('ev-2020-2')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Frank Ruda: "The Excluded and Grotesque Sovereigns"</div>
+                <div class="past-ev-date">December 3, 2020</div>
+              </div>
+            </div>
+            <div class="past-ev-item" onclick="openEventModal('ev-2020-3')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Philip Golub: "Towards a Multipolar World?"</div>
+                <div class="past-ev-date">December 3, 2020</div>
+              </div>
+            </div>
+            <div class="past-ev-item" onclick="openEventModal('ev-2020-4')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Can We Learn Democracy? Transnational Perspectives</div>
+                <div class="past-ev-date">November 25-27, 2020 · 15 speakers</div>
+              </div>
+            </div>
+            <div class="past-ev-item" onclick="openEventModal('ev-2020-5')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Well-being / Bien-être Conference</div>
+                <div class="past-ev-date">October 21-22, 2020 · 16 speakers</div>
               </div>
             </div>
           </div>
@@ -2198,17 +2240,89 @@ footer .footer-bottom img{height:22px;opacity:0.5}
 
       <!-- 2019 Events -->
       <div class="pub-year-group" style="margin-top:24px">
-        <button class="pub-year-toggle open" onclick="toggleYear(this)">
+        <button class="pub-year-toggle" onclick="toggleYear(this)">
           <span class="yr">2019</span>
-          <span class="count">1 event <span class="arrow">▾</span></span>
+          <span class="count">3 events <span class="arrow">▶</span></span>
         </button>
-        <div class="pub-year-body open">
+        <div class="pub-year-body">
           <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px">
-            <div class="past-ev-item" data-event-id="8" onclick="openEventModal(8)">
+            <div class="past-ev-item" onclick="openEventModal('ev-2019-1')">
               <img src="images/ccds_booklet/hl_paris_centennial.jpeg" alt="Paris Centennial">
               <div class="past-ev-info">
-                <div class="past-ev-title">Paris Centennial Conference</div>
-                <div class="past-ev-date">May 2019 · AUP Centennial</div>
+                <div class="past-ev-title">Paris Centennial Conference: 1919 Peace Conference</div>
+                <div class="past-ev-date">May 23-26, 2019 · 28 speakers</div>
+              </div>
+            </div>
+            <div class="past-ev-item" onclick="openEventModal('ev-2019-2')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Rob Reich: "Just Giving: Why Philanthropy is Failing Democracy"</div>
+                <div class="past-ev-date">April 3, 2019</div>
+              </div>
+            </div>
+            <div class="past-ev-item" onclick="openEventModal('ev-2019-3')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Theodore Lechterman: "Famine, Affluence, and Democracy"</div>
+                <div class="past-ev-date">February 25, 2019</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2018 Events -->
+      <div class="pub-year-group" style="margin-top:24px">
+        <button class="pub-year-toggle" onclick="toggleYear(this)">
+          <span class="yr">2018</span>
+          <span class="count">4 events <span class="arrow">▶</span></span>
+        </button>
+        <div class="pub-year-body">
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px">
+            <div class="past-ev-item" onclick="openEventModal('ev-2018-1')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Global Justice in and Through Education</div>
+                <div class="past-ev-date">November 29-30, 2018 · 6 speakers</div>
+              </div>
+            </div>
+            <div class="past-ev-item" onclick="openEventModal('ev-2018-2')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Mai 68 Conference</div>
+                <div class="past-ev-date">June 9, 2018 · 12 speakers</div>
+              </div>
+            </div>
+            <div class="past-ev-item" onclick="openEventModal('ev-2018-3')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Political Transitions and Federal Projects</div>
+                <div class="past-ev-date">May 24, 2018 · 10 speakers</div>
+              </div>
+            </div>
+            <div class="past-ev-item" onclick="openEventModal('ev-2018-4')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Trump: Year One</div>
+                <div class="past-ev-date">January 19, 2018 · 12 speakers</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2017 Events -->
+      <div class="pub-year-group" style="margin-top:24px">
+        <button class="pub-year-toggle" onclick="toggleYear(this)">
+          <span class="yr">2017</span>
+          <span class="count">2 events <span class="arrow">▶</span></span>
+        </button>
+        <div class="pub-year-body">
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px">
+            <div class="past-ev-item" onclick="openEventModal('ev-2017-1')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Généalogies de l'État, avec et après Foucault</div>
+                <div class="past-ev-date">September 29, 2017 · 8 speakers</div>
+              </div>
+            </div>
+            <div class="past-ev-item" onclick="openEventModal('ev-2017-2')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Democracy and the Political: Raymond Aron Beyond the Hexagon</div>
+                <div class="past-ev-date">May 5-6, 2017 · 18 speakers</div>
               </div>
             </div>
           </div>
@@ -2412,9 +2526,34 @@ const EVENTS = {
   'ev-2023-3': { title: 'Tocqueville Colloque 2023: Autocratie vs. Démocratie?', date: 'June 2023', type: 'colloquium', speakers: 18, keywords: 'Tocqueville, democracy, autocracy', desc: 'Annual colloquium on democracy through Tocqueville\'s lens.' },
   'ev-2023-4': { title: 'The American Developmental State', date: 'May 2023', type: 'workshop', speakers: 36, keywords: 'American politics, state theory, development', desc: 'Workshop on US state role in economic development.' },
   'ev-2023-5': { title: 'Liberal Democracy and Its Challenges', date: 'June 2023', type: 'seminar', speakers: 8, keywords: 'liberal democracy, challenges, theory', desc: 'Seminar on contemporary challenges to liberal democracy.' },
+
+  // 2022
   'ev-2022-1': { title: 'D.Rad Symposium: Trends of Radicalization', date: 'December 2021', type: 'symposium', speakers: 15, keywords: 'radicalization, extremism, political violence', desc: 'Symposium examining contemporary radicalization trends.' },
-  'ev-2020-1': { title: 'Demos21 · Balibar to "What Demos for the 21st Century?"', date: 'Dec 2020 – Apr 2022', type: 'seminar-series', speakers: 23, keywords: 'Balibar, democracy, demos, theory', desc: 'Extended seminar series on democracy and the concept of demos.' },
-  'ev-2019-1': { title: 'Paris Centennial Conference', date: 'May 2019', type: 'conference', speakers: null, keywords: 'AUP, centennial, education, history', desc: 'AUP centennial celebration and academic conference.' }
+
+  // 2021
+  'ev-2021-1': { title: 'Demos21 · Balibar: "What Demos for the 21st Century?"', date: 'December 2020 – April 2022', type: 'seminar-series', speakers: 23, keywords: 'Balibar, democracy, demos, theory', desc: 'Extended seminar series on democracy and the concept of demos.' },
+
+  // 2020
+  'ev-2020-1': { title: 'Gilles Marmasse: "L\'homme dans l\'État selon Hegel"', date: 'December 10, 2020', type: 'talk', speakers: 1, keywords: 'Hegel, citizenship, state, philosophy', desc: 'Discussion on Hegel\'s vision of citizenship and the role of the citizen in the state.' },
+  'ev-2020-2': { title: 'Frank Ruda: "The Excluded and Grotesque Sovereigns"', date: 'December 3, 2020', type: 'talk', speakers: 1, keywords: 'sovereignty, Luhmann, Foucault, Hegel', desc: 'Lecture on exclusory practices and grotesque sovereigns in contemporary politics.' },
+  'ev-2020-3': { title: 'Philip Golub: "Towards a Multipolar World?"', date: 'December 3, 2020', type: 'talk', speakers: 1, keywords: 'international relations, multipolarity, geopolitics', desc: 'Discussion on emerging multipolar global order and international relations.' },
+  'ev-2020-4': { title: 'Can We Learn Democracy? Transnational Perspectives', date: 'November 25-27, 2020', type: 'conference', speakers: 15, keywords: 'democracy, education, citizenship, transnational', desc: 'International conference on democracy education across the 19th-21st centuries.' },
+  'ev-2020-5': { title: 'Well-being / Bien-être Conference', date: 'October 21-22, 2020', type: 'conference', speakers: 16, keywords: 'well-being, welfare state, democracy, Tocqueville', desc: 'Multidisciplinary colloquium exploring conceptions of well-being in democratic societies.' },
+
+  // 2019
+  'ev-2019-1': { title: 'Paris Centennial Conference: 1919 Peace Conference', date: 'May 23-26, 2019', type: 'conference', speakers: 28, keywords: 'Treaty of Versailles, peace, international law, 1919', desc: 'Major international conference marking the centennial of the 1919 Paris Peace Conference.' },
+  'ev-2019-2': { title: 'Rob Reich: "Just Giving: Why Philanthropy is Failing Democracy"', date: 'April 3, 2019', type: 'talk', speakers: 1, keywords: 'philanthropy, democracy, power, justice', desc: 'Lecture on the ethical and political dimensions of philanthropy in democratic societies.' },
+  'ev-2019-3': { title: 'Theodore Lechterman: "Famine, Affluence, and Democracy"', date: 'February 25, 2019', type: 'talk', speakers: 1, keywords: 'effective altruism, global justice, democracy', desc: 'Discussion on effective altruism and its implications for democratic politics.' },
+
+  // 2018
+  'ev-2018-1': { title: 'Global Justice in and Through Education', date: 'November 29-30, 2018', type: 'workshop', speakers: 6, keywords: 'global justice, education, philosophy, development', desc: 'Workshop exploring connections between education and global justice.' },
+  'ev-2018-2': { title: 'Mai 68 Conference', date: 'June 9, 2018', type: 'conference', speakers: 12, keywords: 'May 1968, student movements, democracy, history', desc: 'Conference reflecting on the importance of the 1968 uprisings for European democracy.' },
+  'ev-2018-3': { title: 'Political Transitions and Federal Projects', date: 'May 24, 2018', type: 'conference', speakers: 10, keywords: 'federalism, political transitions, sovereignty, institutions', desc: 'Multidisciplinary conference on federalism in periods of political transition.' },
+  'ev-2018-4': { title: 'Trump: Year One', date: 'January 19, 2018', type: 'conference', speakers: 12, keywords: 'Trump administration, Congress, economy, international relations', desc: 'Conference analyzing the first year of the Trump Administration.' },
+
+  // 2017
+  'ev-2017-1': { title: 'Généalogies de l\'État, avec et après Foucault', date: 'September 29, 2017', type: 'conference', speakers: 8, keywords: 'Foucault, state, genealogy, governmentality', desc: 'International study day on genealogies of the state in and after Foucault.' },
+  'ev-2017-2': { title: 'Democracy and the Political: Raymond Aron Beyond the Hexagon', date: 'May 5-6, 2017', type: 'conference', speakers: 18, keywords: 'Raymond Aron, democracy, liberalism, international relations', desc: 'Two-day conference exploring Raymond Aron\'s political thought and its global significance.' }
 };
 
 /* ════════════════════════════════════════════════════════════
@@ -3043,22 +3182,34 @@ const eventData = {
 };
 
 function openEventModal(eventId) {
-  const event = eventData[eventId];
+  const event = EVENTS[eventId];
   if (!event) return;
 
   document.getElementById('eventTitle').textContent = event.title;
-  document.getElementById('eventDate').textContent = event.date + ' • ' + event.duration;
-  document.getElementById('eventParticipants').textContent = event.participants;
-  document.getElementById('eventDescription').textContent = event.description;
 
+  // Format date and speakers info
+  let dateText = event.date;
+  if (event.speakers) {
+    dateText += ' · ' + event.speakers + ' speakers';
+  }
+  document.getElementById('eventDate').textContent = dateText;
+
+  // Display type
+  const typeText = event.type.charAt(0).toUpperCase() + event.type.slice(1).replace('-', ' ');
+  document.getElementById('eventParticipants').textContent = typeText;
+  document.getElementById('eventDescription').textContent = event.desc;
+
+  // Display keywords as themes
   const themesList = document.getElementById('eventThemes');
   themesList.innerHTML = '';
-  event.themes.forEach(theme => {
-    const tag = document.createElement('div');
-    tag.className = 'event-theme-tag';
-    tag.textContent = theme;
-    themesList.appendChild(tag);
-  });
+  if (event.keywords) {
+    event.keywords.split(', ').forEach(keyword => {
+      const tag = document.createElement('div');
+      tag.className = 'event-theme-tag';
+      tag.textContent = keyword;
+      themesList.appendChild(tag);
+    });
+  }
 
   document.getElementById('eventModal').classList.add('active');
   document.body.style.overflow = 'hidden';
