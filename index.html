@@ -3393,13 +3393,15 @@ const SEMINARS = {
     keyTopics: 'Investigates care as both a practice and a political concept essential to democratic life and social justice.'
   },
   'upel': {
-    title: 'UPEL',
+    title: 'UPEL: US Political Economy Lab',
     sessions: 7,
     period: '2019 – 2024',
     organizer: 'CCDS Faculty',
-    desc: 'A specialized seminar series in political theory, ethics, and law (UPEL). This series hosts advanced seminars on critical topics at the intersection of political philosophy, legal theory, and social analysis. Topics have ranged from constitutional theory to global justice to contemporary political movements.',
-    themes: ['Political Theory', 'Legal Philosophy', 'Ethics', 'Constitutional Law', 'Global Justice'],
-    keyTopics: 'Addresses cutting-edge questions in political theory, legal philosophy, and their bearing on contemporary democratic challenges.'
+    desc: 'The US Political Economy Lab (UPEL) examines American capitalism in comparative and global perspective. This seminar series engages with new research on political economy across disciplinary divides, drawing inspiration from historical work on other regions around the world. Hosted at AUP, UPEL brings together scholars working on the political economy of the United States from multiple theoretical and methodological approaches.',
+    website: 'https://www.politicaleconomylab.org',
+    team: 'https://www.politicaleconomylab.org/team',
+    themes: ['Political Economy', 'Capitalism', 'American Politics', 'Comparative Analysis', 'Economic Systems'],
+    keyTopics: 'Analyzes the political economy of the United States through comparative and global perspectives, examining systems of power, production, and distribution of resources.'
   },
   'soulevements': {
     title: 'Soulèvements ou Révolutions',
@@ -3426,6 +3428,37 @@ function openSeminarModal(seminarId) {
   if (!seminar) return;
 
   const modalBody = document.getElementById('seminarModalBody');
+
+  // Build links section if website/team URLs exist
+  let linksSection = '';
+  if (seminar.website || seminar.team) {
+    linksSection = `
+      <div class="seminar-modal-section">
+        <div class="seminar-modal-label">Resources & Links</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          ${seminar.website ? `<a href="${seminar.website}" target="_blank" style="color:var(--blue);text-decoration:none;font-family:var(--sans);font-size:0.95rem;border-bottom:1px solid var(--blue);display:inline-block">Visit UPEL Website →</a>` : ''}
+          ${seminar.team ? `<a href="${seminar.team}" target="_blank" style="color:var(--blue);text-decoration:none;font-family:var(--sans);font-size:0.95rem;border-bottom:1px solid var(--blue);display:inline-block">View Organizers & Team →</a>` : ''}
+        </div>
+      </div>
+    `;
+  }
+
+  // Build gallery section for UPEL
+  let gallerySection = '';
+  if (seminarId === 'upel') {
+    gallerySection = `
+      <div class="seminar-modal-section">
+        <div class="seminar-modal-label">Event Photos & Gallery</div>
+        <div style="background:#F4F1E8;border:1px dashed #D7D4CC;padding:24px;border-radius:4px;text-align:center">
+          <p style="font-family:var(--sans);font-size:0.9rem;color:var(--muted);margin:0">
+            Explore photos and documentation of UPEL seminars and events on the
+            <a href="https://www.politicaleconomylab.org" target="_blank" style="color:var(--blue);text-decoration:underline">UPEL website</a>
+          </p>
+        </div>
+      </div>
+    `;
+  }
+
   modalBody.innerHTML = `
     <h2 class="seminar-modal-title">${seminar.title}</h2>
     <div class="seminar-modal-meta">${seminar.sessions} sessions · ${seminar.period}</div>
@@ -3453,6 +3486,9 @@ function openSeminarModal(seminarId) {
         `).join('')}
       </div>
     </div>
+
+    ${linksSection}
+    ${gallerySection}
   `;
 
   document.getElementById('seminarModal').classList.add('active');
