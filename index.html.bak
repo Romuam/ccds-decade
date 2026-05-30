@@ -131,16 +131,11 @@ footer .footer-bottom img.logo-img{height:28px;width:auto;mix-blend-mode:screen;
   display:flex;flex-direction:column;justify-content:flex-end;
   padding-top:var(--nav-h);position:relative;overflow:hidden;
 }
-#hero::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.75) 100%);
-  z-index:0;pointer-events:none;
-}
 #hero .hero-bg{
   position:absolute;inset:0;
-  background-image:url('images/00_photo_collage.png');
+  background-image:url('charts_large/00_photo_collage.png');
   background-size:cover;background-position:center 30%;
-  opacity:0.12;
+  opacity:0.22;
 }
 #hero .hero-body{
   position:relative;z-index:1;
@@ -312,7 +307,7 @@ footer .footer-bottom img.logo-img{height:28px;width:auto;mix-blend-mode:screen;
 }
 .past-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:24px;margin-bottom:24px}
 .past-card{text-align:center;display:block;text-decoration:none;color:inherit}
-.past-card img{width:100%;height:auto;aspect-ratio:1 / 1;object-fit:cover;border-radius:2px;margin-bottom:8px;filter:grayscale(30%);transition:filter 0.25s,transform 0.2s;display:block}
+.past-card img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:2px;margin-bottom:8px;filter:grayscale(30%);transition:filter 0.25s,transform 0.2s}
 .past-card:hover img{filter:grayscale(0%);transform:translateY(-2px)}
 .past-card .p-name{font-family:var(--sans);font-size:0.82rem;font-weight:600;color:var(--navy)}
 .past-card .p-role{font-family:var(--sans);font-size:0.65rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted)}
@@ -717,12 +712,12 @@ footer .footer-bottom img{height:22px;opacity:0.5}
 .stat-label{font-family:var(--sans);font-size:1.1rem;font-weight:600;color:var(--ink);margin-bottom:4px}
 .stat-detail{font-family:var(--sans);font-size:0.85rem;color:var(--muted);line-height:1.4}
 .past-events-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
-.past-ev-item{background:transparent;border-radius:4px;overflow:hidden;transition:all 0.3s ease;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.1);display:flex;flex-direction:column}
+.past-ev-item{background:#F9F8F5;border-radius:4px;overflow:hidden;transition:all 0.3s ease;cursor:pointer}
 .past-ev-item:hover{box-shadow:0 4px 12px rgba(0,0,0,0.1);transform:translateY(-2px)}
-.past-ev-item img{width:100%;flex:1;object-fit:cover;display:block;background:transparent;min-height:280px}
-.past-ev-info{padding:12px;background:#f9f9f9;border-bottom:1px solid #e0e0e0}
-.past-ev-title{font-family:var(--serif);font-size:0.9rem;font-weight:600;color:var(--ink);line-height:1.3;margin-bottom:4px}
-.past-ev-date{font-family:var(--sans);font-size:0.8rem;color:#666;font-weight:400}
+.past-ev-item img{width:100%;height:160px;object-fit:cover;display:block;background:#E0DDD5}
+.past-ev-info{padding:16px}
+.past-ev-title{font-family:var(--serif);font-size:0.95rem;font-weight:600;color:var(--ink);line-height:1.3;margin-bottom:6px}
+.past-ev-date{font-family:var(--sans);font-size:0.75rem;color:var(--muted);font-weight:500}
 .event-modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:2000;align-items:center;justify-content:center;padding:20px}
 .event-modal.active{display:flex}
 .event-modal-content{background:white;border-radius:8px;max-width:700px;width:100%;max-height:85vh;overflow-y:auto;position:relative;animation:slideIn 0.3s ease}
@@ -1070,6 +1065,175 @@ footer .footer-bottom img{height:22px;opacity:0.5}
       </div>
     </div>
 
+    <!-- Biographical profiles (all team members) -->
+    <div class="fellows-bio fade-in">
+      <span class="section-label" style="margin-bottom:20px;">Team Profiles</span>
+
+      <div class="fellow-bio-block">
+        <img src="images/community/image2.png" alt="Stephen W. Sawyer">
+        <div>
+          <div class="bio-meta">
+            <div class="name">Stephen W. Sawyer</div>
+            <div class="role">Director · Ballantine-Leavitt Professor of History</div>
+          </div>
+          <div class="bio-text">Stephen W. Sawyer is the Ballantine-Leavitt Professor of History and Director of the Center for Critical Democracy Studies. He came to AUP from the University of Chicago center in Paris and the École Normale Supérieure–rue d'Ulm. After receiving fellowships from the EHESS, Fulbright, and Sciences Po, Sawyer served as part-time assistant to Pierre Rosanvallon at the Collège de France.</div>
+        </div>
+      </div>
+
+      <div class="fellow-bio-block">
+        <img src="images/community/image15.jpeg" alt="Roman Zinigrad">
+        <div>
+          <div class="bio-meta">
+            <div class="name">Roman Zinigrad</div>
+            <div class="role">Deputy Director · Assistant Professor of Law</div>
+          </div>
+          <div class="bio-text">Roman Zinigrad is Assistant Professor of Law and, from 2026, Deputy Director of the Center for Critical Democracy Studies. He coordinates the AUP History, Law &amp; Society undergraduate program.</div>
+        </div>
+      </div>
+
+      <div class="fellow-bio-block">
+        <img src="images/community/image5.jpeg" alt="Julian Culp">
+        <div>
+          <div class="bio-meta">
+            <div class="name">Julian Culp</div>
+            <div class="role">Faculty Fellow · Associate Professor of Philosophy</div>
+          </div>
+          <div class="bio-text">Julian Culp is Associate Professor of Philosophy, Program Coordinator for Philosophy, and Fellow of the Center for Critical Democracy Studies. Previously, he was a lecturer at the Goethe University of Frankfurt am Main, where he received his Habilitation and PhD. He held postdoctoral fellowships from the University of Toronto and the Catholic University of Louvain, and research stays at Duke and Princeton.</div>
+        </div>
+      </div>
+
+      <div class="fellow-bio-block">
+        <img src="images/community/image6.png" alt="Mirjam Dageförde">
+        <div>
+          <div class="bio-meta">
+            <div class="name">Mirjam Dageförde</div>
+            <div class="role">Faculty Fellow · Assistant Professor of Comparative Politics</div>
+          </div>
+          <div class="bio-text">Mirjam Dageförde researches failing representation, citizen-politics relations, party politics, and inequality with a focus on Europe — France and Germany in particular. She is currently Assistant Professor of Comparative Politics at AUP and an Associate Researcher at Sciences Po Paris and the WZB (Wissenschaftszentrum Berlin).</div>
+        </div>
+      </div>
+
+      <div class="fellow-bio-block">
+        <img src="images/community/image11.jpeg" alt="Miranda Spieler">
+        <div>
+          <div class="bio-meta">
+            <div class="name">Miranda Spieler</div>
+            <div class="role">Faculty Fellow · Professor of History</div>
+          </div>
+          <div class="bio-text">Professor Miranda Spieler joined the faculty of AUP in 2012. She holds an AB from Harvard College and a PhD from Columbia University, where she also served as assistant to writer Susan Sontag. Before joining AUP she was in the history department at the University of Arizona, where she received tenure in 2011.</div>
+        </div>
+      </div>
+
+      <div class="fellow-bio-block">
+        <img src="images/community/colinjaeger_portrait.jpeg" alt="Nathanaël Colin-Jaeger">
+        <div>
+          <div class="bio-meta">
+            <div class="name">Nathanaël Colin-Jaeger</div>
+            <div class="role">Affiliate Member · Maître de Conférences, ESPOL</div>
+          </div>
+          <div class="bio-text">Nathanaël Colin-Jaeger is Maître de Conférences (Associate Professor) of Politics, Philosophy &amp; Economics at ESPOL (European School of Political and Social Sciences, Catholic University of Lille). He is Affiliate Member at the CCDS and was Postdoctoral Research Fellow at the Center from January 2024 to June 2025.</div>
+        </div>
+      </div>
+
+      <div class="fellow-bio-block">
+        <img src="images/community/image7.jpeg" alt="Annabelle Lever">
+        <div>
+          <div class="bio-meta">
+            <div class="name">Annabelle Lever</div>
+            <div class="role">Affiliate Member · Professor of Political Philosophy, Sciences Po</div>
+          </div>
+          <div class="bio-text">Annabelle Lever is an Affiliate Member of the CCDS since September 2025 and Professor of Political Philosophy at Sciences Po, Paris. She writes mainly on democratic theory, ethics, and public policy.</div>
+        </div>
+      </div>
+
+      <div class="fellow-bio-block">
+        <img src="images/community/image14.png" alt="Zona Zarić">
+        <div>
+          <div class="bio-meta">
+            <div class="name">Zona Zarić</div>
+            <div class="role">Affiliate Member · Research Fellow, IFDT Belgrade</div>
+          </div>
+          <div class="bio-text">Zona Zarić, philosopher and feminist, organises the Center's "Care &amp; Democracy" seminar series and previously held a CCDS postdoctoral fellowship during which she contributed to the OppAttune project. She holds a PhD in Political Philosophy from the ENS-Ulm, a J.D. in law from the University of Belgrade, and an MA from AUP.</div>
+        </div>
+      </div>
+
+      <div class="fellow-bio-block">
+        <img src="images/community/oberoi_portrait.jpeg" alt="Naintara Oberoi">
+        <div>
+          <div class="bio-meta">
+            <div class="name">Naintara Maya Oberoi</div>
+            <div class="role">Postdoctoral Research Fellow</div>
+          </div>
+          <div class="bio-text">Naintara Maya Oberoi is a Postdoctoral Research Fellow at the CCDS since October 2025. She completed her doctoral research in political philosophy at the École Normale Supérieure, Paris, specialising in questions of subalternity and citizenship.</div>
+        </div>
+      </div>
+
+      <div class="fellow-bio-block">
+        <img src="images/community/image12.jpeg" alt="Hannah Davis Taieb">
+        <div>
+          <div class="bio-meta">
+            <div class="name">Hannah Davis Taieb</div>
+            <div class="role">Clinical Fellow · PhD in Anthropology</div>
+          </div>
+          <div class="bio-text">Dr. Hannah Davis Taieb is a Clinical Fellow at the Center for Critical Democracy Studies. She holds a PhD in anthropology and is the founder and leader of AUP's innovative prison education workshops, where students learn from and with people who are currently incarcerated.</div>
+        </div>
+      </div>
+
+      <div class="fellow-bio-block">
+        <img src="images/community/image4.jpeg" alt="Alice Crary">
+        <div>
+          <div class="bio-meta">
+            <div class="name">Alice Crary</div>
+            <div class="role">Visiting Scholar 2025–26 · New School</div>
+          </div>
+          <div class="bio-text">Alice Crary is a moral and social philosopher, currently Walter A. Eberstadt Distinguished University Professor at the New School for Social Research and Visiting Fellow in Philosophy and Christian Ethics at Regent's Park College, Oxford. She is also a Researcher-in-Residence at Maison Suger (FMSH) and Visiting Researcher at ISJPS (Sorbonne/Paris 1).</div>
+        </div>
+      </div>
+
+      <div class="fellow-bio-block">
+        <img src="images/community/image13.jpeg" alt="Juliet Williams">
+        <div>
+          <div class="bio-meta">
+            <div class="name">Juliet A. Williams</div>
+            <div class="role">Visiting Scholar 2025–26 · UCLA</div>
+          </div>
+          <div class="bio-text">Juliet A. Williams is Professor of Gender Studies and Faculty Director of the UCLA Quarter in Washington Program. She holds a B.A. in Government from Harvard and a Ph.D. in Government from Cornell. She is a socio-legal scholar specialising in feminist theory and politics, masculinities studies, gender discrimination law, and Title IX.</div>
+        </div>
+      </div>
+
+      <div class="fellow-bio-block">
+        <img src="images/community/crosby.jpeg" alt="Margaret Crosby">
+        <div>
+          <div class="bio-meta">
+            <div class="name">Margaret Crosby</div>
+            <div class="role">Visiting Scholar 2026–27 · Liberty University</div>
+          </div>
+          <div class="bio-text">Margaret Crosby is a Senior Deputy Prosecutor with extensive experience at the intersection of trauma, victimization, and institutional response. She brings expertise in law and society, with professional experience as a senior deputy prosecutor. Her work combines practical legal knowledge with scholarly interests in democratic justice and institutional reform.</div>
+        </div>
+      </div>
+
+      <div class="fellow-bio-block">
+        <img src="images/community/ritchie.png" alt="Jennifer Ritchie">
+        <div>
+          <div class="bio-meta">
+            <div class="name">Jennifer Ritchie</div>
+            <div class="role">Visiting Clinical Scholar · Seattle, WA</div>
+          </div>
+          <div class="bio-text">Jennifer Ritchie is a Senior Deputy Prosecutor with the King County Prosecuting Attorney's Office in Seattle, where she has spent over thirty years working at the intersection of trauma, victimization, and institutional response. She served nearly a decade as Commissioner on the Washington State Supreme Court Commission on Gender and Justice.</div>
+        </div>
+      </div>
+
+      <div class="fellow-bio-block">
+        <img src="images/community/image8.jpeg" alt="Shane McLorrain">
+        <div>
+          <div class="bio-meta">
+            <div class="name">Shane McLorrain</div>
+            <div class="role">Tocqueville 21 Editor</div>
+          </div>
+          <div class="bio-text">Shane McLorrain is a Visiting Research Analyst with the Center for Critical Democracy Studies and an Editor for Tocqueville 21. His contributions focus on geopolitics, international political economy, and French politics. He is also the creator, host, and producer of the Tocqueville 21 Podcast.</div>
+        </div>
+      </div>
+    </div>
 
     <!-- Past members -->
     <div class="past-members-section fade-in">
@@ -1290,28 +1454,28 @@ footer .footer-bottom img{height:22px;opacity:0.5}
           <div class="pub-cat-head">Articles &amp; Book Chapters</div>
           <div class="pub-entry">
             <img src="images/journal_covers/rmm.jpg" alt="Journal cover" onerror="this.style.display='none'">
-            <div class="pub-text"><strong>Colin-Jaeger, N.</strong> 2026. "Alexandre Viala, <em>Faut-il abandonner le pouvoir aux savants?</em>" <a href="https://scholar.google.com/scholar?q=Colin-Jaeger+2026+Alexandre+Viala" target="_blank" rel="noopener"><em>Revue de Métaphysique et de Morale</em></a>, 135–138.</div>
+            <div class="pub-text"><strong>Colin-Jaeger, N.</strong> 2026. "Alexandre Viala, <em>Faut-il abandonner le pouvoir aux savants?</em>" <em>Revue de Métaphysique et de Morale</em>, 135–138.</div>
           </div>
           <div class="pub-entry">
             <img src="images/book_covers/bk_edu_handbook.jpg" alt="Book cover" onerror="this.style.display='none'">
-            <div class="pub-text"><strong>Culp, J.</strong> 2026. <a href="https://scholar.google.com/scholar?q=Culp+2026+Non-ideal+theorizing+democratic+education" target="_blank" rel="noopener">"Non-ideal theorizing of democratic education."</a> <em>Handbook on Education History, Philosophy and Theory</em>, p. 112.</div>
+            <div class="pub-text"><strong>Culp, J.</strong> 2026. "Non-ideal theorizing of democratic education." <em>Handbook on Education History, Philosophy and Theory</em>, p. 112.</div>
           </div>
           <div class="pub-entry">
             <img src="images/journal_covers/eps.jpg" alt="Journal cover" onerror="this.style.display='none'">
-            <div class="pub-text">Stockemer, D., Abou-El-Kheir, E., &amp; <strong>Sawyer, S.W.</strong> 2026. <a href="https://www.springer.com/journal/12110" target="_blank" rel="noopener">"Closing the gender gap in political science publishing."</a> <em>European Political Science</em>, 1–11.</div>
+            <div class="pub-text">Stockemer, D., Abou-El-Kheir, E., &amp; <strong>Sawyer, S.W.</strong> 2026. "Closing the gender gap in political science publishing." <em>European Political Science</em>, 1–11.</div>
           </div>
           <div class="pub-entry">
             <img src="images/book_covers/bk_ipsa_companion.jpg" alt="Book cover" onerror="this.style.display='none'">
-            <div class="pub-text">Stockemer, D., <strong>Sawyer, S.W.</strong>, &amp; Gagnon, A. 2026. <a href="https://scholar.google.com/scholar?q=Stockemer+Sawyer+Gagnon+2026+IPSA+Companion" target="_blank" rel="noopener">"Introduction."</a> <em>IPSA Companion to Political Science</em>.</div>
+            <div class="pub-text">Stockemer, D., <strong>Sawyer, S.W.</strong>, &amp; Gagnon, A. 2026. "Introduction." <em>IPSA Companion to Political Science</em>.</div>
           </div>
           <div class="pub-cat-head">Reviews</div>
           <div class="pub-entry">
             <img src="images/journal_covers/ethics.png" alt="Journal cover" onerror="this.style.display='none'">
-            <div class="pub-text"><strong>Lever, A.</strong> 2026. Review of Dimitri Landa &amp; Ryan Pevnick. <a href="https://www.journals.uchicago.edu/toc/ethics/current" target="_blank" rel="noopener"><em>Ethics</em></a>.</div>
+            <div class="pub-text"><strong>Lever, A.</strong> 2026. Review of Dimitri Landa &amp; Ryan Pevnick. <em>Ethics</em>.</div>
           </div>
           <div class="pub-entry">
             <img src="images/journal_covers/icon.jpg" alt="Journal cover" onerror="this.style.display='none'">
-            <div class="pub-text"><strong>Zinigrad, R.</strong> 2026. Review of Astrid von Busekist. <a href="https://academic.oup.com/icon" target="_blank" rel="noopener"><em>International Journal of Constitutional Law</em></a>.</div>
+            <div class="pub-text"><strong>Zinigrad, R.</strong> 2026. Review of Astrid von Busekist. <em>International Journal of Constitutional Law</em>.</div>
           </div>
         </div>
       </div>
@@ -1326,45 +1490,45 @@ footer .footer-bottom img{height:22px;opacity:0.5}
           <div class="pub-cat-head">Books</div>
           <div class="pub-entry">
             <img src="images/book_covers/demos_rising.jpg" alt="Demos Rising" onerror="this.style.display='none'">
-            <div class="pub-text"><strong>Sawyer, S.W.</strong> 2025. <a href="https://press.uchicago.edu/ucp/books/book/chicago/D/bo205233524.html" target="_blank" rel="noopener"><em>Demos Rising: Democracy and the Popular Construction of Public Power in France, 1800–1850</em></a>. University of Chicago Press.</div>
+            <div class="pub-text"><strong>Sawyer, S.W.</strong> 2025. <em>Demos Rising: Democracy and the Popular Construction of Public Power in France, 1800–1850</em>. University of Chicago Press.</div>
           </div>
           <div class="pub-entry">
             <img src="images/book_covers/slaves_in_paris.jpg" alt="Slaves in Paris" onerror="this.style.display='none'">
-            <div class="pub-text"><strong>Spieler, M.</strong> 2025. <a href="https://www.harvard.edu/admissions/" target="_blank" rel="noopener"><em>Slaves in Paris: Hidden Lives and Fugitive Histories</em></a>. Harvard University Press.</div>
+            <div class="pub-text"><strong>Spieler, M.</strong> 2025. <em>Slaves in Paris: Hidden Lives and Fugitive Histories</em>. Harvard University Press.</div>
           </div>
           <div class="pub-cat-head">Special Issues</div>
           <div class="pub-entry">
             <img src="images/journal_covers/fcri20.jpg" alt="Journal cover" onerror="this.style.display='none'">
-            <div class="pub-text"><strong>Lever, A.</strong> &amp; Mráz, A. (Guest Eds.) 2025. <a href="https://www.tandfonline.com/toc/ccrs20/28/5" target="_blank" rel="noopener">"Democratic Ethics and Voting."</a> <em>Critical Review of International Social and Political Philosophy</em>, 28(5).</div>
+            <div class="pub-text"><strong>Lever, A.</strong> &amp; Mráz, A. (Guest Eds.) 2025. "Democratic Ethics and Voting." <em>Critical Review of International Social and Political Philosophy</em>, 28(5).</div>
           </div>
           <div class="pub-cat-head">Articles &amp; Book Chapters</div>
           <div class="pub-entry">
             <img src="images/journal_covers/hssc.jpeg" alt="Journal cover" onerror="this.style.display='none'">
-            <div class="pub-text"><strong>Colin-Jaeger, N.</strong> &amp; Dold, M. 2025. <a href="https://www.nature.com/articles/s42979-024-02000-x" target="_blank" rel="noopener">"Individual autonomy and public deliberation."</a> <em>Humanities and Social Sciences Communications</em>, 12(1), 1–10.</div>
+            <div class="pub-text"><strong>Colin-Jaeger, N.</strong> &amp; Dold, M. 2025. "Individual autonomy and public deliberation." <em>Humanities and Social Sciences Communications</em>, 12(1), 1–10.</div>
           </div>
           <div class="pub-entry">
             <img src="images/journal_covers/oeconomia.jpg" alt="Journal cover" onerror="this.style.display='none'">
-            <div class="pub-text"><strong>Colin-Jaeger, N.</strong>, Hédoin, C., &amp; Espinel, C.O. 2025. <a href="https://scholar.google.com/scholar?q=Colin-Jaeger+Hedoin+Espinel+2025+Markets+Democracy" target="_blank" rel="noopener">"Markets and Democracy: Introduction."</a> <em>Oeconomia</em>.</div>
+            <div class="pub-text"><strong>Colin-Jaeger, N.</strong>, Hédoin, C., &amp; Espinel, C.O. 2025. "Markets and Democracy: Introduction." <em>Oeconomia</em>.</div>
           </div>
           <div class="pub-entry">
             <img src="images/journal_covers/zphf_2026.png" alt="Journal cover" onerror="this.style.display='none'">
-            <div class="pub-text"><strong>Culp, J.</strong> 2025. <a href="https://scholar.google.com/scholar?q=Culp+2025+Das+Verh%C3%A4ltnis+Rawls+Gerechtigkeitstheorie" target="_blank" rel="noopener">"Das Verhältnis Rawls' idealer und nicht-idealer Gerechtigkeitstheorie."</a> <em>Zeitschrift für philosophische Forschung</em>, 79(4), 439–464.</div>
+            <div class="pub-text"><strong>Culp, J.</strong> 2025. "Das Verhältnis Rawls' idealer und nicht-idealer Gerechtigkeitstheorie." <em>Zeitschrift für philosophische Forschung</em>, 79(4), 439–464.</div>
           </div>
           <div class="pub-entry">
             <img src="images/journal_covers/wp_ptx.jpg" alt="Journal cover" onerror="this.style.display='none'">
-            <div class="pub-text"><strong>Culp, J.</strong> 2025. <a href="https://journals.sagepub.com/home/ptx" target="_blank" rel="noopener">"Deciphering the Paradox of Digital Citizenship."</a> <em>Political Theory</em>.</div>
+            <div class="pub-text"><strong>Culp, J.</strong> 2025. "Deciphering the Paradox of Digital Citizenship." <em>Political Theory</em>.</div>
           </div>
           <div class="pub-entry">
             <img src="images/book_covers/bk_mig.jpg" alt="Book cover" onerror="this.style.display='none'">
-            <div class="pub-text"><strong>Culp, J.</strong> 2025. <a href="https://link.springer.com/referencework/10.1007/978-3-031-10300-4" target="_blank" rel="noopener">"Migration Ethics Between Ideal and Non-Ideal Theory."</a> <em>Handbook of Migration Ethics</em>, Springer, 127–136.</div>
+            <div class="pub-text"><strong>Culp, J.</strong> 2025. "Migration Ethics Between Ideal and Non-Ideal Theory." <em>Handbook of Migration Ethics</em>, Springer, 127–136.</div>
           </div>
           <div class="pub-entry">
             <img src="images/journal_covers/jope.jpg" alt="Journal cover" onerror="this.style.display='none'">
-            <div class="pub-text"><strong>Culp, J.</strong> 2025. <a href="https://onlinelibrary.wiley.com/journal/14679752" target="_blank" rel="noopener">"Multicultural Education for Transnational Democratic Citizenship."</a> <em>Journal of Philosophy of Education</em>, 59(3–4), 413–433.</div>
+            <div class="pub-text"><strong>Culp, J.</strong> 2025. "Multicultural Education for Transnational Democratic Citizenship." <em>Journal of Philosophy of Education</em>, 59(3–4), 413–433.</div>
           </div>
           <div class="pub-entry">
             <img src="images/journal_covers/rop.jpg" alt="Journal cover" onerror="this.style.display='none'">
-            <div class="pub-text"><strong>Culp, J.</strong> 2025. <a href="https://www.cambridge.org/core/journals/review-of-politics" target="_blank" rel="noopener">"Three Rawlsian Rationales for a Cultural Turn in Digital Citizenship Education."</a> <em>The Review of Politics</em>, 87(3), 369–392.</div>
+            <div class="pub-text"><strong>Culp, J.</strong> 2025. "Three Rawlsian Rationales for a Cultural Turn in Digital Citizenship Education." <em>The Review of Politics</em>, 87(3), 369–392.</div>
           </div>
           <div class="pub-entry">
             <img src="images/book_covers/bk_muendigkeit.jpg" alt="Book cover" onerror="this.style.display='none'">
@@ -1372,32 +1536,32 @@ footer .footer-bottom img{height:22px;opacity:0.5}
           </div>
           <div class="pub-entry">
             <img src="images/journal_covers/fcri20.jpg" alt="Journal cover" onerror="this.style.display='none'">
-            <div class="pub-text">Albertsen, A. &amp; <strong>Lever, A.</strong> 2025. <a href="https://www.tandfonline.com/toc/ccrs20/28/default" target="_blank" rel="noopener">"A new way to serve democracy."</a> <em>Critical Review of International Social and Political Philosophy</em>, 28, 866–885.</div>
+            <div class="pub-text">Albertsen, A. &amp; <strong>Lever, A.</strong> 2025. "A new way to serve democracy." <em>Critical Review of International Social and Political Philosophy</em>, 28, 866–885.</div>
           </div>
           <div class="pub-entry">
             <img src="images/book_covers/bk_routl_hb.jpg" alt="Book cover" onerror="this.style.display='none'">
-            <div class="pub-text"><strong>Sawyer, S.W.</strong> 2025. <a href="https://scholar.google.com/scholar?q=Sawyer+2025+Veridiction+Democratic+State+Billy+Budd" target="_blank" rel="noopener">"Veridiction and the Democratic State of Exception in Billy Budd."</a> <em>The Oxford Handbook of Herman Melville</em>.</div>
+            <div class="pub-text"><strong>Sawyer, S.W.</strong> 2025. "Veridiction and the Democratic State of Exception in Billy Budd." <em>The Oxford Handbook of Herman Melville</em>.</div>
           </div>
           <div class="pub-entry">
             <img src="images/book_covers/bk_butler.jpg" alt="Book cover" onerror="this.style.display='none'">
-            <div class="pub-text"><strong>Zarić, Z.</strong> 2025. <a href="https://scholar.google.com/scholar?q=Zaric+2025+Care+Critical+Methodology+Butler" target="_blank" rel="noopener">"Care as Critical Methodology. Debating Butler."</a> <em>Judith Butler and Marxism</em>, Bloomsbury Publishing.</div>
+            <div class="pub-text"><strong>Zarić, Z.</strong> 2025. "Care as Critical Methodology. Debating Butler." <em>Judith Butler and Marxism</em>, Bloomsbury Publishing.</div>
           </div>
           <div class="pub-entry">
             <img src="images/journal_covers/jlrs.jpg" alt="Journal cover" onerror="this.style.display='none'">
-            <div class="pub-text"><strong>Zinigrad, R.</strong> 2025. <a href="https://www.cambridge.org/core/journals/journal-of-law-religion-and-state" target="_blank" rel="noopener">"Laïcité and Regimes of Security."</a> <em>Journal of Law, Religion, and State</em>, 1(1), 31–71.</div>
+            <div class="pub-text"><strong>Zinigrad, R.</strong> 2025. "Laïcité and Regimes of Security." <em>Journal of Law, Religion, and State</em>, 1(1), 31–71.</div>
           </div>
           <div class="pub-entry">
             <img src="images/journal_covers/nyu.jpg" alt="Journal cover" onerror="this.style.display='none'">
-            <div class="pub-text"><strong>Zinigrad, R.</strong> 2025. <a href="https://nyulawreview.org/" target="_blank" rel="noopener">"Parental Rights Are Wrong."</a> <em>N.Y.U. Rev. L. &amp; Soc. Change Harbinger</em>, 51, 14–22.</div>
+            <div class="pub-text"><strong>Zinigrad, R.</strong> 2025. "Parental Rights Are Wrong." <em>N.Y.U. Rev. L. &amp; Soc. Change Harbinger</em>, 51, 14–22.</div>
           </div>
           <div class="pub-cat-head">Blogs</div>
           <div class="pub-entry">
             <img src="images/journal_covers/conversation_france.png" alt="Blog cover" onerror="this.style.display='none'">
-            <div class="pub-text"><strong>Dageförde, M.</strong>, Lang, J., &amp; Laslier, J.-F. 2025. <a href="https://theconversation.com/fr" target="_blank" rel="noopener">"Élections: pourquoi la proportionnelle à l'allemande devrait inspirer la France."</a> <em>The Conversation France</em>.</div>
+            <div class="pub-text"><strong>Dageförde, M.</strong>, Lang, J., &amp; Laslier, J.-F. 2025. "Élections: pourquoi la proportionnelle à l'allemande devrait inspirer la France." <em>The Conversation France</em>.</div>
           </div>
           <div class="pub-entry">
             <img src="images/journal_covers/blog-verf.png" alt="Blog" onerror="this.style.display='none'">
-            <div class="pub-text"><strong>Zinigrad, R.</strong> 2025. <a href="https://verfassungsblog.de/" target="_blank" rel="noopener">"The Dark Side of Humor."</a> <em>VerfBlog</em>.</div>
+            <div class="pub-text"><strong>Zinigrad, R.</strong> 2025. "The Dark Side of Humor." <em>VerfBlog</em>.</div>
           </div>
         </div>
       </div>
@@ -1412,21 +1576,21 @@ footer .footer-bottom img{height:22px;opacity:0.5}
           <div class="pub-cat-head">Books</div>
           <div class="pub-entry">
             <img src="images/book_covers/nancy_fraser_and_politics.jpg" alt="Nancy Fraser and Politics" onerror="this.style.display='none'">
-            <div class="pub-text"><strong>Zarić, Z.</strong> &amp; Ivković, M. (Eds.) 2024. <a href="https://edinburghuniversitypress.com/" target="_blank" rel="noopener"><em>Nancy Fraser and Politics</em></a>. Edinburgh University Press.</div>
+            <div class="pub-text"><strong>Zarić, Z.</strong> &amp; Ivković, M. (Eds.) 2024. <em>Nancy Fraser and Politics</em>. Edinburgh University Press.</div>
           </div>
           <div class="pub-cat-head">Special Issues</div>
           <div class="pub-entry">
             <img src="images/journal_covers/demt.jpg" alt="Journal cover" onerror="this.style.display='none'">
-            <div class="pub-text"><strong>Culp, J.</strong> &amp; <strong>Sawyer, S.W.</strong> (Guest Eds.) 2024. <a href="https://www.berghahnjournals.com/view/journals/dem/dem-overview.xml" target="_blank" rel="noopener">"What Demos and Kratos for the 21st Century?"</a> <em>Democratic Theory</em>, 11(2).</div>
+            <div class="pub-text"><strong>Culp, J.</strong> &amp; <strong>Sawyer, S.W.</strong> (Guest Eds.) 2024. "What Demos and Kratos for the 21st Century?" <em>Democratic Theory</em>, 11(2).</div>
           </div>
           <div class="pub-cat-head">Articles &amp; Book Chapters</div>
           <div class="pub-entry">
             <img src="images/journal_covers/ejpe.jpg" alt="Journal cover" onerror="this.style.display='none'">
-            <div class="pub-text"><strong>Colin-Jaeger, N.</strong> 2024. <a href="https://www.mdpi.com/journal/ejpe" target="_blank" rel="noopener">"Can We Design Spontaneity?"</a> <em>Erasmus Journal for Philosophy and Economics</em>, 17(1), 66–88.</div>
+            <div class="pub-text"><strong>Colin-Jaeger, N.</strong> 2024. "Can We Design Spontaneity?" <em>Erasmus Journal for Philosophy and Economics</em>, 17(1), 66–88.</div>
           </div>
           <div class="pub-entry">
             <img src="images/journal_covers/rejh20.jpg" alt="Journal cover" onerror="this.style.display='none'">
-            <div class="pub-text"><strong>Colin-Jaeger, N.</strong> 2024. <a href="https://www.mdpi.com/journal/ejpe" target="_blank" rel="noopener">"Can we design spontaneity? Hayek, design, and spontaneous orders."</a> <em>Erasmus Journal for Philosophy and Economics</em>, 17(1), 66–88.</div>
+            <div class="pub-text"><strong>Colin-Jaeger, N.</strong> 2024. "Can we design spontaneity? Hayek, design, and spontaneous orders." <em>Erasmus Journal for Philosophy and Economics</em>, 17(1), 66–88.</div>
           </div>
         </div>
       </div>
@@ -1441,20 +1605,20 @@ footer .footer-bottom img{height:22px;opacity:0.5}
           <div class="pub-cat-head">Books</div>
           <div class="pub-entry">
             <img src="images/book_covers/cambridge_handbook.jpg" alt="Cambridge Handbook of Democratic Education" onerror="this.style.display='none'">
-            <div class="pub-text"><strong>Culp, J.</strong> (Co-Ed.) 2023. <a href="https://www.cambridge.org/core/books" target="_blank" rel="noopener"><em>The Cambridge Handbook of Democratic Education</em></a>. Cambridge University Press.</div>
+            <div class="pub-text"><strong>Culp, J.</strong> (Co-Ed.) 2023. <em>The Cambridge Handbook of Democratic Education</em>. Cambridge University Press.</div>
           </div>
           <div class="pub-entry">
             <img src="images/book_covers/soin_et_compassion.jpg" alt="Soin et compassion" onerror="this.style.display='none'">
-            <div class="pub-text"><strong>Zarić, Z.</strong> (Co-Author) 2023. <a href="https://www.editions-hermann.fr/" target="_blank" rel="noopener"><em>Soin et compassion: Un nouveau paradigme pour la philosophie politique?</em></a> Hermann.</div>
+            <div class="pub-text"><strong>Zarić, Z.</strong> (Co-Author) 2023. <em>Soin et compassion: Un nouveau paradigme pour la philosophie politique?</em> Hermann.</div>
           </div>
           <div class="pub-cat-head">Articles &amp; Book Chapters</div>
           <div class="pub-entry">
             <img src="images/journal_covers/rai.jpg" alt="Journal cover" onerror="this.style.display='none'">
-            <div class="pub-text"><a href="https://scholar.google.com/scholar?q=%22Revue+Africaine+et+Malgache+de+Recherche%22+2023" target="_blank" rel="noopener">Article.</a> <em>Revue Africaine et Malgache de Recherche</em>, 2023.</div>
+            <div class="pub-text">Article. <em>Revue Africaine et Malgache de Recherche</em>, 2023.</div>
           </div>
           <div class="pub-entry">
             <img src="images/book_covers/rawls_handbuch.jpeg" alt="Rawls-Handbuch" onerror="this.style.display='none'">
-            <div class="pub-text"><a href="https://www.metzler.de/" target="_blank" rel="noopener">Chapter in <em>Rawls-Handbuch</em></a>. Metzler, 2023.</div>
+            <div class="pub-text">Chapter in <em>Rawls-Handbuch</em>. Metzler, 2023.</div>
           </div>
         </div>
       </div>
@@ -1469,16 +1633,16 @@ footer .footer-bottom img{height:22px;opacity:0.5}
           <div class="pub-cat-head">Articles &amp; Book Chapters</div>
           <div class="pub-entry">
             <img src="images/journal_covers/rejh20.jpg" alt="Journal cover" onerror="this.style.display='none'">
-            <div class="pub-text"><a href="https://scholar.google.com/scholar?q=%22Revue+Europ%C3%A9enne+de+Journalisme+et+d'Histoire%22+2022" target="_blank" rel="noopener">Article.</a> <em>Revue Européenne de Journalisme et d'Histoire</em>, 2022.</div>
+            <div class="pub-text">Article. <em>Revue Européenne de Journalisme et d'Histoire</em>, 2022.</div>
           </div>
           <div class="pub-entry">
             <img src="images/journal_covers/cr_current.jpg" alt="Journal cover" onerror="this.style.display='none'">
-            <div class="pub-text"><a href="https://www.tandfonline.com/toc/ucri20/current" target="_blank" rel="noopener">Article.</a> <em>Critical Review</em>, 2022.</div>
+            <div class="pub-text">Article. <em>Critical Review</em>, 2022.</div>
           </div>
           <div class="pub-cat-head">Blogs</div>
           <div class="pub-entry">
             <img src="images/journal_covers/blog-verf.png" alt="Blog" onerror="this.style.display='none'">
-            <div class="pub-text"><a href="https://verfassungsblog.de/" target="_blank" rel="noopener">Blog post.</a> <em>Verfassungsblog</em>, 2022.</div>
+            <div class="pub-text">Blog post. <em>Verfassungsblog</em>, 2022.</div>
           </div>
         </div>
       </div>
@@ -1493,7 +1657,7 @@ footer .footer-bottom img{height:22px;opacity:0.5}
           <div class="pub-cat-head">Books</div>
           <div class="pub-entry">
             <img src="images/book_covers/bk_abidjan.jpg" alt="Book cover" onerror="this.style.display='none'">
-            <div class="pub-text"><a href="https://www.aup.edu/" target="_blank" rel="noopener">Monograph.</a> AUP Press, 2021.</div>
+            <div class="pub-text">Monograph. AUP Press, 2021.</div>
           </div>
         </div>
       </div>
@@ -1508,12 +1672,12 @@ footer .footer-bottom img{height:22px;opacity:0.5}
           <div class="pub-cat-head">Books</div>
           <div class="pub-entry">
             <img src="images/book_covers/bk_dem_ed_globalized.jpg" alt="Democratic Education in a Globalized World" onerror="this.style.display='none'">
-            <div class="pub-text"><strong>Culp, J.</strong> 2019. <a href="https://www.routledge.com/" target="_blank" rel="noopener"><em>Democratic Education in a Globalized World</em></a>. Routledge.</div>
+            <div class="pub-text"><strong>Culp, J.</strong> 2019. <em>Democratic Education in a Globalized World</em>. Routledge.</div>
           </div>
           <div class="pub-cat-head">Articles</div>
           <div class="pub-entry">
             <img src="images/journal_covers/philosophy_public_issues.jpg" alt="Philosophy and Public Issues" onerror="this.style.display='none'">
-            <div class="pub-text"><a href="https://scholar.google.com/scholar?q=%22Philosophy+and+Public+Issues%22+2019" target="_blank" rel="noopener">Article.</a> <em>Philosophy &amp; Public Issues</em>, 2019.</div>
+            <div class="pub-text">Article. <em>Philosophy &amp; Public Issues</em>, 2019.</div>
           </div>
         </div>
       </div>
@@ -1528,11 +1692,11 @@ footer .footer-bottom img{height:22px;opacity:0.5}
           <div class="pub-cat-head">Books</div>
           <div class="pub-entry">
             <img src="images/book_covers/bk_thiers.jpg" alt="Adolphe Thiers" onerror="this.style.display='none'">
-            <div class="pub-text"><strong>Sawyer, S.W.</strong> 2018. <a href="https://press.uchicago.edu/" target="_blank" rel="noopener"><em>Demos Assembled: Democracy and the International Origins of the Modern State, 1840–1880</em></a>. University of Chicago Press.</div>
+            <div class="pub-text"><strong>Sawyer, S.W.</strong> 2018. <em>Demos Assembled: Democracy and the International Origins of the Modern State, 1840–1880</em>. University of Chicago Press.</div>
           </div>
           <div class="pub-entry">
             <img src="images/book_covers/bk_manuel.jpg" alt="Book cover" onerror="this.style.display='none'">
-            <div class="pub-text"><a href="https://www.armand-colin.com/" target="_blank" rel="noopener">Monograph.</a> Armand Colin, 2018.</div>
+            <div class="pub-text">Monograph. Armand Colin, 2018.</div>
           </div>
         </div>
       </div>
@@ -1690,7 +1854,7 @@ footer .footer-bottom img{height:22px;opacity:0.5}
     </div>
     <div class="partners-grid fade-in">
       <a href="https://www.thects.org/" target="_blank" rel="noopener" class="partner-card">
-        <img src="https://static1.squarespace.com/static/674fa793d7e68e3d37b51e28/t/67abca9d2c4a0c05ca75dc07/1739311773653/CTS+Logo+Social+Media.png?format=1500w" alt="Center for Transcultural Studies">
+        <img src="images/partnerships/cts.webp" alt="Center for Transcultural Studies">
         <div>
           <div class="pc-name">Center for Transcultural Studies</div>
           <div class="pc-url">thects.org · Chicago</div>
@@ -1796,15 +1960,531 @@ footer .footer-bottom img{height:22px;opacity:0.5}
       <p class="intro">178 academic events organized since the Center's founding, spanning seminar series, book launches, international conferences, and thematic lectures.</p>
     </div>
 
-    <div style="margin-top:48px">
-      <span class="section-label" style="margin-bottom:16px">Highlights · Featured Conferences & Symposia</span>
-      <div id="highlights-container" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;margin-bottom:60px;background:#f5f3f0;padding:32px;border-radius:6px;border:1px solid #e8e5de">
+    <div class="events-summary fade-in">
+      <div class="ev-sum-item"><div class="n">71</div><div class="l">Thematic Lectures<br>&amp; Seminars</div></div>
+      <div class="ev-sum-item"><div class="n">52</div><div class="l">Sessions in<br>Seminar Series</div></div>
+      <div class="ev-sum-item"><div class="n">33</div><div class="l">Book Launches<br>&amp; Talks</div></div>
+      <div class="ev-sum-item"><div class="n">22</div><div class="l">Conferences<br>&amp; Symposia</div></div>
+    </div>
+
+    <div class="ev-big fade-in">
+      <div class="n">178</div>
+      <div class="l">total academic events · 2016–2026</div>
+    </div>
+
+    <figure class="chart-figure fade-in">
+      <img src="charts_large/01_events_per_year.png" alt="Events per year 2016–2026">
+    </figure>
+    <figure class="chart-figure fade-in">
+      <img src="charts_large/02_events_by_type_treemap.png" alt="Events by type">
+      <figcaption>Events by type, 2016–2026.</figcaption>
+    </figure>
+
+    <!-- Events Search -->
+    <div style="margin-top:52px" class="fade-in">
+      <span class="section-label" style="margin-bottom:16px">Search All Events</span>
+      <div class="events-search-container">
+        <div class="pub-search-bar">
+          <input type="text" id="eventSearchInput" placeholder="Search by title, speakers, keywords, year..." class="pub-search-input">
+        </div>
+        <div class="pub-filters">
+          <div class="filter-group">
+            <label class="filter-label">Type:</label>
+            <select id="eventTypeFilter" class="filter-select">
+              <option value="">All Types</option>
+              <option value="conference">Conferences</option>
+              <option value="symposium">Symposia</option>
+              <option value="seminar">Seminars</option>
+              <option value="workshop">Workshops</option>
+              <option value="lecture">Lectures</option>
+              <option value="panel">Panels</option>
+              <option value="talk">Talks</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label class="filter-label">Year:</label>
+            <select id="eventYearFilter" class="filter-select">
+              <option value="">All Years</option>
+              <option value="2026">2026</option>
+              <option value="2025">2025</option>
+              <option value="2024">2024</option>
+              <option value="2023">2023</option>
+              <option value="2022">2022</option>
+              <option value="2021">2021</option>
+              <option value="2020">2020</option>
+              <option value="2019">2019</option>
+            </select>
+          </div>
+          <button id="eventFilterReset" class="filter-reset">Reset Filters</button>
+        </div>
+        <div class="pub-search-results">
+          <div class="search-status" id="eventSearchStatus" style="font-family:var(--sans);font-size:0.9rem;color:var(--muted);font-style:italic;"></div>
+        </div>
       </div>
     </div>
 
+    <!-- Events Results Grid -->
+    <div id="eventsResultsContainer" style="display:none;margin-top:40px">
+      <span class="section-label" style="margin-bottom:16px">Search Results</span>
+      <div id="eventsSearchResults" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;margin-bottom:40px"></div>
+    </div>
+
+    <div style="margin-top:48px">
+      <span class="section-label" style="margin-bottom:16px">Featured Events</span>
+      <div class="events-gallery fade-in">
+        <div class="ev-item clickable" data-modal="event-0">
+          <img src="images/highlights/franco_american_poster.jpg" alt="Franco-American Relations" onerror="this.src='images/ccds_booklet/image13.jpeg'">
+          <div class="ev-overlay">
+            <div class="ev-count">27</div>
+            <div class="ev-count-lbl">speakers</div>
+            <div class="ev-title">A Quarter-Millennium of Franco-American Relations</div>
+            <div class="ev-date">May 2026 · Upcoming</div>
+          </div>
+        </div>
+        <div class="ev-item clickable" data-modal="event-1">
+          <img src="images/ccds_booklet/image13.jpeg" alt="Rousseau Journée">
+          <div class="ev-overlay">
+            <div class="ev-count">5</div>
+            <div class="ev-count-lbl">speakers</div>
+            <div class="ev-title">Journée d'Étude: Rousseau · Nouvelles Perspectives</div>
+            <div class="ev-date">March 2026</div>
+          </div>
+        </div>
+        <div class="ev-item clickable" data-modal="event-2">
+          <img src="images/ccds_booklet/image47.jpeg" alt="Democracy CoLab">
+          <div class="ev-overlay">
+            <div class="ev-count">14</div>
+            <div class="ev-count-lbl">speakers</div>
+            <div class="ev-title">Democracy CoLab: Care Democracy &amp; Everyday Extremism</div>
+            <div class="ev-date">February 2026</div>
+          </div>
+        </div>
+        <div class="ev-item clickable" data-modal="event-3">
+          <img src="images/ccds_booklet/image114.jpeg" alt="LSD Symposium">
+          <div class="ev-overlay">
+            <div class="ev-count">19</div>
+            <div class="ev-count-lbl">speakers</div>
+            <div class="ev-title">Law, State, and Democracy · International Symposium</div>
+            <div class="ev-date">December 2025</div>
+          </div>
+        </div>
+        <div class="ev-item clickable" data-modal="event-4">
+          <img src="images/ccds_booklet/image169.jpeg" alt="Autonomy and the Law">
+          <div class="ev-overlay">
+            <div class="ev-count">8</div>
+            <div class="ev-count-lbl">speakers</div>
+            <div class="ev-title">Autonomy and the Law</div>
+            <div class="ev-date">May 2025</div>
+          </div>
+        </div>
+        <div class="ev-item clickable" data-modal="event-5">
+          <img src="images/ccds_booklet/image225.jpeg" alt="Renewing the Social Contract">
+          <div class="ev-overlay">
+            <div class="ev-count">50</div>
+            <div class="ev-count-lbl">speakers</div>
+            <div class="ev-title">Renewing the Social Contract</div>
+            <div class="ev-date">December 2024</div>
+          </div>
+        </div>
+        <div class="ev-item clickable" data-modal="event-6">
+          <img src="images/ccds_booklet/image235.jpeg" alt="">
+          <div class="ev-overlay">
+            <div class="ev-count">1</div>
+            <div class="ev-count-lbl">speaker</div>
+            <div class="ev-title">The Law of International Society: A Road Not Taken</div>
+            <div class="ev-date">October 2024</div>
+          </div>
+        </div>
+        <div class="ev-item clickable" data-modal="event-7">
+          <img src="images/ccds_booklet/image244.jpeg" alt="Academic Freedom">
+          <div class="ev-overlay">
+            <div class="ev-count">6</div>
+            <div class="ev-count-lbl">speakers</div>
+            <div class="ev-title">Perspectives on Academic Freedom: USA &amp; Europe</div>
+            <div class="ev-date">May 2024</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Past events archive -->
     <div style="margin-top:64px">
-      <span class="section-label" style="margin-bottom:24px">Archive · All Events by Year</span>
-      <div id="events-container" style="margin-top:24px"></div>
+      <span class="section-label" style="margin-bottom:24px">Archive · Past Events by Year</span>
+
+      <!-- 2023 Events -->
+      <div class="pub-year-group">
+        <button class="pub-year-toggle open" onclick="toggleYear(this)">
+          <span class="yr">2023</span>
+          <span class="count">5 events <span class="arrow">▾</span></span>
+        </button>
+        <div class="pub-year-body open">
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px">
+            <div class="past-ev-item" onclick="openEventModal('ev-2023-1')">
+              <img src="images/ccds_booklet/image292.jpeg" alt="Foucault">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Journée d'Études: Michel Foucault</div>
+                <div class="past-ev-date">December 2023 · 6 speakers</div>
+              </div>
+            </div>
+            <div class="past-ev-item" onclick="openEventModal('ev-2023-2')">
+              <img src="images/ccds_booklet/image306.jpg" alt="Violent Turns">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Violent Turns: Sources, Interpretations, Responses</div>
+                <div class="past-ev-date">June 2023 · 75 speakers</div>
+              </div>
+            </div>
+            <div class="past-ev-item" onclick="openEventModal('ev-2023-3')">
+              <img src="images/ccds_booklet/image309.jpg" alt="Tocqueville 2023">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Tocqueville Colloque 2023: Autocratie vs. Démocratie?</div>
+                <div class="past-ev-date">June 2023 · 18 speakers</div>
+              </div>
+            </div>
+            <div class="past-ev-item" onclick="openEventModal('ev-2023-4')">
+              <img src="images/ccds_booklet/american_developmental_state.jpg" alt="American Developmental State">
+              <div class="past-ev-info">
+                <div class="past-ev-title">The American Developmental State</div>
+                <div class="past-ev-date">May 2023 · 36 speakers</div>
+              </div>
+            </div>
+            <div class="past-ev-item" onclick="openEventModal('ev-2023-5')">
+              <img src="images/ccds_booklet/image307.jpg" alt="Liberal Democracy">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Liberal Democracy and Its Challenges</div>
+                <div class="past-ev-date">June 2023 · 8 speakers</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2022 Events -->
+      <div class="pub-year-group" style="margin-top:24px">
+        <button class="pub-year-toggle" onclick="toggleYear(this)">
+          <span class="yr">2022</span>
+          <span class="count">1 event <span class="arrow">▶</span></span>
+        </button>
+        <div class="pub-year-body">
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px">
+            <div class="past-ev-item" onclick="openEventModal('ev-2022-1')">
+              <img src="images/ccds_booklet/image392.jpeg" alt="D.Rad Symposium">
+              <div class="past-ev-info">
+                <div class="past-ev-title">D.Rad Symposium: Trends of Radicalization</div>
+                <div class="past-ev-date">December 2021 · 15 speakers</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2021 Events -->
+      <div class="pub-year-group" style="margin-top:24px">
+        <button class="pub-year-toggle" onclick="toggleYear(this)">
+          <span class="yr">2021</span>
+          <span class="count">1 event <span class="arrow">▶</span></span>
+        </button>
+        <div class="pub-year-body">
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px">
+            <div class="past-ev-item" onclick="openEventModal('ev-2021-1')">
+              <img src="images/ccds_booklet/hl_demos21_balibar.jpeg" alt="Demos21 Balibar">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Demos21 · Balibar: "What Demos for the 21st Century?"</div>
+                <div class="past-ev-date">December 2020 – April 2022 · 23 sessions</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2020 Events -->
+      <div class="pub-year-group" style="margin-top:24px">
+        <button class="pub-year-toggle" onclick="toggleYear(this)">
+          <span class="yr">2020</span>
+          <span class="count">5 events <span class="arrow">▶</span></span>
+        </button>
+        <div class="pub-year-body">
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px">
+            <div class="past-ev-item" onclick="openEventModal('ev-2020-1')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Gilles Marmasse: "L'homme dans l'État selon Hegel"</div>
+                <div class="past-ev-date">December 10, 2020</div>
+              </div>
+            </div>
+            <div class="past-ev-item" onclick="openEventModal('ev-2020-2')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Frank Ruda: "The Excluded and Grotesque Sovereigns"</div>
+                <div class="past-ev-date">December 3, 2020</div>
+              </div>
+            </div>
+            <div class="past-ev-item" onclick="openEventModal('ev-2020-3')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Philip Golub: "Towards a Multipolar World?"</div>
+                <div class="past-ev-date">December 3, 2020</div>
+              </div>
+            </div>
+            <div class="past-ev-item" onclick="openEventModal('ev-2020-4')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Can We Learn Democracy? Transnational Perspectives</div>
+                <div class="past-ev-date">November 25-27, 2020 · 15 speakers</div>
+              </div>
+            </div>
+            <div class="past-ev-item" onclick="openEventModal('ev-2020-5')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Well-being / Bien-être Conference</div>
+                <div class="past-ev-date">October 21-22, 2020 · 16 speakers</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2019 Events -->
+      <div class="pub-year-group" style="margin-top:24px">
+        <button class="pub-year-toggle" onclick="toggleYear(this)">
+          <span class="yr">2019</span>
+          <span class="count">3 events <span class="arrow">▶</span></span>
+        </button>
+        <div class="pub-year-body">
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px">
+            <div class="past-ev-item" onclick="openEventModal('ev-2019-1')">
+              <img src="images/ccds_booklet/hl_paris_centennial.jpeg" alt="Paris Centennial">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Paris Centennial Conference: 1919 Peace Conference</div>
+                <div class="past-ev-date">May 23-26, 2019 · 28 speakers</div>
+              </div>
+            </div>
+            <div class="past-ev-item" onclick="openEventModal('ev-2019-2')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Rob Reich: "Just Giving: Why Philanthropy is Failing Democracy"</div>
+                <div class="past-ev-date">April 3, 2019</div>
+              </div>
+            </div>
+            <div class="past-ev-item" onclick="openEventModal('ev-2019-3')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Theodore Lechterman: "Famine, Affluence, and Democracy"</div>
+                <div class="past-ev-date">February 25, 2019</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2018 Events -->
+      <div class="pub-year-group" style="margin-top:24px">
+        <button class="pub-year-toggle" onclick="toggleYear(this)">
+          <span class="yr">2018</span>
+          <span class="count">4 events <span class="arrow">▶</span></span>
+        </button>
+        <div class="pub-year-body">
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px">
+            <div class="past-ev-item" onclick="openEventModal('ev-2018-1')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Global Justice in and Through Education</div>
+                <div class="past-ev-date">November 29-30, 2018 · 6 speakers</div>
+              </div>
+            </div>
+            <div class="past-ev-item" onclick="openEventModal('ev-2018-2')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Mai 68 Conference</div>
+                <div class="past-ev-date">June 9, 2018 · 12 speakers</div>
+              </div>
+            </div>
+            <div class="past-ev-item" onclick="openEventModal('ev-2018-3')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Political Transitions and Federal Projects</div>
+                <div class="past-ev-date">May 24, 2018 · 10 speakers</div>
+              </div>
+            </div>
+            <div class="past-ev-item" onclick="openEventModal('ev-2018-4')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Trump: Year One</div>
+                <div class="past-ev-date">January 19, 2018 · 12 speakers</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2017 Events -->
+      <div class="pub-year-group" style="margin-top:24px">
+        <button class="pub-year-toggle" onclick="toggleYear(this)">
+          <span class="yr">2017</span>
+          <span class="count">5 events <span class="arrow">▶</span></span>
+        </button>
+        <div class="pub-year-body">
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px">
+            <div class="past-ev-item" onclick="openEventModal('ev-2017-1')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Généalogies de l'État, avec et après Foucault</div>
+                <div class="past-ev-date">September 29, 2017</div>
+              </div>
+            </div>
+            <div class="past-ev-item" onclick="openEventModal('ev-2017-2')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Democracy and the Political: Raymond Aron Beyond the Hexagon</div>
+                <div class="past-ev-date">May 5-6, 2017</div>
+              </div>
+            </div>
+            <div class="past-ev-item" onclick="openEventModal('ev-2017-3')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Impasse & Genre in American Politics and Literature</div>
+                <div class="past-ev-date">April 26, 2017</div>
+              </div>
+            </div>
+            <div class="past-ev-item" onclick="openEventModal('ev-2017-4')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">"Notre Président est une Présidente": Populism & Gender</div>
+                <div class="past-ev-date">April 19, 2017</div>
+              </div>
+            </div>
+            <div class="past-ev-item" onclick="openEventModal('ev-2017-5')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Owen Jones Speaks at AUP</div>
+                <div class="past-ev-date">February 28, 2017</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2016 Events -->
+      <div class="pub-year-group" style="margin-top:24px">
+        <button class="pub-year-toggle" onclick="toggleYear(this)">
+          <span class="yr">2016</span>
+          <span class="count">8 events <span class="arrow">▶</span></span>
+        </button>
+        <div class="pub-year-body">
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px">
+            <div class="past-ev-item" onclick="openEventModal('ev-2016-1')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Justice Stephen Breyer at AUP</div>
+                <div class="past-ev-date">May 3, 2016</div>
+              </div>
+            </div>
+            <div class="past-ev-item" onclick="openEventModal('ev-2016-2')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Ta-Nehisi Coates - Black History Month</div>
+                <div class="past-ev-date">February 16, 2016</div>
+              </div>
+            </div>
+            <div class="past-ev-item" onclick="openEventModal('ev-2016-3')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Thomas Piketty Conference on Inequality</div>
+                <div class="past-ev-date">January 21, 2016</div>
+              </div>
+            </div>
+            <div class="past-ev-item" onclick="openEventModal('ev-2016-4')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">"Forging a New South Empire"</div>
+                <div class="past-ev-date">March 21, 2016</div>
+              </div>
+            </div>
+            <div class="past-ev-item" onclick="openEventModal('ev-2016-5')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Thomas Chatterton Williams - Black History Month</div>
+                <div class="past-ev-date">February 15, 2016</div>
+              </div>
+            </div>
+            <div class="past-ev-item" onclick="openEventModal('ev-2016-6')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Dror Ladin: ACLU Lawyer Discussion</div>
+                <div class="past-ev-date">December 5, 2016</div>
+              </div>
+            </div>
+            <div class="past-ev-item" onclick="openEventModal('ev-2016-7')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Foucault and Neoliberalism</div>
+                <div class="past-ev-date">March 25, 2016</div>
+              </div>
+            </div>
+            <div class="past-ev-item" onclick="openEventModal('ev-2016-8')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Inequalities Conference: Piketty & Goldhammer</div>
+                <div class="past-ev-date">February 5, 2016</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2015 Events -->
+      <div class="pub-year-group" style="margin-top:24px">
+        <button class="pub-year-toggle" onclick="toggleYear(this)">
+          <span class="yr">2015</span>
+          <span class="count">1 event <span class="arrow">▶</span></span>
+        </button>
+        <div class="pub-year-body">
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px">
+            <div class="past-ev-item" onclick="openEventModal('ev-2015-1')">
+              <div class="past-ev-info">
+                <div class="past-ev-title">Civic Jazz: Music & Democracy Launch Event</div>
+                <div class="past-ev-date">October 23, 2015 · CCDS Launch</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Event Details Modal -->
+    <div class="event-modal" id="eventModal" onclick="closeEventModal(event)">
+      <div class="event-modal-content" onclick="event.stopPropagation()">
+        <div class="event-modal-header">
+          <div>
+            <div class="event-modal-title" id="eventTitle"></div>
+          </div>
+          <button class="event-modal-close" onclick="closeEventModal()">&times;</button>
+        </div>
+        <div class="event-modal-body">
+          <div class="event-meta">
+            <div class="event-meta-item">
+              <span class="event-meta-label">Date & Duration</span>
+              <div class="event-meta-value" id="eventDate"></div>
+            </div>
+            <div class="event-meta-item">
+              <span class="event-meta-label">Participants</span>
+              <div class="event-meta-value" id="eventParticipants"></div>
+            </div>
+          </div>
+          <div class="event-description" id="eventDescription"></div>
+          <div class="event-themes">
+            <div class="event-themes-title">Key Themes</div>
+            <div class="event-theme-list" id="eventThemes"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Seminar series -->
+    <div style="margin-top:52px" class="fade-in">
+      <span class="section-label" style="margin-bottom:16px">Recurring Seminar Series</span>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+        <div class="seminar-card" onclick="openSeminarModal('demos21')" style="background:#fff;border:1px solid var(--rule);padding:20px;border-radius:3px;cursor:pointer;transition:all 0.3s ease">
+          <div style="font-family:var(--sans);font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:4px">Demos 21</div>
+          <div style="font-family:var(--sans);font-size:1.5rem;font-weight:700;color:var(--red)">23</div>
+          <div style="font-family:var(--sans);font-size:0.72rem;color:var(--muted)">sessions</div>
+        </div>
+        <div class="seminar-card" onclick="openSeminarModal('care')" style="background:#fff;border:1px solid var(--rule);padding:20px;border-radius:3px;cursor:pointer;transition:all 0.3s ease">
+          <div style="font-family:var(--sans);font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:4px">Care &amp; Democracy</div>
+          <div style="font-family:var(--sans);font-size:1.5rem;font-weight:700;color:var(--red)">14</div>
+          <div style="font-family:var(--sans);font-size:0.72rem;color:var(--muted)">sessions</div>
+        </div>
+        <div class="seminar-card" onclick="openSeminarModal('upel')" style="background:#fff;border:1px solid var(--rule);padding:20px;border-radius:3px;cursor:pointer;transition:all 0.3s ease">
+          <div style="font-family:var(--sans);font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:4px">UPEL</div>
+          <div style="font-family:var(--sans);font-size:1.5rem;font-weight:700;color:var(--red)">7</div>
+          <div style="font-family:var(--sans);font-size:0.72rem;color:var(--muted)">sessions</div>
+        </div>
+        <div class="seminar-card" onclick="openSeminarModal('soulevements')" style="background:#fff;border:1px solid var(--rule);padding:20px;border-radius:3px;cursor:pointer;transition:all 0.3s ease">
+          <div style="font-family:var(--sans);font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:4px">Soulèvements ou Révolutions</div>
+          <div style="font-family:var(--sans);font-size:1.5rem;font-weight:700;color:var(--red)">5</div>
+          <div style="font-family:var(--sans);font-size:0.72rem;color:var(--muted)">sessions</div>
+        </div>
+        <div class="seminar-card" onclick="openSeminarModal('theory101')" style="background:#fff;border:1px solid var(--rule);padding:20px;border-radius:3px;cursor:pointer;transition:all 0.3s ease">
+          <div style="font-family:var(--sans);font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:4px">Critical Theory 101</div>
+          <div style="font-family:var(--sans);font-size:1.5rem;font-weight:700;color:var(--red)">3</div>
+          <div style="font-family:var(--sans);font-size:0.72rem;color:var(--muted)">sessions</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1922,24 +2602,24 @@ footer .footer-bottom img{height:22px;opacity:0.5}
    EVENTS DATABASE · All 178 CCDS Events
    ════════════════════════════════════════════════════════════ */
 const EVENTS = {
-  'ev-2026-1': { title: 'International Conference: A Quarter-Millennium of Franco-American Relations', date: 'May 28–29, 2026', type: 'conference', speakers: 27, keywords: 'international conference: a quarter-millennium', desc: 'Contributors: Yohanna Alimi-Levy (Reichman University), Catherine Audard (LSE), Nicolas Barreyre (EHESS), David Bell (Pr' },
+  'ev-2026-1': { title: 'International Conference: A Quarter-Millennium of Franco-American Relations', date: 'May 28–29, 2026', type: 'conference', speakers: 1, keywords: 'international conference: a quarter-millennium', desc: 'Contributors: Yohanna Alimi-Levy (Reichman University), Catherine Audard (LSE), Nicolas Barreyre (EHESS), David Bell (Pr' },
   'ev-2026-2': { title: 'Care and Ecology', date: 'May 28, 2026', type: 'seminar', speakers: 1, keywords: 'care and ecology', desc: 'Catherine Larrère (Université Paris 1 Panthéon-Sorbonne). Organizers: Zona Zarić (IFDT, AUP), Sandra Laugier (Université' },
   'ev-2026-3': { title: 'Duncan Kelly, "Worlds of Wartime: The First World War and the Reconstruction of Modern Politics" (', date: 'April 21, 2026', type: 'talk', speakers: 1, keywords: 'duncan kelly, "worlds of', desc: 'Presentation: Duncan Kelly (University of Cambridge)' },
   'ev-2026-4': { title: 'Care and Vulnerability in Prison', date: 'April 16, 2026', type: 'seminar', speakers: 1, keywords: 'care and vulnerability in', desc: 'Thibault Collin (Université Paris-Cité), Youssef Rhnima (OIP-SF), Hannah Taieb (AUP). Organizers: Zona Zarić (IFDT, AUP)' },
   'ev-2026-5': { title: 'Natasha Wunsch, "Democratic Commitment: Why Citizens Tolerate Democratic Backsliding" (OUP, 2025)', date: 'April 13, 2026', type: 'talk', speakers: 1, keywords: 'natasha wunsch, "democratic commitment:', desc: 'Presentation: Natasha Wunsch (University of Fribourg). Commentary: Julian Culp (AUP)' },
   'ev-2026-6': { title: 'Luke Ulaş, "Being Cosmopolitan: A Political Approach" (OUP, 2025)', date: 'April 9, 2026', type: 'talk', speakers: 1, keywords: 'luke ulaş, "being cosmopolitan:', desc: 'Presentation: Luke Ulaş (University of Sheffield)' },
   'ev-2026-7': { title: 'The Law Laid Bare: German Jurists and the Search for Life', date: 'April 3, 2026', type: 'seminar', speakers: 1, keywords: 'the law laid bare:', desc: 'Katharina Isabel Schmidt (Max Planck Institute)' },
-  'ev-2026-8': { title: 'La Philosophie Politique de Rousseau: Nouvelles Perspectives', date: 'March 26, 2026', type: 'seminar', speakers: 5, keywords: 'la philosophie politique de', desc: 'Contributors: Geneviève Rousselière (Duke), Arthur Ghins (ULB), Samuel Hayat (Sciences Po Paris), Stephen Sawyer (AUP) &' },
+  'ev-2026-8': { title: 'La Philosophie Politique de Rousseau: Nouvelles Perspectives', date: 'March 26, 2026', type: 'seminar', speakers: 1, keywords: 'la philosophie politique de', desc: 'Contributors: Geneviève Rousselière (Duke), Arthur Ghins (ULB), Samuel Hayat (Sciences Po Paris), Stephen Sawyer (AUP) &' },
   'ev-2026-9': { title: '"Climate Justice Now: Crossing Disciplines to Combat Our Planetary Crisis"', date: 'March 25, 2026', type: 'talk', speakers: 1, keywords: '"climate justice now: crossing', desc: 'Presentation: Rebecca Marwege (AUP), Julia Lajus (Helsinki Collegium for Advanced Studies). Commentary: Elena Berg (AUP)' },
   'ev-2026-10': { title: 'New Masculinities and Care', date: 'March 19, 2026', type: 'seminar', speakers: 1, keywords: 'new masculinities and care', desc: 'Juliet A. Williams (UCLA). Organizers: Zona Zarić (IFDT, AUP), Sandra Laugier (Université Paris 1 Panthéon-Sorbonne).' },
   'ev-2026-11': { title: 'Is a Genuinely Caring Society a Democracy?', date: 'February 19, 2026', type: 'seminar', speakers: 1, keywords: 'is a genuinely caring', desc: 'Estelle Ferrarese (Université de Picardie Jules Verne). Organizers: Zona Zarić (IFDT, AUP), Sandra Laugier (Université P' },
   'ev-2026-12': { title: 'What Can Citizen Deliberation Mechanisms Do in Times of Democratic Backsliding?', date: 'February 12, 2026', type: 'seminar', speakers: 1, keywords: 'what can citizen deliberation', desc: 'Aliénor Ballangé (Paris Institute for Advanced Study)' },
-  'ev-2026-13': { title: 'Democracy CoLab: Care Democracy & Rising to the Challenge of Everyday Extremism', date: 'February 5–6, 2026', type: 'seminar', speakers: 14, keywords: 'democracy colab: care democracy', desc: 'Contributors: Stephen W. Sawyer (AUP), Zona Zarić (AUP), Sandra Obradović (LSE), Adelina Hasani (Kosovar Center for Secu' },
+  'ev-2026-13': { title: 'Democracy CoLab: Care Democracy & Rising to the Challenge of Everyday Extremism', date: 'February 5–6, 2026', type: 'seminar', speakers: 1, keywords: 'democracy colab: care democracy', desc: 'Contributors: Stephen W. Sawyer (AUP), Zona Zarić (AUP), Sandra Obradović (LSE), Adelina Hasani (Kosovar Center for Secu' },
   'ev-2026-14': { title: 'Stephen W. Sawyer, "Demos Rising: Democracy and the Popular Construction of Public Power in France,', date: 'February 2, 2026', type: 'talk', speakers: 1, keywords: 'stephen w. sawyer, "demos', desc: 'Presentation: Stephen W. Sawyer (AUP). Commentary: Hayley Hooper (University of Oxford), Geneviève Rousselière (Duke Uni' },
   'ev-2026-15': { title: 'Up and Down: Nouveaux Enjeux dans la Lutte pour la Démocratie', date: 'January 29, 2026', type: 'seminar', speakers: 1, keywords: 'up and down: nouveaux', desc: 'Barbara Szaniecki (Escola Superior de Desenho Industrial) & Giuseppe Cocco (Federal U of Rio de Janeiro). Organizers: Zo' },
   'ev-2026-16': { title: 'Miranda Spieler, "Slaves in Paris: Hidden Lives and Fugitive Histories" (Harvard UP, 2025)', date: 'January 14, 2026', type: 'talk', speakers: 1, keywords: 'miranda spieler, "slaves in', desc: 'Presentation: Miranda Spieler (AUP). Commentary: Anne Lafont (EHESS), Pierre Singaravélou (Paris 1 Panthéon-Sorbonne) & ' },
   'ev-2025-1': { title: 'Lutter Contre la Verticalité, un Vœu Pieux?', date: 'December 11, 2025', type: 'seminar', speakers: 1, keywords: 'lutter contre la verticalité,', desc: 'Pascal Molinier (EHESP). Organizers: Zona Zarić (IFDT, AUP), Sandra Laugier (Université Paris 1 Panthéon-Sorbonne).' },
-  'ev-2025-2': { title: 'Law, State, and Democracy', date: 'December 11–12, 2025', type: 'conference', speakers: 19, keywords: 'law, state, and democracy', desc: 'Contributors: Roberto Breña (El Colegio de México), Craig Calhoun (Arizona State U), Chiara Cordelli (U of Chicago), Bla' },
+  'ev-2025-2': { title: 'Law, State, and Democracy', date: 'December 11–12, 2025', type: 'conference', speakers: 1, keywords: 'law, state, and democracy', desc: 'Contributors: Roberto Breña (El Colegio de México), Craig Calhoun (Arizona State U), Chiara Cordelli (U of Chicago), Bla' },
   'ev-2025-3': { title: 'Digitally Mediated Intersubjectivities and the Public Sphere: Ambivalent Democratic & Authoritarian ', date: 'December 4, 2025', type: 'seminar', speakers: 1, keywords: 'digitally mediated intersubjectivities and', desc: 'Ricardo Gonçalves (Freie Universität Berlin)' },
   'ev-2025-4': { title: 'Care and the Social Contract: Toward a Reconstructive Critique of the Modern', date: 'November 20, 2025', type: 'seminar', speakers: 1, keywords: 'care and the social', desc: 'Stephen W. Sawyer (AUP). Organizers: Zona Zarić (IFDT, AUP), Sandra Laugier (Université Paris 1 Panthéon-Sorbonne).' },
   'ev-2025-5': { title: 'Thinking Democracy After Marx and Empire', date: 'November 3, 2025', type: 'seminar', speakers: 1, keywords: 'thinking democracy after marx', desc: 'Iain Stewart (UCL)' },
@@ -1952,7 +2632,7 @@ const EVENTS = {
   'ev-2025-12': { title: 'Exploring Autonomy of Cities', date: 'June 12, 2025', type: 'conference', speakers: 1, keywords: 'exploring autonomy of cities', desc: 'Contributors: Nir Barak (Ben Gurion University), Bartosz Biskup (Université de Tours), Oskar Steiner (CEE, Sciences Po P' },
   'ev-2025-13': { title: '"Nancy Fraser and Politics"', date: 'May 26, 2025', type: 'talk', speakers: 1, keywords: '"nancy fraser and politics"', desc: 'Contributors: Nancy Fraser (The New School), Eli Zaretsky (The New School), Estelle Ferrarese (Université de Picardie Ju' },
   'ev-2025-14': { title: 'Politics of Care: Feminist Approaches to Rethinking Communality as a Critique of Neoliberalism', date: 'May 22, 2025', type: 'seminar', speakers: 1, keywords: 'politics of care: feminist', desc: 'Valentina Moro (Stony Brook University). Organizers: Zona Zarić (IFDT, AUP), Sandra Laugier (Université Paris 1 Panthéon' },
-  'ev-2025-15': { title: 'Autonomy and the Law: International Workshop', date: 'May 13, 2025', type: 'workshop', speakers: 8, keywords: 'autonomy and the law:', desc: 'Contributors: Marc Goetzmann (Université de Tours), Oriane Roty (Université de Tours), Bartosz Biskup (Université de Tou' },
+  'ev-2025-15': { title: 'Autonomy and the Law: International Workshop', date: 'May 13, 2025', type: 'workshop', speakers: 1, keywords: 'autonomy and the law:', desc: 'Contributors: Marc Goetzmann (Université de Tours), Oriane Roty (Université de Tours), Bartosz Biskup (Université de Tou' },
   'ev-2025-16': { title: 'Mainstreaming the Far Right: How Far-Right Actors and Ideas Shape Public Debates', date: 'April 18, 2025', type: 'seminar', speakers: 1, keywords: 'mainstreaming the far right:', desc: 'Presentation: Teresa Völker (WZB Berlin Social Science Center). Commentary: Friederike Windel (AUP)' },
   'ev-2025-17': { title: 'Peter Weiss, "The Aesthetics of Resistance (Vol. III)" (Joel Scott, trans., Duke UP, 2025)', date: 'April 4, 2025', type: 'talk', speakers: 1, keywords: 'peter weiss, "the aesthetics', desc: 'Contributors: Joel Scott & Charlotte Thiessen' },
   'ev-2025-18': { title: 'Claudia Wiesner, "Politicization, Democratization and EU Identity: National EU Discourses in German', date: 'April 3, 2025', type: 'talk', speakers: 1, keywords: 'claudia wiesner, "politicization, democratization', desc: 'Presentation: Claudia Wiesner (Fulda University of Applied Sciences). Commentary: Mirjam Dageförde (AUP)' },
@@ -1965,14 +2645,14 @@ const EVENTS = {
   'ev-2025-25': { title: 'Progress (Future Directions and New Challenges)', date: 'February 4, 2025', type: 'talk', speakers: 1, keywords: 'progress (future directions and', desc: 'Rahel Jaeggi (Humboldt University Berlin)' },
   'ev-2025-26': { title: 'Repair, Redo, Maintain: Performance Art and Practice of Care', date: 'January 23, 2025', type: 'seminar', speakers: 1, keywords: 'repair, redo, maintain: performance', desc: 'Barbara Formis (Université Paris 1 Panthéon-Sorbonne). Organizers: Zona Zarić (IFDT, AUP), Sandra Laugier (Université Pa' },
   'ev-2025-27': { title: 'Pierre-Yves Néron, "Seeing Like a Firm: Social Justice, Corporations, and the Conservative Order" ', date: 'January 20, 2025', type: 'talk', speakers: 1, keywords: 'pierre-yves néron, "seeing like', desc: 'Presentation: Pierre-Yves Néron (ESPOL). Commentary: Peter Hägel (AUP), Sandrine Blanc (INSEEC), Morgane Delorme (Univer' },
-  'ev-2024-1': { title: 'Renewing the Social Contract: The Challenge of Inclusivity and Democratic Government in Social Contr', date: 'December 17, 2024', type: 'conference', speakers: 50, keywords: 'renewing the social contract:', desc: 'Keynotes: Myriam Hunter-Henin (UCL), Albert Weale (UCL). Organizers: Stephen Sawyer, Roman Zinigrad, Nathanaël Colin-Jae' },
+  'ev-2024-1': { title: 'Renewing the Social Contract: The Challenge of Inclusivity and Democratic Government in Social Contr', date: 'December 17, 2024', type: 'conference', speakers: 1, keywords: 'renewing the social contract:', desc: 'Keynotes: Myriam Hunter-Henin (UCL), Albert Weale (UCL). Organizers: Stephen Sawyer, Roman Zinigrad, Nathanaël Colin-Jae' },
   'ev-2024-2': { title: 'Alvita Akiboh, "Imperial Material: National Symbols in the US Colonial Empire" (UCP, 2023)', date: 'December 2, 2024', type: 'talk', speakers: 1, keywords: 'alvita akiboh, "imperial material:', desc: 'Presentation: Alvita Akiboh (Yale University). Commentary: Mariana Dias Paes (AUP), Gabrielle Guillerm (Sorbonne Univers' },
   'ev-2024-3': { title: 'Que Faire de Nos Attachements en Démocratie ?', date: 'November 7, 2024', type: 'seminar', speakers: 1, keywords: 'que faire de nos', desc: 'Fabienne Brugère (Université Paris 8 Vincennes-Saint-Denis). Organizers: Zona Zarić (IFDT, AUP), Sandra Laugier (Univers' },
   'ev-2024-4': { title: 'Three Faces of Capitalist Labor (Future Directions and New Challenges)', date: 'November 4, 2024', type: 'seminar', speakers: 1, keywords: 'three faces of capitalist', desc: 'Presentation: Nancy Fraser (The New School for Social Research). Moderation: Zona Zarić (AUP, IFDT). Co-organized with I' },
   'ev-2024-5': { title: 'The Silent Power: Federal Corporations as Constitutional Law', date: 'October 23, 2024', type: 'seminar', speakers: 1, keywords: 'the silent power: federal', desc: 'Caitlin Tully (NYU Law)' },
   'ev-2024-6': { title: 'L\'avenir de la Démocratie', date: 'October 17, 2024', type: 'seminar', speakers: 1, keywords: 'l\'avenir de la démocratie', desc: 'Clotilde Nouet (Mohammed VI Polytechnic University)' },
   'ev-2024-7': { title: 'Care and Democracy: Opening Session', date: 'October 10, 2024', type: 'seminar', speakers: 1, keywords: 'care and democracy: opening', desc: 'Sandra Laugier (Paris 1 Panthéon-Sorbonne) & Zona Zarić (AUP, IFDT)' },
-  'ev-2024-8': { title: 'The Law of International Society: A Road Not Taken', date: 'October 10, 2024', type: 'talk', speakers: 1, keywords: 'the law of international', desc: 'Presentation: Martti Koskenniemi (University of Helsinki). Moderator: Anne-Charlotte Martineau. Co-organizers: Delphine' },
+  'ev-2024-8': { title: 'The Law of International Society: A Road Not Taken', date: 'October 10, 2024', type: 'talk', speakers: 1, keywords: 'the law of international', desc: 'Presentation: Martti Koskenniemi (University of Helsinki). Moderator: Anne-Charlotte Martineau. Co-organizers: Delphine ' },
   'ev-2024-9': { title: 'Constitutional Overhaul and the War in Gaza: The Puzzle of Civic Mobilization in Israel', date: 'September 20, 2024', type: 'seminar', speakers: 1, keywords: 'constitutional overhaul and the', desc: 'Presentation: Adam Shinar (Reichman University). Commentary: Helena Alviar (Sciences Po Law School) & Liora Israël (EHES' },
   'ev-2024-10': { title: 'Julien Jeanneney, "American Fever: Selecting Supreme Court Justices" (CNRS Éditions)', date: 'September 19, 2024', type: 'talk', speakers: 1, keywords: 'julien jeanneney, "american fever:', desc: 'Presentation: Julien Jeanneney (University of Strasbourg). Commentary: Nicoletta Perlo (University of Burgundy) & Adam S' },
   'ev-2024-11': { title: 'Boycotting German and Germany: Artistic Censorship and the Creation of Israel (1948–1967)', date: 'September 16, 2024', type: 'seminar', speakers: 1, keywords: 'boycotting german and germany:', desc: 'Presentation: Adam Shinar (Reichman University). Commentary: Marcela Iacub (CNRS / EHESS) & Mariana Dias Paes (AUP)' },
@@ -1981,7 +2661,7 @@ const EVENTS = {
   'ev-2024-14': { title: 'One Step Forward, Two Steps Back: Postcolonialism and the West (Future Directions and New Challenges', date: 'June 13, 2024', type: 'talk', speakers: 1, keywords: 'one step forward, two', desc: 'Axel Honneth (Columbia University)' },
   'ev-2024-15': { title: 'Qu\'est-ce que la philosophie politique ? (Inaugural Lecture: L\'atelier de Théorie Politique Paris ', date: 'June 3, 2024', type: 'talk', speakers: 1, keywords: 'qu\'est-ce que la philosophie', desc: 'Presentation: Charles Larmore (Brown University). Organizers: Luc Foisneau, Patrick Savidan. Co-organized by CEVIPOF (Sc' },
   'ev-2024-16': { title: 'Increasing Accountability and Reducing Polarization Through Evaluative Voting', date: 'May 22, 2024', type: 'seminar', speakers: 1, keywords: 'increasing accountability and reducing', desc: 'Pierre Etienne Vandamme (UCLouvain)' },
-  'ev-2024-17': { title: 'Perspectives on Academic Freedom: USA & Europe', date: 'May 17, 2024', type: 'seminar', speakers: 6, keywords: 'perspectives on academic freedom:', desc: 'Keynote: Robert C. Post (Yale Law School). Panelists: Olivier Beaud (Paris 2 Panthéon-Assas), Eleonora Bottini (Universi' },
+  'ev-2024-17': { title: 'Perspectives on Academic Freedom: USA & Europe', date: 'May 17, 2024', type: 'seminar', speakers: 1, keywords: 'perspectives on academic freedom:', desc: 'Keynote: Robert C. Post (Yale Law School). Panelists: Olivier Beaud (Paris 2 Panthéon-Assas), Eleonora Bottini (Universi' },
   'ev-2024-18': { title: 'Darrin M. McMahon, "Equality: Reflections on the History of an Elusive Idea" (Basic Books, 2023)', date: 'April 30, 2024', type: 'talk', speakers: 1, keywords: 'darrin m. mcmahon, "equality:', desc: 'Presentation: Darrin M. McMahon (Dartmouth College)' },
   'ev-2024-19': { title: 'Anti Social Capital: Community Cohesion and Tax Avoidance among American Elites', date: 'April 15, 2024', type: 'seminar', speakers: 1, keywords: 'anti social capital: community', desc: 'Yossi Harpaz (Tel Aviv University)' },
   'ev-2024-20': { title: 'Darrel Moellendorf, "Mobilizing Hope: Climate Change and Global Poverty" (OUP, 2023)', date: 'April 12, 2024', type: 'talk', speakers: 1, keywords: 'darrel moellendorf, "mobilizing hope:', desc: 'Presentation: Darrel Moellendorf (Goethe University)' },
@@ -1998,12 +2678,8 @@ const EVENTS = {
   'ev-2024-31': { title: 'Jayson Harsin ed., "Re-thinking Mediations of Post-Truth Politics and Trust: Globality, Culture and', date: 'February 1, 2024', type: 'talk', speakers: 1, keywords: 'jayson harsin ed., "re-thinking', desc: 'Presentation: Jayson Harsin (AUP), Bilge Yesil (CUNY Graduate School), Hannah Westley (AUP). Commentary: François Allard' },
   'ev-2024-32': { title: 'Pouvoir Constituant or Pouvoirs Constitués ?', date: 'January 25, 2024', type: 'seminar', speakers: 1, keywords: 'pouvoir constituant or pouvoirs', desc: 'Stephen Sawyer (AUP) & Giuseppe Cocco (UFRJ, Brazil)' },
   'ev-2023-1': { title: 'Bernard E. Harcourt, "Economic, and Social Theory" (Columbia UP, 2023)', date: 'December 13, 2023', type: 'talk', speakers: 1, keywords: 'bernard e. harcourt, "economic,', desc: 'Presentation: Bernard E. Harcourt (Columbia University)' },
-  'ev-2023-2': { title: 'Études sur le Discours Philosophique de Michel Foucault', date: 'December 6, 2023', type: 'seminar', speakers: 6, keywords: 'études sur le discours', desc: 'Contributors: Bernard Aspe (La Division Politique), Michael Behrent (Appalachian State University), Daniele Lorenzini (U' },
+  'ev-2023-2': { title: 'Études sur le Discours Philosophique de Michel Foucault', date: 'December 6, 2023', type: 'seminar', speakers: 1, keywords: 'études sur le discours', desc: 'Contributors: Bernard Aspe (La Division Politique), Michael Behrent (Appalachian State University), Daniele Lorenzini (U' },
   'ev-2023-3': { title: '"Refusing to Be Silent: Engaged Conversations with Leading Intellectuals"Gazela Pudar Draško, Zona', date: 'November 20, 2023', type: 'talk', speakers: 1, keywords: '"refusing to be silent:', desc: 'Presentation: Gazela Pudar Draško (IFDT, Belgrade), Zona Zarić (AUP / IFDT), Éric Fassin (Paris 8) & Philip Golub (AUP)' },
-  'ev-2023-10': { title: 'Violent Turns: Sources, Interpretations, Responses', date: 'June 21–23, 2023', type: 'conference', speakers: 75, keywords: 'violent turns', desc: 'D.Rad International Conference' },
-  'ev-2023-11': { title: 'Liberal Democracy and Its Challenges for Education and for Political Science', date: 'June 9, 2023', type: 'seminar', speakers: 8, keywords: 'liberal democracy', desc: 'Contributors' },
-  'ev-2023-13': { title: 'Tocqueville Colloque 2023: Autocratie vs. Démocratie?', date: 'June 2–3, 2023', type: 'seminar', speakers: 18, keywords: 'tocqueville', desc: 'Colloque' },
-  'ev-2023-14': { title: 'The American Developmental State', date: 'May 25–26, 2023', type: 'conference', speakers: 36, keywords: 'american developmental state', desc: 'Conference' },
   'ev-2023-4': { title: 'From Utopia to Real Possibilities: How Can Critical Social Science Contribute to Political Strategy?', date: 'November 6, 2023', type: 'seminar', speakers: 1, keywords: 'from utopia to real', desc: 'Laurent Jeanpierre (Université Paris 1 Panthéon-Sorbonne)' },
   'ev-2023-5': { title: 'Quel avenir pour nos démocraties ?', date: 'October 26, 2023', type: 'seminar', speakers: 1, keywords: 'quel avenir pour nos', desc: 'Perrine Simon-Nahum (ENS-ULM)' },
   'ev-2023-6': { title: 'Solidarity in Polarized Times', date: 'October 11, 2023', type: 'seminar', speakers: 1, keywords: 'solidarity in polarized times', desc: 'Presentation: Isabelle Aubert (Panthéon-Sorbonne), Rainer Forst (Goethe-Universität)' },
@@ -2086,7 +2762,7 @@ const EVENTS = {
   'ev-2018-2': { title: 'Mai 68: Fifty Years On', date: 'June 9, 2018', type: 'conference', speakers: 1, keywords: 'mai 68: fifty years', desc: 'Organizers: Stephen Sawyer (AUP), Daniel Steinmetz-Jenkins (Yale University).' },
   'ev-2018-3': { title: 'Political Transitions and Federal Projects', date: 'May 23–25, 2018', type: 'conference', speakers: 1, keywords: 'political transitions and federal', desc: 'Co-organized by the CCDS, Sciences Po Paris, and University Paris Diderot. International conference exploring federalism' },
   'ev-2018-4': { title: 'Cultural Sharing Night', date: 'April 27, 2018', type: 'workshop', speakers: 1, keywords: 'cultural sharing night', desc: 'Student event on multiculturalism — sharing experiences adjusting to life in Paris.' },
-    'ev-2018-5': { title: 'Trump: Year One', date: 'January 19, 2018', type: 'conference', speakers: 1, keywords: 'trump: year one', desc: 'Co-organized by CERSA (Paris 2) and CCDS (AUP).' },
+  'ev-2018-5': {{ 'title': 'Trump: Year One', 'date': 'January 19, 2018', 'type': 'conference', 'speakers': 1, 'keywords': 'trump: year one', 'desc': 'Co-organized by CERSA (Paris 2) and CCDS (AUP).' }},
   'ev-2017-1': { title: 'Généalogies de l\'État, avec et après Foucault', date: 'September 29, 2017', type: 'conference', speakers: 1, keywords: 'généalogies de l\'état, avec', desc: 'Participants: Kaspar Villadsen (CBS), Carolina Verlengia (ENS Lyon), Eric Szulman (IDHES Paris I), Shira Havkin (CERI), ' },
   'ev-2017-2': { title: 'Democracy and the Political: Raymond Aron Beyond the Hexagon', date: 'May 5–6, 2017', type: 'conference', speakers: 1, keywords: 'democracy and the political:', desc: 'Organizers: Daniel Steinmetz-Jenkins, Stephen Sawyer.' },
   'ev-2017-3': { title: 'Impasse & Genre in American Politics and Literature', date: 'April 26, 2017', type: 'talk', speakers: 1, keywords: 'impasse & genre in', desc: 'George Shulman (NYU)' },
@@ -2099,466 +2775,9 @@ const EVENTS = {
   'ev-2016-5': { title: 'An Evening with Ta-Nehisi Coates', date: 'February 16, 2016', type: 'talk', speakers: 1, keywords: 'an evening with ta-nehisi', desc: 'Presentation: Ta-Nehisi Coates. Author of Between the World and Me (#1 NYT Bestseller, National Book Award). Moderation:' },
   'ev-2016-6': { title: 'An Evening with Thomas Chatterton Williams', date: 'February 15, 2016', type: 'talk', speakers: 1, keywords: 'an evening with thomas', desc: 'Thomas Chatterton Williams' },
   'ev-2016-7': { title: 'Inequalities', date: 'February 5–6, 2016', type: 'conference', speakers: 1, keywords: 'inequalities', desc: 'Speakers: Thomas Piketty, Arthur Goldhammer. Conference on The Economics of Inequality, appearing in English for the fir' },
-  'ev-2016-8': { title: 'Decoding the COP 21', date: 'January 21, 2016', type: 'seminar', speakers: 1, keywords: 'decoding the cop 21', desc: 'Expert speakers from UNEP, the French Senate, and the Fondation Nicolas Hulot.' },
-  'ev-2016-9': { title: 'Civic Jazz: A Conversation on American Music & Democracy — The Launch of the Center', date: 'October 23, 2015', type: 'conference', speakers: 1, keywords: 'civic jazz: a conversation', desc: 'Speakers: Gregory Clark (President, Rhetoric Society of America; author of Civic Jazz) and Marcus Roberts (Marcus Robert' },
+  'ev-2016-8': {{ 'title': 'Decoding the COP 21', 'date': 'January 21, 2016', 'type': 'seminar', 'speakers': 1, 'keywords': 'decoding the cop 21', 'desc': 'Expert speakers from UNEP, the French Senate, and the Fondation Nicolas Hulot.' }},
+  'ev-2016-9': {{ 'title': 'Civic Jazz: A Conversation on American Music & Democracy — The Launch of the Center', 'date': 'October 23, 2015', 'type': 'conference', 'speakers': 1, 'keywords': 'civic jazz: a conversation', 'desc': 'Speakers: Gregory Clark (President, Rhetoric Society of America; author of Civic Jazz) and Marcus Roberts (Marcus Robert' }},
 };
-
-const EVENT_POSTERS = {
-  'ev-2026-16': 'images/ccds_booklet/image105.jpeg',
-  'ev-2026-15': 'images/ccds_booklet/image104.jpeg',
-  'ev-2026-14': 'images/ccds_booklet/image48.jpeg',
-  'ev-2026-13': 'images/ccds_booklet/image47.jpeg',
-  'ev-2026-12': 'images/ccds_booklet/image46.jpeg',
-  'ev-2026-11': 'images/ccds_booklet/image45.jpeg',
-  'ev-2026-10': 'images/ccds_booklet/image44.jpeg',
-  'ev-2026-9': 'images/ccds_booklet/image14.jpeg',
-  'ev-2026-8': 'images/ccds_booklet/image13.jpeg',
-  'ev-2026-7': 'images/ccds_booklet/image1.jpeg',
-  'ev-2026-6': 'images/ccds_booklet/ulas_cosmopolitan.jpg',
-  'ev-2026-5': 'images/ccds_booklet/wunsch_democratic_commitment.jpg',
-  'ev-2026-4': 'images/ccds_booklet/taieb_care_vulnerability.jpg',
-  'ev-2026-3': 'images/ccds_booklet/kelly_worlds_wartime.jpg',
-  'ev-2026-2': 'images/ccds_booklet/larrere_care_ecology.jpg',
-  'ev-2026-1': 'images/ccds_booklet/franco_american_conference.jpg',
-  'ev-2025-26': 'images/ccds_booklet/image220.jpeg',
-  'ev-2025-24': 'images/ccds_booklet/image218.jpeg',
-  'ev-2025-22': 'images/ccds_booklet/image215.jpeg',
-  'ev-2025-21': 'images/ccds_booklet/image214.jpeg',
-  'ev-2025-20': 'images/ccds_booklet/image213.jpeg',
-  'ev-2025-19': 'images/ccds_booklet/image212.jpeg',
-  'ev-2025-16': 'images/ccds_booklet/image201.jpeg',
-  'ev-2025-15': 'images/ccds_booklet/image169.jpeg',
-  'ev-2025-14': 'images/ccds_booklet/image168.jpeg',
-  'ev-2025-13': 'images/ccds_booklet/image167.jpeg',
-  'ev-2025-12': 'images/ccds_booklet/image166.jpeg',
-  'ev-2025-11': 'images/ccds_booklet/image165.jpeg',
-  'ev-2025-10': 'images/ccds_booklet/image159.jpeg',
-  'ev-2025-9': 'images/ccds_booklet/image158.jpeg',
-  'ev-2025-8': 'images/ccds_booklet/image143.jpeg',
-  'ev-2025-7': 'images/ccds_booklet/image134.jpeg',
-  'ev-2025-6': 'images/ccds_booklet/image133.jpeg',
-  'ev-2025-5': 'images/ccds_booklet/image132.jpeg',
-  'ev-2025-4': 'images/ccds_booklet/image116.jpeg',
-  'ev-2025-3': 'images/ccds_booklet/image115.jpeg',
-  'ev-2025-2': 'images/ccds_booklet/image114.jpeg',
-  'ev-2025-1': 'images/ccds_booklet/image113.jpeg',
-  'ev-2024-22': 'images/ccds_booklet/image276.png',
-  'ev-2024-21': 'images/ccds_booklet/image275.jpg',
-  'ev-2024-19': 'images/ccds_booklet/image273.jpeg',
-  'ev-2024-17': 'images/ccds_booklet/image245.jpeg',
-  'ev-2024-16': 'images/ccds_booklet/image243.jpg',
-  'ev-2024-14': 'images/ccds_booklet/image241.jpg',
-  'ev-2024-13': 'images/ccds_booklet/image240.jpg',
-  'ev-2024-12': 'images/ccds_booklet/image239.jpg',
-  'ev-2024-11': 'images/ccds_booklet/image238.jpeg',
-  'ev-2024-9': 'images/ccds_booklet/image236.jpeg',
-  'ev-2024-8': 'images/ccds_booklet/image235.jpeg',
-  'ev-2024-7': 'images/ccds_booklet/image234.jpeg',
-  'ev-2024-5': 'images/ccds_booklet/image230.jpeg',
-  'ev-2024-4': 'images/ccds_booklet/image228.jpeg',
-  'ev-2024-3': 'images/ccds_booklet/image227.jpeg',
-  'ev-2024-1': 'images/ccds_booklet/image225.jpeg',
-  'ev-2023-30': 'images/ccds_booklet/image374.jpeg',
-  'ev-2023-28': 'images/ccds_booklet/image372.jpeg',
-  'ev-2023-26': 'images/ccds_booklet/image369.jpg',
-  'ev-2023-25': 'images/ccds_booklet/image368.jpg',
-  'ev-2023-24': 'images/ccds_booklet/image367.jpg',
-  'ev-2023-23': 'images/ccds_booklet/image366.jpeg',
-  'ev-2023-22': 'images/ccds_booklet/image365.jpg',
-  'ev-2023-21': 'images/lsd__oppattune_drad/image71.png',
-  'ev-2023-20': 'images/ccds_booklet/image316.jpeg',
-  'ev-2023-19': 'images/ccds_booklet/image315.jpeg',
-  'ev-2023-18': 'images/ccds_booklet/ibos_fassin.jpg',
-  'ev-2023-14': 'images/ccds_booklet/american_developmental_state.jpg',
-  'ev-2023-13': 'images/ccds_booklet/image309.jpg',
-  'ev-2023-12': 'images/ccds_booklet/image308.jpeg',
-  'ev-2023-11': 'images/ccds_booklet/image307.jpg',
-  'ev-2023-10': 'images/ccds_booklet/image306.jpg',
-  'ev-2023-9': 'images/ccds_booklet/image305.jpeg',
-  'ev-2023-8': 'images/ccds_booklet/image304.jpg',
-  'ev-2022-18': 'images/ccds_booklet/image390.jpeg',
-  'ev-2022-16': 'images/ccds_booklet/image388.jpeg',
-  'ev-2022-15': 'images/ccds_booklet/image387.png',
-  'ev-2022-14': 'images/ccds_booklet/image386.png',
-  'ev-2022-13': 'images/ccds_booklet/image371.jpeg',
-  'ev-2022-12': 'images/ccds_booklet/image385.png',
-  'ev-2022-10': 'images/ccds_booklet/image314.jpeg',
-  'ev-2022-9': 'images/ccds_booklet/image383.jpeg',
-  'ev-2022-7': 'images/ccds_booklet/image381.jpg',
-  'ev-2022-6': 'images/ccds_booklet/image380.jpeg',
-  'ev-2022-5': 'images/ccds_booklet/image379.jpeg',
-  'ev-2022-4': 'images/ccds_booklet/image378.jpeg',
-  'ev-2022-3': 'images/ccds_booklet/image377.jpg',
-  'ev-2022-2': 'images/ccds_booklet/image376.jpeg',
-  'ev-2022-1': 'images/ccds_booklet/bach_indian_economics.jpg',
-  'ev-2021-23': 'images/ccds_booklet/image413.jpeg',
-  'ev-2021-22': 'images/ccds_booklet/image412.jpeg',
-  'ev-2021-21': 'images/ccds_booklet/image411.jpeg',
-  'ev-2021-20': 'images/ccds_booklet/image410.jpeg',
-  'ev-2021-19': 'images/ccds_booklet/image409.jpeg',
-  'ev-2021-17': 'images/ccds_booklet/image407.jpeg',
-  'ev-2021-16': 'images/ccds_booklet/image406.jpeg',
-  'ev-2021-15': 'images/ccds_booklet/image405.jpeg',
-  'ev-2021-14': 'images/ccds_booklet/image404.jpeg',
-  'ev-2021-13': 'images/ccds_booklet/image403.jpeg',
-  'ev-2021-12': 'images/ccds_booklet/image402.jpeg',
-  'ev-2021-11': 'images/ccds_booklet/image401.jpeg',
-  'ev-2021-10': 'images/ccds_booklet/image400.png',
-  'ev-2021-9': 'images/ccds_booklet/image399.png',
-  'ev-2021-8': 'images/ccds_booklet/image398.png',
-  'ev-2021-7': 'images/ccds_booklet/image397.png',
-  'ev-2021-6': 'images/ccds_booklet/image396.jpeg',
-  'ev-2021-4': 'images/ccds_booklet/image394.png',
-  'ev-2021-2': 'images/ccds_booklet/image392.jpeg',
-  'ev-2021-1': 'images/ccds_booklet/image391.jpeg',
-  'ev-2020-3': 'images/ccds_booklet/image398.png',
-  'ev-2020-1': 'images/ccds_booklet/image414.jpeg',
-  'ev-2018-1': 'images/old_events/image24.jpeg'
-};;
-
-const EVENT_PHOTOS = {
-  'ev-2016-1': [],
-  'ev-2016-2': [],
-  'ev-2016-3': [],
-  'ev-2016-4': [],
-  'ev-2016-5': [],
-  'ev-2016-6': [],
-  'ev-2016-7': [],
-  'ev-2016-8': [],
-  'ev-2016-9': [],
-  'ev-2017-1': [],
-  'ev-2017-2': [],
-  'ev-2017-3': [],
-  'ev-2017-4': [],
-  'ev-2017-5': [],
-  'ev-2018-1': [],
-  'ev-2018-2': [],
-  'ev-2018-3': [],
-  'ev-2018-4': [],
-  'ev-2018-5': [],
-  'ev-2019-1': [],
-  'ev-2019-2': [],
-  'ev-2019-3': ['images/old_events/image25.jpeg'],
-  'ev-2020-1': [],
-  'ev-2020-2': [],
-  'ev-2020-3': [],
-  'ev-2020-4': [],
-  'ev-2020-5': [],
-  'ev-2020-6': [],
-  'ev-2020-7': [],
-  'ev-2021-1': [],
-  'ev-2021-10': [],
-  'ev-2021-11': [],
-  'ev-2021-12': [],
-  'ev-2021-13': [],
-  'ev-2021-14': [],
-  'ev-2021-15': [],
-  'ev-2021-16': [],
-  'ev-2021-17': [],
-  'ev-2021-18': [],
-  'ev-2021-19': [],
-  'ev-2021-2': [],
-  'ev-2021-20': [],
-  'ev-2021-21': [],
-  'ev-2021-22': [],
-  'ev-2021-23': [],
-  'ev-2021-3': [],
-  'ev-2021-4': [],
-  'ev-2021-5': [],
-  'ev-2021-6': [],
-  'ev-2021-7': [],
-  'ev-2021-8': [],
-  'ev-2021-9': [],
-  'ev-2022-1': [],
-  'ev-2022-10': [],
-  'ev-2022-11': [],
-  'ev-2022-12': [],
-  'ev-2022-13': [],
-  'ev-2022-14': [],
-  'ev-2022-15': [],
-  'ev-2022-16': [],
-  'ev-2022-17': [],
-  'ev-2022-18': [],
-  'ev-2022-2': [],
-  'ev-2022-3': [],
-  'ev-2022-4': [],
-  'ev-2022-5': [],
-  'ev-2022-6': [],
-  'ev-2022-7': [],
-  'ev-2022-8': [],
-  'ev-2022-9': [],
-  'ev-2023-1': [],
-  'ev-2023-10': ['images/ccds_booklet/image318.jpeg', 'images/ccds_booklet/exhibition_vernissage.jpeg', 'images/ccds_booklet/exhibition_artwork.jpeg'],
-  'ev-2023-11': [],
-  'ev-2023-12': [],
-  'ev-2023-13': [],
-  'ev-2023-14': [],
-  'ev-2023-15': [],
-  'ev-2023-16': [],
-  'ev-2023-17': [],
-  'ev-2023-18': [],
-  'ev-2023-19': [],
-  'ev-2023-2': [],
-  'ev-2023-20': [],
-  'ev-2023-21': [],
-  'ev-2023-22': ['images/old_events/reich_1.jpg', 'images/old_events/reich_2.jpg', 'images/old_events/reich_3.jpg'],
-  'ev-2023-23': [],
-  'ev-2023-24': [],
-  'ev-2023-25': [],
-  'ev-2023-26': [],
-  'ev-2023-27': [],
-  'ev-2023-28': [],
-  'ev-2023-29': [],
-  'ev-2023-30': [],
-  'ev-2023-4': ['images/ccds_booklet/vt1.png', 'images/ccds_booklet/vt2.png'],
-  'ev-2023-5': [],
-  'ev-2023-6': [],
-  'ev-2023-7': [],
-  'ev-2023-8': [],
-  'ev-2024-1': ['images/ccds_booklet/image229.jpeg'],
-  'ev-2024-10': [],
-  'ev-2024-11': [],
-  'ev-2024-12': [],
-  'ev-2024-13': [],
-  'ev-2024-14': [],
-  'ev-2024-15': [],
-  'ev-2024-16': [],
-  'ev-2024-17': [],
-  'ev-2024-18': ['images/ccds_booklet/silent_audience.png', 'images/ccds_booklet/silent_group.png'],
-  'ev-2024-19': [],
-  'ev-2024-2': [],
-  'ev-2024-20': [],
-  'ev-2024-21': [],
-  'ev-2024-22': [],
-  'ev-2024-23': [],
-  'ev-2024-24': [],
-  'ev-2024-25': [],
-  'ev-2024-26': [],
-  'ev-2024-27': [],
-  'ev-2024-28': [],
-  'ev-2024-29': [],
-  'ev-2024-3': [],
-  'ev-2024-30': [],
-  'ev-2024-31': [],
-  'ev-2024-32': [],
-  'ev-2024-4': [],
-  'ev-2024-5': ['images/ccds_booklet/image232.jpeg', 'images/ccds_booklet/image233.jpeg'],
-  'ev-2024-6': [],
-  'ev-2024-7': ['images/ccds_booklet/image250.jpeg', 'images/ccds_booklet/image260.jpeg', 'images/ccds_booklet/image247.jpeg'],
-  'ev-2024-8': [],
-  'ev-2024-9': [],
-  'ev-2025-1': ['images/lsd__oppattune_drad/image36.jpeg', 'images/lsd__oppattune_drad/image10.jpeg', 'images/lsd__oppattune_drad/image16.jpeg'],
-  'ev-2025-10': [],
-  'ev-2025-11': ['images/ccds_booklet/image173.jpeg', 'images/ccds_booklet/image184.jpeg', 'images/ccds_booklet/image172.jpeg'],
-  'ev-2025-12': [],
-  'ev-2025-14': [],
-  'ev-2025-15': [],
-  'ev-2025-16': ['images/ccds_booklet/image203.jpeg', 'images/ccds_booklet/image204.jpeg'],
-  'ev-2025-17': [],
-  'ev-2025-18': [],
-  'ev-2025-19': [],
-  'ev-2025-2': [],
-  'ev-2025-20': [],
-  'ev-2025-21': [],
-  'ev-2025-22': [],
-  'ev-2025-23': [],
-  'ev-2025-24': [],
-  'ev-2025-25': [],
-  'ev-2025-26': [],
-  'ev-2025-27': [],
-  'ev-2025-3': ['images/ccds_booklet/image119.jpeg', 'images/ccds_booklet/image121.jpeg'],
-  'ev-2025-4': [],
-  'ev-2025-5': ['images/ccds_booklet/gilligan_2.jpeg', 'images/ccds_booklet/gilligan_3.jpeg'],
-  'ev-2025-6': [],
-  'ev-2025-7': ['images/ccds_booklet/image136.jpeg', 'images/ccds_booklet/image141.jpeg'],
-  'ev-2025-8': ['images/ccds_booklet/image145.jpeg', 'images/ccds_booklet/image148.jpeg'],
-  'ev-2025-9': ['images/ccds_booklet/image160.jpeg', 'images/ccds_booklet/image161.jpeg'],
-  'ev-2026-1': [],
-  'ev-2026-10': ['images/ccds_booklet/image49.jpeg', 'images/ccds_booklet/image52.jpeg'],
-  'ev-2026-11': [],
-  'ev-2026-12': [],
-  'ev-2026-13': [],
-  'ev-2026-14': [],
-  'ev-2026-15': ['images/ccds_booklet/image109.jpeg', 'images/ccds_booklet/image107.jpeg'],
-  'ev-2026-16': [],
-  'ev-2026-2': [],
-  'ev-2026-3': [],
-  'ev-2026-4': [],
-  'ev-2026-5': [],
-  'ev-2026-6': [],
-  'ev-2026-7': [],
-  'ev-2026-8': ['images/ccds_booklet/image15.jpeg', 'images/ccds_booklet/image17.jpeg'],
-};
-
-
-/* ════════════════════════════════════════════════════════════
-   DYNAMIC EVENT DISPLAY · Generate Past Events from Database
-   ════════════════════════════════════════════════════════════ */
-function generatePastEventsHTML() {
-  // Group events by year
-  const eventsByYear = {};
-
-  Object.keys(EVENTS).forEach(eventId => {
-    const match = eventId.match(/ev-(\d+)-/);
-    if (match) {
-      const year = parseInt(match[1]);
-      if (!eventsByYear[year]) {
-        eventsByYear[year] = [];
-      }
-      eventsByYear[year].push({ id: eventId, ...EVENTS[eventId] });
-    }
-  });
-
-  // Sort years in descending order
-  const years = Object.keys(eventsByYear).map(Number).sort((a, b) => b - a);
-
-  let html = '';
-
-  years.forEach((year, index) => {
-    const events = eventsByYear[year];
-    const isOpen = index === 0 ? 'open' : '';
-    const arrow = index === 0 ? '▾' : '▶';
-    
-    html += `
-      <!-- ${year} Events -->
-      <div class="pub-year-group" ${index > 0 ? 'style="margin-top:24px"' : ''}>
-        <button class="pub-year-toggle ${isOpen}" onclick="toggleYear(this)">
-          <span class="yr">${year}</span>
-          <span class="count">${events.length} event${events.length > 1 ? 's' : ''} <span class="arrow">${arrow}</span></span>
-        </button>
-        <div class="pub-year-body ${isOpen}">
-          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:28px">
-`;
-    
-    events.forEach(event => {
-      const img = EVENT_POSTERS[event.id] || 'images/ccds_booklet/image292.jpeg';
-      html += `<div style="background:#f5f5f5;border-radius:4px;overflow:hidden;cursor:pointer" onclick="openEventModal('${event.id}')"><img src="${img}" alt="${event.title}" style="width:100%;height:280px;object-fit:cover"><div style="padding:14px;background:white"><div style="font-weight:600;margin-bottom:6px">${event.title}</div><div style="color:#999;font-size:0.9rem">${event.date}${event.speakers ? ' · ' + event.speakers : ''}</div></div></div>`;
-    });
-    
-    html += `
-          </div>
-        </div>
-      </div>
-`;
-  });
-  
-  return html;
-}
-
-// Replace the past events section on page load
-/* Highlights: Selected Events at a Glance - Text above, full poster image */
-function generateHighlights() {
-  const highlightPairs = [
-    ['ev-2026-1', 'images/highlights/franco_american_poster.jpg'], // Franco-American
-    ['ev-2026-8', 'images/ccds_booklet/image13.jpeg'], // Rousseau
-    ['ev-2026-13', 'images/ccds_booklet/image47.jpeg'], // Care Democracy
-    ['ev-2025-2', 'images/ccds_booklet/image114.jpeg'], // Law, State, and Democracy
-    ['ev-2025-15', 'images/ccds_booklet/image169.jpeg'], // Autonomy and the Law
-    ['ev-2024-1', 'images/ccds_booklet/image225.jpeg'], // Renewing the Social Contract
-    ['ev-2024-8', 'images/ccds_booklet/image235.jpeg'], // Law of International Society
-    ['ev-2024-17', 'images/ccds_booklet/image244.jpeg'], // Academic Freedom
-    ['ev-2023-2', 'images/ccds_booklet/image292.jpeg'], // Foucault
-    ['ev-2023-10', 'images/ccds_booklet/image306.jpg'], // Violent Turns
-    ['ev-2023-13', 'images/ccds_booklet/image309.jpg'], // Tocqueville Colloque
-    ['ev-2023-14', 'images/ccds_booklet/american_developmental_state.jpg'], // American Developmental State
-    ['ev-2023-11', 'images/ccds_booklet/image307.jpg'], // Liberal Democracy
-    ['ev-2021-2', 'images/ccds_booklet/image392.jpeg'], // D.Rad Radicalization
-    ['ev-2021-1', 'images/ccds_booklet/hl_demos21_balibar.jpeg'] // Demos21/Balibar
-  ];
-
-  const highlights = highlightPairs
-    .map(([id, poster]) => {
-      const event = EVENTS[id];
-      if (!event) return null;
-      return { id, ...event, poster };
-    })
-    .filter(e => e !== null);
-
-  return highlights.map(e => {
-    const speakerLabel = e.id === 'ev-2021-1' ? 'sessions' : 'speakers';
-    const imgStyle = e.id === 'ev-2021-1' ? 'width:100%;flex:1;object-fit:cover;min-height:280px;background:#fff;transform:rotate(90deg)' : 'width:100%;flex:1;object-fit:cover;min-height:280px';
-    return `<div style="cursor:pointer;overflow:hidden;border-radius:4px;display:flex;flex-direction:column" onclick="openEventModal('${e.id}')"><div style="padding:12px;background:#f9f9f9;border-bottom:1px solid #e0e0e0"><div style="font-weight:600;font-size:0.9rem;margin-bottom:4px;line-height:1.3">${e.title}</div><div style="color:#666;font-size:0.8rem">${e.date} · ${e.speakers} ${speakerLabel}</div></div><img src="${e.poster}" alt="${e.title}" style="${imgStyle}"></div>`;
-  }).join('');
-}
-
-
-
-/* Generate publications list from database */
-function generatePublications() {
-  const pubsByYear = {};
-  
-  Object.keys(PUBLICATIONS).forEach(pubId => {
-    const pub = PUBLICATIONS[pubId];
-    if (pub.year) {
-      if (!pubsByYear[pub.year]) pubsByYear[pub.year] = [];
-      pubsByYear[pub.year].push({ id: pubId, ...pub });
-    }
-  });
-  
-  const years = Object.keys(pubsByYear).map(Number).sort((a, b) => b - a);
-  let html = '';
-  
-  years.forEach((year, idx) => {
-    const pubs = pubsByYear[year];
-    const isOpen = idx === 0 ? 'open' : '';
-    const arrow = idx === 0 ? '▾' : '▶';
-    
-    html += `
-      <div class="pub-year-group" ${idx > 0 ? 'style="margin-top:24px"' : ''}>
-        <button class="pub-year-toggle ${isOpen}" onclick="toggleYear(this)">
-          <span class="yr">${year}</span>
-          <span class="count">${pubs.length} publication${pubs.length > 1 ? 's' : ''} <span class="arrow">${arrow}</span></span>
-        </button>
-        <div class="pub-year-body ${isOpen}">
-          <div style="padding:16px 0">
-`;
-    
-    pubs.forEach(pub => {
-      const typeLabel = pub.type ? pub.type.charAt(0).toUpperCase() + pub.type.slice(1) : 'Work';
-      const authStr = pub.author ? `<strong>${pub.author}</strong>. ` : '';
-      const journalStr = pub.journal ? `<em>${pub.journal}</em>` : '';
-      const urlStr = pub.url ? ` <a href="${pub.url}" target="_blank" style="color:#0072bc;text-decoration:none">[Link]</a>` : '';
-      
-      html += `
-            <div style="margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid #eee">
-              <div style="font-size:0.85rem;color:#999;margin-bottom:4px">${typeLabel}</div>
-              <div style="margin-bottom:8px">${authStr}<strong>${pub.title}</strong></div>
-              ${journalStr ? `<div style="color:#666;margin-bottom:6px">${journalStr}</div>` : ''}
-              ${urlStr}
-            </div>
-`;
-    });
-    
-    html += `
-          </div>
-        </div>
-      </div>
-`;
-  });
-  
-  return html;
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  // Generate and insert highlights
-  const highlightsContainer = document.getElementById('highlights-container');
-  if (highlightsContainer) {
-    highlightsContainer.innerHTML = generateHighlights();
-  }
-
-  // Generate and insert events by year
-  const eventsContainer = document.getElementById('events-container');
-  if (eventsContainer) {
-    eventsContainer.innerHTML = generatePastEventsHTML();
-  }
-
-  // Generate and insert publications
-  const pubContainer = document.querySelector('[style*="Full Publication Record"]')?.closest('div')?.nextElementSibling;
-  if (pubContainer) {
-    pubContainer.innerHTML = '<span class="section-label" style="margin-bottom:16px">Full Publication Record · by Year</span>' + generatePublications();
-  }
-});
-
 
 /* ════════════════════════════════════════════════════════════
    PUBLICATION DATABASE · Easy URL Management
@@ -3191,13 +3410,6 @@ function openEventModal(eventId) {
 
   document.getElementById('eventTitle').textContent = event.title;
 
-  // Display poster image
-  const posterImg = document.getElementById('eventPoster');
-  if (posterImg && EVENT_POSTERS[eventId]) {
-    posterImg.src = EVENT_POSTERS[eventId];
-    posterImg.style.display = 'block';
-  }
-
   // Format date and speakers info
   let dateText = event.date;
   if (event.speakers) {
@@ -3220,23 +3432,6 @@ function openEventModal(eventId) {
       tag.textContent = keyword;
       themesList.appendChild(tag);
     });
-  }
-
-  // Display event photos if available
-  const photosSection = document.getElementById('eventPhotosSection');
-  const photosContainer = document.getElementById('eventPhotos');
-  if (EVENT_PHOTOS[eventId] && EVENT_PHOTOS[eventId].length > 0) {
-    photosContainer.innerHTML = '';
-    EVENT_PHOTOS[eventId].forEach(photoSrc => {
-      const photoDiv = document.createElement('div');
-      photoDiv.style.overflow = 'hidden';
-      photoDiv.style.borderRadius = '4px';
-      photoDiv.innerHTML = `<img src="${photoSrc}" alt="Event photo" style="width:100%;height:150px;object-fit:cover;cursor:pointer" onclick="window.open(this.src, '_blank')">`;
-      photosContainer.appendChild(photoDiv);
-    });
-    photosSection.style.display = 'block';
-  } else {
-    photosSection.style.display = 'none';
   }
 
   document.getElementById('eventModal').classList.add('active');
