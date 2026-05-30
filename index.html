@@ -131,11 +131,16 @@ footer .footer-bottom img.logo-img{height:28px;width:auto;mix-blend-mode:screen;
   display:flex;flex-direction:column;justify-content:flex-end;
   padding-top:var(--nav-h);position:relative;overflow:hidden;
 }
+#hero::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.25) 100%);
+  z-index:0;pointer-events:none;
+}
 #hero .hero-bg{
   position:absolute;inset:0;
-  background-image:url('charts_large/00_photo_collage.png');
+  background-image:url('images/00_photo_collage.png');
   background-size:cover;background-position:center 30%;
-  opacity:0.22;
+  opacity:0.85;
 }
 #hero .hero-body{
   position:relative;z-index:1;
