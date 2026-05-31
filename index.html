@@ -2245,27 +2245,41 @@ function generatePublications() {
           <span class="count">${pubs.length} publication${pubs.length > 1 ? 's' : ''} <span class="arrow">${arrow}</span></span>
         </button>
         <div class="pub-year-body ${isOpen}">
-          <div style="padding:16px 0">
 `;
     
     pubs.forEach(pub => {
-      const typeLabel = pub.type ? pub.type.charAt(0).toUpperCase() + pub.type.slice(1) : 'Work';
-      const authStr = pub.author ? `<strong>${pub.author}</strong>. ` : '';
-      const journalStr = pub.journal ? `<em>${pub.journal}</em>` : '';
-      const urlStr = pub.url ? ` <a href="${pub.url}" target="_blank" style="color:#0072bc;text-decoration:none">[Link]</a>` : '';
+      // Get cover path - check all possible directories
+      let coverPath = '';
+      if (pub.cover) {
+        // Check for cover in different directories
+        if (pub.type === 'book' || pub.cover.includes('bk_') || pub.cover.includes('_uerj')) {
+          coverPath = `images/book_covers/${pub.cover}`;
+        } else if (pub.cover.includes('drad')) {
+          coverPath = `images/drad/${pub.cover}`;
+        } else if (pub.cover.includes('co3')) {
+          coverPath = `images/co3/${pub.cover}`;
+        } else if (pub.cover.includes('hepp')) {
+          coverPath = `images/hepp_france/${pub.cover}`;
+        } else {
+          coverPath = `images/journal_covers/${pub.cover}`;
+        }
+      }
       
       html += `
-            <div style="margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid #eee">
-              <div style="font-size:0.85rem;color:#999;margin-bottom:4px">${typeLabel}</div>
-              <div style="margin-bottom:8px">${authStr}<strong>${pub.title}</strong></div>
-              ${journalStr ? `<div style="color:#666;margin-bottom:6px">${journalStr}</div>` : ''}
-              ${urlStr}
+          <div class="pub-entry">
+            ${coverPath ? `<img src="${coverPath}" alt="Publication cover" onerror="this.style.display='none'">` : ''}
+            <div class="pub-text">
+              ${pub.author ? `<strong>${pub.author}</strong>. ` : ''}
+              <strong>${pub.title}</strong>
+              ${pub.journal ? ` <em>${pub.journal}</em>` : ''}
+              ${pub.year ? ` ${pub.year}` : ''}
+              ${pub.url ? `<a href="${pub.url}" target="_blank" style="color:#0072bc;text-decoration:none"> [Link]</a>` : ''}
             </div>
+          </div>
 `;
     });
     
     html += `
-          </div>
         </div>
       </div>
 `;
