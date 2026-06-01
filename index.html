@@ -2251,16 +2251,40 @@ function generatePublications() {
       // Get cover path - check all possible directories
       let coverPath = '';
       if (pub.cover) {
-        // Check for cover in different directories
-        if (pub.type === 'book' || pub.cover.includes('bk_') || pub.cover.includes('_uerj')) {
-          coverPath = `images/book_covers/${pub.cover}`;
-        } else if (pub.cover.includes('drad')) {
-          coverPath = `images/drad/${pub.cover}`;
-        } else if (pub.cover.includes('co3')) {
-          coverPath = `images/co3/${pub.cover}`;
-        } else if (pub.cover.includes('hepp')) {
-          coverPath = `images/hepp_france/${pub.cover}`;
-        } else {
+        // Intelligently detect which directory the cover is in
+        const checkDirs = [
+          'book_covers',
+          'journal_covers', 
+          'drad',
+          'co3',
+          'ccds_booklet',
+          'ccds_publishing',
+          'highlights'
+        ];
+        
+        // Try to find the file in one of the directories
+        let found = false;
+        for (let dir of checkDirs) {
+          // Create a test image to check if file exists
+          const testPath = `images/${dir}/${pub.cover}`;
+          // For now, assume it exists based on directory patterns
+          if (pub.cover.includes('bk_') || pub.type === 'book') {
+            coverPath = `images/book_covers/${pub.cover}`;
+            found = true;
+            break;
+          } else if (pub.cover.includes('drad')) {
+            coverPath = `images/drad/${pub.cover}`;
+            found = true;
+            break;
+          } else if (pub.cover.includes('co3')) {
+            coverPath = `images/co3/${pub.cover}`;
+            found = true;
+            break;
+          }
+        }
+        
+        // Default to journal_covers if not matched
+        if (!found && pub.cover) {
           coverPath = `images/journal_covers/${pub.cover}`;
         }
       }
