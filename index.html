@@ -2220,21 +2220,39 @@ function generateHighlights() {
 
 /* Generate publications list from database */
 function generatePublications() {
-  const pubsByYear = {};
+  // Classify publication type
+  function getType(pub) {
+    const t = pub.title.toLowerCase();
+    if (t.includes('review of') || t.includes('book review')) return 'Review';
+    if (t.includes('press') || t.includes('university') || t.includes('routledge') || 
+        t.includes('bloomsbury') || t.includes('harvard') || t.includes('oxford') || 
+        t.includes('penguin') || t.includes('springer') || t.includes('handbook') ||
+        pub.cover.indexOf('bk_') >= 0) return 'Book';
+    if (t.includes('blog') || t.includes('verfassungsblog') || t.includes('conversation')) return 'Blog Post';
+    return 'Article';
+  }
+  
+  const pubsByYearType = {};
+  const typeOrder = ['Book', 'Article', 'Review', 'Blog Post'];
   
   Object.keys(PUBLICATIONS).forEach(pubId => {
     const pub = PUBLICATIONS[pubId];
     if (pub.year) {
-      if (!pubsByYear[pub.year]) pubsByYear[pub.year] = [];
-      pubsByYear[pub.year].push({ id: pubId, ...pub });
+      const year = pub.year;
+      const type = getType(pub);
+      
+      if (!pubsByYearType[year]) pubsByYearType[year] = {};
+      if (!pubsByYearType[year][type]) pubsByYearType[year][type] = [];
+      pubsByYearType[year][type].push({ id: pubId, ...pub, type });
     }
   });
   
-  const years = Object.keys(pubsByYear).map(Number).sort((a, b) => b - a);
+  const years = Object.keys(pubsByYearType).map(Number).sort((a, b) => b - a);
   let html = '';
   
   years.forEach((year, idx) => {
-    const pubs = pubsByYear[year];
+    const byType = pubsByYearType[year];
+    const totalCount = Object.values(byType).reduce((sum, arr) => sum + arr.length, 0);
     const isOpen = idx === 0 ? 'open' : '';
     const arrow = idx === 0 ? '▾' : '▶';
     
@@ -2242,32 +2260,38 @@ function generatePublications() {
       <div class="pub-year-group" ${idx > 0 ? 'style="margin-top:24px"' : ''}>
         <button class="pub-year-toggle ${isOpen}" onclick="toggleYear(this)">
           <span class="yr">${year}</span>
-          <span class="count">${pubs.length} publication${pubs.length > 1 ? 's' : ''} <span class="arrow">${arrow}</span></span>
+          <span class="count">${totalCount} publication${totalCount > 1 ? 's' : ''} <span class="arrow">${arrow}</span></span>
         </button>
         <div class="pub-year-body ${isOpen}">
 `;
     
-    pubs.forEach(pub => {
-      // Get cover path
-      let coverPath = '';
-      if (pub.cover) {
-        if (pub.cover.indexOf('bk_') >= 0) {
-          coverPath = `images/book_covers/${pub.cover}`;
-        } else if (pub.cover.indexOf('drad') >= 0) {
-          coverPath = `images/drad/${pub.cover}`;
-        } else if (pub.cover.indexOf('co3') >= 0) {
-          coverPath = `images/co3/${pub.cover}`;
-        } else {
-          coverPath = `images/journal_covers/${pub.cover}`;
-        }
-      }
-      
-      html += `
+    typeOrder.forEach(type => {
+      if (byType[type] && byType[type].length > 0) {
+        const pubs = byType[type];
+        html += `<div class="pub-cat-head">${type}${pubs.length > 1 ? 's' : ''}</div>`;
+        
+        pubs.forEach(pub => {
+          let coverPath = '';
+          if (pub.cover) {
+            if (pub.cover.indexOf('bk_') >= 0) {
+              coverPath = `images/book_covers/${pub.cover}`;
+            } else if (pub.cover.indexOf('drad') >= 0) {
+              coverPath = `images/drad/${pub.cover}`;
+            } else if (pub.cover.indexOf('co3') >= 0) {
+              coverPath = `images/co3/${pub.cover}`;
+            } else if (pub.cover) {
+              coverPath = `images/journal_covers/${pub.cover}`;
+            }
+          }
+          
+          html += `
           <div class="pub-entry">
             ${coverPath ? `<img src="${coverPath}" alt="Publication cover" onerror="this.style.display='none'">` : ''}
             <div class="pub-text">${pub.title}</div>
           </div>
 `;
+        });
+      }
     });
     
     html += `
