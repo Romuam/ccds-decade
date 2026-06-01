@@ -2718,6 +2718,12 @@ const animateCounters = () => {
 
 // Open 2026 and 2025 by default
 document.addEventListener('DOMContentLoaded', () => {
+  // Generate and populate publications list
+  const pubContainer = document.querySelector('#publications-list-container');
+  if (pubContainer) {
+    pubContainer.innerHTML = '<span class="section-label" style="margin-bottom:16px">Publications · Complete Record (2016–2026)</span>' + generatePublications();
+  }
+
   const yearButtons = document.querySelectorAll('.pub-year-toggle');
   yearButtons.forEach(btn => {
     const yearText = btn.querySelector('.yr').textContent;
