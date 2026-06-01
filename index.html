@@ -2220,71 +2220,13 @@ function generateHighlights() {
 
 /* Generate publications list from database */
 function generatePublications() {
-  // Classify publications by type
-  function classifyPublication(pub) {
-    const title = pub.title.toLowerCase();
-    if (title.includes('review of') || title.includes('book review')) {
-      return 'Review';
-    } else if (title.includes('press') || title.includes('university') || 
-               title.includes('routledge') || title.includes('bloomsbury') ||
-               title.includes('harvard') || title.includes('oxford') ||
-               title.includes('penguin') || title.includes('springer') ||
-               pub.cover.includes('bk_')) {
-      return 'Book';
-    } else if (title.includes('blog') || title.includes('verfassungsblog') || 
-               title.includes('conversation')) {
-      return 'Blog Post';
-    } else {
-      return 'Article';
-    }
-  }
-  
-  // Parse publication text to extract components
-  function parsePublication(pub) {
-    const text = pub.title;
-    const parts = {
-      authors: '',
-      title: '',
-      journal: '',
-      year: pub.year,
-      raw: text
-    };
-    
-    // Extract authors (before first quote or period)
-    const authorMatch = text.match(/^([^"]+?)\./);
-    if (authorMatch) {
-      parts.authors = authorMatch[1].trim();
-    }
-    
-    // Extract title (in quotes)
-    const titleMatch = text.match(/"([^"]+)"/);
-    if (titleMatch) {
-      parts.title = titleMatch[1];
-    }
-    
-    // Extract journal (after title, before year)
-    const journalMatch = text.match(/"[^"]+"[.\s]+([^0-9]+?)\d{4}/);
-    if (journalMatch) {
-      parts.journal = journalMatch[1].trim();
-    }
-    
-    return parts;
-  }
-  
   const pubsByYear = {};
-  const categoryOrder = ['Book', 'Article', 'Review', 'Blog Post'];
   
   Object.keys(PUBLICATIONS).forEach(pubId => {
     const pub = PUBLICATIONS[pubId];
     if (pub.year) {
-      if (!pubsByYear[pub.year]) pubsByYear[pub.year] = {};
-      
-      const category = classifyPublication(pub);
-      if (!pubsByYear[pub.year][category]) {
-        pubsByYear[pub.year][category] = [];
-      }
-      
-      pubsByYear[pub.year][category].push({ id: pubId, ...pub, category });
+      if (!pubsByYear[pub.year]) pubsByYear[pub.year] = [];
+      pubsByYear[pub.year].push({ id: pubId, ...pub });
     }
   });
   
@@ -2292,54 +2234,40 @@ function generatePublications() {
   let html = '';
   
   years.forEach((year, idx) => {
-    const pubsByCategory = pubsByYear[year];
+    const pubs = pubsByYear[year];
     const isOpen = idx === 0 ? 'open' : '';
     const arrow = idx === 0 ? '▾' : '▶';
-    
-    // Count total publications for this year
-    const totalCount = Object.values(pubsByCategory).reduce((sum, pubs) => sum + pubs.length, 0);
     
     html += `
       <div class="pub-year-group" ${idx > 0 ? 'style="margin-top:24px"' : ''}>
         <button class="pub-year-toggle ${isOpen}" onclick="toggleYear(this)">
           <span class="yr">${year}</span>
-          <span class="count">${totalCount} publication${totalCount > 1 ? 's' : ''} <span class="arrow">${arrow}</span></span>
+          <span class="count">${pubs.length} publication${pubs.length > 1 ? 's' : ''} <span class="arrow">${arrow}</span></span>
         </button>
         <div class="pub-year-body ${isOpen}">
 `;
     
-    // Iterate through categories in order
-    categoryOrder.forEach(category => {
-      if (pubsByCategory[category] && pubsByCategory[category].length > 0) {
-        const pubs = pubsByCategory[category];
-        html += `<div class="pub-cat-head">${category}${pubs.length > 1 ? 's' : ''}</div>`;
-        
-        pubs.forEach(pub => {
-          // Get cover path
-          let coverPath = '';
-          if (pub.cover) {
-            if (pub.cover.includes('bk_')) {
-              coverPath = `images/book_covers/${pub.cover}`;
-            } else if (pub.cover.includes('drad')) {
-              coverPath = `images/drad/${pub.cover}`;
-            } else if (pub.cover.includes('co3')) {
-              coverPath = `images/co3/${pub.cover}`;
-            } else {
-              coverPath = `images/journal_covers/${pub.cover}`;
-            }
-          }
-          
-          // Use raw text as citation (already formatted from booklet)
-          const citation = pub.title;
-          
-          html += `
+    pubs.forEach(pub => {
+      // Get cover path
+      let coverPath = '';
+      if (pub.cover) {
+        if (pub.cover.indexOf('bk_') >= 0) {
+          coverPath = `images/book_covers/${pub.cover}`;
+        } else if (pub.cover.indexOf('drad') >= 0) {
+          coverPath = `images/drad/${pub.cover}`;
+        } else if (pub.cover.indexOf('co3') >= 0) {
+          coverPath = `images/co3/${pub.cover}`;
+        } else {
+          coverPath = `images/journal_covers/${pub.cover}`;
+        }
+      }
+      
+      html += `
           <div class="pub-entry">
             ${coverPath ? `<img src="${coverPath}" alt="Publication cover" onerror="this.style.display='none'">` : ''}
-            <div class="pub-text">${citation}</div>
+            <div class="pub-text">${pub.title}</div>
           </div>
 `;
-        });
-      }
     });
     
     html += `
