@@ -2220,13 +2220,71 @@ function generateHighlights() {
 
 /* Generate publications list from database */
 function generatePublications() {
+  // Classify publications by type
+  function classifyPublication(pub) {
+    const title = pub.title.toLowerCase();
+    if (title.includes('review of') || title.includes('book review')) {
+      return 'Review';
+    } else if (title.includes('press') || title.includes('university') || 
+               title.includes('routledge') || title.includes('bloomsbury') ||
+               title.includes('harvard') || title.includes('oxford') ||
+               title.includes('penguin') || title.includes('springer') ||
+               pub.cover.includes('bk_')) {
+      return 'Book';
+    } else if (title.includes('blog') || title.includes('verfassungsblog') || 
+               title.includes('conversation')) {
+      return 'Blog Post';
+    } else {
+      return 'Article';
+    }
+  }
+  
+  // Parse publication text to extract components
+  function parsePublication(pub) {
+    const text = pub.title;
+    const parts = {
+      authors: '',
+      title: '',
+      journal: '',
+      year: pub.year,
+      raw: text
+    };
+    
+    // Extract authors (before first quote or period)
+    const authorMatch = text.match(/^([^"]+?)\./);
+    if (authorMatch) {
+      parts.authors = authorMatch[1].trim();
+    }
+    
+    // Extract title (in quotes)
+    const titleMatch = text.match(/"([^"]+)"/);
+    if (titleMatch) {
+      parts.title = titleMatch[1];
+    }
+    
+    // Extract journal (after title, before year)
+    const journalMatch = text.match(/"[^"]+"[.\s]+([^0-9]+?)\d{4}/);
+    if (journalMatch) {
+      parts.journal = journalMatch[1].trim();
+    }
+    
+    return parts;
+  }
+  
   const pubsByYear = {};
+  const categoryOrder = ['Book', 'Article', 'Review', 'Blog Post'];
   
   Object.keys(PUBLICATIONS).forEach(pubId => {
     const pub = PUBLICATIONS[pubId];
     if (pub.year) {
-      if (!pubsByYear[pub.year]) pubsByYear[pub.year] = [];
-      pubsByYear[pub.year].push({ id: pubId, ...pub });
+      if (!pubsByYear[pub.year]) pubsByYear[pub.year] = {};
+      
+      const category = classifyPublication(pub);
+      if (!pubsByYear[pub.year][category]) {
+        pubsByYear[pub.year][category] = [];
+      }
+      
+      pubsByYear[pub.year][category].push({ id: pubId, ...pub, category });
     }
   });
   
@@ -2234,73 +2292,54 @@ function generatePublications() {
   let html = '';
   
   years.forEach((year, idx) => {
-    const pubs = pubsByYear[year];
+    const pubsByCategory = pubsByYear[year];
     const isOpen = idx === 0 ? 'open' : '';
     const arrow = idx === 0 ? '▾' : '▶';
+    
+    // Count total publications for this year
+    const totalCount = Object.values(pubsByCategory).reduce((sum, pubs) => sum + pubs.length, 0);
     
     html += `
       <div class="pub-year-group" ${idx > 0 ? 'style="margin-top:24px"' : ''}>
         <button class="pub-year-toggle ${isOpen}" onclick="toggleYear(this)">
           <span class="yr">${year}</span>
-          <span class="count">${pubs.length} publication${pubs.length > 1 ? 's' : ''} <span class="arrow">${arrow}</span></span>
+          <span class="count">${totalCount} publication${totalCount > 1 ? 's' : ''} <span class="arrow">${arrow}</span></span>
         </button>
         <div class="pub-year-body ${isOpen}">
 `;
     
-    pubs.forEach(pub => {
-      // Get cover path - check all possible directories
-      let coverPath = '';
-      if (pub.cover) {
-        // Intelligently detect which directory the cover is in
-        const checkDirs = [
-          'book_covers',
-          'journal_covers', 
-          'drad',
-          'co3',
-          'ccds_booklet',
-          'ccds_publishing',
-          'highlights'
-        ];
+    // Iterate through categories in order
+    categoryOrder.forEach(category => {
+      if (pubsByCategory[category] && pubsByCategory[category].length > 0) {
+        const pubs = pubsByCategory[category];
+        html += `<div class="pub-cat-head">${category}${pubs.length > 1 ? 's' : ''}</div>`;
         
-        // Try to find the file in one of the directories
-        let found = false;
-        for (let dir of checkDirs) {
-          // Create a test image to check if file exists
-          const testPath = `images/${dir}/${pub.cover}`;
-          // For now, assume it exists based on directory patterns
-          if (pub.cover.includes('bk_') || pub.type === 'book') {
-            coverPath = `images/book_covers/${pub.cover}`;
-            found = true;
-            break;
-          } else if (pub.cover.includes('drad')) {
-            coverPath = `images/drad/${pub.cover}`;
-            found = true;
-            break;
-          } else if (pub.cover.includes('co3')) {
-            coverPath = `images/co3/${pub.cover}`;
-            found = true;
-            break;
+        pubs.forEach(pub => {
+          // Get cover path
+          let coverPath = '';
+          if (pub.cover) {
+            if (pub.cover.includes('bk_')) {
+              coverPath = `images/book_covers/${pub.cover}`;
+            } else if (pub.cover.includes('drad')) {
+              coverPath = `images/drad/${pub.cover}`;
+            } else if (pub.cover.includes('co3')) {
+              coverPath = `images/co3/${pub.cover}`;
+            } else {
+              coverPath = `images/journal_covers/${pub.cover}`;
+            }
           }
-        }
-        
-        // Default to journal_covers if not matched
-        if (!found && pub.cover) {
-          coverPath = `images/journal_covers/${pub.cover}`;
-        }
-      }
-      
-      html += `
+          
+          // Use raw text as citation (already formatted from booklet)
+          const citation = pub.title;
+          
+          html += `
           <div class="pub-entry">
             ${coverPath ? `<img src="${coverPath}" alt="Publication cover" onerror="this.style.display='none'">` : ''}
-            <div class="pub-text">
-              ${pub.author ? `<strong>${pub.author}</strong>. ` : ''}
-              <strong>${pub.title}</strong>
-              ${pub.journal ? ` <em>${pub.journal}</em>` : ''}
-              ${pub.year ? ` ${pub.year}` : ''}
-              ${pub.url ? `<a href="${pub.url}" target="_blank" style="color:#0072bc;text-decoration:none"> [Link]</a>` : ''}
-            </div>
+            <div class="pub-text">${citation}</div>
           </div>
 `;
+        });
+      }
     });
     
     html += `
@@ -2311,585 +2350,6 @@ function generatePublications() {
   
   return html;
 }
-
-document.addEventListener('DOMContentLoaded', function() {
-  // Generate and insert highlights
-  const highlightsContainer = document.getElementById('highlights-container');
-  if (highlightsContainer) {
-    highlightsContainer.innerHTML = generateHighlights();
-  }
-
-  // Generate and insert events by year
-  const eventsContainer = document.getElementById('events-container');
-  if (eventsContainer) {
-    eventsContainer.innerHTML = generatePastEventsHTML();
-  }
-
-  // Generate and insert publications
-  const pubContainer = document.querySelector('#publications-list-container');
-  if (pubContainer) {
-    pubContainer.innerHTML = '<span class="section-label" style="margin-bottom:16px">Publications · Complete Record (2016–2026)</span>' + generatePublications();
-  }
-});
-
-
-/* ════════════════════════════════════════════════════════════
-   PUBLICATION DATABASE · Easy URL Management
-   ════════════════════════════════════════════════════════════ */
-const PUBLICATIONS = {
-  "2016-1": { title: "Sawyer, S. & Stewart, I. (eds.) In Search of the Liberal Moment: Democracy, Anti-totalitarianism, and Intellectual Politics in France since 1950. Springer / Palgrave, 2016.", journal: "", author: "", year: 2016, type: "article", url: "", cover: "bk_liberal_moment.png" },
-  "2016-2": { title: "Spieler, Miranda. Liberté, liberté trahie... : faire et défaire des citoyens français, Guyane 1780–1880. Alma éditeur, 2016.", journal: "", author: "", year: 2016, type: "article", url: "", cover: "bk_liberte_trahie.jpg" },
-  "2016-3": { title: "Sawyer, Stephen W. \"A fiscal revolution: statecraft in France's Early Third Republic.\" The American Historical Review 121(4), 1141–1166, 2016.", journal: "", author: "", year: 2016, type: "article", url: "", cover: "rah.jpg" },
-  "2016-4": { title: "Mélonio, F. & Sawyer, S.W. \"Introduction. Investigating inequalities: A new Tocqueville.\" The Tocqueville Review 37(2), 7–11, 2016.", journal: "", author: "", year: 2016, type: "article", url: "", cover: "blog-tocq.svg" },
-  "2017-1": { title: "Novak, W.J., Sawyer, S.W., Sparrow, J.T. \"Democratic States of Unexception: Towards a New Genealogy of the American Political.\" In Morgan, K.J. & Orloff, A.S. (eds.), The Many Hands of the State: Theorizing Political Authority and Social Control, 229–257. Cambridge University Press, 2017.", journal: "", author: "", year: 2017, type: "article", url: "", cover: "bk_many_hands.jpg" },
-  "2017-2": { title: "Sawyer, S. & Stewart, I. \"The Search Continues.\" Politics, Religion & Ideology 18(3), 342–349, 2017.", journal: "", author: "", year: 2017, type: "article", url: "", cover: "politics_religion_ideology.jpeg" },
-  "2017-3": { title: "Spieler, Miranda. \"The Vanishing Slaves of Paris: The Lettre de Cachet and the Emergence of an Imperial Legal Order in Eighteenth-Century France.\" In The Scaffolding of Sovereignty. Columbia University Press, 2017, 230–245.", journal: "", author: "", year: 2017, type: "article", url: "", cover: "bk_scaffolding.jpg" },
-  "2017-4": { title: "Zarić, Zona & Bégué, P. \"Agir avec compassion, penser un soin (en) commun.\" Soins 62(814), 56–59, 2017.", journal: "", author: "", year: 2017, type: "article", url: "", cover: "soins.jpg" },
-  "2017-5": { title: "Zarić, Zona. \"Pourquoi avons-nous besoin de compassion?\" La Philosophie en Poche: iphilo.fr, 2017.", journal: "", author: "", year: 2017, type: "article", url: "", cover: "None" },
-  "2017-6": { title: "Spieler, Miranda. 2017. Review of Jennifer Palmer, Intimate Bonds. French History 31(3), 380–382.", journal: "", author: "", year: 2017, type: "article", url: "", cover: "hfra.jpg" },
-  "2018-1": { title: "Sawyer, Stephen W. Adolphe Thiers: la contingence et le pouvoir. Armand Colin, 2018.", journal: "", author: "", year: 2018, type: "article", url: "", cover: "bk_thiers.jpg" },
-  "2018-10": { title: "Culp, Julian. 2018. Review of David Ingram, World Crisis and Underdevelopment. Notre Dame Philosophical Reviews.", journal: "", author: "", year: 2018, type: "article", url: "", cover: "bk_world_crisis.jpg" },
-  "2018-2": { title: "Sawyer, Stephen W. Demos Assembled: Democracy and the International Origins of the Modern State, 1840–1880. University of Chicago Press, 2018.", journal: "", author: "", year: 2018, type: "article", url: "", cover: "bk_demos_assembled.jpg" },
-  "2018-3": { title: "Culp, Julian. 2018. \"Freiheit.\" In Staatslexikon der Görres-Gesellschaft, 837–845.", journal: "", author: "", year: 2018, type: "article", url: "", cover: "bk_staatslexikon.webp" },
-  "2018-4": { title: "Culp, Julian. \"International responsibilities: From utility and humanitarianism to global justice.\" In Routledge Handbook of Development Ethics, 333–345, 2018.", journal: "", author: "", year: 2018, type: "article", url: "", cover: "bk_dev_ethics.jpg" },
-  "2018-5": { title: "Culp, Julian. \"Internationalizing Nussbaum's model of cosmopolitan democratic education.\" Ethics and Education 13(2), 172–190, 2018.", journal: "", author: "", year: 2018, type: "article", url: "", cover: "ethics_and_education.jpeg" },
-  "2018-6": { title: "Culp, Julian & Zwarthoed, D. 2018. \"Introduction: education and migration.\" Journal of Global Ethics 14(1), 5–10.", journal: "", author: "", year: 2018, type: "article", url: "", cover: "journal_global_ethics.webp" },
-  "2018-7": { title: "Culp, Julian. \"Israeli history textbooks and the Palestinians.\" Journal of Holy Land and Palestine Studies 17(1), 115–129, 2018.", journal: "", author: "", year: 2018, type: "article", url: "", cover: "jhlps.webp" },
-  "2018-8": { title: "Goldhammer, A. & Sawyer, S.W. \"How Can Democracy and European Government Be Reconciled?: Introduction.\" The Tocqueville Review 39(1), 7–9, 2018.", journal: "", author: "", year: 2018, type: "article", url: "", cover: "blog-tocq.svg" },
-  "2018-9": { title: "Sawyer, Stephen W. \"Towards democracy and its paradoxes.\" Politics, Religion & Ideology 19(3), 389–391, 2018.", journal: "", author: "", year: 2018, type: "article", url: "", cover: "politics_religion_ideology.jpeg" },
-  "2019-1": { title: "Culp, Julian. Democratic Education in a Globalized World: A Normative Theory. Routledge, 2019.", journal: "", author: "", year: 2019, type: "article", url: "", cover: "bk_dem_ed_globalized.jpg" },
-  "2019-10": { title: "Spieler, Miranda. \"Mobility.\" In McKenzie, K. (ed.), A Cultural History of Western Empires, vol. 5. Bloomsbury, 2019, 109–130.", journal: "", author: "", year: 2019, type: "article", url: "", cover: "bk_cultural_hist_western_empires.jpg" },
-  "2019-11": { title: "Culp, Julian. 2019. Review of David Alm, Moral Rights and Their Grounds. Notre Dame Philosophical Reviews.", journal: "", author: "", year: 2019, type: "article", url: "", cover: "notre_dame_phil_reviews.jpg" },
-  "2019-12": { title: "Sawyer, Stephen W. 2019. Review of Emmanuel Fureix & François Jarrige, La modernité désenchantée. Annales. Histoire, Sciences Sociales 74(2), 497–499.", journal: "", author: "", year: 2019, type: "article", url: "", cover: "annales.png" },
-  "2019-13": { title: "Spieler, Miranda. 2019. Review of Pascal Firges, French Revolutionaries in the Ottoman Empire. Journal of Modern History 91(3), 677–678.", journal: "", author: "", year: 2019, type: "article", url: "", cover: "journal_modern_history.png" },
-  "2019-2": { title: "Sparrow, J.T., Novak, W.J., Sawyer, S.W. (eds.) Boundaries of the State in US History. University of Chicago Press, 2019.", journal: "", author: "", year: 2019, type: "article", url: "", cover: "bk_boundaries_state.jpg" },
-  "2019-3": { title: "Sawyer, S.W. & Steinmetz-Jenkins, D. (eds.) Foucault, Neoliberalism, and Beyond. Bloomsbury, 2019.", journal: "", author: "", year: 2019, type: "article", url: "", cover: "bk_foucault_neoliberalism.webp" },
-  "2019-4": { title: "Flügel-Martinsen, O., Martinsen, F., Sawyer, S.W., Schulz, D. (eds.) Pierre Rosanvallon's Political Thought. Transcript Verlag, 2019.", journal: "", author: "", year: 2019, type: "article", url: "", cover: "bk_rosanvallon_political.jpg" },
-  "2019-5": { title: "Culp, Julian. 2019. \"Die praktische Relevanz des politischen Liberalismus.\" In Liberalismus: Traditionsbestände und Gegenwartskontroversen, 387–408.", journal: "", author: "", year: 2019, type: "article", url: "", cover: "bk_lib_hb.jpg" },
-  "2019-6": { title: "Culp, Julian. \"Is There a Universal Grammar of Justice?\" Philosophy and Public Issues 9(3), 145–174, 2019.", journal: "", author: "", year: 2019, type: "article", url: "", cover: "philosophy_public_issues.jpg" },
-  "2019-7": { title: "Culp, Julian. \"On the compatibility of global democratic justice and Confucianism.\" In Global justice in East Asia, 34–51, 2019.", journal: "", author: "", year: 2019, type: "article", url: "", cover: "bk_global_justice_east_asia.jpg" },
-  "2019-8": { title: "Culp, Julian. \"Two tales of the capability approach.\" Journal of Human Development and Capabilities 20(3), 362–367, 2019.", journal: "", author: "", year: 2019, type: "article", url: "", cover: "jhdc.jpg" },
-  "2019-9": { title: "Sawyer, S.W., Novak, W.J., Sparrow, J.T. \"Social Freedom, Democracy and the Political: Three Reflections on Axel Honneth's Idea of Socialism.\" Tocqueville Review 40, 241, 2019.", journal: "", author: "", year: 2019, type: "article", url: "", cover: "blog-tocq.svg" },
-  "2020-1": { title: "Culp, Julian. \"A vindication of transnational democratic education — replies to Festl, Beckstein and Geiss.\" Ethics & Global Politics 13(3), 155–174, 2020.", journal: "", author: "", year: 2020, type: "article", url: "", cover: "ethics_global_politics.png" },
-  "2020-10": { title: "Maggor, N. & Sawyer, S.W. \"Fiscal Federalism: Local Debt and the Construction of the Modern State in the United States and France.\" In A World of Public Debts, 231–258, 2020.", journal: "", author: "", year: 2020, type: "article", url: "", cover: "bk_world_public_debts.jpg" },
-  "2020-11": { title: "Novak, W.J. & Sawyer, S.W. \"Epilogue: The Need for a New and Critical Democracy.\" The Tocqueville Review 41(2), 109–118, 2020.", journal: "", author: "", year: 2020, type: "article", url: "", cover: "blog-tocq.svg" },
-  "2020-12": { title: "Spieler, Miranda. \"Slave Voice and the Legal Archive: Freedom Suits before the Paris Admiralty Court.\" In White, S., Burnard, T. (eds.), Hearing Enslaved Voices. London: Routledge, 2020, 165–187.", journal: "", author: "", year: 2020, type: "article", url: "", cover: "bk_hearing_enslaved_voices.jpg" },
-  "2020-13": { title: "Spieler, Miranda. \"The Right to Come and Go.\" Law and History Review 38(3), 2020, 555–570.", journal: "", author: "", year: 2020, type: "article", url: "", cover: "law_history_review.jpg" },
-  "2020-14": { title: "Zarić, Zona. \"Human Rights: Moral Claims and the Crisis of Hospitality.\" Filozofija i društvo 31(4), 649–660, 2020.", journal: "", author: "", year: 2020, type: "article", url: "", cover: "fsla20.jpg" },
-  "2020-15": { title: "Culp, Julian (ed.). 2020. Special Issue on Global Justice and Education. Global Justice: Theory Practice Rhetoric 12(01), i–ii.", journal: "", author: "", year: 2020, type: "article", url: "", cover: "None" },
-  "2020-16": { title: "Sawyer, Stephen W. 2020. Review of Pierre Rosanvallon, Le modèle politique français. Annales. Histoire, Sciences Sociales 75(3–4), 870–875.", journal: "", author: "", year: 2020, type: "article", url: "", cover: "annales.png" },
-  "2020-17": { title: "Spieler, Miranda. 2020. Review of Edward Rugemer, Slave Law and the Politics of Resistance. William and Mary Quarterly 77(4), 711–715.", journal: "", author: "", year: 2020, type: "article", url: "", cover: "None" },
-  "2020-18": { title: "Zarić, Zona & Mladenović, I. 2020. \"Resurgence of Authoritarianism and Civil Resistance.\" Living With Plagues, Buffett Institute, Northwestern University. plagues.buffett.northwestern.edu/impressions-and-reflections/zaric-mladenovic/", journal: "", author: "", year: 2020, type: "article", url: "", cover: "None" },
-  "2020-2": { title: "Culp, Julian. 2020. \"Bildung und Gerechtigkeit.\" Zeitschrift für philosophische Forschung 74(2), 296–309.", journal: "", author: "", year: 2020, type: "article", url: "", cover: "zphf.png" },
-  "2020-3": { title: "Culp, Julian. \"Discourse ethics, epistemology, and educational justice: A reply to Harvey Siegel.\" Theory and Research in Education 18(2), 151–173, 2020.", journal: "", author: "", year: 2020, type: "article", url: "", cover: "theory_research_education.webp" },
-  "2020-4": { title: "Culp, Julian. 2020. \"Education and Justice.\" Zeitschrift für philosophische Forschung 74(2), 296–309. (English version)", journal: "", author: "", year: 2020, type: "article", url: "", cover: "zphf.png" },
-  "2020-5": { title: "Culp, Julian & Zwarthoed, D. (eds.) Education and Migration. Routledge, 2020.", journal: "", author: "", year: 2020, type: "article", url: "", cover: "bk_education_migration.jpg" },
-  "2020-6": { title: "Culp, Julian. \"Educational justice.\" Philosophy Compass 15(12), e12713, 2020.", journal: "", author: "", year: 2020, type: "article", url: "", cover: "philosophy_compass.gif" },
-  "2020-7": { title: "Culp, Julian. 2020. \"Educação cidadã, consciência democrática e globalização.\" Perspectiva filosófica 45(2).", journal: "", author: "", year: 2020, type: "article", url: "", cover: "perspectiva_filosofica.png" },
-  "2020-8": { title: "Culp, Julian. 2020. \"Provincializing 'the West' by Essentializing 'the East'?\" On Education: journal for research and debate 3(7).", journal: "", author: "", year: 2020, type: "article", url: "", cover: "on_education.png" },
-  "2020-9": { title: "Sawyer, Stephen W. \"Adolphe Thiers, au-delà de la justification.\" Grief 72(2), 94–98, 2020.", journal: "", author: "", year: 2020, type: "article", url: "", cover: "grief.webp" },
-  "2021-1": { title: "Culp, Julian. 2021. \"Democratic School Education and the Crisis of representative Democracy.\" Zeitschrift für Pädagogik 67(4), 528–542.", journal: "", author: "", year: 2021, type: "article", url: "", cover: "z_padagogik.png" },
-  "2021-10": { title: "Ducange, Jean-Numa, Larcher, Silyane & Sawyer, Stephen W. 2021. \"La République multiple.\" In D'ici et d'ailleurs. Paris: La Découverte.", journal: "", author: "", year: 2021, type: "article", url: "", cover: "bk_dici.jpg" },
-  "2021-11": { title: "Sawyer, Stephen W. 2021. \"The Forgotten Democratic Tradition of Revolutionary France.\" Modern Intellectual History 18(3), 629–657.", journal: "", author: "", year: 2021, type: "article", url: "", cover: "modern_intellectual_history.jpg" },
-  "2021-12": { title: "Sawyer, Stephen W. 2021. \"Un procès en légitimité. Adolphe Thiers, la Commune et les fondements démocratiques de la République.\" Revue d'histoire du XIXe siècle. 63: 39–56.", journal: "", author: "", year: 2021, type: "article", url: "", cover: "r1848.png" },
-  "2021-13": { title: "Spieler, Miranda. 2021. \"Peasant Resistance in Postrevolutionary Haiti.\" Reviews in American History. 49(3): 413–421.", journal: "", author: "", year: 2021, type: "article", url: "", cover: "rah.jpg" },
-  "2021-14": { title: "Spieler, Miranda. 2021. \"Être esclave dans une capitale impériale: Paris XVIIIe siècle.\" dans Histoire mondiale de l'esclavage. Edited by Paulin Ismard, Benedetta Rossi, and Cécile Vidal, 245–252. Paris: Seuil.", journal: "", author: "", year: 2021, type: "article", url: "", cover: "bk_esclavage.jpg" },
-  "2021-15": { title: "Zinigrad, Roman. 2021. \"Parental Rights in Education under International Law: Nature and Scope.\" in Realizing the Abidjan Principles on the Right to Education 79–103. F. Adamson et al. eds. Elgar Publishing.", journal: "", author: "", year: 2021, type: "article", url: "", cover: "bk_abidjan.jpg" },
-  "2021-16": { title: "Sawyer, Stephen W. & Zinigrad, Roman. 2021. Cultural Drivers of Radicalization in France. The American University of Paris. D.Rad. pp.71. halshs-04471785.", journal: "", author: "", year: 2021, type: "article", url: "", cover: "drad_logo_clean.png" },
-  "2021-17": { title: "Sawyer, Stephen W. & Zinigrad, Roman. 2021. De-radicalization and Integration in France: Legal & Policy Framework. The American University of Paris. D.Rad. pp.81. halshs-04471780.", journal: "", author: "", year: 2021, type: "article", url: "", cover: "drad_logo_clean.png" },
-  "2021-18": { title: "Sawyer, Stephen W. & Zinigrad, Roman. 2021. Stakeholders of (De)-Radicalization in France. American University of Paris. D.Rad. pp.62. halshs-04471763.", journal: "", author: "", year: 2021, type: "article", url: "", cover: "drad_logo_clean.png" },
-  "2021-19": { title: "Sawyer, Stephen W. & Zinigrad, Roman. 2021. Trends of Radicalization in France. The American University of Paris. D.Rad. pp.64. halshs-04471773.", journal: "", author: "", year: 2021, type: "article", url: "", cover: "drad_logo_clean.png" },
-  "2021-2": { title: "Culp, Julian & Drerup, Johannes. 2021. \"Demokratieerziehung und die Herausforderungen des Liberalismus.\" Zeitschrift für Pädagogik, Ausgabe 4.", journal: "", author: "", year: 2021, type: "article", url: "", cover: "zpaed_alt.jpg" },
-  "2021-20": { title: "Zarić, Zona et al. \"Pierre Bourdieu and politics.\" Filozofija i Društvo 32(4), 567–586, 2021.", journal: "", author: "", year: 2021, type: "article", url: "", cover: "filozofija_i_drustvo.jpg" },
-  "2021-21": { title: "Zarić, Zona & Bégué, P. Soin et compassion: Un nouveau paradigme pour la philosophie politique? Hermann, 2021.", journal: "", author: "", year: 2021, type: "article", url: "", cover: "soin_et_compassion.jpg" },
-  "2021-22": { title: "Zarić, Zona & Mladenović, I. \"The pandemic: A breeding ground for authoritarian power grabs.\" Glasnik Etnografskog instituta SANU 69, 2021.", journal: "", author: "", year: 2021, type: "article", url: "", cover: "None" },
-  "2021-23": { title: "Spieler, Miranda. 2021. Review of Brandon Byrd, The Black Republic. Slavery and Abolition, 42(2): 415–417.", journal: "", author: "", year: 2021, type: "article", url: "", cover: "fsla20.jpg" },
-  "2021-24": { title: "Spieler, Miranda. 2021. Review of Sophie White, Voices of the Enslaved. Slavery and Abolition. 42(3): 653–654.", journal: "", author: "", year: 2021, type: "article", url: "", cover: "fsla20.jpg" },
-  "2021-25": { title: "Culp, Julian. 2021. \"Licht und Schatten John Rawls' politischer Philosophie.\" praefaktisch-Blog, February 28.", journal: "", author: "", year: 2021, type: "article", url: "", cover: "blog-prae.png" },
-  "2021-26": { title: "Sawyer, Stephen W. & Zinigrad, Roman. 2021. \"The Democratic Promise of 'Deradicalization'.\" Tocqueville21 (02.06.2021).", journal: "", author: "", year: 2021, type: "article", url: "", cover: "blog-tocq.svg" },
-  "2021-3": { title: "Culp, Julian. 2021. \"John Rawls.\" in Festl, Michael G. (ed.), Liberalismus Handbuch. Stuttgart: Metzler, 149–156.", journal: "", author: "", year: 2021, type: "article", url: "", cover: "bk_lib_hb.jpg" },
-  "2021-4": { title: "Culp, Julian. 2021. \"Martha Nussbaum.\" in Festl, Michael G. (ed.), Liberalismus Handbuch. Stuttgart: Metzler, 165–171.", journal: "", author: "", year: 2021, type: "article", url: "", cover: "bk_lib_hb.jpg" },
-  "2021-5": { title: "Culp, Julian. 2021. \"Schulische Demokratieerziehung und die Krise der repräsentativen Demokratie.\" Zeitschrift für Pädagogik, 2021/4, 528–542.", journal: "", author: "", year: 2021, type: "article", url: "", cover: "zpaed_alt.jpg" },
-  "2021-6": { title: "Culp, Julian. 2021. \"Supranationalität.\" in Festl, Michael G. (ed.), Liberalismus Handbuch. Stuttgart: Metzler, 263–268.", journal: "", author: "", year: 2021, type: "article", url: "", cover: "bk_lib_hb.jpg" },
-  "2021-7": { title: "Sawyer, Stephen W. 2021. \"'Paris Broken, but Paris Liberated'? The State, City Administration and Scales of Reconstruction in Post-War Paris, 1944–1976.\" Cold War Cities, Tze-ki Hon, ed. Routledge.", journal: "", author: "", year: 2021, type: "article", url: "", cover: "bk_coldwar.jpg" },
-  "2021-8": { title: "Sawyer, Stephen W. 2021. \"From Histories of Liberalism to a History of the Demos: Toward a Democratic Critique of Neoliberalism.\" Consecutio Rerum, Anno 5, no 9.", journal: "", author: "", year: 2021, type: "article", url: "", cover: "cr_current.jpg" },
-  "2021-9": { title: "Delalande, Nicolas & Sawyer, Stephen W. 2021. \"La fabrique transnationale de l'État.\" In D'ici et d'ailleurs. Histoires globales de la France contemporaine, Quentin Deluermoz, ed. Paris: La Découverte.", journal: "", author: "", year: 2021, type: "article", url: "", cover: "bk_dici.jpg" },
-  "2022-1": { title: "Culp, Julian, Drerup, Johannes, de Groot, Isolde, Schinkel, Anders & Yacek, Douglas (eds.). Liberal Democratic Education: A Paradigm in Crisis. Brill, 2022.", journal: "", author: "", year: 2022, type: "article", url: "", cover: "liberal_democratic_education.jpg" },
-  "2022-10": { title: "Spieler, Miranda. 2022. \"Viande de barbecue.\" dans L'Épicerie du monde. Edited by Pierre Singravélou, 17–21. Paris: Fayard.", journal: "", author: "", year: 2022, type: "article", url: "", cover: "bk_epicerie.jpg" },
-  "2022-11": { title: "Valeonti, Sofia. 2022. \"Henry C. Carey's Monetary Thought and American Industrialization in the Greenbacks Debate.\" History of Political Economy 54(2): 186–216.", journal: "", author: "", year: 2022, type: "article", url: "", cover: "hope_58_2.png" },
-  "2022-12": { title: "Dimand, Robert & Valeonti, Sofia. 2022. \"Irving Fisher, Simon Newcomb, and Their Plans to Stabilize the Dollar.\" The European Journal of the History of Economic Thought 29(6): 1052–1065.", journal: "", author: "", year: 2022, type: "article", url: "", cover: "rejh20.jpg" },
-  "2022-13": { title: "Zarić, Zona & Pudar Draško, G. (eds.) Angažovane reči. Beograd: IFDT, 2022.", journal: "", author: "", year: 2022, type: "article", url: "", cover: "bk_angazovane.jpg" },
-  "2022-14": { title: "Zarić, Zona & Pantović, L. \"Care in the Anthropocene: Acting with compassion.\" Filozofija i društvo 33(4), 881–894, 2022.", journal: "", author: "", year: 2022, type: "article", url: "", cover: "filozofija_i_drustvo.jpg" },
-  "2022-15": { title: "Zarić, Zona et al. \"The ethics and politics of care in times of crises.\" Filozofija i društvo 33(4), 934–946, 2022.", journal: "", author: "", year: 2022, type: "article", url: "", cover: "filozofija_i_drustvo.jpg" },
-  "2022-16": { title: "Culp, Julian. 2022. Demokratie und Digitalisierung in der Erwachsenenbildung. Vienna: Austrian Federal Ministry of Education, Science and Research (BMBWF).", journal: "", author: "", year: 2022, type: "article", url: "", cover: "bk_demok_digit.jpg" },
-  "2022-17": { title: "Sawyer, Stephen W. & Zinigrad, Roman. 2022. \"Radicalizing Law to Deradicalize Society: The French Legislative Arsenal of Deradicalization and the Threat to Human Rights.\" D.Rad Blog.", journal: "", author: "", year: 2022, type: "article", url: "", cover: "drad_logo_clean.png" },
-  "2022-2": { title: "Culp, Julian. 2022. \"Does Democratic Citizenship Education Engineer Consent to Political Authority?\" in Luppi, Roberto (ed.), Autorità e democrazia. Rome: Armando Editore, 163–176.", journal: "", author: "", year: 2022, type: "article", url: "", cover: "bk_autorita.jpg" },
-  "2022-3": { title: "Culp, Julian. 2022. \"Four Challenges to Political Autonomy Education in Contemporary Public Spheres.\" On Education. Journal for Research and Debate 5(14).", journal: "", author: "", year: 2022, type: "article", url: "", cover: "oneed.svg" },
-  "2022-4": { title: "Culp, Julian. 2022. \"Global Democratic Educational Justice.\" in Curren, Randall (ed.), Routledge Handbook of Philosophy of Education. London: Routledge, 245–56.", journal: "", author: "", year: 2022, type: "article", url: "", cover: "bk_routl_hb.jpg" },
-  "2022-5": { title: "Culp, Julian. 2022. \"Symposium on Peter Hägel's Billionaires in World Politics.\" The Journal of Global Ethics, 18/2.", journal: "", author: "", year: 2022, type: "article", url: "", cover: "journal_global_ethics.webp" },
-  "2022-6": { title: "Culp, Julian. 2022. \"Zur postkolonialen Kritik globaler demokratischer Bildungsgerechtigkeit.\" in Drerup, Johannes und Philipp Knobloch (eds.), Bildung in postkolonialen Konstellationen. Bielefeld: transcript, 235–260.", journal: "", author: "", year: 2022, type: "article", url: "", cover: "bk_postkol.jpg" },
-  "2022-7": { title: "Sawyer, Stephen W. 2022. \"Deglobalizing the Global History of Europe.\" Annales Histoire et Sciences Sociales, 1–11.", journal: "", author: "", year: 2022, type: "article", url: "", cover: "ane.jpg" },
-  "2022-8": { title: "Sawyer, Stephen W. & Novak, William J. 2022. \"Of Rights and Regulation: Technologies of Socio-economic Governance in a Revolutionary Age.\" in Social Rights and the Politics of Obligation in History, Walton, Charles and Jensen, Steven, eds. Cambridge University Press.", journal: "", author: "", year: 2022, type: "article", url: "", cover: "bk_ofrights.jpg" },
-  "2022-9": { title: "Novak, W.J. & Sawyer, Stephen W. 2022. \"Possibilidades de uma História Pragmática do Político / Possibilities of a Pragmatic History of the Political.\" Revista da Faculdade de Direito da UERJ 41, 1–17.", journal: "", author: "", year: 2022, type: "article", url: "", cover: "rfd_uerj.jpg" },
-  "2023-1": { title: "Culp, Julian, Drerup, Johannes & Yacek, Douglas (eds.). The Cambridge Handbook of Democratic Education. Cambridge University Press, 2023.", journal: "", author: "", year: 2023, type: "article", url: "", cover: "cambridge_handbook.jpg" },
-  "2023-10": { title: "Culp, Julian & Drerup, Johannes. 2023. \"Equality of Educational Opportunity.\" in Sardoč, Mitja (ed.), Handbook of Equality of Opportunity. Berlin: Springer, 1–25.", journal: "", author: "", year: 2023, type: "article", url: "", cover: "bk_equal_opp.jpg" },
-  "2023-11": { title: "Culp, Julian. 2023. \"Ethics of Education.\" in Sellers, Mortimer, and Stephan Kirste (eds.), Encyclopedia of the Philosophy of Law and Social Philosophy. Berlin: Springer, 1–7.", journal: "", author: "", year: 2023, type: "article", url: "", cover: "bk_encyc_law_social.webp" },
-  "2023-12": { title: "Culp, Julian. 2023. \"Thomas Pogge.\" in Rawls-Handbuch. Stuttgart: Metzler, 497–503.", journal: "", author: "", year: 2023, type: "article", url: "", cover: "rawls_handbuch.jpeg" },
-  "2023-13": { title: "Culp, Julian, Drerup, J. & Yacek, D. 2023. \"What is democratic education and why should we care?\" In The Cambridge Handbook of Democratic Education.", journal: "", author: "", year: 2023, type: "article", url: "", cover: "cambridge_handbook.jpg" },
-  "2023-14": { title: "Ron, Ariel & Valeonti, Sofia. 2023. \"The Money War: An Interpretation of Democracy, Depreciation, and Taxes in the U.S. Civil War.\" Cambridge Journal of Economics 47(2): 263–268.", journal: "", author: "", year: 2023, type: "article", url: "", cover: "cje_cpes.jpg" },
-  "2023-15": { title: "Novak, William J. & Sawyer, Stephen W. 2023. \"Une Histoire Pragmatique du Politique.\" Histoire @ Politique 51: 184–193.", journal: "", author: "", year: 2023, type: "article", url: "", cover: "hp.png" },
-  "2023-16": { title: "Sawyer, Stephen W. 2023. \"¿Qué es la democracia crítica?\" Multitudes 90(1), 113–118.", journal: "", author: "", year: 2023, type: "article", url: "", cover: "mult.jpg" },
-  "2023-17": { title: "Spieler, Miranda. 2023. Review of Cecile Vidal, Caribbean New Orleans. Annales: Histoire, Sciences Sociales 4: 828–831.", journal: "", author: "", year: 2023, type: "article", url: "", cover: "ane.jpg" },
-  "2023-18": { title: "Spieler, Miranda. 2023. \"L'Enlèvement des esclaves de Paris des Lumières.\" In Colonisations: notre histoire, 120–122. Paris: Seuil.", journal: "", author: "", year: 2023, type: "article", url: "", cover: "bk_colonisations.jpg" },
-  "2023-19": { title: "Spieler, Miranda. 2023. Forum comment on David Todd, Velvet Empire (2022). H-Diplo Roundtable.", journal: "", author: "", year: 2023, type: "article", url: "", cover: "hfra.jpg" },
-  "2023-2": { title: "Wu, Albert & Sawyer, Stephen W. (eds.). The Making of a World Order: Global Historical Perspectives on the Paris Peace Conference and the Treaty of Versailles. Routledge, 2023.", journal: "", author: "", year: 2023, type: "article", url: "", cover: "making_of_world_order.jpg" },
-  "2023-20": { title: "Mladenović, Ivica, Milosavljević, Dušanka & Zarić, Zona. 2023. \"Critical sociology.\" In: Manuel of Critique, ed. Marjan Ivković and Željko Radinković. 465–494. Belgrade: Akademska knjiga.", journal: "", author: "", year: 2023, type: "article", url: "", cover: "bk_manuel.jpg" },
-  "2023-21": { title: "Hristov, George, Zaharijević, Adriana & Zarić, Zona. 2023. \"Critique of the Master-Slave Dialectic.\" In: Manuel of Critique, ed. Marjan Ivković and Željko Radinković. 263–294. Belgrade: Akademska knjiga.", journal: "", author: "", year: 2023, type: "article", url: "", cover: "bk_manuel.jpg" },
-  "2023-22": { title: "Mladenović, I., Milosavljević, D. & Zarić, Zona. 2023. \"Kritička sociologija.\" Priručnik kritike, p. 465.", journal: "", author: "", year: 2023, type: "article", url: "", cover: "None" },
-  "2023-23": { title: "Zinigrad, Roman. 2023. \"Commentary on the Abidjan Principles: Obligations to Respect, Protect, and Fulfil the Right to Education in the Context of Private Involvement.\" Oxford Hum. Rights Hub J.", journal: "", author: "", year: 2023, type: "article", url: "", cover: "OxHRH-Journal-Cover-2018.jpg" },
-  "2023-24": { title: "Zinigrad, Roman & Sawyer, Stephen W. 2023. \"State and Religion: The French Response to Jihadist Violence.\" 14(8) Religions 1010.", journal: "", author: "", year: 2023, type: "article", url: "", cover: "religions_real.png" },
-  "2023-25": { title: "Sawyer, Stephen W. & Zinigrad, Roman. 2023. Civic Education Programs as Preventive Measures in France. The American University of Paris. D.Rad. pp.22. halshs-04471801.", journal: "", author: "", year: 2023, type: "article", url: "", cover: "drad_logo_clean.png" },
-  "2023-26": { title: "Sawyer, Stephen W. & Zinigrad, Roman. 2023. Mainstreaming, Gender, and Communication in France. The American University of Paris. D.Rad. pp.95. halshs-04471793.", journal: "", author: "", year: 2023, type: "article", url: "", cover: "drad_logo_clean.png" },
-  "2023-27": { title: "Culp, Julian. 2023. Review of Krassimir Stojanov, Bildung gegen Populismus? Zeitschrift für Didaktik der Philosophie und Ethik 45/4, 117.", journal: "", author: "", year: 2023, type: "article", url: "", cover: "zpaed_alt.jpg" },
-  "2023-28": { title: "Zinigrad, Roman. 2023. \"The False Hope of Israel's Protestors: Why The Supreme Court Is Not (And Never Was) The Last Bastion of Democracy.\" VerfBlog (08.09.2023).", journal: "", author: "", year: 2023, type: "article", url: "", cover: "blog-verf.png" },
-  "2023-3": { title: "Zarić, Zona, Mladenović, I. & Urošević, M. (eds.) Pjer Burdije: radikalna misao i praxis. Beograd: IFDT, 2023.", journal: "", author: "", year: 2023, type: "article", url: "", cover: "bk_burdije.jpg" },
-  "2023-4": { title: "Zarić, Zona & Pudar Draško, G. (eds.) Refusing to Be Silent. Engaged Conversations With Leading Intellectuals. Mimesis International, 2023.", journal: "", author: "", year: 2023, type: "article", url: "", cover: "bk_refusing.jpg" },
-  "2023-5": { title: "Colin-Jaeger, Nathanaël. 2023. \"Raison publique, libéralisme, pluralisme et complexité : la contribution de Gerald Gaus à la philosophie politique.\" Raisons Politiques, 92(4): 85–94.", journal: "", author: "", year: 2023, type: "article", url: "", cover: "rai.jpg" },
-  "2023-6": { title: "Culp, Julian. 2023. \"Democratic Citizenship Education in Digitized Societies — A Habermasean Approach.\" Educational Theory 73/2, 178–203.", journal: "", author: "", year: 2023, type: "article", url: "", cover: "edu_theory.jpg" },
-  "2023-7": { title: "Culp, Julian. 2023. Review essay of Sam Wong, \"Democratic Education in a Globalized World.\" A Development Education Review.", journal: "", author: "", year: 2023, type: "article", url: "", cover: "None" },
-  "2023-8": { title: "Culp, Julian. 2023. \"Demokratie.\" in Rawls-Handbuch. Stuttgart: Metzler, 213–217.", journal: "", author: "", year: 2023, type: "article", url: "", cover: "rawls_handbuch.jpeg" },
-  "2023-9": { title: "Culp, Julian. 2023. \"Education and Poverty.\" In The Routledge Handbook of Philosophy and Poverty, 465–475.", journal: "", author: "", year: 2023, type: "article", url: "", cover: "bk_routl_hb.jpg" },
-  "2024-1": { title: "Zarić, Zona & Marjan Ivković. Nancy Fraser and Politics. Edinburgh University Press, 2024.", journal: "", author: "", year: 2024, type: "article", url: "", cover: "nancy_fraser_and_politics.jpg" },
-  "2024-10": { title: "Culp, Julian. 2024. \"Global Justice Must Be Seen To Be Done — A Defense of Integrated Pluralism.\" Journal of International Political Theory.", journal: "", author: "", year: 2024, type: "article", url: "", cover: "wp_ipt.jpg" },
-  "2024-11": { title: "Culp, Julian. 2024. \"Morally philosophizing the indefensible or politically theorizing the disagreeable?\" Ethics & Global Politics, 17/4, 16–24.", journal: "", author: "", year: 2024, type: "article", url: "", cover: "zegp20.jpg" },
-  "2024-12": { title: "Culp, Julian. 2024. \"The Global Crisis and the Psychological Feasibility of Internationalism.\" Social Philosophy and Policy 40/2, 372–86.", journal: "", author: "", year: 2024, type: "article", url: "", cover: "soy.jpg" },
-  "2024-13": { title: "Dageförde, Mirjam. \"Do they get close? Party shifts and changes in parliamentary congruence on multiple issue dimensions in the wake of the crises.\" Representation 60(3), 507–533, 2024.", journal: "", author: "", year: 2024, type: "article", url: "", cover: "None" },
-  "2024-14": { title: "Dageförde, Mirjam. \"Repräsentation und das Verhältnis von Bürgern und Politik in Deutschland und Frankreich.\" In Die Gesellschaften Europas und ihre Zukunft. Frankreich Jahrbuch 2023 (Nomos), 185–204, 2024.", journal: "", author: "", year: 2024, type: "article", url: "", cover: "bk_routl_hb.jpg" },
-  "2024-15": { title: "Ayadi, M., Dageförde, Mirjam, Lang, J. & Laslier, J.-F. \"Réinventer la démocratie française: le grand débat des modes de scrutin.\" Dauphine éclairages, 2024.", journal: "", author: "", year: 2024, type: "article", url: "", cover: "dauphine_eclairages.png" },
-  "2024-16": { title: "Shyriaieva, T., Vergouli, E. & Sawyer, Stephen W. \"'Psychology has a fundamental role to play in forging a politically constituted society of equals'.\" The Psychologist 37, 2024. (Interview)", journal: "", author: "", year: 2024, type: "article", url: "", cover: "None" },
-  "2024-17": { title: "Sawyer, Stephen W. \"Doubling Democracy.\" The Tocqueville Review / La Revue Tocqueville 45(2), 204–211, 2024.", journal: "", author: "", year: 2024, type: "article", url: "", cover: "" },
-  "2024-18": { title: "Spieler, Miranda. 2024. \"Ourika and the Chevalier de Boufflers.\" In French Revolutionary Lives. Edited by David Bell and Colin Jones, 29–47. Palgrave MacMillan.", journal: "", author: "", year: 2024, type: "article", url: "", cover: "bk_frev.png" },
-  "2024-19": { title: "Zarić, Zona. 2024. \"Pour une praxis de la compassion.\" Multitude 96: 100–105.", journal: "", author: "", year: 2024, type: "article", url: "", cover: "mult.jpg" },
-  "2024-2": { title: "Democratic Theory, Volume 11:2 (Dec 2024). \"What Demos and Kratos for the 21st Century?\" Guest edited by Julian Culp and Stephen W. Sawyer.", journal: "", author: "", year: 2024, type: "article", url: "", cover: "demt.jpg" },
-  "2024-20": { title: "Zarić, Zona. 2024. \"The Rapeability and Takeability of Bodies and Lands.\" In: Contours of Change, ed. Sanja Bojanić and Valeria Graziano. 176–189. Rijeka: CAS SEE University of Rijeka.", journal: "", author: "", year: 2024, type: "article", url: "", cover: "bk_contours.png" },
-  "2024-21": { title: "Zinigrad, Roman. 2024. \"Laughing Matters in Courts: Humor and the Normalization of Hate Speech.\" Alternatives 2024. doi.org/10.1177/03043754241244891.", journal: "", author: "", year: 2024, type: "article", url: "", cover: "wp_alt.jpg" },
-  "2024-22": { title: "Colin-Jaeger, Nathanaël. 2024. Review of Philippe Nemo, La philosophie de Hayek (PUF, 2023). Revue française de science politique 74(4), 790–791.", journal: "", author: "", year: 2024, type: "article", url: "", cover: "revue_francaise_sci_pol.webp" },
-  "2024-23": { title: "Culp, Julian. 2024. Review of Craig Calhoun, Dilip Parameshwar Gaonkar, and Charles Taylor, Degenerations of Democracy. Constellations 31/1, 124–6.", journal: "", author: "", year: 2024, type: "article", url: "", cover: "constellations.jpg" },
-  "2024-24": { title: "Culp, Julian. 2024. Review of Markus Tiedemann, Post-Aufklärungsgesellschaft. Zeitschrift für Didaktik der Philosophie und Ethik 46/1, 123–4.", journal: "", author: "", year: 2024, type: "article", url: "", cover: "zpaed_alt.jpg" },
-  "2024-25": { title: "Spieler, Miranda. 2024. Review of Edenz Maurice, La Guyane: la promesse républicaine. H-France Review Vol. 24 (December 2024), No. 68.", journal: "", author: "", year: 2024, type: "article", url: "", cover: "hfra.jpg" },
-  "2024-26": { title: "Zarić, Zona. Review of Cynthia Fleury, Here Lies Bitterness: Healing from Resentment. Filozofija i Društvo 35(1), 2024.", journal: "", author: "", year: 2024, type: "article", url: "", cover: "filozofija_i_drustvo.jpg" },
-  "2024-27": { title: "Zinigrad, Roman. 2024. \"How Social Media Amplifies Support for the Far Right in France.\" LSE EUROPP (Sep. 2, 2024).", journal: "", author: "", year: 2024, type: "article", url: "", cover: "blog-europp.jpg" },
-  "2024-28": { title: "Sawyer, Stephen W. & Zinigrad, Roman. 2024. Country Brief: A Social Psychological Perspective on Trends of Extremism in France. The American University of Paris. D.Rad. pp.12. halshs-04800435.", journal: "", author: "", year: 2024, type: "article", url: "", cover: "drad_logo_clean.png" },
-  "2024-3": { title: "Colin-Jaeger, Nathanaël. 2024. \"Can We Design Spontaneity?\" Erasmus Journal for Philosophy and Economics, 17(1): 66–88.", journal: "", author: "", year: 2024, type: "article", url: "", cover: "ejpe.jpg" },
-  "2024-4": { title: "Colin-Jaeger, Nathanaël. \"Can we design spontaneity? Hayek, design, and the normative appeal of spontaneous orders.\" Erasmus Journal for Philosophy and Economics 17(1), 66–88, 2024.", journal: "", author: "", year: 2024, type: "article", url: "", cover: "erasmus_jpe.png" },
-  "2024-5": { title: "Colin-Jaeger, Nathanaël. \"Divide and Rule (Better): An Argument for Polycentric Federalism.\" Revue philosophique de la France et de l'étranger 149(4), 475–498, 2024.", journal: "", author: "", year: 2024, type: "article", url: "", cover: "revue_philosophique.jpg" },
-  "2024-6": { title: "Colin-Jaeger, Nathanaël. 2024. \"Diviser pour mieux gouverner : en défense des fédérations polycentriques.\" Revue Philosophique de la France et de l'Etranger 149(4) : 475-498.", journal: "", author: "", year: 2024, type: "article", url: "", cover: "rphi.jpg" },
-  "2024-7": { title: "Colin-Jaeger, Nathanaël. 2024. \"La nature de la Fédération : ontologie et caractéristiques normatives.\" Implications Philosophiques.", journal: "", author: "", year: 2024, type: "article", url: "", cover: "impl.png" },
-  "2024-8": { title: "Culp, Julian. 2024. \"Deweyan Democracy and Education in a 'Society of Broadcasters'.\" in Festl, Michael (ed.), John Dewey and Contemporary Challenges to Democracy and Education, 87–104.", journal: "", author: "", year: 2024, type: "article", url: "", cover: "bk_dewey.jpg" },
-  "2024-9": { title: "Culp, Julian & Drerup, J. \"Equality of educational opportunity.\" In Handbook of Equality of Opportunity, 521–545, 2024.", journal: "", author: "", year: 2024, type: "article", url: "", cover: "bk_equal_opp.jpg" },
-  "2025-1": { title: "Sawyer, Stephen W. Demos Rising: Democracy and the Popular Construction of Public Power in France, 1800–1850. University of Chicago Press, 2025.", journal: "", author: "", year: 2025, type: "article", url: "", cover: "demos_rising.jpg" },
-  "2025-10": { title: "Culp, Julian. \"The Relationship between Rawls' ideal and non-ideal Theories of Justice.\" Zeitschrift für philosophische Forschung 79(4), 439–464, 2025.", journal: "", author: "", year: 2025, type: "article", url: "", cover: "zphf.png" },
-  "2025-11": { title: "Culp, Julian. 2025. \"Three Rawlsian Rationales for a Cultural Turn in Digital Citizenship Education.\" The Review of Politics 87/3, 369–392.", journal: "", author: "", year: 2025, type: "article", url: "", cover: "rop.jpg" },
-  "2025-12": { title: "Culp, Julian. 2025. \"Was können wir von der 'postmodernen' Kritik an der Erziehung zur Autonomie lernen?\" in Drerup, Johannes et al. (eds.), Mündigkeit. Frankfurt am Main: Wochenschau Verlag, 95–114.", journal: "", author: "", year: 2025, type: "article", url: "", cover: "bk_muendigkeit.jpg" },
-  "2025-13": { title: "Albertsen, Andreas & Lever, Annabelle. 2025. \"A new way to serve democracy: recruiting poll workers and electoral participation.\" Critical Review of International Social and Political Philosophy, 28: 866–885.", journal: "", author: "", year: 2025, type: "article", url: "", cover: "fcri20.jpg" },
-  "2025-14": { title: "Lever, Annabelle. 2025. \"Democracy and the Ethics of Voting.\" Critical Review of International Social and Political Philosophy, 28: 831–847.", journal: "", author: "", year: 2025, type: "article", url: "", cover: "fcri20.jpg" },
-  "2025-15": { title: "Lever, Annabelle. 2025. \"Lottocracy: For and Against.\" European Journal of Political Theory.", journal: "", author: "", year: 2025, type: "article", url: "", cover: "wp_ptx.jpg" },
-  "2025-16": { title: "Sawyer, Stephen W. \"Veridiction and the Democratic State of Exception in Billy Budd.\" In The Oxford Handbook of Herman Melville, 2025.", journal: "", author: "", year: 2025, type: "article", url: "", cover: "bk_routl_hb.jpg" },
-  "2025-17": { title: "Zarić, Zona. \"Care as Critical Methodology. Debating Butler.\" In Judith Butler and Marxism, 2025.", journal: "", author: "", year: 2025, type: "article", url: "", cover: "bk_butler.jpg" },
-  "2025-18": { title: "Zarić, Zona & Mladenović, I. \"Philosophical and Ethnological Foundations of Pierre Bourdieu's Sociology.\" Etnoantropološki problemi 20(2), 331–353, 2025.", journal: "", author: "", year: 2025, type: "article", url: "", cover: "None" },
-  "2025-19": { title: "Zarić, Zona & Mladenović, I. \"Politička filozofija francuske Pete republike.\" Međunarodni problemi 77(2), 225–253, 2025.", journal: "", author: "", year: 2025, type: "article", url: "", cover: "medjunarodni_problemi.jpg" },
-  "2025-2": { title: "Spieler, Miranda. Slaves in Paris: Hidden Lives and Fugitive Histories. Harvard University Press, 2025.", journal: "", author: "", year: 2025, type: "article", url: "", cover: "slaves_in_paris.jpg" },
-  "2025-20": { title: "Zarić, Zona & Pantović, L. \"Šta medicina čini ženskom telu?\" In Svi se plaše roda, 322–355, 2025.", journal: "", author: "", year: 2025, type: "article", url: "", cover: "bk_svi_se_plase_roda.jpg" },
-  "2025-21": { title: "Zarić, Zona. 2025. \"Butler and Fraser: The History of a Controversy.\" In: Judith Butler and Marxism: The Radical Feminism of Performativity, Vulnerability, and Care, ed. Elliot Mason and Valentina Moro. Bloomsbury Publishing.", journal: "", author: "", year: 2025, type: "article", url: "", cover: "bk_butler.jpg" },
-  "2025-22": { title: "Zinigrad, Roman. 2025. \"Laïcité and Regimes of Security: Weaponizing Republican Values against Muslims in France.\" Journal of Law, Religion, and State 1(1): 31–71.", journal: "", author: "", year: 2025, type: "article", url: "", cover: "jlrs.jpg" },
-  "2025-23": { title: "Zinigrad, Roman. \"Laïcité and Regimes of Security: Weaponizing Republican Values against Muslims in France.\" Journal of Law, Religion and State 13(1), 31–71, 2025.", journal: "", author: "", year: 2025, type: "article", url: "", cover: "j_law_religion_state.jpg" },
-  "2025-24": { title: "Zinigrad, Roman. 2025. \"Parental Rights Are Wrong: Toward a Regulatory Model of Parental Authority in Education.\" N.Y.U. Rev. L. & Soc. Change Harbinger 51: 14–22.", journal: "", author: "", year: 2025, type: "article", url: "", cover: "nyu.jpg" },
-  "2025-25": { title: "Dageförde, Mirjam & Lang, J., Laslier, J.-F. \"Élections : pourquoi la proportionnelle à l'allemande devrait inspirer la France.\" The Conversation France, 20 February 2025.", journal: "", author: "", year: 2025, type: "article", url: "", cover: "conversation_france.png" },
-  "2025-26": { title: "Zinigrad, Roman. 2025. \"The Dark Side of Humor: The ECtHR and the Normalization of Hate Speech.\" VerfBlog (14.05.2025).", journal: "", author: "", year: 2025, type: "article", url: "", cover: "blog-verf.png" },
-  "2025-27": { title: "Colin-Jaeger, Nathanaël. 2025. An Overview of Social Contract Theories: From Hobbes to Contemporary Theories. The American University of Paris. CO3. halshs-04954279.", journal: "", author: "", year: 2025, type: "article", url: "", cover: "co3_logo_clean.png" },
-  "2025-28": { title: "Colin-Jaeger, Nathanaël. 2025. D2.1 The Social Contract: History, Theory, and Contemporary Challenges. The American University of Paris. CO3. doi.org/10.5281/zenodo.17433539.", journal: "", author: "", year: 2025, type: "article", url: "", cover: "co3_logo_clean.png" },
-  "2025-29": { title: "Zinigrad, Roman & Colin-Jaeger, Nathanaël. 2025. Deep Roots of the Social Contract in France. The American University of Paris. CO3, D2.2. pp.66–71. doi.org/10.5281/zenodo.17433715.", journal: "", author: "", year: 2025, type: "article", url: "", cover: "co3_logo_clean.png" },
-  "2025-3": { title: "Critical Review of International Social and Political Philosophy, Volume 28:5 (2025). \"Democratic Ethics and Voting.\" Guest edited by Annabelle Lever & Attila Mráz.", journal: "", author: "", year: 2025, type: "article", url: "", cover: "fcri20.jpg" },
-  "2025-30": { title: "Zinigrad, Roman, Sawyer, Stephen W., Colin-Jaeger, Nathanaël & Mozolevska, Alina. 2025. Navigating Social Contracts and Grievances in the Era of Algorithmic Politics: The 2024 European Elections in France. University of Helsinki. HEPP Working Papers Vol. 4. pp.158–196. ISSN 2737-3657. hdl.handle.net/10138/625277.", journal: "", author: "", year: 2025, type: "article", url: "", cover: "" },
-  "2025-4": { title: "Colin-Jaeger, Nathanaël & Dold, M. \"Individual autonomy and public deliberation in behavioral public policy.\" Humanities and Social Sciences Communications 12(1), 1–10, 2025.", journal: "", author: "", year: 2025, type: "article", url: "", cover: "hssc.jpeg" },
-  "2025-5": { title: "Colin-Jaeger, Nathanaël & Hédoin, C., Espinel, C.O. \"Markets and Democracy: Introduction.\" Oeconomia, 2025.", journal: "", author: "", year: 2025, type: "article", url: "", cover: "oeconomia.jpg" },
-  "2025-6": { title: "Culp, Julian. 2025. \"Das Verhältnis Rawls' idealer und nicht-idealer Gerechtigkeitstheorie — vorrangig oder gleichursprünglich?\" Zeitschrift für philosophische Forschung 79/4, 439–464.", journal: "", author: "", year: 2025, type: "article", url: "", cover: "zphf_2026.png" },
-  "2025-7": { title: "Culp, Julian. 2025. OnlineFirst. \"Deciphering the Paradox of Digital Citizenship.\" Political Theory.", journal: "", author: "", year: 2025, type: "article", url: "", cover: "wp_ptx.jpg" },
-  "2025-8": { title: "Culp, Julian. 2025. \"Migration Ethics Between Ideal and Non-Ideal Theory.\" in Niederberger, Andreas et al. (eds.), Handbook of Migration Ethics. Berlin: Springer, 127–36.", journal: "", author: "", year: 2025, type: "article", url: "", cover: "bk_mig.jpg" },
-  "2025-9": { title: "Culp, Julian. 2025. \"Multicultural Education for Transnational Democratic Citizenship.\" Journal of Philosophy of Education 59/3–4, 413–433.", journal: "", author: "", year: 2025, type: "article", url: "", cover: "jope.jpg" },
-  "2026-1": { title: "Colin-Jaeger, Nathanaël. \"Alexandre Viala, Faut-il abandonner le pouvoir aux savants? La tentation de l'épistocratie (Dalloz, 2024).\" Revue de métaphysique et de morale, 135–138, 2026.", journal: "", author: "", year: 2026, type: "article", url: "", cover: "rmm.jpg" },
-  "2026-2": { title: "Culp, Julian. \"Non-ideal theorizing of democratic education.\" In Handbook on Education History, Philosophy and Theory, p. 112, 2026.", journal: "", author: "", year: 2026, type: "article", url: "", cover: "bk_edu_handbook.jpg" },
-  "2026-3": { title: "Stockemer, D., Abou-El-Kheir, E., Sawyer, S.W. \"Closing the gender gap in political science publishing: The role of female editorial boards.\" European Political Science, 2026, 1–11.", journal: "", author: "", year: 2026, type: "article", url: "", cover: "eps.jpg" },
-  "2026-4": { title: "Stockemer, D., Sawyer, S.W., Gagnon, A. \"Introduction.\" IPSA Companion to Political Science. 2026.", journal: "", author: "", year: 2026, type: "article", url: "", cover: "bk_ipsa_companion.jpg" },
-  "2026-5": { title: "Lever, Annabelle. \"Review of Dimitri Landa and Ryan Pevnick's Representative Democracy: A Justification (OUP 2025).\" Ethics (International Journal of Social, Political and Legal Philosophy), 2026.", journal: "", author: "", year: 2026, type: "article", url: "", cover: "ethics.png" },
-  "2026-6": { title: "Zinigrad, Roman. Review of Astrid von Busekist, Religion on Trial: An Essay on Deliberalism. Forthcoming in International Journal of Constitutional Law, 2026.", journal: "", author: "", year: 2026, type: "article", url: "", cover: "icon.jpg" }
-};
-
-/* ════════════════════════════════════════════════════════════
-   MODAL DATA STORE
-   ════════════════════════════════════════════════════════════ */
-const MODAL = {
-
-  /* ── Statistics ─────────────────────────────────────────── */
-  'stat-publications': {
-    type:'stat', eyebrow:'Publications',
-    headline:'186', subtitle:'Total publications by CCDS Fellows & Affiliates · 2016–2026',
-    intro:'Since its founding in 2016, the Center has produced 186 scholarly works across every genre of academic output — from authored monographs and edited volumes to peer-reviewed articles, EU policy reports, and scholarly reviews.',
-    bars:[
-      {label:'Articles & Book Chapters', val:127, max:186, color:'#E4002B'},
-      {label:'Book Reviews',             val:17,  max:186, color:'#002F6C'},
-      {label:'Books (authored/edited)',  val:16,  max:186, color:'#C9A24B'},
-      {label:'Policy Reports',           val:15,  max:186, color:'#5E5E5E'},
-      {label:'Blog Essays',              val:8,   max:186, color:'#8A9AAF'},
-      {label:'Special Issues (guest-ed)',val:3,   max:186, color:'#001F4D'},
-    ],
-    note:'Counts include all publications from 2016, or from the year each scholar joined the Center, whichever is later. Total citations across all works: 1,225.'
-  },
-
-  'stat-events': {
-    type:'stat', eyebrow:'Academic Events',
-    headline:'178', subtitle:'Academic events organised by CCDS · 2016–2026',
-    intro:'The Center has organised 178 academic events over a decade, spanning five recurring seminar series, major international conferences, intimate book talks, and thematic workshops.',
-    bars:[
-      {label:'Thematic Lectures & Seminars', val:71, max:178, color:'#001F4D'},
-      {label:'Seminar Series Sessions',       val:52, max:178, color:'#2E6B62'},
-      {label:'Book Launches & Talks',         val:33, max:178, color:'#C9A24B'},
-      {label:'Conferences & Symposia',        val:22, max:178, color:'#002F6C'},
-    ],
-    note:'Recurring seminar series: Demos 21 (23 sessions) · Care & Democracy (14) · UPEL (7) · Soulèvements ou Révolutions (5) · Critical Theory 101 (3)'
-  },
-
-  'stat-speakers': {
-    type:'stat', eyebrow:'Invited Guests',
-    headline:'545', subtitle:'Invited speakers & contributors from 43 countries, 176 cities',
-    intro:'The Center has hosted 545 distinct invited speakers and contributors from across the globe. France, the United States, and the United Kingdom together account for roughly three-quarters of all participants.',
-    bars:[
-      {label:'France',                val:185, max:545, color:'#E4002B'},
-      {label:'United States',         val:148, max:545, color:'#002F6C'},
-      {label:'United Kingdom',        val:72,  max:545, color:'#C9A24B'},
-      {label:'Germany',               val:35,  max:545, color:'#5E5E5E'},
-      {label:'Other (39 countries)',  val:105, max:545, color:'#8A9AAF'},
-    ],
-    note:'Notable keynote speakers include Axel Honneth, Nancy Fraser, Rahel Jaeggi, Craig Calhoun, Charles Taylor, Carol Gilligan, Étienne Balibar, Margaret MacMillan, Adam Tooze, Thomas Piketty, and Justice Stephen Breyer.'
-  },
-
-  'stat-funding': {
-    type:'funding', eyebrow:'EU Research Funding',
-    headline:'€797k', subtitle:'CCDS share across three Horizon grants · €8.19M total consortia funding',
-    intro:'The Center participates in three successive European Commission research programmes, bringing together partner institutions across Europe and beyond to study radicalization, extremism, social contracts, and democratic resilience.',
-    grants:[
-      {name:'CO3',       full:'Resilient Social Contracts for Democratic Societies',        period:'Mar 2024 – ongoing',    horizon:'Horizon Europe', total:'€3.0M',  ccds:'€273k', partners:11},
-      {name:'OppAttune', full:'Countering Oppositional Political Extremism',                period:'Apr 2023 – Apr 2026',   horizon:'Horizon Europe', total:'€2.09M', ccds:'€269k', partners:17},
-      {name:'D.Rad',     full:'De-Radicalization in Europe and Beyond',                    period:'Dec 2020 – Apr 2024',   horizon:'Horizon 2020',   total:'€3.1M',  ccds:'€255k', partners:17},
-    ]
-  },
-
-  'stat-citations': {
-    type:'stat', eyebrow:'Scholarly Impact',
-    headline:'1,225', subtitle:'Total scholarly citations · CCDS Fellows & Affiliates · 2016–2026',
-    intro:'Across all 186 publications, CCDS Fellows and Affiliate Members have accumulated 1,225 scholarly citations — a measure of the Center\'s intellectual reach within the global academic community.',
-    note:'Counts citations from 2016, or from the year each scholar joined the Center, whichever is later. Citation data drawn from Google Scholar and Scopus.'
-  },
-
-  'stat-community': {
-    type:'stat', eyebrow:'Community',
-    headline:'17', subtitle:'Current members · as of May 2026',
-    intro:'The CCDS community comprises faculty fellows, affiliate members, postdoctoral research fellows, visiting scholars, a clinical fellow, and student researchers and interns.',
-    bars:[
-      {label:'Faculty Fellows',          val:5, max:17, color:'#E4002B'},
-      {label:'Affiliate Members',        val:3, max:17, color:'#002F6C'},
-      {label:'Visiting Scholars',        val:3, max:17, color:'#C9A24B'},
-      {label:'Postdoc / Clinical',       val:2, max:17, color:'#5E5E5E'},
-      {label:'Editor / Analyst',         val:1, max:17, color:'#8A9AAF'},
-      {label:'Student Interns',          val:3, max:17, color:'#AAAAAA'},
-    ],
-    note:'26 past members — including 8 former visiting scholars and 15 former student researchers — have contributed to the Center\'s work since its founding in 2016.'
-  },
-
-  /* ── Community members ────────────────────────────────── */
-  'member-sawyer': {
-    type:'member', eyebrow:'Director · Faculty Fellow',
-    name:'Stephen W. Sawyer',
-    role:'Director · Ballantine-Leavitt Professor of History',
-    url:'https://www.aup.edu/profile/ssawyer',
-    photo:'images/community/image2.png',
-    bio:`<p>Stephen W. Sawyer is the Ballantine-Leavitt Professor of History and Director of the Center for Critical Democracy Studies. He came to AUP from the University of Chicago center in Paris and the École Normale Supérieure–rue d'Ulm. After receiving fellowships from the EHESS, Fulbright, and Sciences Po, Sawyer served as part-time assistant to Pierre Rosanvallon at the Collège de France.</p>
-<p>His core project articulates a history and theory of democracy as a mode of popular magistrature, administration, and public regulation. The first volume, <em>Demos Assembled: Democracy and the International Origins of the Modern State, 1840–1880</em> (University of Chicago Press, 2018), was followed in 2025 by <em>Demos Rising: Democracy and the Popular Construction of Public Power in France, 1800–1850</em> (UChicago Press). He also published <em>La contingence et le pouvoir</em> (Armand Colin, 2018).</p>
-<p>He has edited nine volumes including <em>In Search of the Liberal Moment</em> (Palgrave, 2016), <em>Pierre Rosanvallon's Political Thought</em> (Bielefeld, 2018), and <em>Michel Foucault, Neoliberalism and Beyond</em> (Rowman and Littlefield, 2019). He directs <em>The Tocqueville Review / La Revue Tocqueville</em> and founded the online platform Tocqueville21 in 2017. He was Kratter Visiting Professor at Stanford (Spring 2020) and Visiting Scholar at Harvard's Center for European Studies (2024–25).</p>`
-  },
-
-  'member-zinigrad': {
-    type:'member', eyebrow:'Deputy Director · Faculty Fellow',
-    name:'Roman Zinigrad',
-    role:'Deputy Director (2026–) · Assistant Professor of Law',
-    url:'https://www.aup.edu/profile/rzinigrad',
-    photo:'images/community/image15.jpeg',
-    bio:`<p>Roman Zinigrad is Assistant Professor of Law and, from 2026, Deputy Director of the Center for Critical Democracy Studies. He coordinates the AUP History, Law & Society undergraduate program.</p>
-<p>He specializes in constitutional law and theory, comparative constitutional law, and law and education. His research addresses law and religion, international human rights law, children's rights, parental rights, and legal aspects of the French approach to radical violence. He is co-curator of this activity report.</p>`
-  },
-
-  'member-culp': {
-    type:'member', eyebrow:'Faculty Fellow',
-    name:'Julian Culp',
-    role:'Faculty Fellow · Associate Professor of Philosophy',
-    url:'https://www.aup.edu/profile/jculp',
-    photo:'images/community/image5.jpeg',
-    bio:`<p>Julian Culp is Associate Professor of Philosophy, Program Coordinator for Philosophy, and Fellow of the Center for Critical Democracy Studies. Previously, he was a lecturer at the Goethe University of Frankfurt am Main, where he received his Habilitation and PhD. He held postdoctoral fellowships from the University of Toronto and the Catholic University of Louvain, and research stays at Duke and Princeton.</p>
-<p>Culp is the author of <em>Global Justice and Development</em> (Palgrave, 2014) and <em>Democratic Education in a Globalized World</em> (Routledge, 2019). He co-edited <em>The Cambridge Handbook of Democratic Education</em> (CUP, 2023) and co-edits the journal <em>Analyse & Kritik – Journal of Philosophy and Social Theory</em> (De Gruyter) and the book series <em>Philosophy of Education – Debates and Constellations</em> (Brill/Mentis).</p>`
-  },
-
-  'member-dageforde': {
-    type:'member', eyebrow:'Faculty Fellow',
-    name:'Mirjam Dageförde',
-    role:'Faculty Fellow · Assistant Professor of Comparative Politics',
-    url:'https://www.aup.edu/profile/mdagefoerde',
-    photo:'images/community/image6.png',
-    bio:`<p>Mirjam Dageförde researches failing representation, citizen-politics relations, party politics, and inequality with a focus on Europe — France and Germany in particular. She is currently Assistant Professor of Comparative Politics at AUP and an Associate Researcher at Sciences Po Paris and the WZB (Wissenschaftszentrum Berlin).</p>
-<p>Previously, she was Lecturer at Freie Universität Berlin. She holds a PhD from Sciences Po Paris, and was awarded a Max Weber Fellowship at the European University Institute (EUI) in Florence, an OxPo Fellowship at Oxford (Nuffield College), and was chercheuse invitée at the Paris School of Economics (invited by Jean-François Laslier and Thomas Piketty).</p>`
-  },
-
-  'member-spieler': {
-    type:'member', eyebrow:'Faculty Fellow',
-    name:'Miranda Spieler',
-    role:'Faculty Fellow · Professor of History',
-    url:'https://www.aup.edu/profile/mspieler',
-    photo:'images/community/image11.jpeg',
-    bio:`<p>Professor Miranda Spieler joined the faculty of AUP in 2012. She holds an AB from Harvard College and a PhD from Columbia University, where she also served as assistant to writer Susan Sontag. Before joining AUP she was in the history department at the University of Arizona, where she received tenure in 2011.</p>
-<p>She is an historian of France and the overseas empire, writing about law and imperial violence. Her research uses archives to recover traces of marginal people — slaves, former slaves, immigrants, prisoners, and vagabonds — in France and former colonies. Her book <em>Empire and Underworld</em> drew on archival research in France and French Guiana (six months on site). Her new project focuses on people of color living in Paris and French port cities during the eighteenth century.</p>`
-  },
-
-  'member-colinjaeger': {
-    type:'member', eyebrow:'Affiliate Member',
-    name:'Nathanaël Colin-Jaeger',
-    role:'Affiliate Member · Maître de Conférences, ESPOL',
-    url:'https://espol.school/en/team/nathanael-colin-jaeger/',
-    photo:'images/community/colinjaeger_portrait.jpeg',
-    bio:`<p>Nathanaël Colin-Jaeger is Maître de Conférences (Associate Professor) of Politics, Philosophy & Economics at ESPOL (European School of Political and Social Sciences, Catholic University of Lille). He is Affiliate Member at the CCDS and was Postdoctoral Research Fellow at the Center from January 2024 to June 2025.</p>
-<p>He holds a PhD in Political Philosophy from the ENS Lyon. His work focuses on neoliberal political theory, theories of social justice in market and competitive situations, deliberative democracy under pluralism, and federalism and polycentricity. He is interested in reconciling liberal theories (Rawls, Hayek) and exploring non-statist alternatives to social justice.</p>`
-  },
-
-  'member-lever': {
-    type:'member', eyebrow:'Affiliate Member',
-    name:'Annabelle Lever',
-    role:'Affiliate Member · Professor of Political Philosophy, Sciences Po',
-    url:'https://www.sciencespo.fr/cevipof/en/researcher/annabelle-lever.html',
-    photo:'images/community/image7.jpeg',
-    bio:`<p>Annabelle Lever is an Affiliate Member of the CCDS since September 2025 and Professor of Political Philosophy at Sciences Po, Paris. She writes mainly on democratic theory, ethics, and public policy.</p>
-<p>She is the author of <em>On Privacy</em> (2011) and <em>A Democratic Conception of Privacy</em> (2014); editor of <em>New Frontiers in the Philosophy of Intellectual Property</em> (2012); and co-editor of <em>The Routledge Handbook of Ethics and Public Policy</em> (2018), <em>Ideas that Matter: Democracy, Justice, Rights</em> (2019), and <em>Reconstructing Democracy in Times of Crisis</em> (2023). Since 2017 she has co-edited the <em>Critical Review of International Social and Political Philosophy</em>.</p>`
-  },
-
-  'member-zaric': {
-    type:'member', eyebrow:'Affiliate Member',
-    name:'Zona Zarić',
-    role:'Affiliate Member · Research Fellow, IFDT Belgrade',
-    url:'https://www.aup.edu/profile/zzaric',
-    photo:'images/community/image14.png',
-    bio:`<p>Zona Zarić, philosopher and feminist, organises the Center's "Care & Democracy" seminar series and previously held a CCDS postdoctoral fellowship during which she contributed to the OppAttune project. She holds a PhD in Political Philosophy from the ENS-Ulm, a J.D. in law from the University of Belgrade, and an MA from AUP.</p>
-<p>Her scholarly contributions include co-authoring <em>Soin et compassion: Un nouveau paradigme pour la philosophie politique?</em> (Hermann, 2023) and co-editing <em>Pierre Bourdieu: Radical Thought and Praxis</em> (IFDT, 2023) and <em>Refusing to Be Silent: Engaged Conversations with Leading Intellectuals</em> (Mimesis, 2023). She is currently working on the first monograph dedicated to Nancy Fraser's oeuvre, forthcoming from Edinburgh University Press. She has taught at the ENS-Ulm, the University of Belgrade, Sciences Po, CNAM, the Catholic Institute of Paris, Paris 8, and AUP.</p>`
-  },
-
-  'member-oberoi': {
-    type:'member', eyebrow:'Postdoctoral Research Fellow',
-    name:'Naintara Maya Oberoi',
-    role:'Postdoctoral Research Fellow · since October 2025',
-    photo:'images/community/oberoi_portrait.jpeg',
-    bio:`<p>Naintara Maya Oberoi is a Postdoctoral Research Fellow at the CCDS since October 2025. She completed her doctoral research in political philosophy at the École Normale Supérieure, Paris, specialising in questions of subalternity and citizenship.</p>
-<p>Her dissertation, <em>La citoyenneté subalterne</em>, examines the aporias structuring democratic citizenship in postcolonial states, drawing on the Constitutional Assembly Debates of India. She is a member of the Institut Convergences Migrations' PhiloMigr project. Her research interests include border studies, postcolonial studies, constitutionalism, critical citizenship studies, democratic theory, and legal history.</p>`
-  },
-
-  'member-taieb': {
-    type:'member', eyebrow:'Clinical Fellow',
-    name:'Hannah Davis Taieb',
-    role:'Clinical Fellow · PhD in Anthropology',
-    url:'https://dialoguetransformation.com',
-    photo:'images/community/image12.jpeg',
-    bio:`<p>Dr. Hannah Davis Taieb is a Clinical Fellow at the Center for Critical Democracy Studies. She holds a PhD in anthropology and is the founder and leader of AUP's innovative prison education workshops, where students learn from and with people who are currently incarcerated.</p>
-<p>Taieb first established a collaboration with La Santé prison in Paris in 2019. In 2020 she co-founded the non-profit Dialogue & Transformation (dialoguetransformation.com) which develops workshops led and co-led by people who have experienced incarceration. She is primarily interested in egalitarian pedagogies that create connection and generative exchange across difference, and is currently training as a gestalt practitioner.</p>`
-  },
-
-  'member-crary': {
-    type:'member', eyebrow:'Visiting Scholar 2025–26',
-    name:'Alice Crary',
-    role:'Visiting Scholar · Walter A. Eberstadt Distinguished University Professor, New School',
-    url:'https://www.newschool.edu/nssr/faculty/alice-crary/',
-    photo:'images/community/image4.jpeg',
-    bio:`<p>Alice Crary is a moral and social philosopher, currently Walter A. Eberstadt Distinguished University Professor at the New School for Social Research and Visiting Fellow in Philosophy and Christian Ethics at Regent's Park College, Oxford. She is also a Researcher-in-Residence at Maison Suger (FMSH) and Visiting Researcher at ISJPS (Sorbonne/Paris 1).</p>
-<p>An expert in twentieth-century British and American moral philosophy, ordinary language philosophy, feminist philosophy, and animal ethics, her publications include <em>Beyond Moral Judgment</em>, <em>Inside Ethics: On the Difficulty of Moral Thought</em>, <em>Animal Crisis</em> (with Lori Gruen), and the forthcoming <em>The Political Wittgenstein</em> (with Joel de Lara). At CCDS, she is working on "philosophy in the time of technofascism" and a book on animals and justice.</p>`
-  },
-
-  'member-williams': {
-    type:'member', eyebrow:'Visiting Scholar 2025–26',
-    name:'Juliet A. Williams',
-    role:'Visiting Scholar · Professor of Gender Studies, UCLA',
-    url:'https://genderstudies.ucla.edu/person/juliet-a-williams/',
-    photo:'images/community/image13.jpeg',
-    bio:`<p>Juliet A. Williams is Professor of Gender Studies and Faculty Director of the UCLA Quarter in Washington Program. She holds a B.A. in Government from Harvard and a Ph.D. in Government from Cornell. She is a socio-legal scholar specialising in feminist theory and politics, masculinities studies, gender discrimination law, and Title IX.</p>
-<p>She is the author of <em>The Separation Solution?: Single-Sex Education and the New Politics of Gender Equality</em> (UC Press, 2016). At CCDS, she is working on a book examining the development of the concept of patriarchy in feminist theory and activism from the 1970s to the present. Her recent research includes a multi-year NSF-supported study of gender neutrality in U.S. law, media, and activism (with Dr. Abigail Saguy).</p>`
-  },
-
-  'member-ritchie': {
-    type:'member', eyebrow:'Visiting Clinical Scholar · Summer 2026',
-    name:'Jennifer Ritchie',
-    role:'Visiting Clinical Scholar · Senior Deputy Prosecuting Attorney, King County, Seattle',
-    photo:'images/community/ritchie.png',
-    bio:`<p>Jennifer Ritchie is a Senior Deputy Prosecutor with the King County Prosecuting Attorney's Office in Seattle, where she has spent over thirty years working at the intersection of trauma, victimization, and institutional response. She served nearly a decade as Commissioner on the Washington State Supreme Court Commission on Gender and Justice.</p>
-<p>She has taught trial advocacy at the University of Washington School of Law for 10 years and served as adjunct faculty teaching Prosecutorial Ethics, Discretion, and Reform at Seattle University School of Law. She has presented at national and international conferences (Copenhagen, Porto, Frankfurt, Trondheim). At CCDS, her research focuses on comparative justice systems as they relate to survivors of sexual assault and interpersonal violence.</p>`
-  },
-
-  'member-mclorrain': {
-    type:'member', eyebrow:'Tocqueville 21 Editor',
-    name:'Shane McLorrain',
-    role:'Tocqueville 21 Editor / Visiting Research Analyst',
-    photo:'images/community/image8.jpeg',
-    bio:`<p>Shane McLorrain is a Visiting Research Analyst with the Center for Critical Democracy Studies and an Editor for Tocqueville 21. His contributions focus on geopolitics, international political economy, and French politics. He is also the creator, host, and producer of the Tocqueville 21 Podcast.</p>
-<p>Prior to joining the CCDS, Shane was an analyst and consultant with PR firm Fabriq, working with industry leaders in cybersecurity and machine learning. In 2019 he founded Zeitgeist Zeitung (now the Concorde International Review). He holds an MSc in History of International Relations from LSE and a B.A. in History from AUP.</p>`
-  },
-
-  /* ── Research projects ────────────────────────────────── */
-  'project-lsd': {
-    type:'project', eyebrow:'Research Project',
-    name:'Law, State, Democracy (LSD)',
-    logo:'LSD_logo_clean.png',
-    badge:'Ongoing · since Dec 2025',
-    image:'images/lsd__oppattune_drad/lsd_poster.jpg',
-    desc:`<p>Law, State, Democracy (LSD) is a research project seeking to promote an interdisciplinary approach to questions of law, state and democracy. Its aim is to shed new light on the interdependence, and indeed fundamental co-construction of law and democracy in promoting just and effective modes of government.</p>
-<p>The project launched in December 2025 with an inaugural international symposium of 19 speakers from 2 partner institutions — a gathering that brought together legal theorists, historians, and political philosophers to address foundational questions about democratic legality and constitutional self-government.</p>`,
-    stats:[
-      {n:'1', l:'International Symposium'},
-      {n:'19', l:'Symposium Speakers'},
-      {n:'2', l:'Partner Institutions'},
-    ]
-  },
-
-  'project-co3': {
-    type:'project', eyebrow:'Horizon Europe · Research Project',
-    name:'CO3 — Resilient Social Contracts',
-    logo:'images/co3/co3_logo_clean.png',
-    badge:'Mar 2024 – ongoing · €273k CCDS share',
-    image:'images/co3/co3_banner.png',
-    desc:`<p>CO3 (COntinuous COnstruction of resilient social COntracts through societal transformations) studies more open, inclusive, and democratic models of social contracts. Its mission is to create resilient societies capable of addressing societal challenges and anti-democratic tendencies.</p>
-<p>The project brings together 11 consortium partners across Europe and examines how social contracts can be continuously renegotiated to respond to crises — pandemic, climate, democratic backsliding — while preserving legitimacy and inclusion. CCDS contributes expertise on democratic theory, constitutional frameworks, and the history of popular sovereignty.</p>`,
-    stats:[
-      {n:'4', l:'Working Papers'},
-      {n:'1', l:'CCDS Conference'},
-      {n:'11', l:'Consortium Partners'},
-      {n:'€3.0M', l:'Total Consortium'},
-    ]
-  },
-
-  'project-oppattune': {
-    type:'project', eyebrow:'Horizon Europe · Research Project',
-    name:'OppAttune',
-    logo:'images/lsd__oppattune_drad/oppattune_logo_clean.png',
-    badge:'Apr 2023 – Apr 2026 · €269k CCDS share',
-    image:'images/lsd__oppattune_drad/oppattune_banner.png',
-    desc:`<p>OppAttune (Countering Oppositional Political Extremism through Attuned Dialogue) developed an innovative Attunement Model which tracks, attunes, and limits the spread of extreme political narratives. The focus of the project is not on discourse that incites violence or engages in hate speech — rather, it looked at the spread of extreme narratives through seemingly 'common sense' discussions about polarising issues which create an 'everyday extremism'.</p>
-<p>The project examined 6 national case studies, organised 1 flagship conference and 2 training academies, and involved 17 consortium partners across Europe. CCDS contributed research on political philosophy, democratic theory, and the French case study on extremism and social polarisation.</p>`,
-    stats:[
-      {n:'6', l:'Case Studies'},
-      {n:'1', l:'Flagship Conference'},
-      {n:'2', l:'Training Academies'},
-      {n:'17', l:'Consortium Partners'},
-      {n:'€2.09M', l:'Total Consortium'},
-    ]
-  },
-
-  'project-drad': {
-    type:'project', eyebrow:'Horizon 2020 · Research Project',
-    name:'D.Rad — De-Radicalization in Europe and Beyond',
-    logo:'images/drad/drad_logo_clean.png',
-    badge:'Dec 2020 – Apr 2024 · €255k CCDS share · Completed',
-    image:'images/drad/drad_banner.png',
-    desc:`<p>The D.Rad project identified the factors that lead to radicalization and developed recommendations to counter extremism, explore how radicalised individuals can be reintegrated into society, and help shape policies to improve social inclusion. The project drew upon machine learning, discourse analysis, and social psychology approaches.</p>
-<p>CCDS contributed 8 policy reports including 6 specifically on radicalization in France — the most comprehensive comparative study of its kind. The project also produced a landmark art exhibition drawing on testimonies and creative interventions by former radicalised individuals. D.Rad involved 17 consortium partners across 12 countries and concluded with 4 symposia and conferences.</p>`,
-    stats:[
-      {n:'8', l:'Policy Reports'},
-      {n:'6', l:'France Reports'},
-      {n:'1', l:'Art Exhibition'},
-      {n:'4', l:'Events & Symposia'},
-      {n:'17', l:'Consortium Partners'},
-      {n:'€3.1M', l:'Total Consortium'},
-    ]
-  },
-
-  /* ── Events ─────────────────────────────────────────────── */
-  'event-0': {
-    type:'event', eyebrow:'Upcoming Event · May 2026',
-    title:'A Quarter-Millennium of Franco-American Relations',
-    date:'May 2026 · Upcoming', speakers:27,
-    img:'images/highlights/franco_american_poster.jpg',
-    desc:'An international conference marking 250 years of Franco-American diplomatic, cultural, and intellectual relations. The event brings together historians, political scientists, legal scholars, and diplomats to assess the legacy and future of this foundational transatlantic partnership. 27 speakers confirmed.'
-  },
-  'event-1': {
-    type:'event', eyebrow:'Conference · March 2026',
-    title:'Journée d\'Étude: Rousseau · Nouvelles Perspectives',
-    date:'March 2026', speakers:5,
-    img:'images/ccds_booklet/image13.jpeg',
-    desc:'A study day bringing together philosophers and historians to revisit Rousseau\'s political thought through contemporary lenses. Five specialists presented new interpretations of the Social Contract, the General Will, and Rousseau\'s legacy for twenty-first-century democracy.'
-  },
-  'event-2': {
-    type:'event', eyebrow:'Conference · February 2026',
-    title:'Democracy CoLab: Care Democracy & Everyday Extremism',
-    date:'February 2026', speakers:14,
-    img:'images/ccds_booklet/image47.jpeg',
-    desc:'A collaborative laboratory event bridging the Center\'s two major research streams — care ethics and the study of political extremism. 14 speakers from philosophy, sociology, and political science explored the intersection of care-based democracy and the dynamics of everyday radicalization addressed by the OppAttune project.'
-  },
-  'event-3': {
-    type:'event', eyebrow:'International Symposium · December 2025',
-    title:'Law, State, and Democracy · International Symposium',
-    date:'December 2025', speakers:19,
-    img:'images/ccds_booklet/image114.jpeg',
-    desc:'The inaugural event of the Law, State, Democracy (LSD) research project. 19 leading scholars in constitutional law, legal philosophy, and democratic theory gathered to address foundational questions about the co-construction of law and democracy. The symposium established the intellectual agenda for the LSD project and produced a rich programme of collaborative research.'
-  },
-  'event-4': {
-    type:'event', eyebrow:'Workshop · May 2025',
-    title:'Autonomy and the Law',
-    date:'May 2025', speakers:8,
-    img:'images/ccds_booklet/image169.jpeg',
-    desc:'An interdisciplinary workshop examining the concept of individual and collective autonomy across legal, philosophical, and political registers. Eight speakers from law schools and philosophy departments in France, the UK, and the United States addressed themes including reproductive autonomy, constitutional self-determination, and the limits of legal paternalism.'
-  },
-  'event-5': {
-    type:'event', eyebrow:'International Conference · December 2024',
-    title:'Renewing the Social Contract',
-    date:'December 2024', speakers:50,
-    img:'images/ccds_booklet/image225.jpeg',
-    desc:'One of the Center\'s largest events, bringing together 50 speakers for a major international conference on the renewal of social contracts in an era of democratic crisis. A flagship event of the CO3 Horizon Europe project, the conference examined inclusive and resilient models of democratic legitimacy across Europe, North America, and beyond.'
-  },
-  'event-6': {
-    type:'event', eyebrow:'Book Talk · October 2024',
-    title:'The Law of International Society: A Road Not Taken',
-    date:'October 2024', speakers:1,
-    img:'images/ccds_booklet/image235.jpeg',
-    desc:'A CCDS book talk and public lecture presenting and discussing a new monograph on the history of international law and the concept of international society. The speaker traced the "road not taken" by international law in the twentieth century — an alternative tradition emphasising solidarity, community, and democratic governance at the global level.'
-  },
-  'event-7': {
-    type:'event', eyebrow:'Panel · May 2024',
-    title:'Perspectives on Academic Freedom: USA & Europe',
-    date:'May 2024', speakers:6,
-    img:'images/ccds_booklet/image244.jpeg',
-    desc:'A comparative panel discussion examining academic freedom on both sides of the Atlantic. Six speakers from universities in the United States and Europe debated the legal frameworks, institutional cultures, and political pressures shaping scholarly inquiry — from Title IX enforcement and DEI policies in the US to the challenges facing academic institutions in Hungary and Poland.'
-  },
-
-  /* ── Education programs ──────────────────────────────── */
-  'edu-dlab': {
-    type:'event', eyebrow:'Education Programme',
-    title:'Democracy Lab (D.Lab)',
-    date:'4 thematic editions · 2020–present', speakers:null,
-    img:'images/curriculum/image5.jpeg',
-    desc:'The Democracy Lab is a semester-long design-thinking course where students identify a real democratic challenge and devise a prototype solution — drawing on John Dewey\'s pragmatist pedagogy and applied democratic theory. Thematic editions have addressed: Education Justice, Radical Violence, Global Citizenship, and Prison Education. Students collaborate with CCDS fellows and external partners to develop, test, and present their proposals to real stakeholders.'
-  },
-  'edu-prison': {
-    type:'event', eyebrow:'Education Programme',
-    title:'Prison Education Workshop · La Santé',
-    date:'7 iterations · Fall 2019 – Summer 2024', speakers:null,
-    img:'images/curriculum/image6.jpeg',
-    desc:'AUP students share readings, discussions, and creative activities with detainees at La Santé prison in Paris. Led by Dr. Hannah Davis Taieb and co-taught with Michelle Kuo, Albert Wu, Roman Zinigrad, and Friederike Windel, the workshop uses circle pedagogy and egalitarian approaches that treat all participants as equal contributors. The programme grew out of Taieb\'s 2019 training with Walls to Bridges (Canada) and is supported by the non-profit Dialogue & Transformation.'
-  },
-};
-
-/* ════════════════════════════════════════════════════════════
-   RENDER FUNCTIONS
-   ════════════════════════════════════════════════════════════ */
 function renderModal(data) {
   if (!data) return '<p>No details available.</p>';
   if (data.type === 'stat')    return renderStat(data);
