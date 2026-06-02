@@ -2220,44 +2220,85 @@ function generateHighlights() {
 
 /* Generate publications list from database */
 function generatePublications() {
-  let html = '';
-  const pubsByYear = {};
+  // Classify publication type
+  function getType(title) {
+    const t = title.toLowerCase();
+    if (t.includes('review of') || t.includes('book review')) return 'Review';
+    if (t.includes('press') || t.includes('university') || t.includes('routledge') || 
+        t.includes('bloomsbury') || t.includes('harvard') || t.includes('oxford') || 
+        t.includes('springer') || t.includes('penguin') || t.includes('handbook')) {
+      return 'Book';
+    }
+    if (t.includes('blog') || t.includes('verfassungsblog') || t.includes('conversation')) {
+      return 'Blog Post';
+    }
+    return 'Article';
+  }
   
-  // Group by year first
+  // Extract DOI from title or create Google Scholar link
+  function getLink(title) {
+    // Look for DOI
+    const doiMatch = title.match(/https:\/\/doi\.org\/[^\s'"]+/);
+    if (doiMatch) return doiMatch[0];
+    
+    // Create Google Scholar search link from first few words
+    const words = title.split(/[\s.,]/)[0].substring(0, 30);
+    return `https://scholar.google.com/scholar?q=${encodeURIComponent(title.substring(0, 60))}`;
+  }
+  
+  let html = '';
+  const pubsByYearType = {};
+  const typeOrder = ['Book', 'Article', 'Review', 'Blog Post'];
+  
+  // Group by year, then type
   Object.keys(PUBLICATIONS).forEach(id => {
     const pub = PUBLICATIONS[id];
     if (pub.year) {
-      if (!pubsByYear[pub.year]) pubsByYear[pub.year] = [];
-      pubsByYear[pub.year].push(pub);
+      const type = getType(pub.title);
+      const year = pub.year;
+      
+      if (!pubsByYearType[year]) pubsByYearType[year] = {};
+      if (!pubsByYearType[year][type]) pubsByYearType[year][type] = [];
+      pubsByYearType[year][type].push(pub);
     }
   });
   
   // Sort years descending
-  const years = Object.keys(pubsByYear).map(Number).sort((a,b) => b-a);
+  const years = Object.keys(pubsByYearType).map(Number).sort((a,b) => b-a);
   
   years.forEach((year, idx) => {
-    const pubs = pubsByYear[year];
+    const byType = pubsByYearType[year];
+    const totalCount = Object.values(byType).reduce((sum, arr) => sum + arr.length, 0);
     const open = idx === 0 ? 'open' : '';
     
     html += `<div class="pub-year-group">
       <button class="pub-year-toggle ${open}" onclick="toggleYear(this)">
         <span class="yr">${year}</span>
-        <span class="count">${pubs.length} ${pubs.length===1?'publication':'publications'} <span class="arrow">${idx===0?'▾':'▶'}</span></span>
+        <span class="count">${totalCount} ${totalCount===1?'publication':'publications'} <span class="arrow">${idx===0?'▾':'▶'}</span></span>
       </button>
       <div class="pub-year-body ${open}">`;
     
-    pubs.forEach(pub => {
-      // Determine cover path
-      let img = '';
-      if (pub.cover) {
-        let path = 'images/journal_covers/';
-        if (pub.cover.indexOf('bk_') === 0) path = 'images/book_covers/';
-        else if (pub.cover.indexOf('drad') >= 0) path = 'images/drad/';
-        else if (pub.cover.indexOf('co3') >= 0) path = 'images/co3/';
-        img = `<img src="${path}${pub.cover}" alt="" onerror="this.style.display='none'">`;
+    // Add each type group
+    typeOrder.forEach(type => {
+      if (byType[type] && byType[type].length > 0) {
+        const pubs = byType[type];
+        html += `<div class="pub-cat-head">${type}${pubs.length>1?'s':''}</div>`;
+        
+        pubs.forEach(pub => {
+          // Get cover path
+          let img = '';
+          if (pub.cover) {
+            let path = 'images/journal_covers/';
+            if (pub.cover.indexOf('bk_') === 0) path = 'images/book_covers/';
+            else if (pub.cover.indexOf('drad') >= 0) path = 'images/drad/';
+            else if (pub.cover.indexOf('co3') >= 0) path = 'images/co3/';
+            img = `<img src="${path}${pub.cover}" alt="" onerror="this.style.display='none'">`;
+          }
+          
+          const link = getLink(pub.title);
+          html += `<div class="pub-entry">${img}<div class="pub-text"><a href="${link}" target="_blank" rel="noopener">${pub.title}</a></div></div>`;
+        });
       }
-      
-      html += `<div class="pub-entry">${img}<div class="pub-text">${pub.title}</div></div>`;
     });
     
     html += `</div></div>`;
