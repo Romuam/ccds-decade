@@ -2220,84 +2220,47 @@ function generateHighlights() {
 
 /* Generate publications list from database */
 function generatePublications() {
-  // Classify publication type
-  function getType(pub) {
-    const t = pub.title.toLowerCase();
-    if (t.includes('review of') || t.includes('book review')) return 'Review';
-    if (t.includes('press') || t.includes('university') || t.includes('routledge') || 
-        t.includes('bloomsbury') || t.includes('harvard') || t.includes('oxford') || 
-        t.includes('penguin') || t.includes('springer') || t.includes('handbook') ||
-        pub.cover.indexOf('bk_') >= 0) return 'Book';
-    if (t.includes('blog') || t.includes('verfassungsblog') || t.includes('conversation')) return 'Blog Post';
-    return 'Article';
-  }
+  let html = '';
+  const pubsByYear = {};
   
-  const pubsByYearType = {};
-  const typeOrder = ['Book', 'Article', 'Review', 'Blog Post'];
-  
-  Object.keys(PUBLICATIONS).forEach(pubId => {
-    const pub = PUBLICATIONS[pubId];
+  // Group by year first
+  Object.keys(PUBLICATIONS).forEach(id => {
+    const pub = PUBLICATIONS[id];
     if (pub.year) {
-      const year = pub.year;
-      const type = getType(pub);
-      
-      if (!pubsByYearType[year]) pubsByYearType[year] = {};
-      if (!pubsByYearType[year][type]) pubsByYearType[year][type] = [];
-      pubsByYearType[year][type].push({ id: pubId, ...pub, type });
+      if (!pubsByYear[pub.year]) pubsByYear[pub.year] = [];
+      pubsByYear[pub.year].push(pub);
     }
   });
   
-  const years = Object.keys(pubsByYearType).map(Number).sort((a, b) => b - a);
-  let html = '';
+  // Sort years descending
+  const years = Object.keys(pubsByYear).map(Number).sort((a,b) => b-a);
   
   years.forEach((year, idx) => {
-    const byType = pubsByYearType[year];
-    const totalCount = Object.values(byType).reduce((sum, arr) => sum + arr.length, 0);
-    const isOpen = idx === 0 ? 'open' : '';
-    const arrow = idx === 0 ? '▾' : '▶';
+    const pubs = pubsByYear[year];
+    const open = idx === 0 ? 'open' : '';
     
-    html += `
-      <div class="pub-year-group" ${idx > 0 ? 'style="margin-top:24px"' : ''}>
-        <button class="pub-year-toggle ${isOpen}" onclick="toggleYear(this)">
-          <span class="yr">${year}</span>
-          <span class="count">${totalCount} publication${totalCount > 1 ? 's' : ''} <span class="arrow">${arrow}</span></span>
-        </button>
-        <div class="pub-year-body ${isOpen}">
-`;
+    html += `<div class="pub-year-group">
+      <button class="pub-year-toggle ${open}" onclick="toggleYear(this)">
+        <span class="yr">${year}</span>
+        <span class="count">${pubs.length} ${pubs.length===1?'publication':'publications'} <span class="arrow">${idx===0?'▾':'▶'}</span></span>
+      </button>
+      <div class="pub-year-body ${open}">`;
     
-    typeOrder.forEach(type => {
-      if (byType[type] && byType[type].length > 0) {
-        const pubs = byType[type];
-        html += `<div class="pub-cat-head">${type}${pubs.length > 1 ? 's' : ''}</div>`;
-        
-        pubs.forEach(pub => {
-          let coverPath = '';
-          if (pub.cover) {
-            if (pub.cover.indexOf('bk_') >= 0) {
-              coverPath = `images/book_covers/${pub.cover}`;
-            } else if (pub.cover.indexOf('drad') >= 0) {
-              coverPath = `images/drad/${pub.cover}`;
-            } else if (pub.cover.indexOf('co3') >= 0) {
-              coverPath = `images/co3/${pub.cover}`;
-            } else if (pub.cover) {
-              coverPath = `images/journal_covers/${pub.cover}`;
-            }
-          }
-          
-          html += `
-          <div class="pub-entry">
-            ${coverPath ? `<img src="${coverPath}" alt="Publication cover" onerror="this.style.display='none'">` : ''}
-            <div class="pub-text">${pub.title}</div>
-          </div>
-`;
-        });
+    pubs.forEach(pub => {
+      // Determine cover path
+      let img = '';
+      if (pub.cover) {
+        let path = 'images/journal_covers/';
+        if (pub.cover.indexOf('bk_') === 0) path = 'images/book_covers/';
+        else if (pub.cover.indexOf('drad') >= 0) path = 'images/drad/';
+        else if (pub.cover.indexOf('co3') >= 0) path = 'images/co3/';
+        img = `<img src="${path}${pub.cover}" alt="" onerror="this.style.display='none'">`;
       }
+      
+      html += `<div class="pub-entry">${img}<div class="pub-text">${pub.title}</div></div>`;
     });
     
-    html += `
-        </div>
-      </div>
-`;
+    html += `</div></div>`;
   });
   
   return html;
