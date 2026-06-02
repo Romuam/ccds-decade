@@ -365,7 +365,7 @@ footer .footer-bottom img.logo-img{height:28px;width:auto;mix-blend-mode:screen;
 .pub-entry:hover{
   background:#F4F1E8;border-left-color:var(--aup-blue);
 }
-.pub-entry img{width:60px;height:80px;object-fit:cover;border:1px solid #D4D0C8;border-radius:2px;display:block}
+.pub-entry img{width:60px;height:auto;max-height:80px;object-fit:contain;display:block}
 .pub-entry img[style*="display: none"]{width:0;height:0}
 .pub-entry .pub-text{font-size:0.9rem;line-height:1.6;color:#2B2B2B}
 .pub-entry .pub-text strong{color:var(--ink);font-weight:600}
@@ -2223,15 +2223,16 @@ function generatePublications() {
   // Classify publication type
   function getType(title) {
     const t = title.toLowerCase();
+    
+    // Check if it's a standalone book (published by press, no "In")
+    const isStandaloneBook = !t.includes(' in ') && !t.includes('"in ') &&
+      (t.includes('press') || t.includes('university') || t.includes('routledge') || 
+       t.includes('bloomsbury') || t.includes('harvard') || t.includes('oxford') || 
+       t.includes('springer') || t.includes('penguin'));
+    
+    if (isStandaloneBook) return 'Book';
     if (t.includes('review of') || t.includes('book review')) return 'Review';
-    if (t.includes('press') || t.includes('university') || t.includes('routledge') || 
-        t.includes('bloomsbury') || t.includes('harvard') || t.includes('oxford') || 
-        t.includes('springer') || t.includes('penguin') || t.includes('handbook')) {
-      return 'Book';
-    }
-    if (t.includes('blog') || t.includes('verfassungsblog') || t.includes('conversation')) {
-      return 'Blog Post';
-    }
+    if (t.includes('blog') || t.includes('verfassungsblog') || t.includes('conversation')) return 'Blog Post';
     return 'Article';
   }
   
