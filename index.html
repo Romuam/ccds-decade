@@ -2224,19 +2224,30 @@ function generatePublications() {
   function getType(title) {
     const t = title.toLowerCase();
     
-    // Check if it's a chapter: " In Handbook", " In Book", " In:"
+    // REPORTS: Must come BEFORE books check
+    if (t.includes('working paper') || t.includes('co3') || t.includes('report') || 
+        t.includes('country brief') || t.includes('toolkit') || t.includes('deliverable')) {
+      return 'Report';
+    }
+    
+    // REVIEWS
+    if (t.trim().startswith('review of')) {
+      return 'Review';
+    }
+    
+    // BOOKS: Press/University + NOT a chapter
     const isChapter = (/ In /.test(title) && (/ In ["']/.test(title) || / In handbook/.test(t) || /: In/.test(title))) ||
                      / In </.test(title);
-    
-    // Check for press/publisher
     const hasPress = t.includes(' press') || t.includes(' university') || 
                     t.includes('routledge') || t.includes('bloomsbury') ||
                     t.includes('harvard') || t.includes('oxford') ||
                     t.includes('springer') || t.includes('penguin');
     
-    if (hasPress && !isChapter) return 'Book';
-    if (/ In ["']/.test(title) || / In </.test(title) || t.includes('journal') || t.includes('article')) return 'Article';
-    if (t.trim().startsWith('review of')) return 'Review';
+    if (hasPress && !isChapter) {
+      return 'Book';
+    }
+    
+    // ARTICLES: Everything else
     return 'Article';
   }
   let html = '';
