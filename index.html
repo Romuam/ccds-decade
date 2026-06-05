@@ -2223,21 +2223,26 @@ function generatePublications() {
   // Classify publication type
   function getType(title) {
     const t = title.toLowerCase();
-    // Check if it's a chapter in a book (has "In" with capital I)
-    const isChapter = / In ["']/.test(title) || / In </.test(title) || / In [A-Z]/.test(title);
     
-    // Standalone book: press/publisher + not a chapter
-    const isBook = !isChapter && 
-      (t.includes('press') || t.includes('university') || t.includes('routledge') || 
-       t.includes('bloomsbury') || t.includes('harvard') || t.includes('oxford') || 
-       t.includes('springer') || t.includes('penguin') || t.includes('handbook') ||
-       t.includes('published by'));
+    // BOOKS: Standalone publications by press/university, NOT chapters
+    const isChapter = /\s[Ii]n\s/.test(title) || / In </.test(title) || / In "/.test(title);
+    const hasPublisher = t.includes('press') || t.includes('university') || 
+                        t.includes('routledge') || t.includes('bloomsbury') || 
+                        t.includes('harvard') || t.includes('oxford') || 
+                        t.includes('springer') || t.includes('penguin');
+    const isBook = hasPublisher && !isChapter;
     
     if (isBook) return 'Book';
-    if (isChapter || t.includes('journal') || t.includes('article')) return 'Article';
+    
+    // ARTICLES: Everything with title-like content (chapters in books, journal articles)
+    // This is the default for most scholarly publications
+    const isArticle = t.includes('journal') || t.includes('article') || 
+                     t.includes('chapter') || isChapter;
+    if (isArticle) return 'Article';
+    
+    // OTHER: Reviews, blog posts, reports, and misc
     return 'Other';
-  }
-  
+  } 
   let html = '';
   const byYearType = {};
   const typeOrder = ['Book', 'Article', 'Other'];
