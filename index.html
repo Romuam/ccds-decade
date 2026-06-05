@@ -2224,30 +2224,19 @@ function generatePublications() {
   function getType(title) {
     const t = title.toLowerCase();
     
-    // BOOKS: Press/University published, standalone (not a chapter)
-    const isChapter = /\s[Ii]n\s/.test(title) || / In </.test(title) || / In "/.test(title);
-    const hasPublisher = t.includes('press') || t.includes('university') || 
-                        t.includes('routledge') || t.includes('bloomsbury') || 
-                        t.includes('harvard') || t.includes('oxford') || 
-                        t.includes('springer') || t.includes('penguin');
-    if (hasPublisher && !isChapter) return 'Book';
+    // Check if it's a chapter: " In Handbook", " In Book", " In:"
+    const isChapter = (/ In /.test(title) && (/ In ["']/.test(title) || / In handbook/.test(t) || /: In/.test(title))) ||
+                     / In </.test(title);
     
-    // ARTICLES & BOOK CHAPTERS: Chapters in books, journal articles
-    if (isChapter || t.includes('journal') || t.includes('article')) return 'Article';
+    // Check for press/publisher
+    const hasPress = t.includes(' press') || t.includes(' university') || 
+                    t.includes('routledge') || t.includes('bloomsbury') ||
+                    t.includes('harvard') || t.includes('oxford') ||
+                    t.includes('springer') || t.includes('penguin');
     
-    // SPECIAL ISSUES: Guest editor, special issue
-    if (t.includes('special issue') || t.includes('guest editor')) return 'Special Issue';
-    
-    // REVIEWS: "Review of"
-    if (t.includes('review of') || t.includes('book review')) return 'Review';
-    
-    // REPORTS: CCDS reports, working papers, etc
-    if (t.includes('report') || t.includes('working paper')) return 'Report';
-    
-    // BLOGS: Blog posts, online content
-    if (t.includes('blog') || t.includes('verfassungsblog') || t.includes('conversation')) return 'Blog';
-    
-    // Default to Article if unclear
+    if (hasPress && !isChapter) return 'Book';
+    if (/ In ["']/.test(title) || / In </.test(title) || t.includes('journal') || t.includes('article')) return 'Article';
+    if (t.trim().startsWith('review of')) return 'Review';
     return 'Article';
   }
   let html = '';
