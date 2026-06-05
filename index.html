@@ -2220,51 +2220,83 @@ function generateHighlights() {
 
 /* Generate publications list from database */
 function generatePublications() {
-  let html = '';
-  const byYear = {};
+  // Classify publication type
+  function getType(title) {
+    const t = title.toLowerCase();
+    // Check if it's a chapter in a book (has "In" with capital I)
+    const isChapter = / In ["']/.test(title) || / In </.test(title) || / In [A-Z]/.test(title);
+    
+    // Standalone book: press/publisher + not a chapter
+    const isBook = !isChapter && 
+      (t.includes('press') || t.includes('university') || t.includes('routledge') || 
+       t.includes('bloomsbury') || t.includes('harvard') || t.includes('oxford') || 
+       t.includes('springer') || t.includes('penguin') || t.includes('handbook') ||
+       t.includes('published by'));
+    
+    if (isBook) return 'Book';
+    if (t.includes('review of') || t.includes('book review')) return 'Review';
+    if (t.includes('blog') || t.includes('verfassungsblog') || t.includes('conversation')) return 'Blog Post';
+    return 'Article';
+  }
   
-  // Group publications by year
+  let html = '';
+  const byYearType = {};
+  const typeOrder = ['Book', 'Article', 'Review', 'Blog Post'];
+  
+  // Group by year, then type
   for (let id in PUBLICATIONS) {
     const pub = PUBLICATIONS[id];
     if (pub && pub.year) {
-      if (!byYear[pub.year]) byYear[pub.year] = [];
-      byYear[pub.year].push(pub);
+      const year = pub.year;
+      const type = getType(pub.title);
+      
+      if (!byYearType[year]) byYearType[year] = {};
+      if (!byYearType[year][type]) byYearType[year][type] = [];
+      byYearType[year][type].push(pub);
     }
   }
   
   // Sort years descending
-  const years = Object.keys(byYear).map(Number).sort((a,b) => b-a);
+  const years = Object.keys(byYearType).map(Number).sort((a,b) => b-a);
   
   // Build HTML
   years.forEach((year, idx) => {
-    const pubs = byYear[year];
+    const byType = byYearType[year];
+    const totalCount = Object.values(byType).reduce((sum, arr) => sum + arr.length, 0);
     const open = idx === 0 ? 'open' : '';
     
     html += `<div class="pub-year-group">
       <button class="pub-year-toggle ${open}" onclick="toggleYear(this)">
         <span class="yr">${year}</span>
-        <span class="count">${pubs.length} publication${pubs.length===1?'':'s'} <span class="arrow">${idx===0?'▾':'▶'}</span></span>
+        <span class="count">${totalCount} publication${totalCount===1?'':'s'} <span class="arrow">${idx===0?'▾':'▶'}</span></span>
       </button>
       <div class="pub-year-body ${open}">`;
     
-    pubs.forEach(pub => {
-      let img = '';
-      if (pub.cover) {
-        let imgPath = 'images/journal_covers/' + pub.cover;
-        // Check for book covers
-        if (pub.cover.indexOf('bk_') === 0) imgPath = 'images/book_covers/' + pub.cover;
-        else if (pub.cover.indexOf('demos_rising') >= 0) imgPath = 'images/book_covers/' + pub.cover;
-        else if (pub.cover.indexOf('slaves_in_paris') >= 0) imgPath = 'images/book_covers/' + pub.cover;
-        else if (pub.cover.indexOf('cambridge_handbook') >= 0) imgPath = 'images/book_covers/' + pub.cover;
-        else if (pub.cover.indexOf('nancy_fraser') >= 0) imgPath = 'images/book_covers/' + pub.cover;
-        else if (pub.cover.indexOf('drad') >= 0) imgPath = 'images/drad/' + pub.cover;
-        else if (pub.cover.indexOf('co3') >= 0) imgPath = 'images/co3/' + pub.cover;
+    // Add each type
+    typeOrder.forEach(type => {
+      if (byType[type] && byType[type].length > 0) {
+        const pubs = byType[type];
+        html += `<div class="pub-cat-head">${type}${pubs.length>1?'s':''}</div>`;
         
-        img = `<img src="${imgPath}" alt="" onerror="this.style.display='none'">`;
+        pubs.forEach(pub => {
+          let img = '';
+          if (pub.cover) {
+            let path = 'images/journal_covers/';
+            if (pub.cover.indexOf('bk_') === 0) path = 'images/book_covers/';
+            else if (pub.cover.indexOf('demos_rising') >= 0) path = 'images/book_covers/';
+            else if (pub.cover.indexOf('slaves_in_paris') >= 0) path = 'images/book_covers/';
+            else if (pub.cover.indexOf('cambridge_handbook') >= 0) path = 'images/book_covers/';
+            else if (pub.cover.indexOf('nancy_fraser') >= 0) path = 'images/book_covers/';
+            else if (pub.cover.indexOf('drad') >= 0) path = 'images/drad/';
+            else if (pub.cover.indexOf('co3') >= 0) path = 'images/co3/';
+            
+            img = `<img src="${path}${pub.cover}" alt="" onerror="this.style.display='none'">`;
+          }
+          
+          let link = 'https://scholar.google.com/scholar?q=' + encodeURIComponent(pub.title.substring(0,60));
+          html += `<div class="pub-entry">${img}<div class="pub-text"><a href="${link}" target="_blank">${pub.title}</a></div></div>`;
+        });
       }
-      
-      let link = 'https://scholar.google.com/scholar?q=' + encodeURIComponent(pub.title.substring(0,60));
-      html += `<div class="pub-entry">${img}<div class="pub-text"><a href="${link}" target="_blank">${pub.title}</a></div></div>`;
     });
     
     html += `</div></div>`;
@@ -2272,7 +2304,6 @@ function generatePublications() {
   
   return html;
 }
-
 function renderModal(data) {
   if (!data) return '<p>No details available.</p>';
   if (data.type === 'stat')    return renderStat(data);
