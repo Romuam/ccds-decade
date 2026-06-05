@@ -2222,20 +2222,23 @@ function generateHighlights() {
 function generatePublications() {
   // Classify publication type
   function getType(title) {
-    const t = title.toLowerCase();
+    // Check if it's a standalone book
+    // Look for " In " (capital I with spaces) = chapter in book
+    // Look for patterns that indicate book chapters
+    const isChapter = / In /.test(title) || / In"/.test(title) || / In</.test(title);
     
-    // Check if it's a standalone book (published by press, no "In")
-    const isStandaloneBook = !t.includes(' in ') && !t.includes('"in ') &&
-      (t.includes('press') || t.includes('university') || t.includes('routledge') || 
-       t.includes('bloomsbury') || t.includes('harvard') || t.includes('oxford') || 
-       t.includes('springer') || t.includes('penguin'));
+    // Standalone book: has press/publisher AND is not a chapter
+    const isStandaloneBook = !isChapter &&
+      (title.includes('Press') || title.includes('University') || 
+       title.includes('press') || title.includes('university'));
     
     if (isStandaloneBook) return 'Book';
+    
+    const t = title.toLowerCase();
     if (t.includes('review of') || t.includes('book review')) return 'Review';
     if (t.includes('blog') || t.includes('verfassungsblog') || t.includes('conversation')) return 'Blog Post';
     return 'Article';
-  }
-  
+  }  
   // Extract DOI from title or create Google Scholar link
   function getLink(title) {
     // Look for DOI
@@ -2290,9 +2293,15 @@ function generatePublications() {
           let img = '';
           if (pub.cover) {
             let path = 'images/journal_covers/';
-            if (pub.cover.indexOf('bk_') === 0) path = 'images/book_covers/';
-            else if (pub.cover.indexOf('drad') >= 0) path = 'images/drad/';
-            else if (pub.cover.indexOf('co3') >= 0) path = 'images/co3/';
+            // Book covers - check by prefix and specific names
+            const bookCovers = ['cambridge_handbook', 'demos_rising', 'liberal_democratic', 'making_of_world', 'nancy_fraser', 'rawls_handbuch', 'slaves_in_paris', 'soin_et_compassion', 'OxHRH'];
+            if (pub.cover.indexOf('bk_') === 0 || bookCovers.some(bc => pub.cover.indexOf(bc) >= 0)) {
+              path = 'images/book_covers/';
+            } else if (pub.cover.indexOf('drad') >= 0) {
+              path = 'images/drad/';
+            } else if (pub.cover.indexOf('co3') >= 0) {
+              path = 'images/co3/';
+            }
             img = `<img src="${path}${pub.cover}" alt="" onerror="this.style.display='none'">`;
           }
           
