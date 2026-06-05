@@ -2220,32 +2220,39 @@ function generateHighlights() {
 
 /* Generate publications list from database */
 function generatePublications() {
-  // Classify publication type
+  // Classify publication type - using booklet categories
   function getType(title) {
     const t = title.toLowerCase();
     
-    // BOOKS: Standalone publications by press/university, NOT chapters
+    // BOOKS: Press/University published, standalone (not a chapter)
     const isChapter = /\s[Ii]n\s/.test(title) || / In </.test(title) || / In "/.test(title);
     const hasPublisher = t.includes('press') || t.includes('university') || 
                         t.includes('routledge') || t.includes('bloomsbury') || 
                         t.includes('harvard') || t.includes('oxford') || 
                         t.includes('springer') || t.includes('penguin');
-    const isBook = hasPublisher && !isChapter;
+    if (hasPublisher && !isChapter) return 'Book';
     
-    if (isBook) return 'Book';
+    // ARTICLES & BOOK CHAPTERS: Chapters in books, journal articles
+    if (isChapter || t.includes('journal') || t.includes('article')) return 'Article';
     
-    // ARTICLES: Everything with title-like content (chapters in books, journal articles)
-    // This is the default for most scholarly publications
-    const isArticle = t.includes('journal') || t.includes('article') || 
-                     t.includes('chapter') || isChapter;
-    if (isArticle) return 'Article';
+    // SPECIAL ISSUES: Guest editor, special issue
+    if (t.includes('special issue') || t.includes('guest editor')) return 'Special Issue';
     
-    // OTHER: Reviews, blog posts, reports, and misc
-    return 'Other';
-  } 
+    // REVIEWS: "Review of"
+    if (t.includes('review of') || t.includes('book review')) return 'Review';
+    
+    // REPORTS: CCDS reports, working papers, etc
+    if (t.includes('report') || t.includes('working paper')) return 'Report';
+    
+    // BLOGS: Blog posts, online content
+    if (t.includes('blog') || t.includes('verfassungsblog') || t.includes('conversation')) return 'Blog';
+    
+    // Default to Article if unclear
+    return 'Article';
+  }
   let html = '';
   const byYearType = {};
-  const typeOrder = ['Book', 'Article', 'Other'];
+  const typeOrder = ['Book', 'Article', 'Report', 'Review', 'Special Issue', 'Blog'];
   
   // Group by year, then type
   for (let id in PUBLICATIONS) {
@@ -2285,7 +2292,10 @@ function generatePublications() {
         const typeLabels = {
           'Book': 'Books',
           'Article': 'Articles & Book Chapters',
-          'Other': 'Other'
+          'Report': 'Reports',
+          'Review': 'Reviews',
+          'Special Issue': 'Special Issues',
+          'Blog': 'Blogs'
         };
         
         html += `<div class="pub-cat-head">${typeLabels[type]}</div>`;
