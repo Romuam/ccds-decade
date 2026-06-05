@@ -2209,6 +2209,8 @@ function generateHighlights() {
 
 /* Generate publications list from database */
 function generatePublications() {
+  console.log('generatePublications() called');
+  console.log('PUBLICATIONS object:', typeof PUBLICATIONS, Object.keys(PUBLICATIONS).length, 'entries');
   // Classify publication type - using booklet categories
   function getType(title) {
     const t = title.toLowerCase();
@@ -2312,7 +2314,8 @@ function generatePublications() {
     
     html += `</div></div>`;
   });
-  
+
+  console.log('generatePublications returning:', html.length, 'characters with', (html.match(/pub-entry/g) || []).length, 'entries');
   return html;
 }
 function renderModal(data) {
@@ -2874,8 +2877,12 @@ const animateCounters = () => {
 document.addEventListener('DOMContentLoaded', () => {
   // Generate and populate publications list
   const pubContainer = document.querySelector('#publications-list-container');
+  console.log('DOMContentLoaded fired, pubContainer found:', !!pubContainer);
   if (pubContainer) {
-    pubContainer.innerHTML = '<span class="section-label" style="margin-bottom:16px">Publications · Complete Record (2016–2026)</span>' + generatePublications();
+    const pubHTML = generatePublications();
+    console.log('generatePublications returned:', pubHTML ? pubHTML.length + ' characters' : 'empty');
+    pubContainer.innerHTML = '<span class="section-label" style="margin-bottom:16px">Publications · Complete Record (2016–2026)</span>' + pubHTML;
+    console.log('Publications HTML set to container');
   }
 
   const yearButtons = document.querySelectorAll('.pub-year-toggle');
