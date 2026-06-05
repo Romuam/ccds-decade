@@ -2234,14 +2234,13 @@ function generatePublications() {
        t.includes('published by'));
     
     if (isBook) return 'Book';
-    if (t.includes('review of') || t.includes('book review')) return 'Review';
-    if (t.includes('blog') || t.includes('verfassungsblog') || t.includes('conversation')) return 'Blog Post';
-    return 'Article';
+    if (isChapter || t.includes('journal') || t.includes('article')) return 'Article';
+    return 'Other';
   }
   
   let html = '';
   const byYearType = {};
-  const typeOrder = ['Book', 'Article', 'Review', 'Blog Post'];
+  const typeOrder = ['Book', 'Article', 'Other'];
   
   // Group by year, then type
   for (let id in PUBLICATIONS) {
@@ -2276,7 +2275,15 @@ function generatePublications() {
     typeOrder.forEach(type => {
       if (byType[type] && byType[type].length > 0) {
         const pubs = byType[type];
-        html += `<div class="pub-cat-head">${type}${pubs.length>1?'s':''}</div>`;
+        
+        // Type headers with proper labels
+        const typeLabels = {
+          'Book': 'Books',
+          'Article': 'Articles & Book Chapters',
+          'Other': 'Other'
+        };
+        
+        html += `<div class="pub-cat-head">${typeLabels[type]}</div>`;
         
         pubs.forEach(pub => {
           let img = '';
