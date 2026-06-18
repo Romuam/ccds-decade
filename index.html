@@ -2858,7 +2858,7 @@ const animateCounters = () => {
   });
 };
 
-// Photo Carousel - rotating display with 4 photos at a time
+// Photo Carousel - rotating display with 4 unique photos at a time
 const carouselPhotos = [
   'images/co3_photos/image1.jpeg','images/co3_photos/image2.jpeg','images/co3_photos/image3.jpeg','images/co3_photos/image4.jpeg','images/co3_photos/image5.jpeg',
   'images/co3_photos/image6.jpeg','images/co3_photos/image7.jpeg','images/co3_photos/image8.jpeg','images/co3_photos/image9.jpeg','images/co3_photos/image10.jpeg',
@@ -2875,15 +2875,39 @@ const carouselPhotos = [
   'images/old_events/image27.jpeg','images/old_events/image30.jpeg','images/old_events/image32.jpeg','images/old_events/image25.jpeg','images/old_events/image28.jpeg',
   'images/old_events/image29.jpeg','images/old_events/image31.jpeg','images/old_events/image24.jpeg'
 ];
+// Add gallery photos
+for(let g = 1; g <= 7; g++) {
+  const gallery = g === 1 ? 'ccds_gallery' : `ccds_gallery ${g}`;
+  for(let i = 1; i <= 100; i++) {
+    const paths = [
+      `images/${gallery}/images/image${i}.jpeg`,
+      `images/${gallery}/images/image${i}.jpg`,
+      `images/${gallery}/images/image${i}.png`
+    ];
+    carouselPhotos.push(...paths);
+  }
+}
 let currentPhotoIndex = 0;
 const photosPerView = 4;
 const rotatePhotos = () => {
   const imgs = document.querySelectorAll('.carousel-img');
   imgs.forEach(img => img.style.opacity = '0');
   setTimeout(() => {
+    const selectedIndices = new Set();
+    const photosToShow = [];
+    let attempts = 0;
+    while(photosToShow.length < photosPerView && attempts < 100) {
+      const idx = Math.floor(Math.random() * carouselPhotos.length);
+      if(!selectedIndices.has(idx)) {
+        selectedIndices.add(idx);
+        photosToShow.push(carouselPhotos[idx]);
+      }
+      attempts++;
+    }
     imgs.forEach((img, i) => {
-      const photoIndex = (currentPhotoIndex + i) % carouselPhotos.length;
-      img.src = carouselPhotos[photoIndex];
+      if(i < photosToShow.length) {
+        img.src = photosToShow[i];
+      }
       img.style.opacity = '1';
     });
     currentPhotoIndex = (currentPhotoIndex + photosPerView) % carouselPhotos.length;

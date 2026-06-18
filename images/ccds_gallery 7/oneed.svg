@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 520" preserveAspectRatio="xMidYMid meet">
+  <rect width="1600" height="520" fill="#ffffff"/>
+  <text x="800" y="310" text-anchor="middle"
+        font-family="Helvetica, Arial, sans-serif"
+        font-weight="900" font-size="240" letter-spacing="-6">
+    <tspan fill="#000">on</tspan><tspan fill="#d5301e">_</tspan><tspan fill="#000">education</tspan>
+  </text>
+  <text x="800" y="450" text-anchor="middle"
+        font-family="Helvetica, Arial, sans-serif"
+        font-weight="400" font-size="68" fill="#1a1a1a">
+    Journal for Research and Debate
+  </text>
+</svg>
