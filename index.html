@@ -378,8 +378,8 @@ footer .footer-bottom img.logo-img{height:28px;width:auto;mix-blend-mode:screen;
 }
 
 /* ── Photo Carousel ─────────────────────────────────────── */
-.photo-carousel{width:100%;height:220px;overflow-x:auto;overflow-y:hidden;background:#f5f3f0;display:flex;gap:8px;scroll-behavior:smooth;padding:10px;align-items:center}
-.photo-carousel img{height:200px;width:auto;object-fit:contain;flex-shrink:0}
+.photo-carousel{width:100%;height:300px;overflow:hidden;background:#f5f3f0;display:flex;align-items:center;justify-content:center}
+.photo-carousel img{max-height:300px;max-width:100%;object-fit:contain;transition:opacity 0.6s ease}
 
 /* ── Hosted Journals ─────────────────────────────────────── */
 #journals .journals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
@@ -869,33 +869,7 @@ footer .footer-bottom img{height:22px;opacity:0.5}
 
 <!-- ── Photo Carousel ────────────────────────────────────────── -->
 <div id="photo-carousel" class="photo-carousel">
-  <img src="images/co3_photos/image1.jpeg" alt="Event Photo">
-  <img src="images/co3_photos/image5.jpeg" alt="Event Photo">
-  <img src="images/old_events/image27.jpeg" alt="Event Photo">
-  <img src="images/co3_photos/image10.jpeg" alt="Event Photo">
-  <img src="images/old_events/image30.jpeg" alt="Event Photo">
-  <img src="images/co3_photos/image15.jpeg" alt="Event Photo">
-  <img src="images/old_events/image32.jpeg" alt="Event Photo">
-  <img src="images/co3_photos/image20.jpeg" alt="Event Photo">
-  <img src="images/old_events/image25.jpeg" alt="Event Photo">
-  <img src="images/co3_photos/image25.jpeg" alt="Event Photo">
-  <img src="images/old_events/image28.jpeg" alt="Event Photo">
-  <img src="images/co3_photos/image30.jpeg" alt="Event Photo">
-  <img src="images/old_events/image29.jpeg" alt="Event Photo">
-  <img src="images/co3_photos/image35.jpeg" alt="Event Photo">
-  <img src="images/old_events/image31.jpeg" alt="Event Photo">
-  <img src="images/co3_photos/image40.jpeg" alt="Event Photo">
-  <img src="images/old_events/image24.jpeg" alt="Event Photo">
-  <img src="images/co3_photos/image45.jpeg" alt="Event Photo">
-  <img src="images/co3_photos/image2.jpeg" alt="Event Photo">
-  <img src="images/co3_photos/image8.jpeg" alt="Event Photo">
-  <img src="images/co3_photos/image12.jpeg" alt="Event Photo">
-  <img src="images/co3_photos/image18.jpeg" alt="Event Photo">
-  <img src="images/co3_photos/image22.jpeg" alt="Event Photo">
-  <img src="images/co3_photos/image28.jpeg" alt="Event Photo">
-  <img src="images/co3_photos/image33.jpeg" alt="Event Photo">
-  <img src="images/co3_photos/image50.jpeg" alt="Event Photo">
-  <img src="images/co3_photos/image52.jpeg" alt="Event Photo">
+  <img id="carousel-img" src="images/co3_photos/image1.jpeg" alt="Event Photo">
 </div>
 
 <!-- ── Overview ─────────────────────────────────────────── -->
@@ -2927,6 +2901,39 @@ const animateCounters = () => {
     }, 30);
   });
 };
+
+// Photo Carousel - rotating display
+const carouselPhotos = [
+  'images/co3_photos/image1.jpeg','images/co3_photos/image2.jpeg','images/co3_photos/image3.jpeg','images/co3_photos/image4.jpeg','images/co3_photos/image5.jpeg',
+  'images/co3_photos/image6.jpeg','images/co3_photos/image7.jpeg','images/co3_photos/image8.jpeg','images/co3_photos/image9.jpeg','images/co3_photos/image10.jpeg',
+  'images/co3_photos/image11.jpeg','images/co3_photos/image12.jpeg','images/co3_photos/image13.jpeg','images/co3_photos/image14.jpeg','images/co3_photos/image15.jpeg',
+  'images/co3_photos/image16.jpeg','images/co3_photos/image17.jpeg','images/co3_photos/image18.jpeg','images/co3_photos/image19.jpeg','images/co3_photos/image20.jpeg',
+  'images/co3_photos/image21.jpeg','images/co3_photos/image22.jpeg','images/co3_photos/image23.jpeg','images/co3_photos/image24.jpeg','images/co3_photos/image25.jpeg',
+  'images/co3_photos/image26.jpeg','images/co3_photos/image27.jpeg','images/co3_photos/image28.jpeg','images/co3_photos/image29.jpeg','images/co3_photos/image30.jpeg',
+  'images/co3_photos/image31.jpeg','images/co3_photos/image32.jpeg','images/co3_photos/image33.jpeg','images/co3_photos/image34.jpeg','images/co3_photos/image35.jpeg',
+  'images/co3_photos/image36.jpeg','images/co3_photos/image37.jpeg','images/co3_photos/image38.jpeg','images/co3_photos/image39.jpeg','images/co3_photos/image40.jpeg',
+  'images/co3_photos/image41.jpeg','images/co3_photos/image42.jpeg','images/co3_photos/image43.jpeg','images/co3_photos/image44.jpeg','images/co3_photos/image45.jpeg',
+  'images/co3_photos/image46.jpeg','images/co3_photos/image47.jpeg','images/co3_photos/image48.jpeg','images/co3_photos/image49.jpeg','images/co3_photos/image50.jpeg',
+  'images/co3_photos/image51.jpeg','images/co3_photos/image52.jpeg','images/co3_photos/rsc_new_01.jpeg','images/co3_photos/rsc_new_02.jpeg','images/co3_photos/rsc_new_03.jpeg',
+  'images/co3_photos/rsc_new_04.jpeg','images/co3_photos/rsc_new_05.jpeg','images/co3_photos/rsc_new_06.jpeg','images/co3_photos/rsc_new_07.jpeg','images/co3_photos/rsc_new_08.jpeg',
+  'images/old_events/image27.jpeg','images/old_events/image30.jpeg','images/old_events/image32.jpeg','images/old_events/image25.jpeg','images/old_events/image28.jpeg',
+  'images/old_events/image29.jpeg','images/old_events/image31.jpeg','images/old_events/image24.jpeg'
+];
+let currentPhotoIndex = 0;
+const rotatePhoto = () => {
+  const img = document.getElementById('carousel-img');
+  if (img) {
+    img.style.opacity = '0';
+    setTimeout(() => {
+      img.src = carouselPhotos[currentPhotoIndex];
+      img.style.opacity = '1';
+      currentPhotoIndex = (currentPhotoIndex + 1) % carouselPhotos.length;
+    }, 300);
+  }
+};
+document.addEventListener('DOMContentLoaded', () => {
+  setInterval(rotatePhoto, 4000);
+});
 
 // Open 2026 and 2025 by default
 document.addEventListener('DOMContentLoaded', () => {
