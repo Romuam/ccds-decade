@@ -377,6 +377,11 @@ footer .footer-bottom img.logo-img{height:28px;width:auto;mix-blend-mode:screen;
   padding-left:0;
 }
 
+/* ── Photo Gallery ──────────────────────────────────────── */
+#photos .photo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+#photos .photo-grid img{width:100%;height:300px;object-fit:cover;border-radius:6px;box-shadow:0 4px 12px rgba(0,0,0,0.1);transition:transform 0.3s ease}
+#photos .photo-grid img:hover{transform:scale(1.02)}
+
 /* ── Hosted Journals ─────────────────────────────────────── */
 #journals .journals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
 .journal-card{background:#fff;border:1px solid var(--rule);border-radius:3px;overflow:hidden}
@@ -786,7 +791,9 @@ footer .footer-bottom img{height:22px;opacity:0.5}
 <header id="site-nav">
   <div class="nav-inner">
     <a class="nav-logo" href="#hero">
-      <img src="assets/logo_test.png" alt="AUP · Center for Critical Democracy Studies">
+      <svg viewBox="0 0 200 50" height="36" xmlns="http://www.w3.org/2000/svg">
+        <text x="10" y="35" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#ffffff">CCDS</text>
+      </svg>
     </a>
     <nav>
       <a href="#overview">Overview</a>
@@ -1141,6 +1148,20 @@ footer .footer-bottom img{height:22px;opacity:0.5}
       <p>Senior and junior researchers interested in applying are welcome to submit at any time. Scholars have access to CCDS resources, library privileges, and participation in CCDS seminars. Visiting scholars are encouraged to present their research, organize events, and collaborate with CCDS members and the AUP community.</p>
       <p><strong>Required documents:</strong> CV · selected publications list · proposed stay dates (minimum 3 months notice) · brief research description · potential collaborations · financing information. For PhD candidates: a recommendation letter.</p>
       <a href="mailto:ccds@aup.edu" class="apply">Apply · ccds@aup.edu</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Photo Gallery ──────────────────────────────────────── -->
+<section class="section" id="photos">
+  <div class="container">
+    <div class="section-header fade-in">
+      <h2>Moments from a Decade</h2>
+      <p class="intro">Highlights from CCDS events and research activities 2016–2026.</p>
+    </div>
+    <div class="photo-grid fade-in">
+      <img src="images/ccds_booklet/franco_american_conference.jpg" alt="Quarter-Millenium of Franco-American Relations Conference">
+      <img src="images/ccds_booklet/image250.jpeg" alt="250 Conference">
     </div>
   </div>
 </section>
