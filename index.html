@@ -808,6 +808,47 @@ footer .footer-bottom img{height:22px;opacity:0.5}
     </button>
   </div>
 </header>
+
+<!-- ── Photo Carousel ────────────────────────────────────────── -->
+<div id="photo-carousel" class="photo-carousel">
+  <img class="carousel-img" src="images/co3_photos/image1.jpeg" alt="Event Photo">
+  <img class="carousel-img" src="images/co3_photos/image2.jpeg" alt="Event Photo">
+  <img class="carousel-img" src="images/co3_photos/image3.jpeg" alt="Event Photo">
+  <img class="carousel-img" src="images/co3_photos/image4.jpeg" alt="Event Photo">
+</div>
+
+<!-- ── Stats strip ───────────────────────────────────────── -->
+<div id="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item fade-in clickable" data-modal="stat-publications" title="Click for publication breakdown">
+        <div class="n" data-target="186">0</div>
+        <div class="l">Publications</div>
+      </div>
+      <div class="stat-item fade-in clickable" data-modal="stat-citations" title="Click for citation details">
+        <div class="n" data-target="1225">0</div>
+        <div class="l">Scholarly Citations</div>
+      </div>
+      <div class="stat-item fade-in clickable" data-modal="stat-events" title="Click for events breakdown">
+        <div class="n" data-target="178">0</div>
+        <div class="l">Events</div>
+      </div>
+      <div class="stat-item fade-in clickable" data-modal="stat-speakers" title="Click for speaker details">
+        <div class="n" data-target="545">0</div>
+        <div class="l">Invited Speakers</div>
+      </div>
+      <div class="stat-item fade-in clickable" data-modal="stat-speakers" title="Click for geographic breakdown">
+        <div class="n" data-target="43">0</div>
+        <div class="l">Countries</div>
+      </div>
+      <div class="stat-item fade-in clickable" data-modal="stat-funding" title="Click for grant breakdown">
+        <div class="n"><span class="unit">€</span>797k</div>
+        <div class="l">EU Funding (CCDS)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="mobile-menu">
   <a href="#overview" onclick="this.closest('#mobile-menu').classList.remove('open')">Overview</a>
   <a href="#community" onclick="this.closest('#mobile-menu').classList.remove('open')">Community</a>
@@ -845,35 +886,9 @@ footer .footer-bottom img{height:22px;opacity:0.5}
       <a href="#overview" class="btn primary">Explore the Report</a>
       <a href="https://doi.org/10.5281/zenodo.19880201" class="btn" target="_blank">DOI · Full PDF</a>
     </div>
-    <div class="hero-stats">
-      <div class="hero-stat clickable" data-modal="stat-publications" title="Click for breakdown">
-        <div class="num" data-target="186">0</div>
-        <div class="lbl">Publications</div>
-      </div>
-      <div class="hero-stat clickable" data-modal="stat-events" title="Click for breakdown">
-        <div class="num" data-target="178">0</div>
-        <div class="lbl">Academic Events</div>
-      </div>
-      <div class="hero-stat clickable" data-modal="stat-speakers" title="Click for breakdown">
-        <div class="num" data-target="545">0</div>
-        <div class="lbl">Invited Speakers</div>
-      </div>
-      <div class="hero-stat clickable" data-modal="stat-speakers" title="Click for breakdown">
-        <div class="num" data-target="43" data-suffix=" countries">0</div>
-        <div class="lbl">Countries Represented</div>
-      </div>
-    </div>
   </div>
   <div class="tricolor"></div>
 </section>
-
-<!-- ── Photo Carousel ────────────────────────────────────────── -->
-<div id="photo-carousel" class="photo-carousel">
-  <img class="carousel-img" src="images/co3_photos/image1.jpeg" alt="Event Photo">
-  <img class="carousel-img" src="images/co3_photos/image2.jpeg" alt="Event Photo">
-  <img class="carousel-img" src="images/co3_photos/image3.jpeg" alt="Event Photo">
-  <img class="carousel-img" src="images/co3_photos/image4.jpeg" alt="Event Photo">
-</div>
 
 <!-- ── Overview ─────────────────────────────────────────── -->
 <section class="section" id="overview">
@@ -895,71 +910,9 @@ footer .footer-bottom img{height:22px;opacity:0.5}
           <strong>Contact</strong> · <a href="mailto:ccds@aup.edu" style="color:#7A9ABF">ccds@aup.edu</a>
         </div>
       </div>
-      <div class="facts-block">
-        <div class="fact-row clickable" data-modal="stat-community" title="Click for community details">
-          <div class="fact-num">17</div>
-          <div class="fact-text">
-            <strong>Current Members</strong>
-            <span>Faculty fellows, affiliate members, postdoctoral research fellows, visiting scholars, and student researchers.</span>
-          </div>
-        </div>
-        <div class="fact-row clickable" data-modal="stat-publications" title="Click for publication breakdown">
-          <div class="fact-num">186</div>
-          <div class="fact-text">
-            <strong>Scholarly Publications</strong>
-            <span>16 books · 3 special issues · 127 articles &amp; chapters · 15 reports · 17 reviews · 8 blogs</span>
-          </div>
-        </div>
-        <div class="fact-row clickable" data-modal="stat-events" title="Click for events breakdown">
-          <div class="fact-num">178</div>
-          <div class="fact-text">
-            <strong>Academic Events</strong>
-            <span>52 seminar sessions · 33 book launches · 22 conferences &amp; symposia · 71 thematic lectures &amp; workshops</span>
-          </div>
-        </div>
-        <div class="fact-row clickable" data-modal="stat-funding" title="Click for grant breakdown">
-          <div class="fact-num" style="font-size:1.7rem;padding-top:4px;">€797k</div>
-          <div class="fact-text">
-            <strong>EU Research Funding (CCDS share)</strong>
-            <span>Three Horizon Europe grants totalling €8.19M across consortia. D.Rad · OppAttune · CO3.</span>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
-
-<!-- ── Stats strip ───────────────────────────────────────── -->
-<div id="stats">
-  <div class="container">
-    <div class="stats-grid">
-      <div class="stat-item fade-in clickable" data-modal="stat-publications" title="Click for publication breakdown">
-        <div class="n" data-target="186">0</div>
-        <div class="l">Publications</div>
-      </div>
-      <div class="stat-item fade-in clickable" data-modal="stat-citations" title="Click for citation details">
-        <div class="n" data-target="1225">0</div>
-        <div class="l">Scholarly Citations</div>
-      </div>
-      <div class="stat-item fade-in clickable" data-modal="stat-events" title="Click for events breakdown">
-        <div class="n" data-target="178">0</div>
-        <div class="l">Events</div>
-      </div>
-      <div class="stat-item fade-in clickable" data-modal="stat-speakers" title="Click for speaker details">
-        <div class="n" data-target="545">0</div>
-        <div class="l">Invited Speakers</div>
-      </div>
-      <div class="stat-item fade-in clickable" data-modal="stat-speakers" title="Click for geographic breakdown">
-        <div class="n" data-target="43">0</div>
-        <div class="l">Countries</div>
-      </div>
-      <div class="stat-item fade-in clickable" data-modal="stat-funding" title="Click for grant breakdown">
-        <div class="n"><span class="unit">€</span>797k</div>
-        <div class="l">EU Funding (CCDS)</div>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- ── Community ────────────────────────────────────────── -->
 <section class="section alt" id="community">
