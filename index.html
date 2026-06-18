@@ -817,38 +817,6 @@ footer .footer-bottom img{height:22px;opacity:0.5}
   <img class="carousel-img" src="images/co3_photos/image4.jpeg" alt="Event Photo">
 </div>
 
-<!-- ── Stats strip ───────────────────────────────────────── -->
-<div id="stats">
-  <div class="container">
-    <div class="stats-grid">
-      <div class="stat-item fade-in clickable" data-modal="stat-publications" title="Click for publication breakdown">
-        <div class="n" data-target="186">0</div>
-        <div class="l">Publications</div>
-      </div>
-      <div class="stat-item fade-in clickable" data-modal="stat-citations" title="Click for citation details">
-        <div class="n" data-target="1225">0</div>
-        <div class="l">Scholarly Citations</div>
-      </div>
-      <div class="stat-item fade-in clickable" data-modal="stat-events" title="Click for events breakdown">
-        <div class="n" data-target="178">0</div>
-        <div class="l">Events</div>
-      </div>
-      <div class="stat-item fade-in clickable" data-modal="stat-speakers" title="Click for speaker details">
-        <div class="n" data-target="545">0</div>
-        <div class="l">Invited Speakers</div>
-      </div>
-      <div class="stat-item fade-in clickable" data-modal="stat-speakers" title="Click for geographic breakdown">
-        <div class="n" data-target="43">0</div>
-        <div class="l">Countries</div>
-      </div>
-      <div class="stat-item fade-in clickable" data-modal="stat-funding" title="Click for grant breakdown">
-        <div class="n"><span class="unit">€</span>797k</div>
-        <div class="l">EU Funding (CCDS)</div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div id="mobile-menu">
   <a href="#overview" onclick="this.closest('#mobile-menu').classList.remove('open')">Overview</a>
   <a href="#community" onclick="this.closest('#mobile-menu').classList.remove('open')">Community</a>
@@ -885,6 +853,24 @@ footer .footer-bottom img{height:22px;opacity:0.5}
     <div class="hero-cta">
       <a href="#overview" class="btn primary">Explore the Report</a>
       <a href="https://doi.org/10.5281/zenodo.19880201" class="btn" target="_blank">DOI · Full PDF</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat clickable" data-modal="stat-publications" title="Click for breakdown">
+        <div class="num" data-target="186">0</div>
+        <div class="lbl">Publications</div>
+      </div>
+      <div class="hero-stat clickable" data-modal="stat-events" title="Click for breakdown">
+        <div class="num" data-target="178">0</div>
+        <div class="lbl">Academic Events</div>
+      </div>
+      <div class="hero-stat clickable" data-modal="stat-speakers" title="Click for breakdown">
+        <div class="num" data-target="545">0</div>
+        <div class="lbl">Invited Speakers</div>
+      </div>
+      <div class="hero-stat clickable" data-modal="stat-speakers" title="Click for breakdown">
+        <div class="num" data-target="43" data-suffix=" countries">0</div>
+        <div class="lbl">Countries Represented</div>
+      </div>
     </div>
   </div>
   <div class="tricolor"></div>
