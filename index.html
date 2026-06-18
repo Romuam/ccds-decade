@@ -378,8 +378,8 @@ footer .footer-bottom img.logo-img{height:28px;width:auto;mix-blend-mode:screen;
 }
 
 /* ── Photo Carousel ─────────────────────────────────────── */
-.photo-carousel{width:100%;height:120px;overflow:hidden;background:#f5f3f0;display:flex;align-items:center;justify-content:center}
-.photo-carousel img{width:100%;height:100%;object-fit:cover;transition:opacity 0.6s ease;opacity:1}
+.photo-carousel{width:100%;height:90px;overflow-x:auto;overflow-y:hidden;background:#f5f3f0;display:flex;gap:0;scroll-behavior:smooth}
+.photo-carousel img{height:90px;width:auto;object-fit:cover;flex-shrink:0;min-width:140px}
 
 /* ── Hosted Journals ─────────────────────────────────────── */
 #journals .journals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
@@ -837,7 +837,18 @@ footer .footer-bottom img{height:22px;opacity:0.5}
 
 <!-- ── Photo Carousel ────────────────────────────────────────── -->
 <div id="photo-carousel" class="photo-carousel">
-  <img src="images/ccds_booklet/franco_american_conference.jpg" alt="CCDS Event Photo" id="carousel-img">
+  <img src="images/ccds_booklet/gilligan_1.jpeg" alt="Gilligan Lecture">
+  <img src="images/ccds_booklet/gilligan_2.jpeg" alt="Gilligan Lecture">
+  <img src="images/ccds_booklet/gilligan_3.jpeg" alt="Gilligan Lecture">
+  <img src="images/ccds_booklet/ibos_fassin.jpg" alt="Ibos Fassin Event">
+  <img src="images/ccds_booklet/franco_american_conference.jpg" alt="Franco-American Conference">
+  <img src="images/ccds_booklet/exhibition_artwork.jpeg" alt="Exhibition Artwork">
+  <img src="images/ccds_booklet/exhibition_vernissage.jpeg" alt="Exhibition Vernissage">
+  <img src="images/ccds_booklet/bach_indian_economics.jpg" alt="Bach Indian Economics">
+  <img src="images/ccds_booklet/kelly_worlds_wartime.jpg" alt="Kelly Worlds Wartime">
+  <img src="images/ccds_booklet/larrere_care_ecology.jpg" alt="Larrere Care Ecology">
+  <img src="images/ccds_booklet/taieb_care_vulnerability.jpg" alt="Taieb Care Vulnerability">
+  <img src="images/ccds_booklet/wunsch_democratic_commitment.jpg" alt="Wunsch Democratic Commitment">
 </div>
 
 <!-- ── Hero ─────────────────────────────────────────────── -->
@@ -3369,36 +3380,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// Photo carousel - rotate through high-resolution event photos only
-const carouselPhotos = [
-  'images/ccds_booklet/gilligan_1.jpeg',
-  'images/ccds_booklet/gilligan_2.jpeg',
-  'images/ccds_booklet/gilligan_3.jpeg',
-  'images/ccds_booklet/ibos_fassin.jpg',
-  'images/ccds_booklet/franco_american_conference.jpg',
-  'images/ccds_booklet/exhibition_artwork.jpeg',
-  'images/ccds_booklet/exhibition_vernissage.jpeg',
-  'images/ccds_booklet/bach_indian_economics.jpg',
-  'images/ccds_booklet/kelly_worlds_wartime.jpg',
-  'images/ccds_booklet/larrere_care_ecology.jpg',
-  'images/ccds_booklet/taieb_care_vulnerability.jpg',
-  'images/ccds_booklet/wunsch_democratic_commitment.jpg'
-];
-
-let currentPhotoIndex = 0;
-const carouselImg = document.getElementById('carousel-img');
-
-function rotatePhoto() {
-  currentPhotoIndex = (currentPhotoIndex + 1) % carouselPhotos.length;
-  carouselImg.style.opacity = '0';
-  setTimeout(() => {
-    carouselImg.src = carouselPhotos[currentPhotoIndex];
-    carouselImg.style.opacity = '1';
-  }, 300);
-}
-
-// Change photo every 6 seconds
-setInterval(rotatePhoto, 6000);
+// Photo carousel - displays all high-resolution event photos in a scrollable stripe
 </script>
 </body>
 </html>
