@@ -809,14 +809,6 @@ footer .footer-bottom img{height:22px;opacity:0.5}
   </div>
 </header>
 
-<!-- ── Photo Carousel ────────────────────────────────────────── -->
-<div id="photo-carousel" class="photo-carousel">
-  <img class="carousel-img" src="images/co3_photos/image1.jpeg" alt="Event Photo">
-  <img class="carousel-img" src="images/co3_photos/image2.jpeg" alt="Event Photo">
-  <img class="carousel-img" src="images/co3_photos/image3.jpeg" alt="Event Photo">
-  <img class="carousel-img" src="images/co3_photos/image4.jpeg" alt="Event Photo">
-</div>
-
 <div id="mobile-menu">
   <a href="#overview" onclick="this.closest('#mobile-menu').classList.remove('open')">Overview</a>
   <a href="#community" onclick="this.closest('#mobile-menu').classList.remove('open')">Community</a>
@@ -875,6 +867,14 @@ footer .footer-bottom img{height:22px;opacity:0.5}
   </div>
   <div class="tricolor"></div>
 </section>
+
+<!-- ── Photo Carousel ────────────────────────────────────────── -->
+<div id="photo-carousel" class="photo-carousel">
+  <img class="carousel-img" src="images/co3_photos/image1.jpeg" alt="Event Photo">
+  <img class="carousel-img" src="images/co3_photos/image2.jpeg" alt="Event Photo">
+  <img class="carousel-img" src="images/co3_photos/image3.jpeg" alt="Event Photo">
+  <img class="carousel-img" src="images/co3_photos/image4.jpeg" alt="Event Photo">
+</div>
 
 <!-- ── Overview ─────────────────────────────────────────── -->
 <section class="section" id="overview">
@@ -2859,20 +2859,16 @@ const carouselPhotos = [
   'images/co3_photos/image51.jpeg','images/co3_photos/image52.jpeg','images/co3_photos/rsc_new_01.jpeg','images/co3_photos/rsc_new_02.jpeg','images/co3_photos/rsc_new_03.jpeg',
   'images/co3_photos/rsc_new_04.jpeg','images/co3_photos/rsc_new_05.jpeg','images/co3_photos/rsc_new_06.jpeg','images/co3_photos/rsc_new_07.jpeg','images/co3_photos/rsc_new_08.jpeg',
   'images/old_events/image27.jpeg','images/old_events/image30.jpeg','images/old_events/image32.jpeg','images/old_events/image25.jpeg','images/old_events/image28.jpeg',
-  'images/old_events/image29.jpeg','images/old_events/image31.jpeg','images/old_events/image24.jpeg'
+  'images/old_events/image29.jpeg','images/old_events/image31.jpeg','images/old_events/image24.jpeg',
+  // Gallery photos
+  'images/ccds_gallery/ane.jpg','images/ccds_gallery/auk.jpg','images/ccds_gallery/blog-europp.jpg','images/ccds_gallery/constellations.jpg','images/ccds_gallery/cr_current.jpg',
+  'images/ccds_gallery 2/ane.jpg','images/ccds_gallery 2/auk.jpg','images/ccds_gallery 2/bk_butler.jpg','images/ccds_gallery 2/constellations.jpg','images/ccds_gallery 2/cr_current.jpg',
+  'images/ccds_gallery 3/ane.jpg','images/ccds_gallery 3/auk.jpg','images/ccds_gallery 3/bk_butler.jpg','images/ccds_gallery 3/constellations.jpg','images/ccds_gallery 3/cr_current.jpg',
+  'images/ccds_gallery 4/ane.jpg','images/ccds_gallery 4/auk.jpg','images/ccds_gallery 4/bk_butler.jpg','images/ccds_gallery 4/constellations.jpg','images/ccds_gallery 4/cr_current.jpg',
+  'images/ccds_gallery 5/ane.jpg','images/ccds_gallery 5/auk.jpg','images/ccds_gallery 5/bk_butler.jpg','images/ccds_gallery 5/constellations.jpg','images/ccds_gallery 5/cr_current.jpg',
+  'images/ccds_gallery 6/ane.jpg','images/ccds_gallery 6/auk.jpg','images/ccds_gallery 6/bk_butler.jpg','images/ccds_gallery 6/constellations.jpg','images/ccds_gallery 6/cr_current.jpg',
+  'images/ccds_gallery 7/ane.jpg','images/ccds_gallery 7/auk.jpg','images/ccds_gallery 7/bk_butler.jpg','images/ccds_gallery 7/constellations.jpg','images/ccds_gallery 7/cr_current.jpg'
 ];
-// Add gallery photos
-for(let g = 1; g <= 7; g++) {
-  const gallery = g === 1 ? 'ccds_gallery' : `ccds_gallery ${g}`;
-  for(let i = 1; i <= 100; i++) {
-    const paths = [
-      `images/${gallery}/images/image${i}.jpeg`,
-      `images/${gallery}/images/image${i}.jpg`,
-      `images/${gallery}/images/image${i}.png`
-    ];
-    carouselPhotos.push(...paths);
-  }
-}
 let currentPhotoIndex = 0;
 const photosPerView = 4;
 const rotatePhotos = () => {
