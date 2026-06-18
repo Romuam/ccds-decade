@@ -377,10 +377,9 @@ footer .footer-bottom img.logo-img{height:28px;width:auto;mix-blend-mode:screen;
   padding-left:0;
 }
 
-/* ── Photo Gallery ──────────────────────────────────────── */
-#photos .photo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
-#photos .photo-grid img{width:100%;height:300px;object-fit:cover;border-radius:6px;box-shadow:0 4px 12px rgba(0,0,0,0.1);transition:transform 0.3s ease}
-#photos .photo-grid img:hover{transform:scale(1.02)}
+/* ── Photo Carousel ─────────────────────────────────────── */
+.photo-carousel{width:100%;height:180px;overflow:hidden;background:#f5f3f0;display:flex;align-items:center;justify-content:center}
+.photo-carousel img{width:100%;height:100%;object-fit:cover;transition:opacity 0.6s ease;opacity:1}
 
 /* ── Hosted Journals ─────────────────────────────────────── */
 #journals .journals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
@@ -1150,25 +1149,10 @@ footer .footer-bottom img{height:22px;opacity:0.5}
   </div>
 </section>
 
-<!-- ── Photo Gallery ──────────────────────────────────────── -->
-<section class="section" id="photos">
-  <div class="container">
-    <div class="section-header fade-in">
-      <h2>Moments from a Decade</h2>
-      <p class="intro">Highlights from CCDS events and research activities 2016–2026.</p>
-    </div>
-    <div class="photo-grid fade-in">
-      <img src="images/ccds_booklet/franco_american_conference.jpg" alt="Quarter-Millenium of Franco-American Relations Conference">
-      <img src="images/ccds_booklet/drad_symposium_1.jpeg" alt="DRAD Symposium">
-      <img src="images/ccds_booklet/drad_symposium_2.jpeg" alt="DRAD Symposium">
-      <img src="images/ccds_booklet/exhibition_vernissage.jpeg" alt="Exhibition Vernissage">
-      <img src="images/ccds_booklet/gilligan_1.jpeg" alt="Gilligan Lecture">
-      <img src="images/ccds_booklet/gilligan_2.jpeg" alt="Gilligan Lecture">
-      <img src="images/ccds_booklet/gilligan_3.jpeg" alt="Gilligan Lecture">
-      <img src="images/ccds_booklet/image250.jpeg" alt="250 Conference">
-    </div>
-  </div>
-</section>
+<!-- ── Photo Carousel ────────────────────────────────────────── -->
+<div id="photo-carousel" class="photo-carousel">
+  <img src="images/ccds_booklet/franco_american_conference.jpg" alt="CCDS Event Photo" id="carousel-img">
+</div>
 
 <!-- ── Statistics Dashboard ─────────────────────────────── -->
 <section class="section alt" id="impact">
@@ -3384,6 +3368,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+// Photo carousel - rotate through event photos
+const carouselPhotos = [
+  'images/ccds_booklet/franco_american_conference.jpg',
+  'images/ccds_booklet/drad_symposium_1.jpeg',
+  'images/ccds_booklet/drad_symposium_2.jpeg',
+  'images/ccds_booklet/exhibition_vernissage.jpeg',
+  'images/ccds_booklet/gilligan_1.jpeg',
+  'images/ccds_booklet/gilligan_2.jpeg',
+  'images/ccds_booklet/gilligan_3.jpeg',
+  'images/ccds_booklet/image250.jpeg'
+];
+
+let currentPhotoIndex = 0;
+const carouselImg = document.getElementById('carousel-img');
+
+function rotatePhoto() {
+  currentPhotoIndex = (currentPhotoIndex + 1) % carouselPhotos.length;
+  carouselImg.style.opacity = '0';
+  setTimeout(() => {
+    carouselImg.src = carouselPhotos[currentPhotoIndex];
+    carouselImg.style.opacity = '1';
+  }, 300);
+}
+
+// Change photo every 6 seconds
+setInterval(rotatePhoto, 6000);
 </script>
 </body>
 </html>
