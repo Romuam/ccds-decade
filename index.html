@@ -378,8 +378,8 @@ footer .footer-bottom img.logo-img{height:28px;width:auto;mix-blend-mode:screen;
 }
 
 /* ── Photo Carousel ─────────────────────────────────────── */
-.photo-carousel{width:100%;height:280px;overflow:hidden;background:#f5f3f0;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:0;padding:0;align-items:center;justify-items:center}
-.photo-carousel img{height:280px;width:100%;object-fit:cover;transition:opacity 0.5s ease}
+.photo-carousel{width:100%;height:160px;overflow:hidden;background:#f5f3f0;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:0;padding:0;align-items:center;justify-items:center}
+.photo-carousel img{height:160px;width:100%;object-fit:cover;transition:opacity 0.8s ease}
 
 /* ── Hosted Journals ─────────────────────────────────────── */
 #journals .journals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
@@ -874,6 +874,8 @@ footer .footer-bottom img{height:22px;opacity:0.5}
   <img class="carousel-img" src="images/co3_photos/image2.jpeg" alt="Event Photo">
   <img class="carousel-img" src="images/co3_photos/image3.jpeg" alt="Event Photo">
   <img class="carousel-img" src="images/co3_photos/image4.jpeg" alt="Event Photo">
+  <img class="carousel-img" src="images/co3_photos/image5.jpeg" alt="Event Photo">
+  <img class="carousel-img" src="images/co3_photos/image6.jpeg" alt="Event Photo">
 </div>
 
 <!-- ── Overview ─────────────────────────────────────────── -->
@@ -2862,7 +2864,7 @@ const carouselPhotos = [
   'images/old_events/image29.jpeg','images/old_events/image31.jpeg','images/old_events/image24.jpeg'
 ];
 let currentPhotoIndex = 0;
-const photosPerView = 4;
+const photosPerView = 6;
 const rotatePhotos = () => {
   const imgs = document.querySelectorAll('.carousel-img');
   imgs.forEach(img => img.style.opacity = '0');
@@ -2870,7 +2872,7 @@ const rotatePhotos = () => {
     const selectedIndices = new Set();
     const photosToShow = [];
     let attempts = 0;
-    while(photosToShow.length < photosPerView && attempts < 100) {
+    while(photosToShow.length < photosPerView && attempts < 200) {
       const idx = Math.floor(Math.random() * carouselPhotos.length);
       if(!selectedIndices.has(idx)) {
         selectedIndices.add(idx);
@@ -2885,11 +2887,11 @@ const rotatePhotos = () => {
       img.style.opacity = '1';
     });
     currentPhotoIndex = (currentPhotoIndex + photosPerView) % carouselPhotos.length;
-  }, 250);
+  }, 400);
 };
 document.addEventListener('DOMContentLoaded', () => {
-  rotatePhotos(); // Start rotating immediately
-  setInterval(rotatePhotos, 4000);
+  rotatePhotos();
+  setInterval(rotatePhotos, 5500);
 });
 
 // Open 2026 and 2025 by default
