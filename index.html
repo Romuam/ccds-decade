@@ -2844,7 +2844,7 @@ const animateCounters = () => {
   });
 };
 
-// Photo Carousel - rotating display with 4 unique photos at a time
+// Photo Carousel - event photos only (co3_photos: 52 images + old_events: 8 high-quality images = 60 total)
 const carouselPhotos = [
   'images/co3_photos/image1.jpeg','images/co3_photos/image2.jpeg','images/co3_photos/image3.jpeg','images/co3_photos/image4.jpeg','images/co3_photos/image5.jpeg',
   'images/co3_photos/image6.jpeg','images/co3_photos/image7.jpeg','images/co3_photos/image8.jpeg','images/co3_photos/image9.jpeg','images/co3_photos/image10.jpeg',
@@ -2859,15 +2859,7 @@ const carouselPhotos = [
   'images/co3_photos/image51.jpeg','images/co3_photos/image52.jpeg','images/co3_photos/rsc_new_01.jpeg','images/co3_photos/rsc_new_02.jpeg','images/co3_photos/rsc_new_03.jpeg',
   'images/co3_photos/rsc_new_04.jpeg','images/co3_photos/rsc_new_05.jpeg','images/co3_photos/rsc_new_06.jpeg','images/co3_photos/rsc_new_07.jpeg','images/co3_photos/rsc_new_08.jpeg',
   'images/old_events/image27.jpeg','images/old_events/image30.jpeg','images/old_events/image32.jpeg','images/old_events/image25.jpeg','images/old_events/image28.jpeg',
-  'images/old_events/image29.jpeg','images/old_events/image31.jpeg','images/old_events/image24.jpeg',
-  // Gallery photos
-  'images/ccds_gallery/ane.jpg','images/ccds_gallery/auk.jpg','images/ccds_gallery/blog-europp.jpg','images/ccds_gallery/constellations.jpg','images/ccds_gallery/cr_current.jpg',
-  'images/ccds_gallery 2/ane.jpg','images/ccds_gallery 2/auk.jpg','images/ccds_gallery 2/bk_butler.jpg','images/ccds_gallery 2/constellations.jpg','images/ccds_gallery 2/cr_current.jpg',
-  'images/ccds_gallery 3/ane.jpg','images/ccds_gallery 3/auk.jpg','images/ccds_gallery 3/bk_butler.jpg','images/ccds_gallery 3/constellations.jpg','images/ccds_gallery 3/cr_current.jpg',
-  'images/ccds_gallery 4/ane.jpg','images/ccds_gallery 4/auk.jpg','images/ccds_gallery 4/bk_butler.jpg','images/ccds_gallery 4/constellations.jpg','images/ccds_gallery 4/cr_current.jpg',
-  'images/ccds_gallery 5/ane.jpg','images/ccds_gallery 5/auk.jpg','images/ccds_gallery 5/bk_butler.jpg','images/ccds_gallery 5/constellations.jpg','images/ccds_gallery 5/cr_current.jpg',
-  'images/ccds_gallery 6/ane.jpg','images/ccds_gallery 6/auk.jpg','images/ccds_gallery 6/bk_butler.jpg','images/ccds_gallery 6/constellations.jpg','images/ccds_gallery 6/cr_current.jpg',
-  'images/ccds_gallery 7/ane.jpg','images/ccds_gallery 7/auk.jpg','images/ccds_gallery 7/bk_butler.jpg','images/ccds_gallery 7/constellations.jpg','images/ccds_gallery 7/cr_current.jpg'
+  'images/old_events/image29.jpeg','images/old_events/image31.jpeg','images/old_events/image24.jpeg'
 ];
 let currentPhotoIndex = 0;
 const photosPerView = 4;
